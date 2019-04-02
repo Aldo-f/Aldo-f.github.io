@@ -2,14 +2,14 @@
 label: Post
 hide_body: false
 fields:
+- type: file
+  label: Edit Image/File Upload
+  name: edit_image/file_upload
 - type: text
   name: heading
   label: Heading
   config:
     required: true
-- type: file
-  label: Edit Image/File Upload
-  name: edit_image/file_upload
 - type: textarea
   name: body
   label: Body
@@ -18,5 +18,11 @@ fields:
     schema:
       format: markdown
     required: true
+- type: include
+  name: template
+  label: Template
+- type: include
+  name: include_template
+  label: Include template
 pages:
 - _posts/Testfile.md
