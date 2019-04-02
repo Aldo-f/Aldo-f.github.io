@@ -10,6 +10,7 @@ fields:
   label: Heading
   config:
     required: true
+  default: heading
 - type: textarea
   name: body
   label: Body
@@ -18,6 +19,7 @@ fields:
     schema:
       format: markdown
     required: true
+  default: body
 - type: include
   name: template
   label: Template
