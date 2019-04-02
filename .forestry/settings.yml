@@ -6,11 +6,11 @@ webhook_url:
 sections:
 - type: heading
   label: Heading
-- type: jekyll-pages
-  label: Pages
-  create: all
 - type: jekyll-posts
   label: Posts
+  create: all
+- type: jekyll-pages
+  label: Pages
   create: all
 upload_dir: uploads
 public_path: "/uploads"
