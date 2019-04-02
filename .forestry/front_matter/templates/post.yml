@@ -18,3 +18,5 @@ fields:
     schema:
       format: markdown
     required: true
+pages:
+- _posts/Testfile.md
