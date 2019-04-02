@@ -1,7 +1,6 @@
 ---
 label: Post
 hide_body: false
-display_field: edit_image/file_upload
 fields:
 - type: text
   name: heading
