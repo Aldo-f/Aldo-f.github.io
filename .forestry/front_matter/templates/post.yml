@@ -27,4 +27,4 @@ fields:
   name: include_template
   label: Include template
 pages:
-- _posts/Testfile.md
+- _posts/2019-04-02-Testfile.md
