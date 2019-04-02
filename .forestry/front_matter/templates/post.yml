@@ -1,0 +1,21 @@
+---
+label: Post
+hide_body: false
+display_field: edit_image/file_upload
+fields:
+- type: text
+  name: heading
+  label: Heading
+  config:
+    required: true
+- type: file
+  label: Edit Image/File Upload
+  name: edit_image/file_upload
+- type: textarea
+  name: body
+  label: Body
+  config:
+    wysiwyg: true
+    schema:
+      format: markdown
+    required: true
