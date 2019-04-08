@@ -7,7 +7,7 @@ order: 1
 exclude: true
 ---
 
-## Hello planetsAroundSun[2].value
+<h1 class="h1 post-list-heading"> Hello planetsAroundSun[2].value </h1>
 
 
 ```
