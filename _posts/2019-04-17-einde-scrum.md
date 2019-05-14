@@ -54,8 +54,8 @@ Later werd dan, steeds vlak voor een kleine demo, de code gemerged met de master
 Om daar, een GitHub Page te maken van de master. 
 
 
-[gitlab.com/vdab-flexidating](https://gitlab.com/vdab-flexidating/flexidating)<br>
-[github.com/vdab-flexidating](https://github.com/vdab-flexidating/vdab-flexidating.github.io)<br>
+[gitlab.com/vdab-flexidating](https://gitlab.com/vdab-flexidating/flexidating/tags/Demo-2)<br>
+[github.com/vdab-flexidating](https://github.com/vdab-flexidating/vdab-flexidating.github.io/releases/tag/Demo-2)<br>
 [vdab-flexidating.github.io](https://vdab-flexidating.github.io/)
 
 
