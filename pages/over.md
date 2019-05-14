@@ -1,8 +1,10 @@
 ---
 layout: page
-title: Over
+title: Over 
 permalink: /over/
 ---
 
 Te vinden op het internet:<br>
-[Zoek me op google](https://www.google.be/search?q=Aldo+fieuw)
+<a target="_blank" href="https://www.google.be/search?q=Aldo+fieuw">Zoek me op Google</a>
+
+
