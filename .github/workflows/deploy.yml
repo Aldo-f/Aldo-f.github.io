@@ -3,7 +3,7 @@ name: Deploy MkDocs site to GitHub Pages
 on:
   push:
     branches:
-      - master  # Set to your default branch
+      - master
 
 jobs:
   deploy:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Needed for git history in some plugins
+          fetch-depth: 0  # Needed for git history if needed by plugins
 
       - name: Set up Python
         uses: actions/setup-python@v5
