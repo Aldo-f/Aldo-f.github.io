@@ -33,8 +33,8 @@ plugins:
           url: https://github.com/Aldo-f/01-core-infra
 nav:
   - Home: docs/index.md
-  - Thuis: !import thuis
-  - Core Infra: !import infra
+  - Thuis: "!import [thuis]"
+  - Core Infra: "!import [infra]"
 extra:
   social:
     - icon: fontawesome/brands/github
