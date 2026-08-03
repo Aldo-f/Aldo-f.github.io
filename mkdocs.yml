@@ -26,11 +26,15 @@ theme:
 plugins:
   - search
   - multirepo:
-      config_file: .multirepo.yml
+      nav_repos:
+        - name: thuis
+          url: https://github.com/Aldo-f/thuis
+        - name: infra
+          url: https://github.com/Aldo-f/01-core-infra
 nav:
   - Home: docs/index.md
-  - Thuis: https://aldo-f.github.io/thuis/
-  - Core Infra: https://aldo-f.github.io/01-core-infra/
+  - Thuis: !import [thuis]
+  - Core Infra: !import [infra]
 extra:
   social:
     - icon: fontawesome/brands/github
