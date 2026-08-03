@@ -25,16 +25,11 @@ theme:
     - toc.integrate
 plugins:
   - search
-  - multirepo:
-      nav_repos:
-        - name: thuis
-          url: https://github.com/Aldo-f/thuis
-        - name: infra
-          url: https://github.com/Aldo-f/01-core-infra
+  - multirepo
 nav:
   - Home: docs/index.md
-  - Thuis: "!import [thuis]"
-  - Core Infra: "!import [infra]"
+  - Thuis: '!import https://github.com/Aldo-f/thuis?branch=main'
+  # Note: 01-core-infra uses Docusaurus, not MkDocs - cannot be imported directly
 extra:
   social:
     - icon: fontawesome/brands/github
