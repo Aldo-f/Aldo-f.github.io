@@ -25,11 +25,17 @@ theme:
     - toc.integrate
 plugins:
   - search
-  - multirepo
+  - multirepo:
+      nav_repos:
+        - name: thuis
+          import_url: https://github.com/Aldo-f/thuis?branch=main&docs_dir=docs
+        - name: thuis-v3
+          import_url: https://github.com/Aldo-f/thuis?branch=v3.0.0&docs_dir=docs
 nav:
   - Home: docs/index.md
-  - Thuis: '!import https://github.com/Aldo-f/thuis?branch=main'
-  # Note: 01-core-infra uses Docusaurus, not MkDocs - cannot be imported directly
+  - Thuis:
+      - 'Thuis (latest)': '!import https://github.com/Aldo-f/thuis?branch=main&docs_dir=docs'
+      - 'Thuis v3.0.0': '!import https://github.com/Aldo-f/thuis?branch=v3.0.0&docs_dir=docs'
 extra:
   social:
     - icon: fontawesome/brands/github
