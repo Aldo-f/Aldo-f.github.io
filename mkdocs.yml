@@ -2,6 +2,8 @@ site_name: Aldo Fieuw Documentation
 site_url: https://aldo-f.github.io
 repo_url: https://github.com/Aldo-f/Aldo-f.github.io
 repo_name: Aldo-f/Aldo-f.github.io
+docs_dir: docs
+site_dir: site
 theme:
   name: material
   palette:
@@ -36,10 +38,10 @@ plugins:
           imports:
             - docs
 nav:
-  - Home: docs/index.md
+  - Home: index.md
   - Thuis:
-      - 'Thuis (latest)': '!import https://github.com/Aldo-f/thuis?branch=main&docs_dir=docs'
-      - 'Thuis v3.0.0': '!import https://github.com/Aldo-f/thuis?branch=v3.0.0&docs_dir=docs'
+      - Thuis: thuis/docs/index.md
+      - 'Thuis v3.0.0': thuis-v3/docs/index.md
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -47,7 +49,7 @@ extra:
     - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/in/aldo-fieuw
     - icon: fontawesome/brands/mastodon
-      link: https://mastodon.social/@aldo_fieuw
+      link: https://mastodon.social/@AldoF
 markdown_extensions:
   - toc:
       permalink: true
