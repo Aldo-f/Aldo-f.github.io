@@ -28,9 +28,13 @@ plugins:
   - multirepo:
       nav_repos:
         - name: thuis
-          import_url: https://github.com/Aldo-f/thuis?branch=main&docs_dir=docs
+          import_url: https://github.com/Aldo-f/thuis?branch=main
+          imports:
+            - docs
         - name: thuis-v3
-          import_url: https://github.com/Aldo-f/thuis?branch=v3.0.0&docs_dir=docs
+          import_url: https://github.com/Aldo-f/thuis?branch=v3.0.0
+          imports:
+            - docs
 nav:
   - Home: docs/index.md
   - Thuis:
