@@ -14,17 +14,15 @@ theme:
       primary: indigo
       accent: indigo
   features:
-    - navigation.tabs
-    - navigation.tabs.sticky
     - navigation.top
     - search.highlight
     - search.share
     - navigation.indexes
-    - toc.integrate
     - navigation.sections
     - toc.follow
 plugins:
   - search
+  - section-index
   - multirepo:
       nav_repos:
         - name: thuis
