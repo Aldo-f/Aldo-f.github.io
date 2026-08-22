@@ -37,8 +37,13 @@ plugins:
           import_url: https://github.com/Aldo-f/thuis?branch=v3.0.0
           imports:
             - docs
+        - name: clock
+          import_url: https://github.com/Aldo-f/clock?branch=main
+          imports:
+            - docs
 nav:
   - Home: index.md
+  - Clock: clock/docs/index.md
   - Thuis:
       - Thuis: thuis/docs/index.md
       - 'Thuis v3.0.0': thuis-v3/docs/index.md
