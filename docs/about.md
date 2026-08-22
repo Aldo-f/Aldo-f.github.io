@@ -10,7 +10,6 @@ documentation from several repositories at build time using
 | Section | Source | Notes |
 |---------|--------|-------|
 | **Clock** | [`Aldo-f/clock`](https://github.com/Aldo-f/clock) (`main`) | Special clocks — features & development docs |
-| **Hermes WebUI** | [`Aldo-f/hermes-webui`](https://github.com/Aldo-f/hermes-webui) (`master`) | Desktop app docs: onboarding, architecture, contracts |
 | **Thuis main** | [`Aldo-f/thuis`](https://github.com/Aldo-f/thuis) (`main`) | Current MkDocs-based documentation (EN + NL) |
 | **Thuis v5** | `thuis` branch `v5/main` | Docusaurus-era docs: getting started, API, architecture |
 | **Thuis v4** | `thuis` tag `v4.1.0` | Docusaurus-era docs: installation, usage, credentials |

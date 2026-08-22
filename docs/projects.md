@@ -10,15 +10,6 @@ how to set up a development environment.
 - Docs: [Clock](clock/docs/index.md)
 - Source: [github.com/Aldo-f/clock](https://github.com/Aldo-f/clock)
 
-## Hermes WebUI
-
-The Hermes Agent desktop app (Electron + Vite + TanStack Start). Documentation
-covers onboarding, architecture, agent API contracts, extensions, and UI/UX
-guidelines.
-
-- Docs: [Hermes WebUI onboarding](hermes-webui/docs/onboarding.md)
-- Source: [github.com/Aldo-f/hermes-webui](https://github.com/Aldo-f/hermes-webui)
-
 ## Thuis
 
 The Thuis downloader. The hub tracks documentation across its major versions:

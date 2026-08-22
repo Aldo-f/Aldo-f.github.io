@@ -47,32 +47,11 @@ plugins:
           import_url: https://github.com/Aldo-f/clock?branch=main
           imports:
             - docs
-        - name: hermes-webui
-          import_url: https://github.com/Aldo-f/hermes-webui?branch=master
-          imports:
-            - docs
-            - README.md
-            - AGENTS.md
-            - ARCHITECTURE.md
-            - CHANGELOG.md
-            - CONTRIBUTING.md
-            - DESIGN.md
-            - TESTING.md
-            - THEMES.md
-            - ROADMAP.md
-            - SPRINTS.md
-            - CONTRIBUTORS.md
-            - docker-compose.yml
-            - docker-compose.two-container.yml
-            - docker-compose.three-container.yml
-            - .env.docker.example
-            - docker_init.bash
 nav:
   - Home: index.md
   - About: about.md
   - Projects: projects.md
   - Clock: clock/docs/index.md
-  - Hermes WebUI: hermes-webui/docs/onboarding.md
   - Thuis:
       - 'Thuis main': thuis/docs/index.md
       - 'Thuis v5': thuis-v5/website/docs/intro.md
