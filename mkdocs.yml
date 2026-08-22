@@ -21,10 +21,8 @@ theme:
     - search.share
     - navigation.indexes
     - toc.integrate
-    - navigation.top
     - navigation.sections
     - toc.follow
-    - toc.integrate
 plugins:
   - search
   - multirepo:
@@ -37,16 +35,49 @@ plugins:
           import_url: https://github.com/Aldo-f/thuis?branch=v3.0.0
           imports:
             - docs
+        - name: thuis-v4
+          import_url: https://github.com/Aldo-f/thuis?branch=v4.1.0&docs_dir=website/docs/*
+          imports:
+            - docs
+        - name: thuis-v5
+          import_url: https://github.com/Aldo-f/thuis?branch=v5/main&docs_dir=website/docs/*
+          imports:
+            - docs
         - name: clock
           import_url: https://github.com/Aldo-f/clock?branch=main
           imports:
             - docs
+        - name: hermes-webui
+          import_url: https://github.com/Aldo-f/hermes-webui?branch=master
+          imports:
+            - docs
+            - README.md
+            - AGENTS.md
+            - ARCHITECTURE.md
+            - CHANGELOG.md
+            - CONTRIBUTING.md
+            - DESIGN.md
+            - TESTING.md
+            - THEMES.md
+            - ROADMAP.md
+            - SPRINTS.md
+            - CONTRIBUTORS.md
+            - docker-compose.yml
+            - docker-compose.two-container.yml
+            - docker-compose.three-container.yml
+            - .env.docker.example
+            - docker_init.bash
 nav:
   - Home: index.md
+  - About: about.md
+  - Projects: projects.md
   - Clock: clock/docs/index.md
+  - Hermes WebUI: hermes-webui/docs/onboarding.md
   - Thuis:
-      - Thuis: thuis/docs/index.md
-      - 'Thuis v3.0.0': thuis-v3/docs/index.md
+      - 'Thuis main': thuis/docs/index.md
+      - 'Thuis v5': thuis-v5/website/docs/intro.md
+      - 'Thuis v4': thuis-v4/website/docs/intro.md
+      - 'Thuis v3': thuis-v3/docs/index.md
 extra:
   social:
     - icon: fontawesome/brands/github
