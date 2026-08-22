@@ -50,13 +50,15 @@ plugins:
 nav:
   - Home: index.md
   - About: about.md
-  - Projects: projects.md
-  - Clock: clock/docs/index.md
-  - Thuis:
-      - 'Thuis main': thuis/docs/index.md
-      - 'Thuis v5': thuis-v5/website/docs/intro.md
-      - 'Thuis v4': thuis-v4/website/docs/intro.md
-      - 'Thuis v3': thuis-v3/docs/index.md
+  - Projects:
+      - projects.md
+      - Clock:
+          - clock/docs/index.md
+      - Thuis:
+          - 'Thuis main': thuis/docs/index.md
+          - 'Thuis v5': thuis-v5/website/docs/intro.md
+          - 'Thuis v4': thuis-v4/website/docs/intro.md
+          - 'Thuis v3': thuis-v3/docs/index.md
 extra:
   social:
     - icon: fontawesome/brands/github
