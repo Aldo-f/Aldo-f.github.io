@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
-"""End-to-end verification harness for the blog feature.
+"""End-to-end verification harness for the blog + multilingual features.
 
-Spec: specs/001-blog-via-material/spec.md
-Contracts: specs/001-blog-via-material/contracts/site-contract.md
+Specs:
+  specs/001-blog-via-material/spec.md        (blog, EN side)
+  specs/002-multilingual-site-via/spec.md    (multi-build EN/NL)
 
 stdlib-only. Runs against the REAL toolchain:
-  1. strict builds (baseline, probe-added) asserting exit 0 + zero warnings
-  2. a real HTTP server serving the built site with route/body assertions
-  3. draft-exclusion, search-index and regression checks
+  1. per-language staged strict builds (zero warnings required)
+  2. probe-post publish mechanics (add ONE file -> published)
+  3. the REAL repo builds (mkdocs.en.yml -> site/, mkdocs.nl.yml -> site/nl/)
+  4. a real HTTP server serving the merged site/ with route/body assertions
 
 Exit 0 = ALL CHECKS PASSED. Any failing check prints FAIL and exits 1.
 """
 
 from __future__ import annotations
 
+import datetime
 import http.server
 import os
 import re
@@ -26,16 +29,15 @@ import threading
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-DOCS = REPO / "docs"
-POSTS = DOCS / "blog" / "posts"
 MKDOCS = shutil.which("mkdocs")
-VENV_BIN = REPO / "venv" / "bin"
-if MKDOCS is None:
-    candidate = VENV_BIN / "mkdocs"
-    if candidate.is_file():
-        MKDOCS = str(candidate)
+if MKDOCS is None and (REPO / "venv" / "bin" / "mkdocs").is_file():
+    MKDOCS = str(REPO / "venv" / "bin" / "mkdocs")
 
 RESULTS: list[tuple[str, bool, str]] = []
+
+PROBE_TITLE = "ZZProbe Post Alpha"
+PROBE_TOKEN = "zzprobe-alpha-unique-token"
+DRAFT_SLUG = "roadmap-notes-draft"
 
 
 def check(name: str, fn):
@@ -52,138 +54,8 @@ def check(name: str, fn):
         print(f"FAIL {name} — {type(exc).__name__}: {exc}")
 
 
-def run_build(workdir: Path) -> tuple[int, str]:
-    """Run mkdocs build --strict inside workdir; return (rc, combined_output)."""
-    assert MKDOCS is not None, "mkdocs executable not resolved"
-    env = dict(os.environ)
-    env.setdefault("DISABLE_MKDOCS_2_WARNING", "true")  # upstream banner noise
-    proc = subprocess.run(
-        [MKDOCS, "build", "--strict", "--site-dir", "site"],
-        cwd=workdir,
-        capture_output=True,
-        text=True,
-        env=env,
-        timeout=900,
-    )
-    return proc.returncode, (proc.stdout + proc.stderr)
-
-
 # --------------------------------------------------------------------------
-# Build-tree helpers
-# --------------------------------------------------------------------------
-
-PROBE_TITLE = "ZZProbe Post Alpha"
-PROBE_TOKEN = "zzprobe-alpha-unique-token"
-DRAFT_SLUG = "roadmap-notes-draft"
-
-
-def stage_repo(tmp: Path, *, include_draft: bool = False, tag: str = "work") -> Path:
-    """Copy tracked content + config into tmp for isolated strict builds."""
-    work = tmp / f"work-{tag}"
-    if work.exists():
-        shutil.rmtree(work)
-    work.mkdir()
-    shutil.copytree(DOCS, work / "docs")
-    # multirepo caches live outside docs/, so imported nav entries are absent
-    # in staged builds; prune those entries so the staged build is valid.
-    cfg = (REPO / "mkdocs.yml").read_text(encoding="utf-8")
-    cfg = _prune_multirepo(cfg)
-    (work / "mkdocs.yml").write_text(cfg, encoding="utf-8")
-    if not include_draft:
-        draft = work / "docs" / "blog" / "posts" / f"{DRAFT_SLUG}.md"
-        if draft.exists():
-            draft.unlink()
-    return work
-
-
-def _prune_multirepo(cfg: str) -> str:
-    """Remove the multirepo plugin + its nav_repos block and the nav entries
-    that reference imported paths, so an isolated build without the cloned
-    repos still validates."""
-    lines = cfg.splitlines(keepends=True)
-    out: list[str] = []
-    skipping_block = False
-    depth = 0
-    in_nav = False
-    for line in lines:
-        stripped = line.strip()
-        if stripped.startswith("multirepo:"):
-            skipping_block = True
-            depth = len(line) - len(line.lstrip())
-            continue
-        if skipping_block:
-            ind = len(line) - len(line.lstrip())
-            if line.strip() and ind <= depth:
-                skipping_block = False
-            else:
-                continue
-        if stripped == "nav:":
-            in_nav = True
-            out.append(line)
-            continue
-        if in_nav:
-            ind = len(line) - len(line.lstrip())
-            if line.strip() and ind == 0:
-                in_nav = False
-            elif "- clock/" in line or "- thuis" in line:
-                # drop any list item under Projects referencing imported paths
-                continue
-        out.append(line)
-    text = "".join(out)
-    text = text.replace("  - section-index\n", "")
-    return text
-
-
-def serve_site(site_dir: Path):
-    """Serve site_dir over loopback HTTP; returns (httpd, thread, base_url).
-
-    Binds an ephemeral port (0) so concurrent/rapid reruns never collide.
-    """
-
-    class Server(socketserver.TCPServer):
-        allow_reuse_address = True
-
-    class Handler(http.server.SimpleHTTPRequestHandler):
-        def translate_path(self, path):
-            # SimpleHTTPRequestHandler serves relative to cwd; pin to site_dir.
-            path = path.split("?", 1)[0].split("#", 1)[0]
-            return str(site_dir / path.lstrip("/"))
-
-        def log_message(self, format, *args):  # noqa: A002 - stdlib signature
-            pass
-
-    httpd = Server(("127.0.0.1", 0), Handler)
-    thread = threading.Thread(target=httpd.serve_forever, daemon=True)
-    thread.start()
-    port = httpd.server_address[1]
-    return httpd, thread, f"http://127.0.0.1:{port}"
-
-
-def fetch(url: str) -> tuple[int, str]:
-    import urllib.request
-
-    try:
-        with urllib.request.urlopen(url, timeout=10) as resp:
-            body = resp.read().decode("utf-8", "replace")
-            return resp.status, body
-    except urllib.error.HTTPError as err:  # type: ignore[attr-defined]
-        return err.code, ""
-
-
-import urllib.error  # noqa: E402  (after function defs is fine at module scope)
-
-
-def assert_route(base: str, route: str, must_contain: list[str], not_contain: list[str] | None = None):
-    status, body = fetch(base + route)
-    assert status == 200, f"{route} returned HTTP {status}"
-    for marker in must_contain:
-        assert marker in body, f"{route} missing marker {marker!r}"
-    for marker in not_contain or []:
-        assert marker not in body, f"{route} unexpectedly contains {marker!r}"
-
-
-# --------------------------------------------------------------------------
-# Check implementations (run in order inside main)
+# Build helpers
 # --------------------------------------------------------------------------
 
 _BANNER_PAT = re.compile(
@@ -194,7 +66,6 @@ _BANNER_PAT = re.compile(
 
 
 def _real_warnings(output: str) -> list[str]:
-    """True build warnings only — excludes the mkdocs2 banner chatter."""
     return [
         ln
         for ln in output.splitlines()
@@ -202,18 +73,123 @@ def _real_warnings(output: str) -> list[str]:
     ]
 
 
-def check_strict_build_baseline(tmp: Path) -> str:
-    work = stage_repo(tmp)
-    rc, output = run_build(work)
-    warnings = _real_warnings(output)
-    assert rc == 0, f"strict build failed rc={rc}\n{output[-2000:]}"
-    assert not warnings, "strict build emitted warnings:\n" + "\n".join(warnings[:10])
-    return "exit 0, zero warnings (staged content)"
+def run_build(workdir: Path, config: str, site_dir: str) -> tuple[int, str]:
+    """Run a strict mkdocs build; returns (rc, combined_output)."""
+    assert MKDOCS is not None, "mkdocs executable not resolved"
+    env = dict(os.environ)
+    env.setdefault("DISABLE_MKDOCS_2_WARNING", "true")  # upstream banner noise
+    proc = subprocess.run(
+        [MKDOCS, "build", "--strict", "-f", config, "-d", site_dir],
+        cwd=workdir,
+        capture_output=True,
+        text=True,
+        env=env,
+        timeout=900,
+    )
+    return proc.returncode, proc.stdout + proc.stderr
 
+
+def _prune_multirepo(cfg: str) -> str:
+    """Drop the multirepo plugin block + nav entries referencing imported
+    paths so an isolated staged build (no cloned repos) still validates."""
+    lines = cfg.splitlines(keepends=True)
+    out: list[str] = []
+    skipping = False
+    depth = 0
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("multirepo:"):
+            skipping = True
+            depth = len(line) - len(line.lstrip())
+            continue
+        if skipping:
+            ind = len(line) - len(line.lstrip())
+            if line.strip() and ind <= depth:
+                skipping = False
+            else:
+                continue
+        out.append(line)
+    text = "".join(out)
+    # drop nav list-items pointing at imported repo paths
+    kept = []
+    for line in text.splitlines(keepends=True):
+        s = line.strip()
+        if s.startswith("- ") and ("- clock/" in s or s.startswith("- thuis")):
+            continue
+        kept.append(line)
+    return "".join(kept)
+
+
+LANG_ROOTS = {"en": REPO / "docs" / "en", "nl": REPO / "docs" / "nl"}
+
+
+def stage(tmp: Path, tag: str, langs: tuple[str, ...]) -> Path:
+    """Stage configs + requested language doc trees for isolated builds."""
+    work = tmp / f"work-{tag}"
+    if work.exists():
+        shutil.rmtree(work)
+    work.mkdir()
+    for name in ("mkdocs.base.yml", "mkdocs.en.yml", "mkdocs.nl.yml"):
+        src = REPO / name
+        if src.is_file():
+            (work / name).write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+    en_cfg = work / "mkdocs.en.yml"
+    if en_cfg.is_file() and "multirepo" in en_cfg.read_text(encoding="utf-8"):
+        en_cfg.write_text(_prune_multirepo(en_cfg.read_text(encoding="utf-8")), encoding="utf-8")
+    for lang in langs:
+        root = LANG_ROOTS[lang]
+        if not root.is_dir():
+            raise AssertionError(f"{root} missing — language tree not created yet")
+        shutil.copytree(root, work / "docs" / lang)
+    return work
+
+
+def serve_site(site_dir: Path):
+    """Serve site_dir over loopback HTTP on an ephemeral port."""
+
+    class Server(socketserver.TCPServer):
+        allow_reuse_address = True
+
+    class Handler(http.server.SimpleHTTPRequestHandler):
+        def translate_path(self, path):
+            path = path.split("?", 1)[0].split("#", 1)[0]
+            return str(site_dir / path.lstrip("/"))
+
+        def log_message(self, format, *args):  # noqa: A002 - stdlib signature
+            pass
+
+    httpd = Server(("127.0.0.1", 0), Handler)
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    port = httpd.server_address[1]
+    return httpd, f"http://127.0.0.1:{port}"
+
+
+def fetch(url: str) -> tuple[int, str]:
+    import urllib.error
+    import urllib.request
+
+    try:
+        with urllib.request.urlopen(url, timeout=10) as resp:
+            return resp.status, resp.read().decode("utf-8", "replace")
+    except urllib.error.HTTPError as err:
+        return err.code, ""
+
+
+def assert_route(base: str, route: str, must: list[str], must_not: list[str] | None = None):
+    status, body = fetch(base + route)
+    assert status == 200, f"{route} returned HTTP {status}"
+    for m in must:
+        assert m in body, f"{route} missing marker {m!r}"
+    for m in must_not or []:
+        assert m not in body, f"{route} unexpectedly contains {m!r}"
+
+
+# --------------------------------------------------------------------------
+# Checks
+# --------------------------------------------------------------------------
 
 def make_probe_post(work: Path) -> Path:
-    posts = work / "docs" / "blog" / "posts"
-    probe = posts / "zz-probe-alpha.md"
+    probe = work / "docs" / "en" / "blog" / "posts" / "zz-probe-alpha.md"
     probe.write_text(
         "---\n"
         f"title: {PROBE_TITLE}\n"
@@ -221,36 +197,104 @@ def make_probe_post(work: Path) -> Path:
         "categories:\n"
         "  - General\n"
         "---\n\n"
-        f"Probe body mentioning {PROBE_TOKEN} for verification.\n",
+        f"Probe body mentioning {PROBE_TOKEN}.\n",
         encoding="utf-8",
     )
     return probe
 
 
-def check_probe_publish(tmp: Path) -> str:
-    """FR-2/FR-3/SC-2: adding ONE file publishes a post; removing unpublishes."""
-    work = stage_repo(tmp, tag="probe")
-    baseline_listing = work / "site" / "blog" / "index.html"
+def check_staged_builds(tmp: Path) -> str:
+    work = stage(tmp, "base", ("en", "nl"))
+    rc_en, out_en = run_build(work, "mkdocs.en.yml", "site")
+    assert rc_en == 0, f"staged EN build failed rc={rc_en}\n{out_en[-1500:]}"
+    warn_en = _real_warnings(out_en)
+    assert not warn_en, "staged EN warnings:\n" + "\n".join(warn_en[:10])
+    rc_nl, out_nl = run_build(work, "mkdocs.nl.yml", "site/nl")
+    assert rc_nl == 0, f"staged NL build failed rc={rc_nl}\n{out_nl[-1500:]}"
+    warn_nl = _real_warnings(out_nl)
+    assert not warn_nl, "staged NL warnings:\n" + "\n".join(warn_nl[:10])
+    return "EN + NL staged builds exit 0, zero warnings"
 
-    # Build WITHOUT probe first (draft included here; irrelevant to this check)
-    rc, output = run_build(work)
-    assert rc == 0, f"pre-probe strict build failed rc={rc}\n{output[-1500:]}"
-    before = baseline_listing.read_text(encoding="utf-8") if baseline_listing.exists() else ""
-    assert PROBE_TITLE not in before, "probe title present before probe added?!"
 
+def check_publish_mechanics(tmp: Path) -> str:
+    work = stage(tmp, "probe", ("en",))
+    listing = work / "site" / "blog" / "index.html"
+    rc, out = run_build(work, "mkdocs.en.yml", "site")
+    assert rc == 0, f"pre-probe build failed rc={rc}\n{out[-1000:]}"
+    assert PROBE_TITLE not in listing.read_text(encoding="utf-8")
     probe = make_probe_post(work)
-    rc, output = run_build(work)
-    assert rc == 0, f"post-probe strict build failed rc={rc}\n{output[-1500:]}"
-    after = baseline_listing.read_text(encoding="utf-8")
-    assert PROBE_TITLE in after, "adding one file did not publish the post (FR-3)"
-    assert PROBE_TOKEN in after or PROBE_TITLE in after, "excerpt/listing did not update"
-
+    rc, out = run_build(work, "mkdocs.en.yml", "site")
+    assert rc == 0, f"post-probe build failed rc={rc}\n{out[-1000:]}"
+    assert PROBE_TITLE in listing.read_text(encoding="utf-8"), \
+        "adding one file did not publish the post (FR-3)"
     probe.unlink()
-    rc, output = run_build(work)
-    assert rc == 0, f"cleanup strict build failed rc={rc}\n{output[-1500:]}"
-    restored = baseline_listing.read_text(encoding="utf-8")
-    assert PROBE_TITLE not in restored, "removing the file did not unpublish it"
-    return "add-file → published; remove-file → unpublished (strict builds green throughout)"
+    rc, out = run_build(work, "mkdocs.en.yml", "site")
+    assert rc == 0, f"cleanup build failed rc={rc}\n{out[-1000:]}"
+    assert PROBE_TITLE not in listing.read_text(encoding="utf-8")
+    return "single-file add/remove publishes/unpublishes (strict green throughout)"
+
+
+def parse_fm(path: Path) -> dict | None:
+    text = path.read_text(encoding="utf-8")
+    m = re.match(r"^---\r?\n(.*?)\r?\n---\r?\n", text, re.DOTALL)
+    if not m:
+        return None
+    meta: dict = {"categories": []}
+    in_cats = False
+    for line in m.group(1).splitlines():
+        s = line.strip()
+        if s.startswith("- ") and in_cats:
+            meta["categories"].append(s[2:].strip())
+            continue
+        in_cats = False
+        if ":" not in s:
+            continue
+        k, _, v = s.partition(":")
+        k, v = k.strip().lower(), v.strip().strip("'\"")
+        if k == "categories" and not v:
+            in_cats = True
+        elif k in {"title", "date", "draft"}:
+            meta[k] = v
+    return meta
+
+
+def expected_counts(posts_dir: Path) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for post in sorted(posts_dir.glob("*.md")):
+        meta = parse_fm(post)
+        if not meta or meta.get("draft", "").lower() == "true":
+            continue
+        try:
+            datetime.date.fromisoformat((meta.get("date") or "")[:10])
+        except ValueError:
+            continue
+        for cat in meta["categories"] or ["Uncategorized"]:
+            counts[cat] = counts.get(cat, 0) + 1
+    return counts
+
+
+def check_category_tables(base: str) -> str:
+    def overview(lang_root: str) -> dict[str, int]:
+        rows = {}
+        status, body = fetch(base + f"/{'nl/' if lang_root == 'nl' else ''}blog/category/")
+        assert status == 200, f"{lang_root} overview HTTP {status}"
+        cells = re.findall(r"<td[^>]*>(.*?)</td>", body, re.DOTALL)
+        names = [re.sub(r"<[^>]+>", "", c).strip() for c in cells[::2]]
+        nums = [re.sub(r"\s+", "", c) for c in cells[1::2]]
+        for n, c in zip(names, nums):
+            rows[n] = int(c)
+        return rows
+
+    en_live = overview("en")
+    en_want = expected_counts(REPO / "docs" / "en" / "blog" / "posts")
+    assert en_live == en_want, f"EN overview {en_live} != source-derived {en_want}"
+
+    nl_live = overview("nl")
+    nl_want = expected_counts(REPO / "docs" / "nl" / "blog" / "posts")
+    assert nl_live == nl_want, f"NL overview {nl_live} != source-derived {nl_want}"
+    assert nl_want.get("Scrum") == 2 and nl_want.get("VDAB") == 2, \
+        f"NL posts missing? {nl_want}"
+    return f"EN {len(en_want)} cats, NL {len(nl_want)} cats — tables match sources"
 
 
 def main() -> int:
@@ -261,176 +305,165 @@ def main() -> int:
     with tempfile.TemporaryDirectory(prefix="verify-blog-") as td:
         tmp = Path(td)
 
-        # ---- Phase A: strict-build checks on staged copies -----------------
-        check("strict build baseline (exit 0, zero warnings)", lambda: check_strict_build_baseline(tmp))
-        check("publish mechanics: single file add/remove (FR-3, SC-2)", lambda: check_probe_publish(tmp))
+        check("staged strict builds EN+NL (zero warnings)", lambda: check_staged_builds(tmp))
+        check("publish mechanics: single file add/remove (FR-3, SC-2)",
+              lambda: check_publish_mechanics(tmp))
 
-        # ---- Phase B: full-repo build into repo site/ -----------------------
-        # This is the REAL build (multirepo imports included).
-        rc, output = run_build(REPO)
-        full_ok = rc == 0
-        full_warnings = _real_warnings(output)
-        RESULTS.append(("full strict build (real repo, multirepo included)", full_ok,
-                        f"rc={rc}, warnings={len(full_warnings)}"))
-        print(f"{'PASS' if full_ok else 'FAIL'} full strict build — rc={rc}, "
-              f"warnings={len(full_warnings)}")
-        if not full_ok:
-            print(output[-3000:])
+        # ---- REAL repo builds (multirepo included on EN) -------------------
+        rc_en, out_en = run_build(REPO, "mkdocs.en.yml", "site")
+        ok_en = rc_en == 0 and not _real_warnings(out_en)
+        RESULTS.append(("full strict build EN (repo, multirepo)", ok_en, f"rc={rc_en}"))
+        print(f"{'PASS' if ok_en else 'FAIL'} full strict build EN — rc={rc_en}")
+        if not ok_en:
+            print(out_en[-3000:])
+            return _summary()
+        rc_nl, out_nl = run_build(REPO, "mkdocs.nl.yml", "site/nl")
+        ok_nl = rc_nl == 0 and not _real_warnings(out_nl)
+        RESULTS.append(("full strict build NL (repo)", ok_nl, f"rc={rc_nl}"))
+        print(f"{'PASS' if ok_nl else 'FAIL'} full strict build NL — rc={rc_nl}")
+        if not ok_nl:
+            print(out_nl[-3000:])
             return _summary()
 
-        httpd, _thread, base = serve_site(REPO / "site")
+        httpd, base = serve_site(REPO / "site")
         try:
-            # ---- US1: reading the blog -------------------------------------
-            check("listing shows newest-first + excerpts (FR-4)",
-                  lambda: assert_route(base, "/blog/", [
-                      "Welcome to the blog",
-                      "How this documentation hub is built",
-                  ], ["Roadmap notes"]))
-            order = fetch(base + "/blog/")[1]
-            i_new = order.find("Welcome to the blog")
-            i_old = order.find("How this documentation hub is built")
-
-            def ordering():
-                assert 0 <= i_new < i_old, (
-                    f"listing not newest-first (newer@{i_new}, older@{i_old})"
-                )
-                return "newer post listed above older post"
-
-            check("ordering newest-first (FR-4)", ordering)
-
-            def post_page():
-                status, body = fetch(base + "/blog/2026/08/23/welcome-to-the-blog/")
-                assert status == 200, f"post page HTTP {status}"
-                assert "xylophone-framework" in body, "post body token missing"
-                assert 'rel="prev"' in body and \
-                    "how-this-documentation-hub-is-built" in body, \
-                    "prev link to older post missing (FR-5)"
-                assert "md-post__nav" in body or "md-footer__link" in body, \
-                    "no VISIBLE prev/next navigation rendered (FR-5)"
-                return "body token + visible prev-link present"
-
-            check("post page renders w/ prev-next (FR-5)", post_page)
-
-            # ---- US2: drafts + categories ----------------------------------
-            def draft_absent():
-                status, _ = fetch(base + f"/blog/2026/08/23/{DRAFT_SLUG}/")
-                assert status != 200, "draft post is publicly served! (FR-6)"
-                listing_status, listing_body = fetch(base + "/blog/")
-                assert listing_status == 200
-                assert "Roadmap notes" not in listing_body, "draft appears in listing"
-                cat_status, cat_body = fetch(base + "/blog/category/general/")
-                assert cat_status == 200, f"category page HTTP {cat_status}"
-                assert "Welcome to the blog" in cat_body, "category missing published post"
-                assert "Roadmap notes" not in cat_body, "draft leaks via category page"
-                site_dir = REPO / "site"
-                assert not (site_dir / "blog" / "2026" / "08" / "23" / DRAFT_SLUG).exists(), \
-                    "draft directory exists in built output"
-                return "absent from routes, listing, category and disk"
-
-            check("draft excluded from production (FR-6, SC-5)", draft_absent)
-
-            def category_meta():
-                status, body = fetch(base + "/blog/category/meta/")
-                assert status == 200, f"/blog/category/meta/ HTTP {status}"
-                assert "How this documentation hub is built" in body
-                return "meta category view lists its post"
-
-            check("category views exist (FR-7)", category_meta)
-
-            # ---- US4: categories overview (/blog/category/) -----------------
-            def run_generator():
-                import subprocess as _sp
-
-                proc = _sp.run(
-                    [sys.executable, str(REPO / "scripts" / "gen_category_index.py")],
-                    capture_output=True,
-                    text=True,
-                    timeout=60,
-                )
-                assert proc.returncode == 0, (
-                    "gen_category_index.py failed:\n" + proc.stderr[-500:]
-                )
-                return proc.stdout.strip()
-
-            check("category-index generator runs", run_generator)
-
-            def index_fresh():
-                head = subprocess.run(
-                    ["git", "-C", str(REPO), "show", "HEAD:docs/blog/category/index.md"],
-                    capture_output=True,
-                    text=True,
-                )
-                current = (REPO / "docs" / "blog" / "category" / "index.md").read_text(
-                    encoding="utf-8"
-                )
-                if head.returncode != 0:
-                    return "new file (not yet committed)"
-                assert head.stdout == current, (
-                    "docs/blog/category/index.md is STALE vs regenerated content — "
-                    "run scripts/gen_category_index.py and commit the result"
-                )
-                return "committed copy matches regenerated content"
-
-            check("committed category index is fresh", index_fresh)
-
-            def categories_overview():
-                status, body = fetch(base + "/blog/category/")
-                assert status == 200, f"/blog/category/ HTTP {status}"
-                # Published posts only (drafts excluded) as of this writing:
-                expected = {
-                    "General": 1,      # welcome-to-the-blog (roadmap draft excluded)
-                    "Jekyll update": 1,
-                    "Meta": 1,
-                    "Scrum": 2,
-                    "VDAB": 2,
-                }
-                # count cells carry an alignment style -> allow attributes
-                rows = re.findall(r"<td[^>]*>(.*?)</td>", body, re.DOTALL)
-                names = [re.sub(r"<[^>]+>", "", cell).strip() for cell in rows[::2]]
-                counts = [re.sub(r"\s+", "", cell) for cell in rows[1::2]]
-                assert names == sorted(expected, key=str.lower), (
-                    f"overview categories wrong: {names}"
-                )
-                for name, count in zip(names, counts):
-                    assert count == str(expected[name]), (
-                        f"{name}: got {count!r}, want {expected[name]}"
-                    )
-                    slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
-                    assert f'href="{slug}/"' in body, f"link {slug}/ missing"
-                assert "Roadmap notes" not in body, "draft leaked into overview"
-                return f"{len(names)} categories with live counts"
-
-            check("categories overview w/ counts (US4)", categories_overview)
-
-            # ---- US3: discovery --------------------------------------------
+            # ---- US2: EN regressions ---------------------------------------
             def nav_everywhere():
                 for route, marker in (
-                    ("/", "Aldo Fieuw Documentation"),
+                    ("/", "Aldo-f Docs"),
                     ("/about/", "central documentation hub"),
                     ("/projects/", "quick index of the projects"),
-                    ("/thuis/docs/", "Overview - Aldo Fieuw Documentation"),
+                    ("/thuis/docs/", "Overview - Aldo-f Docs"),
                 ):
                     status, body = fetch(base + route)
                     assert status == 200, f"regression: {route} HTTP {status}"
                     assert marker in body, f"regression: {route} lost marker"
-                    # MkDocs emits depth-relative nav hrefs: "blog/",
-                    # "../blog/", "../../blog/", ...
-                    import re as _re
+                return "legacy EN routes intact"
 
-                    assert _re.search(r'href="(?:\.\./)*blog/"', body), \
-                        f"nav Blog link missing on {route}"
-                return "home/about/projects/thuis all 200 + Blog nav present"
+            check("existing routes intact (SC-4, FR-8)", nav_everywhere)
 
-            check("existing routes intact + Blog nav everywhere (SC-4, FR-1)", nav_everywhere)
+            def en_listing():
+                assert_route(base, "/blog/", [
+                    "Welcome to the blog",
+                    "How this documentation hub is built",
+                ], ["Roadmap notes"])
+                h = fetch(base + "/blog/")[1]
+                i_new = h.find("Welcome to the blog")
+                i_old = h.find("How this documentation hub is built")
+                assert 0 <= i_new < i_old, "EN listing not newest-first"
+                return "newest-first + excerpts"
 
-            def search_index():
-                status, body = fetch(base + "/search/search_index.json")
-                assert status == 200, f"search index HTTP {status}"
-                assert "xylophone-framework" in body, "published post not indexed"
-                assert DRAFT_SLUG not in body, "draft leaked into search index"
-                return "published post indexed; draft excluded"
+            check("EN blog listing (FR-4)", en_listing)
 
-            check("search indexes blog posts (FR-9)", search_index)
+            def en_post():
+                status, body = fetch(base + "/blog/2026/08/23/welcome-to-the-blog/")
+                assert status == 200, f"post HTTP {status}"
+                assert "xylophone-framework" in body
+                assert 'rel="prev"' in body and "how-this-documentation-hub-is-built" in body
+                assert "md-post__nav" in body or "md-footer__link" in body
+                return "body + visible prev-link"
+
+            check("EN post page prev/next (FR-5)", en_post)
+
+            # ---- FR-1/SC-3: language selector ------------------------------
+            def selector():
+                status, home = fetch(base + "/")
+                assert status == 200
+                assert 'hreflang="nl"' in home and "/nl/" in home, \
+                    "no NL switcher target on EN home"
+                assert "md-select__link" in home or '<link rel="alternate"' in home
+                status, nl_home = fetch(base + "/nl/")
+                assert status == 200
+                assert 'hreflang="en"' in nl_home, "no EN switcher target on NL home"
+                return "selector wired on both languages"
+
+            check("language selector both directions (FR-1)", selector)
+
+            # ---- US1: NL experience ----------------------------------------
+            def nl_experience():
+                status, body = fetch(base + "/nl/")
+                assert status == 200, f"/nl/ HTTP {status}"
+                assert 'lang="nl"' in body, "document lang is not nl"
+                assert_route(base, "/nl/about/", [])
+                assert_route(base, "/nl/blog/",
+                             ["Einde Scrum", "Start van de Scrum-week", "1 april"],
+                             ["Welcome to the blog", "Roadmap notes"])
+                h = fetch(base + "/nl/blog/")[1]
+                i1 = h.find("Einde Scrum")
+                i2 = h.find("Start van de Scrum-week")
+                i3 = h.find("1 april")
+                assert 0 <= i1 < i2 < i3, "NL listing not newest-first"
+                return "/nl/, /nl/about/, /nl/blog/ Dutch + ordered"
+
+            check("NL pages served in Dutch (FR-2, FR-3)", nl_experience)
+
+            def nl_post():
+                status, body = fetch(base + "/nl/blog/2019/04/17/einde-scrum/")
+                assert status == 200, f"NL post HTTP {status}"
+                assert "lovecoins" in body, "NL post body missing"
+                return "NL post renders"
+
+            check("NL post page (FR-3)", nl_post)
+
+            # ---- US2/drafts --------------------------------------------------
+            def drafts_absent():
+                status, _ = fetch(base + "/blog/2026/08/23/roadmap-notes-draft/")
+                assert status != 200, "draft publicly served on EN"
+                assert not (REPO / "site/blog/2026/08/23" / DRAFT_SLUG).exists()
+                _, en_cat = fetch(base + "/blog/category/general/")
+                assert "Roadmap notes" not in en_cat
+                status, _ = fetch(base + "/nl/blog/2026/08/23/roadmap-notes-draft/")
+                assert status != 200, "draft publicly served on NL"
+                assert not (REPO / "site/nl/blog/2026/08/23" / DRAFT_SLUG).exists()
+                _, nl_blog = fetch(base + "/nl/blog/")
+                assert "Roadmap notes" not in nl_blog
+                return "absent in both languages (routes/listing/category/disk)"
+
+            check("draft excluded everywhere (FR-5, FR-6)", drafts_absent)
+
+            # ---- FR-4/US3: category overviews -------------------------------
+            def run_generator():
+                proc = subprocess.run(
+                    [sys.executable, str(REPO / "scripts" / "gen_category_index.py")],
+                    capture_output=True, text=True, timeout=60,
+                )
+                assert proc.returncode == 0, "generator failed:\n" + proc.stderr[-500:]
+                return proc.stdout.strip().replace("\n", " | ")
+
+            check("category-index generator (both languages)", run_generator)
+
+            def indexes_fresh():
+                stale = []
+                for lang in ("en", "nl"):
+                    p = REPO / "docs" / lang / "blog" / "category" / "index.md"
+                    cur = p.read_text(encoding="utf-8")
+                    head = subprocess.run(
+                        ["git", "-C", str(REPO), "show", f"HEAD:{p.relative_to(REPO)}"],
+                        capture_output=True, text=True,
+                    )
+                    if head.returncode == 0 and head.stdout != cur:
+                        stale.append(lang)
+                assert not stale, f"STALE generated overviews: {stale} — rerun scripts/gen_category_index.py"
+                return "committed copies byte-match regeneration"
+
+            check("generated overviews are fresh", indexes_fresh)
+
+            check("per-language category tables (FR-4, US3)",
+                  lambda: check_category_tables(base))
+
+            # ---- FR-7: search per language ----------------------------------
+            def search():
+                status, idx_en = fetch(base + "/search/search_index.json")
+                assert status == 200
+                assert "xylophone-framework" in idx_en, "EN post not indexed"
+                assert DRAFT_SLUG not in idx_en
+                status, idx_nl = fetch(base + "/nl/search/search_index.json")
+                assert status == 200, f"NL search index HTTP {status}"
+                assert "lovecoins" in idx_nl, "NL post not indexed"
+                assert "xylophone-framework" not in idx_nl, "EN-only post leaked into NL index"
+                return "EN and NL indexes correct"
+
+            check("search per language (FR-7)", search)
         finally:
             httpd.shutdown()
             httpd.server_close()

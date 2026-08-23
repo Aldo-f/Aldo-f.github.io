@@ -1,0 +1,39 @@
+site_name: Aldo-f Docs
+repo_url: https://github.com/Aldo-f/Aldo-f.github.io
+repo_name: Aldo-f/Aldo-f.github.io
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+  features:
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.share
+    - navigation.indexes
+    - navigation.sections
+    - toc.follow
+plugins:
+  - blog:
+      blog_dir: blog
+      post_date_format: yyyy-MM-dd
+      archive: false
+  - search
+  - section-index
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Aldo-f
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/aldo-fieuw
+    - icon: fontawesome/brands/mastodon
+      link: https://mastodon.social/@AldoF
+markdown_extensions:
+  - tables
+  - toc:
+      permalink: true

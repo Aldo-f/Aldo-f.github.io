@@ -1,26 +1,15 @@
-site_name: Aldo Fieuw Documentation
+INHERIT: mkdocs.base.yml
 site_url: https://aldo-f.github.io
-repo_url: https://github.com/Aldo-f/Aldo-f.github.io
-repo_name: Aldo-f/Aldo-f.github.io
-docs_dir: docs
+docs_dir: docs/en
 site_dir: site
-theme:
-  name: material
-  palette:
-    - scheme: default
-      primary: indigo
-      accent: indigo
-    - scheme: slate
-      primary: indigo
-      accent: indigo
-  features:
-    - navigation.top
-    - navigation.footer
-    - search.highlight
-    - search.share
-    - navigation.indexes
-    - navigation.sections
-    - toc.follow
+extra:
+  alternate:
+    - name: English
+      link: /
+      lang: en
+    - name: Nederlands
+      link: /nl/
+      lang: nl
 plugins:
   - blog:
       blog_dir: blog
@@ -104,15 +93,3 @@ nav:
                   - Testen: thuis-v3/docs/nl/testing.md
                   - DRM: thuis-v3/docs/nl/drm.md
                   - Probleemoplossing: thuis-v3/docs/nl/troubleshooting.md
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/Aldo-f
-    - icon: fontawesome/brands/linkedin
-      link: https://linkedin.com/in/aldo-fieuw
-    - icon: fontawesome/brands/mastodon
-      link: https://mastodon.social/@AldoF
-markdown_extensions:
-  - tables
-  - toc:
-      permalink: true
