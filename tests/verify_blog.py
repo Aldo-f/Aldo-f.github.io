@@ -460,7 +460,12 @@ def main() -> int:
                 status, idx_nl = fetch(base + "/nl/search/search_index.json")
                 assert status == 200, f"NL search index HTTP {status}"
                 assert "lovecoins" in idx_nl, "NL post not indexed"
-                assert "xylophone-framework" not in idx_nl, "EN-only post leaked into NL index"
+                # since 003, EN posts are mirrored into NL (translated):
+                # the translated mirror must be indexed too. Isolation is
+                # guaranteed by draft exclusion, asserted below.
+                assert "xylophone-framework" in idx_nl, \
+                    "mirrored post missing from NL index"
+                assert DRAFT_SLUG not in idx_nl, "draft leaked into NL index"
                 return "EN and NL indexes correct"
 
             check("search per language (FR-7)", search)
