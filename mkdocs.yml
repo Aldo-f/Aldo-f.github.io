@@ -113,5 +113,6 @@ extra:
     - icon: fontawesome/brands/mastodon
       link: https://mastodon.social/@AldoF
 markdown_extensions:
+  - tables
   - toc:
       permalink: true

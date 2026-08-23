@@ -337,6 +337,71 @@ def main() -> int:
 
             check("category views exist (FR-7)", category_meta)
 
+            # ---- US4: categories overview (/blog/category/) -----------------
+            def run_generator():
+                import subprocess as _sp
+
+                proc = _sp.run(
+                    [sys.executable, str(REPO / "scripts" / "gen_category_index.py")],
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
+                )
+                assert proc.returncode == 0, (
+                    "gen_category_index.py failed:\n" + proc.stderr[-500:]
+                )
+                return proc.stdout.strip()
+
+            check("category-index generator runs", run_generator)
+
+            def index_fresh():
+                head = subprocess.run(
+                    ["git", "-C", str(REPO), "show", "HEAD:docs/blog/category/index.md"],
+                    capture_output=True,
+                    text=True,
+                )
+                current = (REPO / "docs" / "blog" / "category" / "index.md").read_text(
+                    encoding="utf-8"
+                )
+                if head.returncode != 0:
+                    return "new file (not yet committed)"
+                assert head.stdout == current, (
+                    "docs/blog/category/index.md is STALE vs regenerated content — "
+                    "run scripts/gen_category_index.py and commit the result"
+                )
+                return "committed copy matches regenerated content"
+
+            check("committed category index is fresh", index_fresh)
+
+            def categories_overview():
+                status, body = fetch(base + "/blog/category/")
+                assert status == 200, f"/blog/category/ HTTP {status}"
+                # Published posts only (drafts excluded) as of this writing:
+                expected = {
+                    "General": 1,      # welcome-to-the-blog (roadmap draft excluded)
+                    "Jekyll update": 1,
+                    "Meta": 1,
+                    "Scrum": 2,
+                    "VDAB": 2,
+                }
+                # count cells carry an alignment style -> allow attributes
+                rows = re.findall(r"<td[^>]*>(.*?)</td>", body, re.DOTALL)
+                names = [re.sub(r"<[^>]+>", "", cell).strip() for cell in rows[::2]]
+                counts = [re.sub(r"\s+", "", cell) for cell in rows[1::2]]
+                assert names == sorted(expected, key=str.lower), (
+                    f"overview categories wrong: {names}"
+                )
+                for name, count in zip(names, counts):
+                    assert count == str(expected[name]), (
+                        f"{name}: got {count!r}, want {expected[name]}"
+                    )
+                    slug = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
+                    assert f'href="{slug}/"' in body, f"link {slug}/ missing"
+                assert "Roadmap notes" not in body, "draft leaked into overview"
+                return f"{len(names)} categories with live counts"
+
+            check("categories overview w/ counts (US4)", categories_overview)
+
             # ---- US3: discovery --------------------------------------------
             def nav_everywhere():
                 for route, marker in (
