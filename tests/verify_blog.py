@@ -401,9 +401,21 @@ def main() -> int:
                 status, body = fetch(base + "/nl/blog/2019/04/17/einde-scrum/")
                 assert status == 200, f"NL post HTTP {status}"
                 assert "lovecoins" in body, "NL post body missing"
-                return "NL post renders"
+                # mirrored posts get LOCALIZED slugs (derived from translated
+                # titles) — follow the listing link instead of guessing:
+                _, listing = fetch(base + "/nl/blog/")
+                m = re.search(
+                    r'href="([^"]+)"[^>]*>\s*Welkom op de blog', listing
+                )
+                assert m, "Welkom-post link not found in NL listing"
+                href = m.group(1)
+                status2, body2 = fetch(base + "/nl/" + href)
+                assert status2 == 200, f"mirrored post {href} HTTP {status2}"
+                assert "eerste bericht" in body2 or "blogrubriek" in body2, \
+                    "translated body not rendered"
+                return "NL + mirrored posts render at their localized slugs"
 
-            check("NL post page (FR-3)", nl_post)
+            check("NL post pages render (FR-3)", nl_post)
 
             # ---- US2/drafts --------------------------------------------------
             def drafts_absent():
