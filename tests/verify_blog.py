@@ -409,7 +409,7 @@ def main() -> int:
                 )
                 assert m, "Welkom-post link not found in NL listing"
                 href = m.group(1)
-                status2, body2 = fetch(base + "/nl/" + href)
+                status2, body2 = fetch(base + "/nl/blog/" + href)
                 assert status2 == 200, f"mirrored post {href} HTTP {status2}"
                 assert "eerste bericht" in body2 or "blogrubriek" in body2, \
                     "translated body not rendered"
