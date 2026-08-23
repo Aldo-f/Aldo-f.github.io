@@ -31,6 +31,8 @@ Aggregates documentation from other repos at build time using `mkdocs-multirepo-
 
 ## CONVENTIONS
 - MkDocs markdown with Material extensions; TOC permalinks enabled in `mkdocs.yml`
+- Blog posts live in `docs/blog/posts/`; publishing = adding ONE markdown file
+  with `title` + `date` front matter (`draft: true` keeps it out of production)
 - Remote repos must keep their documentation under a top-level `docs/` folder to be importable
 - Versioned docs = extra `nav_repos` entry pinned to a tag/branch (see `thuis-v3.0.0` example)
 - Deploy only happens on pushes to `main` (GitHub Actions, `build_type: workflow`)
