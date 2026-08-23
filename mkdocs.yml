@@ -52,11 +52,52 @@ nav:
       - projects.md
       - Clock:
           - clock/docs/index.md
+          - Features: clock/docs/features.md
+          - Development: clock/docs/development.md
       - Thuis:
-          - 'Thuis main': thuis/docs/index.md
-          - 'Thuis v5': thuis-v5/website/docs/intro.md
-          - 'Thuis v4': thuis-v4/website/docs/intro.md
-          - 'Thuis v3': thuis-v3/docs/index.md
+          - 'Thuis main':
+              - Overview: thuis/docs/index.md
+              - Installation: thuis/docs/installation.md
+              - Usage: thuis/docs/usage.md
+              - Testing: thuis/docs/testing.md
+              - DRM: thuis/docs/drm.md
+              - Troubleshooting: thuis/docs/troubleshooting.md
+              - Nederlands:
+                  - Overzicht: thuis/docs/nl/index.md
+                  - Installatie: thuis/docs/nl/installation.md
+                  - Gebruik: thuis/docs/nl/usage.md
+                  - Testen: thuis/docs/nl/testing.md
+                  - DRM: thuis/docs/nl/drm.md
+                  - Probleemoplossing: thuis/docs/nl/troubleshooting.md
+          - 'Thuis v5':
+              - Overview: thuis-v5/website/docs/intro.md
+              - Getting started: thuis-v5/website/docs/getting-started.md
+              - Usage: thuis-v5/website/docs/usage.md
+              - Architecture: thuis-v5/website/docs/architecture.md
+              - API reference: thuis-v5/website/docs/api-reference.md
+              - Credential vault: thuis-v5/website/docs/credential-vault.md
+              - Provider adapter: thuis-v5/website/docs/provider-adapter.md
+              - Search service: thuis-v5/website/docs/search-service.md
+          - 'Thuis v4':
+              - Overview: thuis-v4/website/docs/intro.md
+              - Installation: thuis-v4/website/docs/installation.md
+              - Usage: thuis-v4/website/docs/usage.md
+              - Credentials: thuis-v4/website/docs/credentials.md
+              - Development: thuis-v4/website/docs/development.md
+          - 'Thuis v3':
+              - Overview: thuis-v3/docs/index.md
+              - Installation: thuis-v3/docs/installation.md
+              - Usage: thuis-v3/docs/usage.md
+              - Testing: thuis-v3/docs/testing.md
+              - DRM: thuis-v3/docs/drm.md
+              - Troubleshooting: thuis-v3/docs/troubleshooting.md
+              - Nederlands:
+                  - Overzicht: thuis-v3/docs/nl/index.md
+                  - Installatie: thuis-v3/docs/nl/installation.md
+                  - Gebruik: thuis-v3/docs/nl/usage.md
+                  - Testen: thuis-v3/docs/nl/testing.md
+                  - DRM: thuis-v3/docs/nl/drm.md
+                  - Probleemoplossing: thuis-v3/docs/nl/troubleshooting.md
 extra:
   social:
     - icon: fontawesome/brands/github
