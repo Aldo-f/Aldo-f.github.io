@@ -330,10 +330,10 @@ def main() -> int:
             # ---- US2: EN regressions ---------------------------------------
             def nav_everywhere():
                 for route, marker in (
-                    ("/", "Aldo-f Docs"),
+                    ("/", "Aldo-f docs"),
                     ("/about/", "central documentation hub"),
                     ("/projects/", "quick index of the projects"),
-                    ("/thuis/docs/", "Overview - Aldo-f Docs"),
+                    ("/thuis/docs/", "Overview - Aldo-f docs"),
                 ):
                     status, body = fetch(base + route)
                     assert status == 200, f"regression: {route} HTTP {status}"
