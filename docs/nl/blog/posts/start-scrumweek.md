@@ -2,8 +2,8 @@
 title: "Start van de Scrum-week"
 date: 2019-04-08T21:34:04+02:00
 categories:
-  - Scrum
-  - VDAB
+    - Scrum
+    - VDAB
 ---
 
 Voor de opleiding van de VDAB, php developer, startte vandaag de scrumweek.
@@ -20,18 +20,18 @@ Vandaag werd er in grote lijnen besproken hoe we het project zouden aanpakken.
 Enkele puntjes die aan bod kwamen:
 * Gebruik van bootstrap voor de gekregen data overzichtelijk te ordenen.
 * Prioriteiten
-  * Login
-  * Registratie
-  * Startpagina
-  * Zoekpagina
+    * Login
+    * Registratie
+    * Startpagina
+    * Zoekpagina
 
 Vooral de login is belangrijk in deze sprint, dit aangezien er in principe geen (of weinig) data van gebruikers mag gezien worden, vooraleer de gebruiker zich zelf heeft aangemeld.
 
 
 Problemen die in vandaag zelf heb ondervonden:
 * Een git server opzetten gaat niet altijd even vlot.
-  * Er een groep aangemaakt waar iedereen lid van werd, dit om de code maximaal als eigenaar te hebben van alle leden
-  * Hierbij een duidelijk workflow creëren, die daadwerkelijk gevolgd kan worden is niet altijd even gemakkelijk.
+    * Er een groep aangemaakt waar iedereen lid van werd, dit om de code maximaal als eigenaar te hebben van alle leden
+    * Hierbij een duidelijk workflow creëren, die daadwerkelijk gevolgd kan worden is niet altijd even gemakkelijk.
 
   Vermoedelijk de eerste keer voor ieder van ons samen te werken aan een project.
 

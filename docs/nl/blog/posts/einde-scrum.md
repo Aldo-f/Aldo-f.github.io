@@ -2,8 +2,8 @@
 title: "Einde Scrum"
 date: 2019-04-17T18:30:00+02:00
 categories:
-  - Scrum
-  - VDAB
+    - Scrum
+    - VDAB
 ---
 
 We zijn nu woensdag, de 5de dag na de scrum-week.
@@ -16,17 +16,17 @@ Eerst werd er afgetast wie welke zaken voor zich zou nemen, er werd vooral per p
 
 ### Wie deed wat?
 * Griet:
-  * Pagina's: registratie, eigen profiel, profiel bewerken, gebruiker bekijken, ...
-  * Functionaliteit: controle op input, foto toevoegen, sterrenbeeld weergeven, ...
+    * Pagina's: registratie, eigen profiel, profiel bewerken, gebruiker bekijken, ...
+    * Functionaliteit: controle op input, foto toevoegen, sterrenbeeld weergeven, ...
 * Mesut:
-  * Pagina's: berichten, index, navigatie
-  * Functionaliteit: alles m.b.t. berichten (plaatsen, lezen, sorteren, verwijderen, starten)
+    * Pagina's: berichten, index, navigatie
+    * Functionaliteit: alles m.b.t. berichten (plaatsen, lezen, sorteren, verwijderen, starten)
 * Wouter:
-  * Pagina: zoeken, navigatie
-  * Functionaliteit: alles m.b.t. zoeken (aantal per pagina, zoeken volgens ..., ) en de pagination onderaan.
+    * Pagina: zoeken, navigatie
+    * Functionaliteit: alles m.b.t. zoeken (aantal per pagina, zoeken volgens ..., ) en de pagination onderaan.
 * Aldo:
-  * Pagina's: navigatie, registratie, login (in navbar), eigen profiel, ...
-  * Functionaliteit: login, localStorage, favorieten, lovecoins (acties en aanpassing), ...
+    * Pagina's: navigatie, registratie, login (in navbar), eigen profiel, ...
+    * Functionaliteit: login, localStorage, favorieten, lovecoins (acties en aanpassing), ...
 
 ### Wat ging er goed?
 * Communicatie; wat mij betreft ging dit heel vlot, iedereen wist wat de andere deed (al was het maar beperkt), vragen konden aan elkaar gesteld worden, en er diende bijna niet op elkaar gewacht te worden (op basis van code).

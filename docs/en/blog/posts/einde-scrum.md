@@ -2,8 +2,8 @@
 title: "End of Scrum"
 date: 2019-04-17T18:30:00+02:00
 categories:
-  - Scrum
-  - VDAB
+    - Scrum
+    - VDAB
 ---
 
 It's Wednesday now, the 5th day after the scrum week.
@@ -16,17 +16,17 @@ First we felt out who would take on which parts; we mostly worked per page/featu
 
 ### Who did what?
 * Griet:
-  * Pages: registration, own profile, edit profile, view user, ...
-  * Functionality: input validation, adding a photo, displaying the zodiac sign, ...
+    * Pages: registration, own profile, edit profile, view user, ...
+    * Functionality: input validation, adding a photo, displaying the zodiac sign, ...
 * Mesut:
-  * Pages: messages, index, navigation
-  * Functionality: everything related to messages (posting, reading, sorting, deleting, starting)
+    * Pages: messages, index, navigation
+    * Functionality: everything related to messages (posting, reading, sorting, deleting, starting)
 * Wouter:
-  * Pages: search, navigation
-  * Functionality: everything related to search (number per page, searching by ..., ) and the pagination at the bottom.
+    * Pages: search, navigation
+    * Functionality: everything related to search (number per page, searching by ..., ) and the pagination at the bottom.
 * Aldo:
-  * Pages: navigation, registration, login (in navbar), own profile, ...
-  * Functionality: login, localStorage, favorites, lovecoins (actions and adjustments), ...
+    * Pages: navigation, registration, login (in navbar), own profile, ...
+    * Functionality: login, localStorage, favorites, lovecoins (actions and adjustments), ...
 
 ### What went well?
 * Communication; as far as I'm concerned this went very smoothly, everyone knew what the others were doing (even if only partially), questions could be asked of each other, and we almost never had to wait on each other (code-wise).

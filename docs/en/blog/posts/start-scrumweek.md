@@ -2,8 +2,8 @@
 title: "Start of the Scrum Week"
 date: 2019-04-08T21:34:04+02:00
 categories:
-  - Scrum
-  - VDAB
+    - Scrum
+    - VDAB
 ---
 
 For the VDAB php developer training course, the scrum week started today.
@@ -20,18 +20,18 @@ Today we discussed in broad lines how we would approach the project.
 Some points that came up:
 * Use Bootstrap to present the received data in an orderly way.
 * Priorities
-  * Login
-  * Registration
-  * Home page
-  * Search page
+    * Login
+    * Registration
+    * Home page
+    * Search page
 
 The login is especially important in this sprint, since in principle no (or very little) user data may be seen before the user has signed in themselves.
 
 
 Problems I ran into today:
 * Setting up a git server doesn't always go smoothly.
-  * Creating a group that everyone became a member of, so that all members would have maximum ownership of the code
-  * Creating a clear workflow around it, one that is actually followed, is not always easy.
+    * Creating a group that everyone became a member of, so that all members would have maximum ownership of the code
+    * Creating a clear workflow around it, one that is actually followed, is not always easy.
 
   Probably the first time for each of us collaborating on a project.
 
