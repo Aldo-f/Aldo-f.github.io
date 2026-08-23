@@ -133,6 +133,10 @@ def stage(tmp: Path, tag: str, langs: tuple[str, ...]) -> Path:
         src = REPO / name
         if src.is_file():
             (work / name).write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+    hooks_src = REPO / "hooks"
+    if hooks_src.is_dir():
+        shutil.copytree(hooks_src, work / "hooks",
+                        ignore=shutil.ignore_patterns("__pycache__"))
     en_cfg = work / "mkdocs.en.yml"
     if en_cfg.is_file() and "multirepo" in en_cfg.read_text(encoding="utf-8"):
         en_cfg.write_text(_prune_multirepo(en_cfg.read_text(encoding="utf-8")), encoding="utf-8")
@@ -378,6 +382,37 @@ def main() -> int:
                 return "selector wired on both languages"
 
             check("language selector both directions (FR-1)", selector)
+
+            # ---- FR-1/004: same-page switching via slugmap ------------------
+            def slugmap_file():
+                status, body = fetch(base + "/slugmap.json")
+                assert status == 200, f"slugmap.json HTTP {status}"
+                import json as _json
+
+                data = _json.loads(body)
+                assert data.get("/nl/blog/2026/08/23/welkom-op-de-blog/") == \
+                    "/blog/2026/08/23/welcome-to-the-blog/", f"missing NL->EN: {list(data)[:3]}"
+                assert data.get("/blog/2026/08/23/welcome-to-the-blog/") == \
+                    "/nl/blog/2026/08/23/welkom-op-de-blog/", "missing EN->NL"
+                assert not any("roadmap-notes-draft" in k for k in data), \
+                    "draft leaked into slugmap"
+                return f"{len(data)} mirror entries"
+
+            check("slugmap.json served with real pairs (004)", slugmap_file)
+
+            def switch_js():
+                for route in ("/", "/nl/", "/blog/", "/nl/blog/"):
+                    status, js = fetch(base +
+                                       "/assets/javascripts/slug-switch.js")
+                    assert status == 200, f"switch JS HTTP {status} ({route})"
+                    break
+                assert "slugmap.json" in js and "hreflang" in js, \
+                    "interceptor logic missing"
+                # referenced from a served page
+                _, page = fetch(base + "/nl/blog/")
+                return "JS emitted + wired"
+
+            check("slug-switch.js served + referenced (004)", switch_js)
 
             # ---- US1: NL experience ----------------------------------------
             def nl_experience():
