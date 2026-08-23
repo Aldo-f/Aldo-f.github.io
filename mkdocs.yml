@@ -15,12 +15,17 @@ theme:
       accent: indigo
   features:
     - navigation.top
+    - navigation.footer
     - search.highlight
     - search.share
     - navigation.indexes
     - navigation.sections
     - toc.follow
 plugins:
+  - blog:
+      blog_dir: blog
+      post_date_format: yyyy-MM-dd
+      archive: false
   - search
   - section-index
   - multirepo:
@@ -48,6 +53,7 @@ plugins:
 nav:
   - Home: index.md
   - About: about.md
+  - Blog: blog/index.md
   - Projects:
       - projects.md
       - Clock:
