@@ -1,9 +1,9 @@
 ---
-title: "1 april"
+title: "April Fools'"
 date: 2019-04-01T20:15:04+02:00
 categories:
   - Jekyll update
 ---
 
-## We zijn vandaag 1 april
-Hihi, mopje, dit werd later genoteerd :)
+## Today is April 1st
+Hehe, just a joke, this was written later :)

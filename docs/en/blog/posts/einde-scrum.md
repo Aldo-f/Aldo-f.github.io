@@ -1,64 +1,66 @@
 ---
-title: "Einde Scrum"
+title: "End of Scrum"
 date: 2019-04-17T18:30:00+02:00
 categories:
   - Scrum
   - VDAB
 ---
 
-We zijn nu woensdag, de 5de dag na de scrum-week.
+It's Wednesday now, the 5th day after the scrum week.
 
-Naar m'n gevoel ging deze veel te snel vooruit.
-Niet dat het project niet klaar was - met de minimale functionaliteit - maar gewoon, het is moeilijk om een project als "af" te zien.
+To me it felt like it went by far too fast.
+Not that the project wasn't finished - with the minimal functionality - but simply, it's hard to consider a project as "done".
 
-## Hoe verliep het?
-Eerst werd er afgetast wie welke zaken voor zich zou nemen, er werd vooral per pagina/functionaliteit gewerkt.
+## How did it go?
+First we felt out who would take on which parts; we mostly worked per page/feature.
 
-### Wie deed wat?
+### Who did what?
 * Griet:
-  * Pagina's: registratie, eigen profiel, profiel bewerken, gebruiker bekijken, ...
-  * Functionaliteit: controle op input, foto toevoegen, sterrenbeeld weergeven, ...
+  * Pages: registration, own profile, edit profile, view user, ...
+  * Functionality: input validation, adding a photo, displaying the zodiac sign, ...
 * Mesut:
-  * Pagina's: berichten, index, navigatie
-  * Functionaliteit: alles m.b.t. berichten (plaatsen, lezen, sorteren, verwijderen, starten)
+  * Pages: messages, index, navigation
+  * Functionality: everything related to messages (posting, reading, sorting, deleting, starting)
 * Wouter:
-  * Pagina: zoeken, navigatie
-  * Functionaliteit: alles m.b.t. zoeken (aantal per pagina, zoeken volgens ..., ) en de pagination onderaan.
+  * Pages: search, navigation
+  * Functionality: everything related to search (number per page, searching by ..., ) and the pagination at the bottom.
 * Aldo:
-  * Pagina's: navigatie, registratie, login (in navbar), eigen profiel, ...
-  * Functionaliteit: login, localStorage, favorieten, lovecoins (acties en aanpassing), ...
+  * Pages: navigation, registration, login (in navbar), own profile, ...
+  * Functionality: login, localStorage, favorites, lovecoins (actions and adjustments), ...
 
-### Wat ging er goed?
-* Communicatie; wat mij betreft ging dit heel vlot, iedereen wist wat de andere deed (al was het maar beperkt), vragen konden aan elkaar gesteld worden, en er diende bijna niet op elkaar gewacht te worden (op basis van code).
+### What went well?
+* Communication; as far as I'm concerned this went very smoothly, everyone knew what the others were doing (even if only partially), questions could be asked of each other, and we almost never had to wait on each other (code-wise).
 
-  Vooral dankzij de daily standup, en de extra tussentijdse demo's die we ingelast hadden.
-* De CSS; door het gebruik van Bootstrap werd reeds een groot stuk UI en UX opgelost waar we, als developers, dan weinig meer moesten over denken, of aanpassingen aan moesten doen.
-
-
-### Wat kon er beter?
-* De aanduiding van de Scrum Master en de Product Owner; er werd niet een echt onderscheid gemaakt tussen de groepsleden.
-Toch niet op papier.
-* Het aanduiden hoeveel story points per functionaliteit; werd niet steeds gedaan, en is moeilijk om daar aan te houden.
-Ook werd er soms te veel (CSS &amp; code) onderverdeeld.
-* Door de korter periode was het moeilijk, om duidelijk te weten wat er in elke sprint kon meegenomen worden (1<sup>ste</sup> duurde 1,5 dag)
-
-  Bij de tussentijdse demo (op donderdag) werd er nogmaals duidelijk besproken wat er nog bij kan, en wat er moest gecanceld worden.
-* Iets meer commentaar in de code, toch wanneer anderen zaken willen toevoegen.
-* De demo was in mijn ogen geen volledig resultaat; de kleine bugs die nog werden gevonden, de feature die niet mooi afgewerkt werd (de favorieten). Er kon nog vanales beter om een mooier, beter resultaat te leveren.
-
-  Nadien werden er dan ook nog enkele aanpassingen doorgevoerd en gemergd met de master branch.
+  Mostly thanks to the daily standup, and the extra mid-week demos we scheduled.
+* The CSS; by using Bootstrap a large part of UI and UX was already solved, so as developers we had little left to think about or adjust.
 
 
-## Wat neem ik mee?
-Elk project heeft een stevige basiscode nodig, vooraleer ieder verder werk aan zijn feature. En pas na deze basis kan er verder gewerkt worden. Ook beter weten waar elk van de groepsleden staat (niet idereen had kennis van Bootstrap) kan in andere projecten een grote meerwaarde geven.
+### What could be better?
+* The designation of Scrum Master and Product Owner; no real distinction was made between group members.
 
-## Meer info:
-De code van dit project is te vinden op GitHub en GitLab.
+  At least not on paper.
+* Indicating how many story points per feature; this wasn't always done, and it's hard to stick to.
 
-Er werd gepusht naar GitLab, en daar werden de merge requsten geaccepteerd of gedeclined (meestal in de develop branch).
+  Also, things were sometimes subdivided too much (CSS &amp; code).
+* Because of the shorter period it was difficult to know clearly what could be included in each sprint (the 1<sup>st</sup> lasted 1.5 days)
 
-Later werd dan, steeds vlak voor een kleine demo, de code gemerged met de master branch. Waarna automatisch de branch develop en master gepusht werden naar GitHub.
-Om daar, een GitHub Page te maken van de master.
+  At the interim demo (on Thursday) it was once again clearly discussed what could still be added, and what had to be cancelled.
+* A bit more commenting in the code, especially when others want to add things.
+* In my eyes the demo was not a complete result; the small bugs that were still found, the feature that wasn't nicely finished (the favorites). Plenty could still be improved to deliver a nicer, better result.
+
+  Afterwards some adjustments were made and merged into the master branch.
+
+
+## What do I take away?
+Every project needs a solid base codebase before anyone can work further on their feature. Only after this base can work continue. Also, knowing better where each group member stands (not everyone knew Bootstrap) can be a great added value in other projects.
+
+## More info:
+The code for this project can be found on GitHub and GitLab.
+
+Everything was pushed to GitLab, where merge requests were accepted or declined (usually in the develop branch).
+
+Later, always just before a small demo, the code was merged into the master branch. After which both the develop and master branches were automatically pushed to GitHub.
+So that a GitHub Page could be made from master there.
 
 
 [gitlab.com/vdab-flexidating](https://gitlab.com/vdab-flexidating/flexidating/tags/Demo-2)

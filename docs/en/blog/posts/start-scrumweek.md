@@ -1,51 +1,51 @@
 ---
-title: "Start van de Scrum-week"
+title: "Start of the Scrum Week"
 date: 2019-04-08T21:34:04+02:00
 categories:
   - Scrum
   - VDAB
 ---
 
-Voor de opleiding van de VDAB, php developer, startte vandaag de scrumweek.
-Hierbij werden 2 groepjes gemaakt van 3 en 4 personen.
+For the VDAB php developer training course, the scrum week started today.
+Two groups were formed, of 3 and 4 people.
 
-De bedoeling is in deze week een FlexDating app te creëren.
-Dit door grotendeels gebruik te maken van bestaande code die gebruikers fetcht van een andere server.
-Deze responses worden nadien gebruikt voor het creëren van de front-end van een website.
+The goal is to build a FlexDating app this week,
+mostly by reusing existing code that fetches users from another server.
+Those responses are then used to create the front-end of a website.
 
-Om een beetje feeling te hebben met de gehele groep werd er vandaag gekozen om pair programming een kans te geven.
-Dit om de zwaktes en sterktes van alle groepsleden in kaart te brengen.
+To get a bit of a feel for the whole group, today we chose to give pair programming a chance.
+This to map out the weaknesses and strengths of all group members.
 
-Vandaag werd er in grote lijnen besproken hoe we het project zouden aanpakken.
-Enkele puntjes die aan bod kwamen:
-* Gebruik van bootstrap voor de gekregen data overzichtelijk te ordenen.
-* Prioriteiten
+Today we discussed in broad lines how we would approach the project.
+Some points that came up:
+* Use Bootstrap to present the received data in an orderly way.
+* Priorities
   * Login
-  * Registratie
-  * Startpagina
-  * Zoekpagina
+  * Registration
+  * Home page
+  * Search page
 
-Vooral de login is belangrijk in deze sprint, dit aangezien er in principe geen (of weinig) data van gebruikers mag gezien worden, vooraleer de gebruiker zich zelf heeft aangemeld.
-
-
-Problemen die in vandaag zelf heb ondervonden:
-* Een git server opzetten gaat niet altijd even vlot.
-  * Er een groep aangemaakt waar iedereen lid van werd, dit om de code maximaal als eigenaar te hebben van alle leden
-  * Hierbij een duidelijk workflow creëren, die daadwerkelijk gevolgd kan worden is niet altijd even gemakkelijk.
-
-  Vermoedelijk de eerste keer voor ieder van ons samen te werken aan een project.
-
-  In onze groep hebben we bijvoorbeeld geen 2<sup>de</sup> keer van de <code>develop</code> geforkt voor de registratie te voltooien, maar hebben we dit rechtstreeks op de develop branch uitgevoerd.
-* Tijdens het pair programming kreeg ik te horen - en constateerde ik - dat de verdeling van zwaktes en sterktes niet geheel gecompenseerd werd. Denk dat de pair programming pas echt een meerwaarde heeft wanneer de verschillen zich beter uiten. Eventueel wel verder in het project nogmaals doen, maar dan switchen.
-* Heeft het pair programming, op basis van snelheid, wel een meerwaarde na dat er een sterke basis is?
+The login is especially important in this sprint, since in principle no (or very little) user data may be seen before the user has signed in themselves.
 
 
-Wat kan beter tegen morgen en wat wil ik behouden?
-* Nu dat we de basis code, en ieder zijn manier van werken (evenals de sterktes en zwaktes wat hebben gevonden) lijkt het me goed van de volgende dagen met deze basis code elk zijn bepaalde feature af te werken. De huidige features (index.html en registratie.html) zijn nog niet af. Is dit best van nog af te laten werken door de groepjes, of kunnen de groepjes nu al gesplitst worden tijdens de feature? Eventueel kan er een duidelijk scrum-master en project-owner gekozen worden die de volgende dagen dit toch proberen te bewaren.
-* Pair programming even op halt zetten?
-* Het meer communiceren met elkaar geeft toch steeds een meerwaarde, na een basiscursus javascript is het moeilijk van elke bestaande functie reeds te kennen. Eens kunnen samenkijken voor een probleem op te lossen kan hierbij toch wel de snelheid ten goede komen.
+Problems I ran into today:
+* Setting up a git server doesn't always go smoothly.
+  * Creating a group that everyone became a member of, so that all members would have maximum ownership of the code
+  * Creating a clear workflow around it, one that is actually followed, is not always easy.
+
+  Probably the first time for each of us collaborating on a project.
+
+  In our group, for example, we didn't fork from <code>develop</code> a 2<sup>nd</sup> time to complete the registration, but did it directly on the develop branch.
+* During pair programming I was told - and I noticed myself - that the distribution of weaknesses and strengths wasn't entirely compensated. I think pair programming only really adds value when the differences show themselves more clearly. Maybe do it again later in the project, but then switch around.
+* Does pair programming actually add value, speed-wise, after there's already a strong foundation?
 
 
-Later maakte ik nog een mirror van de Gitlab op GitHub, daar werd een GitHub Page van gemaakt.
-Deze website is [hier](https://vdab-flexidating.github.io/) te vinden.
-(dit toont steeds de master)
+What can be better by tomorrow and what do I want to keep?
+* Now that we have the base code, and everyone's way of working (having also discovered some strengths and weaknesses), it seems good to spend the next days with this base code each finishing their assigned feature. The current features (index.html and registration.html) are not yet done. Is it best to have the groups finish them, or can the groups already split up during a feature? Perhaps a clear scrum-master and product-owner could be chosen who try to keep this on track over the next few days.
+* Pausing pair programming for now?
+* Communicating more with each other is always an added value; after a basic JavaScript course it's hard to know every existing function already. Being able to look together at solving a problem does help speed here.
+
+
+Later I made a mirror of the GitLab on GitHub, and a GitHub Page was made from it.
+That website can be found [here](https://vdab-flexidating.github.io/).
+(it always shows master)
