@@ -10,6 +10,14 @@ how to set up a development environment.
 - Docs: [Clock](clock/docs/index.md)
 - Source: [github.com/Aldo-f/clock](https://github.com/Aldo-f/clock)
 
+## Blanky
+
+Tiny jQuery plugin that opens external links in a new window, safely
+(`noopener`, optional `nofollow`).
+
+- Docs: [Blanky](blanky/docs/index.md)
+- Source: [gitlab.com/Aldo-f/blanky](https://gitlab.com/Aldo-f/blanky)
+
 ## Thuis
 
 The Thuis downloader. The hub tracks documentation across its major versions:

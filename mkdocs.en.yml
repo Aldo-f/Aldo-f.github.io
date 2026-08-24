@@ -39,6 +39,10 @@ plugins:
           import_url: https://github.com/Aldo-f/clock?branch=main
           imports:
             - docs
+        - name: blanky
+          import_url: https://gitlab.com/Aldo-f/blanky?branch=master
+          imports:
+            - docs
 nav:
   - Home: index.md
   - About: about.md
@@ -49,6 +53,8 @@ nav:
           - clock/docs/index.md
           - Features: clock/docs/features.md
           - Development: clock/docs/development.md
+      - Blanky:
+          - blanky/docs/index.md
       - Thuis:
           - 'Thuis main':
               - Overview: thuis/docs/index.md
