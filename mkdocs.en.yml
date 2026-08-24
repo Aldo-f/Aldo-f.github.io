@@ -43,6 +43,10 @@ plugins:
           import_url: https://gitlab.com/Aldo-f/blanky?branch=master
           imports:
             - docs
+        - name: blanky-v1
+          import_url: https://gitlab.com/Aldo-f/blanky?branch=v1-docs
+          imports:
+            - docs
 nav:
   - Home: index.md
   - About: about.md
@@ -55,6 +59,7 @@ nav:
           - Development: clock/docs/development.md
       - Blanky:
           - blanky/docs/index.md
+          - 'v1 (jQuery plugin)': blanky-v1/docs/index.md
       - Thuis:
           - 'Thuis main':
               - Overview: thuis/docs/index.md
