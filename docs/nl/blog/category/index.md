@@ -4,7 +4,6 @@ All topics covered on this blog, newest-first inside each category.
 
 | Category | Posts |
 |----------|------:|
-| [General](general/) | 1 |
 | [Jekyll update](jekyll-update/) | 1 |
 | [Meta](meta/) | 1 |
 | [Scrum](scrum/) | 2 |
