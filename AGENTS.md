@@ -45,9 +45,10 @@ Aggregates documentation from other repos at build time using `mkdocs-multirepo-
 - After adding/changing post categories, re-run
   `./venv/bin/python scripts/gen_category_index.py` (per-language overview tables;
   `tests/verify_blog.py` fails if stale)
-- To fill translation gaps: `python3 scripts/blog_translate.py` (dry-run) then
-  `--write`, review the diff, re-run the category generator, commit. DeepL key
-  lives outside the repo (`~/.config/deepl/api_key`)
+- To fill translation gaps: `autotranslate --docs-dir docs --paths . --exclude 'blog/category/*'`
+  (dry-run) then `--write`, review the diff, re-run the category generator, commit.
+  Provided by the `mkdocs-autotranslate` plugin (PyPI); DeepL key lives outside
+  the repo (`~/.config/deepl/api_key`). Plugin config lives in `mkdocs.base.yml`
 - Remote repos must keep their documentation under a top-level `docs/` folder to be importable
 - Versioned docs = extra `nav_repos` entry pinned to a tag/branch (see `thuis-v3.0.0` example)
 - Deploy only happens on pushes to `main` (GitHub Actions, `build_type: workflow`)
