@@ -24,15 +24,30 @@ Aggregates documentation from other repos at build time using `mkdocs-multirepo-
 ## WHERE TO LOOK
 | File | Purpose |
 |------|---------|
-| `mkdocs.yml` | Site configuration (site_name, theme, plugins, nav, multirepo imports) |
-| `docs/` | Local markdown content (home page lives here as `index.md`) |
-| `.github/workflows/deploy.yml` | Deployment pipeline (trigger branch must match working branch — currently `main`) |
+| `mkdocs.base.yml` | Shared config: theme, common plugins/extensions/social, hooks |
+| `mkdocs.en.yml` | EN build (INHERIT base): `docs/en`, site root, multirepo imports |
+| `mkdocs.nl.yml` | NL build (INHERIT base): `docs/nl`, served at `/nl/` |
+| `hooks/slugmap.py` | Build hook: emits `slugmap.json` + language-switch interceptor |
+| `docs/en/` | EN content (blog posts in `docs/en/blog/posts/`) |
+| `docs/nl/` | NL content (Dutch home/about/blog) |
+| `.github/workflows/deploy.yml` | Deployment pipeline: two strict builds (EN root, NL `/nl/`) on push to `main` |
 | `requirements.txt` | Python dependencies for build |
 
 ## CONVENTIONS
-- MkDocs markdown with Material extensions; TOC permalinks enabled in `mkdocs.yml`
-- Blog posts live in `docs/blog/posts/`; publishing = adding ONE markdown file
-  with `title` + `date` front matter (`draft: true` keeps it out of production)
+- Multilingual via Material multi-build recipe: one strict build per language;
+  every `mkdocs build` MUST name its config (`-f mkdocs.en.yml` / `-f mkdocs.nl.yml`)
+- `INHERIT` REPLACES list values (plugins/nav/theme.features/hooks) instead of
+  merging — keep each language config self-complete for those keys
+- Blog posts live in `docs/<lang>/blog/posts/`; publishing = adding ONE markdown
+  file with `title` + `date` front matter (`draft: true` keeps it out of production)
+- Mirrored posts share the FILENAME across languages (sync key); URL slugs
+  derive from the translated title, so they differ per language
+- After adding/changing post categories, re-run
+  `./venv/bin/python scripts/gen_category_index.py` (per-language overview tables;
+  `tests/verify_blog.py` fails if stale)
+- To fill translation gaps: `python3 scripts/blog_translate.py` (dry-run) then
+  `--write`, review the diff, re-run the category generator, commit. DeepL key
+  lives outside the repo (`~/.config/deepl/api_key`)
 - Remote repos must keep their documentation under a top-level `docs/` folder to be importable
 - Versioned docs = extra `nav_repos` entry pinned to a tag/branch (see `thuis-v3.0.0` example)
 - Deploy only happens on pushes to `main` (GitHub Actions, `build_type: workflow`)
