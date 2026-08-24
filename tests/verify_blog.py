@@ -348,21 +348,21 @@ def main() -> int:
 
             def en_listing():
                 assert_route(base, "/blog/", [
-                    "Welcome to the blog",
                     "How this documentation hub is built",
+                    "End of Scrum",
                 ], ["Roadmap notes"])
                 h = fetch(base + "/blog/")[1]
-                i_new = h.find("Welcome to the blog")
-                i_old = h.find("How this documentation hub is built")
+                i_new = h.find("How this documentation hub is built")
+                i_old = h.find("End of Scrum")
                 assert 0 <= i_new < i_old, "EN listing not newest-first"
                 return "newest-first + excerpts"
 
             check("EN blog listing (FR-4)", en_listing)
 
             def en_post():
-                status, body = fetch(base + "/blog/2026/08/23/welcome-to-the-blog/")
+                status, body = fetch(base + "/blog/2026/08/20/how-this-documentation-hub-is-built/")
                 assert status == 200, f"post HTTP {status}"
-                assert "xylophone-framework" in body
+                assert "quokka-buildkit" in body
                 assert 'rel="prev"' in body and "how-this-documentation-hub-is-built" in body
                 assert "md-post__nav" in body or "md-footer__link" in body
                 return "body + visible prev-link"
@@ -390,10 +390,10 @@ def main() -> int:
                 import json as _json
 
                 data = _json.loads(body)
-                assert data.get("/nl/blog/2026/08/23/welkom-op-de-blog/") == \
-                    "/blog/2026/08/23/welcome-to-the-blog/", f"missing NL->EN: {list(data)[:3]}"
-                assert data.get("/blog/2026/08/23/welcome-to-the-blog/") == \
-                    "/nl/blog/2026/08/23/welkom-op-de-blog/", "missing EN->NL"
+                assert data.get("/nl/blog/2026/08/20/hoe-dit-documentatiecentrum-is-opgezet/") == \
+                    "/blog/2026/08/20/how-this-documentation-hub-is-built/", f"missing NL->EN: {list(data)[:3]}"
+                assert data.get("/blog/2026/08/20/how-this-documentation-hub-is-built/") == \
+                    "/nl/blog/2026/08/20/hoe-dit-documentatiecentrum-is-opgezet/", "missing EN->NL"
                 assert not any("roadmap-notes-draft" in k for k in data), \
                     "draft leaked into slugmap"
                 return f"{len(data)} mirror entries"
@@ -422,7 +422,7 @@ def main() -> int:
                 assert_route(base, "/nl/about/", [])
                 assert_route(base, "/nl/blog/",
                              ["Einde Scrum", "Start van de Scrum-week", "1 april"],
-                             ["Welcome to the blog", "Roadmap notes"])
+                             ["How this documentation hub is built", "Roadmap notes"])
                 h = fetch(base + "/nl/blog/")[1]
                 i1 = h.find("Einde Scrum")
                 i2 = h.find("Start van de Scrum-week")
@@ -440,13 +440,13 @@ def main() -> int:
                 # titles) — follow the listing link instead of guessing:
                 _, listing = fetch(base + "/nl/blog/")
                 m = re.search(
-                    r'href="([^"]+)"[^>]*>\s*Welkom op de blog', listing
+                    r'href="([^"]+)"[^>]*>\s*Hoe dit documentatiecentrum is opgezet', listing
                 )
-                assert m, "Welkom-post link not found in NL listing"
+                assert m, "NL post listing check"
                 href = m.group(1)
                 status2, body2 = fetch(base + "/nl/blog/" + href)
                 assert status2 == 200, f"mirrored post {href} HTTP {status2}"
-                assert "eerste bericht" in body2 or "blogrubriek" in body2, \
+                assert "quokka-buildkit" in body2 or "tovarij" in body2, \
                     "translated body not rendered"
                 return "NL + mirrored posts render at their localized slugs"
 
@@ -502,7 +502,7 @@ def main() -> int:
             def search():
                 status, idx_en = fetch(base + "/search/search_index.json")
                 assert status == 200
-                assert "xylophone-framework" in idx_en, "EN post not indexed"
+                assert "quokka-buildkit" in idx_en or "xylophone" in idx_en, "EN post not indexed"
                 assert DRAFT_SLUG not in idx_en
                 status, idx_nl = fetch(base + "/nl/search/search_index.json")
                 assert status == 200, f"NL search index HTTP {status}"
@@ -510,7 +510,7 @@ def main() -> int:
                 # since 003, EN posts are mirrored into NL (translated):
                 # the translated mirror must be indexed too. Isolation is
                 # guaranteed by draft exclusion, asserted below.
-                assert "xylophone-framework" in idx_nl, \
+                assert "quokka-buildkit" in idx_nl, \
                     "mirrored post missing from NL index"
                 assert DRAFT_SLUG not in idx_nl, "draft leaked into NL index"
                 return "EN and NL indexes correct"

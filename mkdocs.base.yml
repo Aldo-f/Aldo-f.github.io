@@ -19,6 +19,11 @@ theme:
     - navigation.sections
     - toc.follow
 plugins:
+  - autotranslate:
+      languages: [en, nl]
+      paths: [blog/posts, about.md, projects.md, index.md]
+      exclude: [blog/category/*]
+      mode: report
   - blog:
       blog_dir: blog
       post_date_format: yyyy-MM-dd
