@@ -44,9 +44,12 @@ class Mem0VectorStore:
             )
 
     def _post(self, path: str, payload: dict, timeout: int = 30):
+        # Serialize with datetime support: front-matter dates parse into
+        # datetime objects and plain json.dumps would raise TypeError.
+        body = json.dumps(payload, default=str).encode()
         req = urllib.request.Request(
             API_BASE + path,
-            data=json.dumps(payload).encode(),
+            data=body,
             headers={
                 "Authorization": f"Token {self.api_key}",
                 "Content-Type": "application/json",

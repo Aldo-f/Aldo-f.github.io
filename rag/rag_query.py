@@ -6,6 +6,7 @@ Minimal RAG pipeline for querying the OKF Home-Lab Infrastructure bundle
 import os
 import re
 import json
+import yaml
 import numpy as np
 from sentence_transformers import SentenceTransformer
 # Attempt to import FAISS; if unavailable, fallback to numpy similarity
@@ -42,6 +43,8 @@ class OKFRAGPipeline:
         Returns:
             Tuple of (frontmatter_dict, body_content)
         """
+        import yaml  # local import: module-level yaml may not exist yet
+        
         frontmatter = {}
         body = content
         
@@ -52,7 +55,7 @@ class OKFRAGPipeline:
                 try:
                     frontmatter = yaml.safe_load(parts[1]) or {}
                     body = parts[2]
-                except:
+                except Exception:
                     pass  # If parsing fails, treat as no frontmatter
         
         return frontmatter, body
@@ -61,8 +64,15 @@ class OKFRAGPipeline:
         """Load all markdown documents from the bundle"""
         import yaml  # Import here to avoid issues if not installed
         
-        # Find all .md files
-        md_files = list(self.bundle_path.rglob("*.md"))
+        # Find all .md files, but only in OKF concept folders. The bundle
+        # root also holds a mirrored site tree (docs/, specs/, ...) synced
+        # by the watcher — indexing that would pollute search results.
+        CONCEPT_PREFIXES = ('01-', '05-', '06-')
+        md_files = [
+            f for f in self.bundle_path.rglob("*.md")
+            if f.relative_to(self.bundle_path).parts[0].startswith(CONCEPT_PREFIXES)
+            or f.relative_to(self.bundle_path) in (Path('index.md'), Path('log.md'))
+        ]
         
         for md_file in md_files:
             try:
@@ -113,12 +123,24 @@ class OKFRAGPipeline:
             self.index.add(embeddings.astype('float32'))
 
         if self._uses_mem0():
-            # Index documents into Mem0 (idempotent: dedupe happens server-side)
+            # Index documents into Mem0, but only when the bundle changed.
+            # Each add() triggers Mem0's LLM fact-extraction (~1-2 s per doc),
+            # so re-indexing 223 docs on every cold start costs minutes.
+            # A content-hash marker makes this a no-op for unchanged bundles.
+            import hashlib
+            marker = self.bundle_path / ".mem0_index_hash"
+            digest = hashlib.sha256(
+                "\n".join(t for t, _ in self.documents).encode()
+            ).hexdigest()
+            if marker.exists() and marker.read_text().strip() == digest:
+                print("Mem0 index up to date (bundle unchanged)")
+                return
             metadatas = [
                 {**meta, "doc_index": i} for i, (text, meta) in enumerate(self.documents)
             ]
             print("Indexing documents into Mem0...")
             self.vector_store.add(texts, metadatas)
+            marker.write_text(digest + "\n")
             return
 
         store = getattr(self, "vector_store", None)
@@ -153,22 +175,31 @@ class OKFRAGPipeline:
                 query=question, limit=k
             )
             results = []
+            # Build a path -> (content, metadata) lookup so hits resolve by
+            # their stored source path, not by a positional doc_index that can
+            # go stale when the document list changes between index rebuilds.
+            path_lookup = {
+                meta['path']: (text, meta) for text, meta in self.documents
+            }
             for i, hit in enumerate(hits):
-                idx = hit.get("metadata", {}).get("doc_index", hit.get("id"))
-                if isinstance(idx, int) and 0 <= idx < len(self.documents):
-                    content, metadata = self.documents[idx]
+                hit_meta = hit.get("metadata", {})
+                resolved = path_lookup.get(hit_meta.get("path", ""))
+                if resolved is not None:
+                    content, metadata = resolved
                 else:
                     content, metadata = hit.get("memory", hit.get("text", "")), {
-                        'path': hit.get('path', 'unknown'),
-                        'title': hit.get('title', 'Untitled'),
-                        'type': hit.get('type', 'Unknown'),
+                        'path': hit_meta.get('path', 'unknown'),
+                        'title': hit_meta.get('title', 'Untitled'),
+                        'type': hit_meta.get('type', 'Unknown'),
                         'tags': [],
                         'sources': []
                     }
                 score = float(hit.get("score", 0.0))
                 results.append({
                     'rank': i + 1,
-                    'content': content[:500] + "..." if len(content) > 500 else content,
+                    # Keep the full body; the answer builder picks the best
+                    # window around the query terms instead of a fixed prefix.
+                    'content': content,
                     'metadata': metadata,
                     'distance': 1.0 - score,
                     'relevance_score': score
@@ -230,13 +261,31 @@ class OKFRAGPipeline:
             })
         
         context = "\n\n---\n\n".join(context_parts)
-        
-        # Simple answer generation (in a real implementation, this would use an LLM)
-        # For now, we'll return the most relevant content as the answer
+
+        # Simple answer generation (no LLM): pick the best window around the
+        # query terms in the top-ranked document so key lines (e.g. commands)
+        # are included even when they sit deep in the page.
         best_result = results[0]
-        
+        content = best_result['content']
+        WINDOW = 700
+
+        # Score candidate windows by query-term overlap
+        terms = [t.lower() for t in re.split(r'\W+', question) if len(t) > 2]
+        lower = content.lower()
+        best_start, best_score = 0, -1
+        step = 200
+        if len(content) > WINDOW:
+            for start in range(0, len(content) - WINDOW + 1, step):
+                window = lower[start:start + WINDOW]
+                score = sum(window.count(t) for t in terms)
+                if score > best_score:
+                    best_score, best_start = score, start
+            snippet = content[best_start:best_start + WINDOW].strip()
+        else:
+            snippet = content.strip()
+
         return {
-            'answer': f"Based on the documentation:\n\n{best_result['content']}",
+            'answer': f"Based on the documentation:\n\n{snippet}",
             'sources': sources,
             'confidence': best_result['relevance_score'],
             'query': question
