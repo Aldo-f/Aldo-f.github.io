@@ -1,3 +1,7 @@
-sentence-transformers==2.2.2
-faiss-cpu==1.7.4
-numpy==1.24.3
+sentence-transformers>=3.0
+faiss-cpu==1.9.0.post1
+# Python 3.13 needs numpy >= 2.1; do NOT pin 1.x
+numpy>=2.1
+PyYAML
+# PyPI package name is mem0ai (import name: mem0)
+mem0ai>=0.1.0

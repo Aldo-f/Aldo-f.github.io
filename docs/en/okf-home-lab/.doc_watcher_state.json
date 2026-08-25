@@ -1,0 +1,522 @@
+{
+  "06-apps-passive-income:README.md": {
+    "hash": "32446c89dfab7956f6459f015f1a6c6d",
+    "integrated_at": "2026-08-25T09:10:58.683867",
+    "size": 4553
+  },
+  "06-apps-passive-income:AGENTS.md": {
+    "hash": "c67feba14bc9c0166a27624f4a2d8ba5",
+    "integrated_at": "2026-08-25T09:10:58.684135",
+    "size": 1719
+  },
+  "06-apps-passive-income:CONTRIBUTING.md": {
+    "hash": "f2d252751a5a7980a48006c8e6b8ef3f",
+    "integrated_at": "2026-08-25T09:10:58.684308",
+    "size": 3270
+  },
+  "06-apps-passive-income:06-apps-passive-income/README.md": {
+    "hash": "32446c89dfab7956f6459f015f1a6c6d",
+    "integrated_at": "2026-08-25T09:10:58.684534",
+    "size": 4553
+  },
+  "06-apps-passive-income:06-apps-passive-income/AGENTS.md": {
+    "hash": "c67feba14bc9c0166a27624f4a2d8ba5",
+    "integrated_at": "2026-08-25T09:10:58.685173",
+    "size": 1719
+  },
+  "06-apps-passive-income:06-apps-passive-income/CONTRIBUTING.md": {
+    "hash": "f2d252751a5a7980a48006c8e6b8ef3f",
+    "integrated_at": "2026-08-25T09:10:58.685454",
+    "size": 3270
+  },
+  "06-apps-passive-income:.specify/memory/constitution.md": {
+    "hash": "63c33ea8fb707049c0c59ee9d70a268b",
+    "integrated_at": "2026-08-25T09:10:58.685853",
+    "size": 3533
+  },
+  "06-apps-passive-income:.specify/templates/tasks-template.md": {
+    "hash": "f8b4f62d384defa0a559bdbbaacb0540",
+    "integrated_at": "2026-08-25T09:10:58.686612",
+    "size": 9171
+  },
+  "06-apps-passive-income:.specify/templates/plan-template.md": {
+    "hash": "311db0670c3d19d2f5b781de97529b79",
+    "integrated_at": "2026-08-25T09:10:58.686838",
+    "size": 3682
+  },
+  "06-apps-passive-income:.specify/templates/spec-template.md": {
+    "hash": "45ac8538bc1220324c9f0d610145b53f",
+    "integrated_at": "2026-08-25T09:10:58.687452",
+    "size": 4556
+  },
+  "06-apps-passive-income:.specify/templates/constitution-template.md": {
+    "hash": "dcefb6b60e7cb3db2e966977b6f02f18",
+    "integrated_at": "2026-08-25T09:10:58.687672",
+    "size": 2346
+  },
+  "06-apps-passive-income:.specify/templates/checklist-template.md": {
+    "hash": "5af23404f7e1314e93fab2bcfcfa5c23",
+    "integrated_at": "2026-08-25T09:10:58.687857",
+    "size": 2033
+  },
+  "06-apps-passive-income:specs/002-dashboard-neo-brutalist/plan.md": {
+    "hash": "c38b85db7a19c470ab2d30626779fdd8",
+    "integrated_at": "2026-08-25T09:10:58.688577",
+    "size": 1408
+  },
+  "06-apps-passive-income:specs/002-dashboard-neo-brutalist/tasks.md": {
+    "hash": "c48a18ed08d8cf4198e7cfbd188a877b",
+    "integrated_at": "2026-08-25T09:10:58.688814",
+    "size": 1532
+  },
+  "06-apps-passive-income:specs/002-dashboard-neo-brutalist/spec.md": {
+    "hash": "a4f5da6e19ac569d9d39f66545a60564",
+    "integrated_at": "2026-08-25T09:10:58.688995",
+    "size": 1940
+  },
+  "06-apps-passive-income:specs/001-make-passive-income/quickstart.md": {
+    "hash": "d88d8435726d1be49129949d7bb1937b",
+    "integrated_at": "2026-08-25T09:10:58.689651",
+    "size": 1457
+  },
+  "06-apps-passive-income:specs/001-make-passive-income/research.md": {
+    "hash": "57d926d4a2345cf1ead0c73d103d5922",
+    "integrated_at": "2026-08-25T09:10:58.689861",
+    "size": 3317
+  },
+  "06-apps-passive-income:specs/001-make-passive-income/plan.md": {
+    "hash": "d7256698360c60587c0ee8d921725f81",
+    "integrated_at": "2026-08-25T09:10:58.690045",
+    "size": 3779
+  },
+  "06-apps-passive-income:specs/001-make-passive-income/tasks.md": {
+    "hash": "f8a4f52ab8ff604a581aa9048832c601",
+    "integrated_at": "2026-08-25T09:10:58.690678",
+    "size": 3253
+  },
+  "06-apps-passive-income:specs/001-make-passive-income/spec.md": {
+    "hash": "18458142c325acc2ebc434c4f3ed1575",
+    "integrated_at": "2026-08-25T09:10:58.690906",
+    "size": 6041
+  },
+  "06-apps-passive-income:providers/honeygain/README.md": {
+    "hash": "d6c86f3d655f6a0c332df81b77cb8291",
+    "integrated_at": "2026-08-25T09:10:58.691278",
+    "size": 912
+  },
+  "06-apps-passive-income:providers/traffmonetizer/README.md": {
+    "hash": "97dd1731f0d68acbe69d9d041537d54d",
+    "integrated_at": "2026-08-25T09:10:58.691987",
+    "size": 810
+  },
+  "06-apps-radio-community:getting-started.md": {
+    "hash": "040823b299003386cf721dcd6b0386ef",
+    "integrated_at": "2026-08-25T09:10:58.692317",
+    "size": 1710
+  },
+  "06-apps-radio-community:index.md": {
+    "hash": "aafd04995761cb5e943930a770ab9f28",
+    "integrated_at": "2026-08-25T09:10:58.692532",
+    "size": 1619
+  },
+  "06-apps-radio-community:project.md": {
+    "hash": "fc4cdd0d6d92aa05eb791e8167075c38",
+    "integrated_at": "2026-08-25T09:10:58.692832",
+    "size": 14822
+  },
+  "06-apps-radio-community:architecture/structure.md": {
+    "hash": "faf6e73f03a86da0bf19fbb5ffeb04d9",
+    "integrated_at": "2026-08-25T09:10:58.693118",
+    "size": 2368
+  },
+  "06-apps-radio-community:architecture/stream-flow.md": {
+    "hash": "172f690bbd1b4fdc354b473d7c19cd04",
+    "integrated_at": "2026-08-25T09:10:58.693270",
+    "size": 2920
+  },
+  "06-apps-radio-community:architecture/database.md": {
+    "hash": "01e50b8847df053fb2ba02a3672058a6",
+    "integrated_at": "2026-08-25T09:10:58.693402",
+    "size": 3198
+  },
+  "06-apps-radio-community:architecture/tech-stack.md": {
+    "hash": "880a7badce1dc4ed817452f8760a8da0",
+    "integrated_at": "2026-08-25T09:10:58.693523",
+    "size": 2637
+  },
+  "06-apps-radio-community:api/sources.md": {
+    "hash": "3159467600296f862cb4404c817b908a",
+    "integrated_at": "2026-08-25T09:10:58.693674",
+    "size": 2500
+  },
+  "06-apps-radio-community:api/members.md": {
+    "hash": "be265cd5380d370353baedca96903a45",
+    "integrated_at": "2026-08-25T09:10:58.693793",
+    "size": 1730
+  },
+  "06-apps-radio-community:api/stream.md": {
+    "hash": "fde979bd89946431e6b46505858dd7a3",
+    "integrated_at": "2026-08-25T09:10:58.693918",
+    "size": 2291
+  },
+  "06-apps-radio-community:api/communities.md": {
+    "hash": "30011d2566f2cc24365e84cb433c4f76",
+    "integrated_at": "2026-08-25T09:10:58.694050",
+    "size": 2325
+  },
+  "06-apps-radio-community:api/tracks.md": {
+    "hash": "02966917d6076b0d8e8a62fa23e1169e",
+    "integrated_at": "2026-08-25T09:10:58.694178",
+    "size": 3562
+  },
+  "06-apps-radio-community:dev/env-vars.md": {
+    "hash": "3d00b4f347620d5b50d9f0d25b8463d1",
+    "integrated_at": "2026-08-25T09:10:58.694343",
+    "size": 2303
+  },
+  "06-apps-radio-community:dev/testing.md": {
+    "hash": "6375400ca946e03b6b7333d0c77b896f",
+    "integrated_at": "2026-08-25T09:10:58.694485",
+    "size": 1745
+  },
+  "06-apps-radio-community:dev/workflow.md": {
+    "hash": "84b1c099f2c44d6f2dc7aea811af5efa",
+    "integrated_at": "2026-08-25T09:10:58.694657",
+    "size": 2263
+  },
+  "06-apps-radio-community:features/playlist-algorithm.md": {
+    "hash": "27c4fdb83b0cd222cbef588e4e550e38",
+    "integrated_at": "2026-08-25T09:10:58.694886",
+    "size": 2989
+  },
+  "06-apps-radio-community:features/community-creation.md": {
+    "hash": "d593c98a28ed27c1cf823092b054d11d",
+    "integrated_at": "2026-08-25T09:10:58.695068",
+    "size": 2382
+  },
+  "06-apps-radio-community:features/voting.md": {
+    "hash": "f8bed8d85e43a2a0ed1d19582a521cb1",
+    "integrated_at": "2026-08-25T09:10:58.695242",
+    "size": 1644
+  },
+  "06-apps-radio-community:features/stream-management.md": {
+    "hash": "3413e84959f2ae946f37e74932755d78",
+    "integrated_at": "2026-08-25T09:10:58.695478",
+    "size": 2543
+  },
+  "06-apps-radio-community:features/permissions.md": {
+    "hash": "41ea0e425044cda083080bd2df1d31a9",
+    "integrated_at": "2026-08-25T09:10:58.696382",
+    "size": 3573
+  },
+  "06-apps-wordpress-stantonius:TESTPLAN.md": {
+    "hash": "d4611a0eaf4f30ddbfd8415d23fc898f",
+    "integrated_at": "2026-08-25T09:10:58.696938",
+    "size": 2165
+  },
+  "06-apps-wordpress-stantonius:README.md": {
+    "hash": "3b43477d2e82231d1acfe151939a39f0",
+    "integrated_at": "2026-08-25T09:10:58.697824",
+    "size": 5428
+  },
+  "06-apps-wordpress-stantonius:design-inspiration-IMPLEMENTATION.md": {
+    "hash": "d12ea7e8280f5a992f16933f49be74f9",
+    "integrated_at": "2026-08-25T09:10:58.698413",
+    "size": 6825
+  },
+  "06-apps-wordpress-stantonius:CHANGELOG.md": {
+    "hash": "3d50848a9b666e469b0e49f775026297",
+    "integrated_at": "2026-08-25T09:10:58.698736",
+    "size": 1959
+  },
+  "06-apps-wordpress-stantonius:STOCK-PHOTOS.md": {
+    "hash": "f83a141db82c08eda08e7b3ca1916987",
+    "integrated_at": "2026-08-25T09:10:58.699482",
+    "size": 3022
+  },
+  "06-apps-wordpress-stantonius:BRIEFING.md": {
+    "hash": "2eaf0be754057053de7ed2d8cc06d1d6",
+    "integrated_at": "2026-08-25T09:10:58.699999",
+    "size": 3048
+  },
+  "06-apps-wordpress-stantonius:performance/performance.md": {
+    "hash": "98a4427e57a659e36f94f4aca3bf12f8",
+    "integrated_at": "2026-08-25T09:10:58.700277",
+    "size": 346
+  },
+  "06-apps-aldo-f-github-io:en/about.md": {
+    "hash": "6c8eb0d0c79774f7355f1b419ca6ab00",
+    "integrated_at": "2026-08-25T09:10:58.701090",
+    "size": 1524
+  },
+  "06-apps-aldo-f-github-io:en/index.md": {
+    "hash": "3f39c853466ec2c94e24ff94088ca3ab",
+    "integrated_at": "2026-08-25T09:10:58.701258",
+    "size": 201
+  },
+  "06-apps-aldo-f-github-io:en/projects.md": {
+    "hash": "54c69f7e2ce9586280012ee8ba57b896",
+    "integrated_at": "2026-08-25T09:10:58.701380",
+    "size": 1307
+  },
+  "06-apps-aldo-f-github-io:nl/about.md": {
+    "hash": "9b562ab1007e42e735782bf0ead8bb19",
+    "integrated_at": "2026-08-25T09:10:58.701520",
+    "size": 236
+  },
+  "06-apps-aldo-f-github-io:nl/index.md": {
+    "hash": "224efaebbb77470923c8ebadf236b061",
+    "integrated_at": "2026-08-25T09:10:58.701637",
+    "size": 232
+  },
+  "06-apps-aldo-f-github-io:nl/projects.md": {
+    "hash": "bdda3f7f0177c61a5b46c07941468d58",
+    "integrated_at": "2026-08-25T09:10:58.701753",
+    "size": 1399
+  },
+  "06-apps-aldo-f-github-io:nl/blog/index.md": {
+    "hash": "87a1cae2936c47994c493692bc366928",
+    "integrated_at": "2026-08-25T09:10:58.701888",
+    "size": 7
+  },
+  "06-apps-aldo-f-github-io:nl/blog/posts/start-scrumweek.md": {
+    "hash": "c9bd6dd90535fd341738c464cc2bc222",
+    "integrated_at": "2026-08-25T09:10:58.702024",
+    "size": 3260
+  },
+  "06-apps-aldo-f-github-io:nl/blog/posts/einde-scrum.md": {
+    "hash": "c08187deda51b6ac4cfcb600bd954832",
+    "integrated_at": "2026-08-25T09:10:58.702145",
+    "size": 3674
+  },
+  "06-apps-aldo-f-github-io:nl/blog/posts/building-this-hub.md": {
+    "hash": "bb7f7b52bce1b8006ff7f74e6c14d8dd",
+    "integrated_at": "2026-08-25T09:10:58.702261",
+    "size": 1041
+  },
+  "06-apps-aldo-f-github-io:nl/blog/posts/1-april.md": {
+    "hash": "21c7df0f20952765f60a26846ff053d1",
+    "integrated_at": "2026-08-25T09:10:58.702375",
+    "size": 156
+  },
+  "06-apps-aldo-f-github-io:nl/blog/category/index.md": {
+    "hash": "8de76619a63b9b1912bffc9bc614d7dc",
+    "integrated_at": "2026-08-25T09:10:58.702516",
+    "size": 355
+  },
+  "06-apps-aldo-f-github-io:en/blog/index.md": {
+    "hash": "3d49160986c188ce8b69f53df6b29a6a",
+    "integrated_at": "2026-08-25T09:10:58.702648",
+    "size": 8
+  },
+  "06-apps-aldo-f-github-io:en/blog/posts/start-scrumweek.md": {
+    "hash": "45ae43e5de10b3d844abb9a8105a4426",
+    "integrated_at": "2026-08-25T09:10:58.702783",
+    "size": 2902
+  },
+  "06-apps-aldo-f-github-io:en/blog/posts/einde-scrum.md": {
+    "hash": "9c7372a5cac0b1da5d53c673035c8876",
+    "integrated_at": "2026-08-25T09:10:58.702915",
+    "size": 3515
+  },
+  "06-apps-aldo-f-github-io:en/blog/posts/building-this-hub.md": {
+    "hash": "71a2fea011cd3c7b72a87f955464c0fc",
+    "integrated_at": "2026-08-25T09:10:58.703048",
+    "size": 805
+  },
+  "06-apps-aldo-f-github-io:en/blog/posts/roadmap-notes-draft.md": {
+    "hash": "cdc236624634fe4443c3213721a86856",
+    "integrated_at": "2026-08-25T09:10:58.703165",
+    "size": 249
+  },
+  "06-apps-aldo-f-github-io:en/blog/posts/1-april.md": {
+    "hash": "f6b78cebf34213c31d93c48499e907c4",
+    "integrated_at": "2026-08-25T09:10:58.703280",
+    "size": 160
+  },
+  "06-apps-aldo-f-github-io:en/blog/category/index.md": {
+    "hash": "8de76619a63b9b1912bffc9bc614d7dc",
+    "integrated_at": "2026-08-25T09:10:58.703413",
+    "size": 355
+  },
+  "06-apps-thuis-v4:credentials.md": {
+    "hash": "e79b70164d0825d27bfe8974af82fbb9",
+    "integrated_at": "2026-08-25T09:10:58.703554",
+    "size": 1034
+  },
+  "06-apps-thuis-v4:development.md": {
+    "hash": "2ca09d35f764a019950f08a777c01f6d",
+    "integrated_at": "2026-08-25T09:10:58.703666",
+    "size": 1838
+  },
+  "06-apps-thuis-v4:installation.md": {
+    "hash": "3a3cd2aecc38d7d893d5b20325ee0326",
+    "integrated_at": "2026-08-25T09:10:58.703776",
+    "size": 687
+  },
+  "06-apps-thuis-v4:usage.md": {
+    "hash": "a781e32b8bb44ebf685565cf76322a33",
+    "integrated_at": "2026-08-25T09:10:58.703897",
+    "size": 4067
+  },
+  "06-apps-thuis-v4:intro.md": {
+    "hash": "5ad1549d29df5aa5794e9e07531554ba",
+    "integrated_at": "2026-08-25T09:10:58.704050",
+    "size": 1178
+  },
+  "06-apps-clock:development.md": {
+    "hash": "7b796c2e608d536ce32fca400788b791",
+    "integrated_at": "2026-08-25T09:10:58.704183",
+    "size": 2328
+  },
+  "06-apps-clock:index.md": {
+    "hash": "ffabac27dccb92855d86fdfc2fbdc4ff",
+    "integrated_at": "2026-08-25T09:10:58.704293",
+    "size": 1544
+  },
+  "06-apps-clock:features.md": {
+    "hash": "9dfac8d9eac570bf469fe02fc52d596b",
+    "integrated_at": "2026-08-25T09:10:58.704403",
+    "size": 2124
+  },
+  "06-apps-passive-income-sync:README.md": {
+    "hash": "32446c89dfab7956f6459f015f1a6c6d",
+    "integrated_at": "2026-08-25T09:10:58.704534",
+    "size": 4553
+  },
+  "06-apps-passive-income-sync:AGENTS.md": {
+    "hash": "c67feba14bc9c0166a27624f4a2d8ba5",
+    "integrated_at": "2026-08-25T09:10:58.705076",
+    "size": 1719
+  },
+  "06-apps-passive-income-sync:CONTRIBUTING.md": {
+    "hash": "f2d252751a5a7980a48006c8e6b8ef3f",
+    "integrated_at": "2026-08-25T09:10:58.705300",
+    "size": 3270
+  },
+  "06-apps-passive-income-sync:06-apps-passive-income/README.md": {
+    "hash": "32446c89dfab7956f6459f015f1a6c6d",
+    "integrated_at": "2026-08-25T09:10:58.705502",
+    "size": 4553
+  },
+  "06-apps-passive-income-sync:06-apps-passive-income/AGENTS.md": {
+    "hash": "c67feba14bc9c0166a27624f4a2d8ba5",
+    "integrated_at": "2026-08-25T09:10:58.705654",
+    "size": 1719
+  },
+  "06-apps-passive-income-sync:06-apps-passive-income/CONTRIBUTING.md": {
+    "hash": "f2d252751a5a7980a48006c8e6b8ef3f",
+    "integrated_at": "2026-08-25T09:10:58.706552",
+    "size": 3270
+  },
+  "06-apps-passive-income-sync:.specify/memory/constitution.md": {
+    "hash": "63c33ea8fb707049c0c59ee9d70a268b",
+    "integrated_at": "2026-08-25T09:10:58.706864",
+    "size": 3533
+  },
+  "06-apps-passive-income-sync:.specify/templates/tasks-template.md": {
+    "hash": "f8b4f62d384defa0a559bdbbaacb0540",
+    "integrated_at": "2026-08-25T09:10:58.707019",
+    "size": 9171
+  },
+  "06-apps-passive-income-sync:.specify/templates/plan-template.md": {
+    "hash": "311db0670c3d19d2f5b781de97529b79",
+    "integrated_at": "2026-08-25T09:10:58.707156",
+    "size": 3682
+  },
+  "06-apps-passive-income-sync:.specify/templates/spec-template.md": {
+    "hash": "45ac8538bc1220324c9f0d610145b53f",
+    "integrated_at": "2026-08-25T09:10:58.707314",
+    "size": 4556
+  },
+  "06-apps-passive-income-sync:.specify/templates/constitution-template.md": {
+    "hash": "dcefb6b60e7cb3db2e966977b6f02f18",
+    "integrated_at": "2026-08-25T09:10:58.707684",
+    "size": 2346
+  },
+  "06-apps-passive-income-sync:.specify/templates/checklist-template.md": {
+    "hash": "5af23404f7e1314e93fab2bcfcfa5c23",
+    "integrated_at": "2026-08-25T09:10:58.707906",
+    "size": 2033
+  },
+  "06-apps-passive-income-sync:specs/002-dashboard-neo-brutalist/plan.md": {
+    "hash": "c38b85db7a19c470ab2d30626779fdd8",
+    "integrated_at": "2026-08-25T09:10:58.708257",
+    "size": 1408
+  },
+  "06-apps-passive-income-sync:specs/002-dashboard-neo-brutalist/tasks.md": {
+    "hash": "c48a18ed08d8cf4198e7cfbd188a877b",
+    "integrated_at": "2026-08-25T09:10:58.708489",
+    "size": 1532
+  },
+  "06-apps-passive-income-sync:specs/002-dashboard-neo-brutalist/spec.md": {
+    "hash": "a4f5da6e19ac569d9d39f66545a60564",
+    "integrated_at": "2026-08-25T09:10:58.708681",
+    "size": 1940
+  },
+  "06-apps-passive-income-sync:specs/001-make-passive-income/quickstart.md": {
+    "hash": "d88d8435726d1be49129949d7bb1937b",
+    "integrated_at": "2026-08-25T09:10:58.709371",
+    "size": 1457
+  },
+  "06-apps-passive-income-sync:specs/001-make-passive-income/research.md": {
+    "hash": "57d926d4a2345cf1ead0c73d103d5922",
+    "integrated_at": "2026-08-25T09:10:58.709640",
+    "size": 3317
+  },
+  "06-apps-passive-income-sync:specs/001-make-passive-income/plan.md": {
+    "hash": "d7256698360c60587c0ee8d921725f81",
+    "integrated_at": "2026-08-25T09:10:58.709811",
+    "size": 3779
+  },
+  "06-apps-passive-income-sync:specs/001-make-passive-income/tasks.md": {
+    "hash": "f8a4f52ab8ff604a581aa9048832c601",
+    "integrated_at": "2026-08-25T09:10:58.709970",
+    "size": 3253
+  },
+  "06-apps-passive-income-sync:specs/001-make-passive-income/spec.md": {
+    "hash": "18458142c325acc2ebc434c4f3ed1575",
+    "integrated_at": "2026-08-25T09:10:58.710217",
+    "size": 6041
+  },
+  "06-apps-thuis-v5:provider-adapter.md": {
+    "hash": "a42ac468d97a9df63b7eef5418bcb946",
+    "integrated_at": "2026-08-25T09:10:58.710436",
+    "size": 2770
+  },
+  "06-apps-thuis-v5:search-service.md": {
+    "hash": "1fa68ba22ec1ff21a2bccb3cbc356cbb",
+    "integrated_at": "2026-08-25T09:10:58.710827",
+    "size": 3256
+  },
+  "06-apps-thuis-v5:getting-started.md": {
+    "hash": "50ac09dd641790fad83ed0c4cc67cea5",
+    "integrated_at": "2026-08-25T09:10:58.711035",
+    "size": 4234
+  },
+  "06-apps-thuis-v5:architecture.md": {
+    "hash": "f5aac43e3e05041b9e8c97f8a585a63d",
+    "integrated_at": "2026-08-25T09:10:58.711175",
+    "size": 1220
+  },
+  "06-apps-thuis-v5:credential-vault.md": {
+    "hash": "d24a94100c264c4647d6078b3f40d35c",
+    "integrated_at": "2026-08-25T09:10:58.711329",
+    "size": 2659
+  },
+  "06-apps-thuis-v5:usage.md": {
+    "hash": "6c37a5c8aebcb91da319566c782560fc",
+    "integrated_at": "2026-08-25T09:10:58.711595",
+    "size": 933
+  },
+  "06-apps-thuis-v5:api-reference.md": {
+    "hash": "c475ffb499934ea2a6d4f454093fb292",
+    "integrated_at": "2026-08-25T09:10:58.711850",
+    "size": 2197
+  },
+  "06-apps-thuis-v5:intro.md": {
+    "hash": "752e50bacb79486740e6fc79108b3f36",
+    "integrated_at": "2026-08-25T09:10:58.712036",
+    "size": 1430
+  }
+}
