@@ -8,8 +8,16 @@ import re
 import json
 import numpy as np
 from sentence_transformers import SentenceTransformer
-import faiss
+# Attempt to import FAISS; if unavailable, fallback to numpy similarity
+try:
+    import faiss
+except Exception:
+    faiss = None
+
+import sys
 from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+from memory_helper import get_memory_provider
 from typing import List, Dict, Tuple, Optional
 
 class OKFRAGPipeline:
@@ -83,24 +91,35 @@ class OKFRAGPipeline:
                 print(f"Warning: Could not process {md_file}: {e}")
     
     def _build_index(self):
-        """Build FAISS index from document embeddings"""
+        """Build vector store (Mem0 when configured, else FAISS)"""
         if not self.documents:
             print("No documents loaded")
             return
-        
+
         # Extract text content for embedding
         texts = [doc[0] for doc in self.documents]
-        
+
         # Generate embeddings
         print(f"Generating embeddings for {len(texts)} documents...")
         embeddings = self.model.encode(texts)
-        
-        # Build FAISS index
-        dimension = embeddings.shape[1]
-        self.index = faiss.IndexFlatL2(dimension)
-        self.index.add(embeddings.astype('float32'))
-        
-        print(f"Built index with {self.index.ntotal} vectors")
+
+        if get_memory_provider() == "mem0":
+            from mem0 import Mem0VectorStore
+            self.vector_store = Mem0VectorStore(collection="okf_rag")
+        else:
+            # existing FAISS logic
+            dimension = embeddings.shape[1]
+            self.index = faiss.IndexFlatL2(dimension)
+            self.index.add(embeddings.astype('float32'))
+
+        store = getattr(self, "vector_store", None)
+        if store is not None:
+            print("Built Mem0 vector store (collection=okf_rag)")
+        else:
+            print(f"Built index with {self.index.ntotal} vectors")
+
+    def _uses_mem0(self) -> bool:
+        return getattr(self, "vector_store", None) is not None
     
     def query(self, question: str, k: int = 3) -> List[Dict]:
         """
@@ -113,13 +132,41 @@ class OKFRAGPipeline:
         Returns:
             List of relevant documents with metadata
         """
-        if self.index is None:
+        if not self._uses_mem0() and self.index is None:
             return [{"error": "Index not built"}]
-        
+
         # Encode the question
         question_embedding = self.model.encode([question])
-        
-        # Search the index
+
+        if self._uses_mem0():
+            # Mem0 vector store search
+            hits = self.vector_store.search(
+                query=question, limit=k
+            )
+            results = []
+            for i, hit in enumerate(hits):
+                idx = hit.get("metadata", {}).get("doc_index", hit.get("id"))
+                if isinstance(idx, int) and 0 <= idx < len(self.documents):
+                    content, metadata = self.documents[idx]
+                else:
+                    content, metadata = hit.get("memory", hit.get("text", "")), {
+                        'path': hit.get('path', 'unknown'),
+                        'title': hit.get('title', 'Untitled'),
+                        'type': hit.get('type', 'Unknown'),
+                        'tags': [],
+                        'sources': []
+                    }
+                score = float(hit.get("score", 0.0))
+                results.append({
+                    'rank': i + 1,
+                    'content': content[:500] + "..." if len(content) > 500 else content,
+                    'metadata': metadata,
+                    'distance': 1.0 - score,
+                    'relevance_score': score
+                })
+            return results
+
+        # Search the FAISS index
         distances, indices = self.index.search(
             question_embedding.astype('float32'), k
         )
