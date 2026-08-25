@@ -104,3 +104,12 @@ nav:
                   - Testen: thuis-v3/docs/nl/testing.md
                   - DRM: thuis-v3/docs/nl/drm.md
                   - Probleemoplossing: thuis-v3/docs/nl/troubleshooting.md
+      - OKF Home Lab:
+          - Overview: okf-home-lab/index.md
+          - Change Log: okf-home-lab/log.md
+          - 01-Core-Infra: okf-home-lab/01-core-infra/index.md
+          - 05-Media-Jellyfin: okf-home-lab/05-media-jellyfin/index.md
+          - 05-Media-Nextcloud: okf-home-lab/05-media-nextcloud/index.md
+          - 05-Media-Qbittorrent: okf-home-lab/05-media-qbittorrent/index.md
+          - 06-Apps-Passive-Income: okf-home-lab/06-apps-passive-income/index.md
+          - RAG Pipeline: okf-home-lab/rag/rag_query.py
