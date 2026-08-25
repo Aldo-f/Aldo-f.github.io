@@ -104,13 +104,22 @@ class OKFRAGPipeline:
         embeddings = self.model.encode(texts)
 
         if get_memory_provider() == "mem0":
-            from mem0 import Mem0VectorStore
+            from mem0_store import Mem0VectorStore
             self.vector_store = Mem0VectorStore(collection="okf_rag")
         else:
             # existing FAISS logic
             dimension = embeddings.shape[1]
             self.index = faiss.IndexFlatL2(dimension)
             self.index.add(embeddings.astype('float32'))
+
+        if self._uses_mem0():
+            # Index documents into Mem0 (idempotent: dedupe happens server-side)
+            metadatas = [
+                {**meta, "doc_index": i} for i, (text, meta) in enumerate(self.documents)
+            ]
+            print("Indexing documents into Mem0...")
+            self.vector_store.add(texts, metadatas)
+            return
 
         store = getattr(self, "vector_store", None)
         if store is not None:
