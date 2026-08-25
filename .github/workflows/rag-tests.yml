@@ -39,10 +39,13 @@ jobs:
         run: pytest -q tests/rag/test_mem0_integration.py
 
       - name: Start RAG API (background)
+        env:
+          MEM0_API_KEY: ${{ secrets.MEM0_API_KEY }}
         run: |
           nohup python -m uvicorn rag_api:app --host 127.0.0.1 --port 8000 \
             --app-dir rag > /tmp/rag_api.log 2>&1 &
           sleep 15
+          cat /tmp/rag_api.log
 
       - name: Run FastAPI endpoint test
         env:
