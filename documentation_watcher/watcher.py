@@ -198,6 +198,11 @@ class DocWatcher:
         
         return changes
     
+    # Repos never scanned: the docs hub itself (scanning its docs/ tree
+    # re-imports the synced mirrors into themselves -> infinite nesting)
+    # and the Nextcloud runtime stack (host state, not project code).
+    SCAN_EXCLUDED = {"06-apps-aldo-f-github-io", "06-apps-nextcloud"}
+
     def scan_all_repositories(self):
         """Scan all application repositories for documentation changes"""
         all_changes = []
@@ -208,7 +213,8 @@ class DocWatcher:
             return all_changes
             
         for item in APPS_DIR.iterdir():
-            if item.is_dir() and item.name.startswith("06-apps-"):
+            if (item.is_dir() and item.name.startswith("06-apps-")
+                    and item.name not in self.SCAN_EXCLUDED):
                 changes = self.scan_repository(item)
                 all_changes.extend(changes)
         
