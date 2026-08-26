@@ -53,6 +53,10 @@ nav:
   - Blog: blog/index.md
   - Projects:
       - projects.md
+      - Radio Community:
+          - Overview: radio-community/index.md
+          - Getting started: radio-community/getting-started.md
+          - Project: radio-community/project.md
       - Clock:
           - clock/docs/index.md
           - Features: clock/docs/features.md
