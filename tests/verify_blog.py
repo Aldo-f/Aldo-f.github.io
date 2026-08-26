@@ -336,7 +336,7 @@ def main() -> int:
                 for route, marker in (
                     ("/", "Aldo-f docs"),
                     ("/about/", "central documentation hub"),
-                    ("/projects/", "quick index of the projects"),
+                    ("/projects/", "quick index of everything documented"),
                     ("/thuis/docs/", "Overview - Aldo-f docs"),
                 ):
                     status, body = fetch(base + route)
