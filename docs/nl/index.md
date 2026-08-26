@@ -12,7 +12,7 @@ zodat wat je leest altijd klopt met de code.
 | Project | Wat het is | Documentatie |
 |---------|------------|--------------|
 | **Clocky** | Een React-klokstudio: 13 handgebouwde klokken plus een AI-customizer | [Documentatie](/clock/docs/) · [GitHub](https://github.com/Aldo-f/clock) |
-| **Thuis** | VRT MAX-video-downloader met automatische authenticatie (v3 → v5) | [Nederlands](thuis/docs/nl/index.md) · [Alle versies](/projects/) |
+| **Thuis** | VRT MAX-video-downloader met automatische authenticatie (v3 → v5) | [Documentatie](/thuis/docs/) · [Alle versies](/projects/) |
 | **Radio Community** | Democratische internetradio met stemmen op de playlist | [Engels](/radio-community/) |
 
 ## Begin hier
