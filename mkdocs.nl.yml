@@ -22,3 +22,4 @@ nav:
   - Home: index.md
   - Over: about.md
   - Blog: blog/index.md
+  - Home-lab Docs: home-lab-docs.md
