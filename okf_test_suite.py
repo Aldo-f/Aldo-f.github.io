@@ -9,7 +9,7 @@ Test suite that runs the four verification steps you requested:
 import subprocess, sys, json, pathlib, yaml, os
 
 BUNDLE_ROOT = pathlib.Path('/home/aldo/dev/okf-home-lab')
-SITE_URL = 'https://aldo-f.github.io/okf-home-lab/'
+SITE_URL = 'https://aldo-f.github.io/home-lab-docs/'
 
 def ok(message):
     print(f"✅ {message}")
