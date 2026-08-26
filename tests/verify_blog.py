@@ -349,11 +349,11 @@ def main() -> int:
             def en_listing():
                 assert_route(base, "/blog/", [
                     "How this documentation hub is built",
-                    "End of Scrum",
+                    "Einde Scrum",
                 ], ["Roadmap notes"])
                 h = fetch(base + "/blog/")[1]
                 i_new = h.find("How this documentation hub is built")
-                i_old = h.find("End of Scrum")
+                i_old = h.find("Einde Scrum")
                 assert 0 <= i_new < i_old, "EN listing not newest-first"
                 return "newest-first + excerpts"
 

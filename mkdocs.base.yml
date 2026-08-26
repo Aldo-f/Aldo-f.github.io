@@ -40,6 +40,11 @@ extra:
       link: https://mastodon.social/@AldoF
 markdown_extensions:
   - tables
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - toc:
       permalink: true
 hooks:
