@@ -142,4 +142,15 @@ def on_post_build(config, **_kwargs):
     js_path = Path(config.site_dir) / JS_NAME
     js_path.parent.mkdir(parents=True, exist_ok=True)
     js_path.write_text(_SWITCH_JS, encoding="utf-8")
+
+    # Material renders its own generic 404.html; our custom 404.md pages are
+    # built as regular pages (404/index.html). Promote the language-appropriate
+    # one to the root 404.html so dead links get a styled, localized page.
+    site = Path(config.site_dir)
+    lang = "nl" if str(site).endswith("/nl") else "en"
+    custom = site / "404" / "index.html"
+    if custom.exists():
+        (site / "404.html").write_text(custom.read_text(encoding="utf-8"), encoding="utf-8")
+        print(f"404: promoted {lang} custom page to 404.html")
+
     print(f"slugmap: wrote {n} mirror entries + {JS_NAME}")
