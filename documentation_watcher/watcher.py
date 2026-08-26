@@ -20,6 +20,34 @@ DOCS_SITE = REPO_ROOT / "06-apps-aldo-f-github-io"
 STATE_FILE = DOCS_SITE / ".doc_watcher_state.json"
 CHECK_INTERVAL = 300  # 5 minutes
 
+# Explicit repo -> destination directories. One source of truth;
+# the generic else-branch is gone on purpose: unknown repos must fail
+# tests/test_watcher_map.py instead of silently landing somewhere odd.
+DOCS_SITE_DOCS = str(DOCS_SITE / "docs")
+OKF_BUNDLE = str(Path(__file__).resolve().parent.parent)
+
+REPO_DEST_MAP = {
+    "06-apps-clock":              [f"{DOCS_SITE_DOCS}/clock"],
+    "06-apps-radio-community":    [f"{DOCS_SITE_DOCS}/radio-community"],
+    "06-apps-wordpress-stantonius": [f"{DOCS_SITE_DOCS}/wordpress-stantonius"],
+    "06-apps-passive-income":     [f"{DOCS_SITE_DOCS}/passive-income",
+                                   f"{OKF_BUNDLE}/docs/passive-income"],
+    "06-apps-passive-income-sync": [f"{DOCS_SITE_DOCS}/passive-income-sync"],
+    "06-apps-thuis-v4":           [f"{DOCS_SITE_DOCS}/thuis-v4"],
+    "06-apps-thuis-v5":           [f"{DOCS_SITE_DOCS}/thuis-v5"],
+    # Aldo's own app: docs published on the site AND kept in the bundle
+    "06-apps-neo-brutalist-home": [f"{DOCS_SITE_DOCS}/neo-brutalist-home",
+                                   f"{OKF_BUNDLE}/docs/neo-brutalist-home"],
+    # NOT Aldo's own application: knowledge for agents only, never published
+    "06-apps-letspeppol":         [f"{OKF_BUNDLE}/docs/letspeppol"],
+    # The docs hub itself and the Nextcloud runtime stack: no external
+    # documentation to sync; mapped to the bundle root as a no-op target so
+    # tests stay green and the watcher has an explicit entry.
+    "06-apps-aldo-f-github-io":   [f"{OKF_BUNDLE}/docs/aldo-f-github-io"],
+    "06-apps-nextcloud":          [f"{OKF_BUNDLE}/docs/nextcloud"],
+}
+
+
 # Documentation patterns to watch
 DOC_PATTERNS = [
     "docs/**/*.md",
@@ -185,7 +213,7 @@ class DocWatcher:
                 all_changes.extend(changes)
         
         return all_changes
-    
+
     def integrate_changes(self, changes):
         """Integrate documentation changes into the site"""
         if not changes:
@@ -201,62 +229,37 @@ class DocWatcher:
             rel_file = change['file']
             src_path = Path(change['full_path'])
             
-            # Determine destination path
-            # For now, we'll integrate into a staged area for review
-            # In a full implementation, this would update the multirepo config
-            # and trigger appropriate imports
+            # Destination(s) from the explicit map; unknown repos are skipped
+            # loudly rather than silently landing in a generic location.
+            dest_bases = REPO_DEST_MAP.get(repo_name)
+            if not dest_bases:
+                print(f"  WARNING: no destination mapping for {repo_name} - skipped")
+                continue
             
-            # Example: Thuis documentation goes to docs/thuis/
-            if repo_name.startswith("06-apps-thuis"):
-                # Extract version from repo name if present
-                if "thuis-v4" in repo_name:
-                    dest_base = DOCS_SITE / "docs" / "thuis-v4"
-                elif "thuis-v5" in repo_name:
-                    dest_base = DOCS_SITE / "docs" / "thuis-v5"
-                elif "thuis-v3" in repo_name:
-                    dest_base = DOCS_SITE / "docs" / "thuis-v3"
-                else:
-                    dest_base = DOCS_SITE / "docs" / "thuis"
-            elif repo_name == "06-apps-clock":
-                dest_base = DOCS_SITE / "docs" / "clock"
-            elif repo_name == "06-apps-radio-community":
-                dest_base = DOCS_SITE / "docs" / "radio-community"
-            elif repo_name == "06-apps-wordpress-stantonius":
-                dest_base = DOCS_SITE / "docs" / "wordpress-stantonius"
-            else:
-                # Generic handling
-                dest_base = DOCS_SITE / "docs" / repo_name.replace("06-apps-", "")
+            import shutil
+            for dest_base in dest_bases:
+                dest_path = Path(dest_base) / rel_file
+                dest_path.parent.mkdir(parents=True, exist_ok=True)
+                
+                try:
+                    shutil.copy2(src_path, dest_path)
+                    print(f"  Integrated: {repo_name}/{rel_file} -> {dest_base}")
+                except Exception as e:
+                    print(f"  Error integrating {repo_name}/{rel_file}: {e}")
             
-            dest_path = dest_base / rel_file
-            dest_path.parent.mkdir(parents=True, exist_ok=True)
-            
-            try:
-                # Copy the file
-                import shutil
-                shutil.copy2(src_path, dest_path)
-                print(f"  Integrated: {repo_name}/{rel_file}")
-                
-                # Update state
-                file_id = f"{repo_name}:{rel_file}"
-                self.state[file_id] = {
-                    'hash': change['new_hash'],
-                    'integrated_at': datetime.now().isoformat(),
-                    'size': src_path.stat().st_size
-                }
-                
-                integrated = True
-                
-            except Exception as e:
-                print(f"  Error integrating {repo_name}/{rel_file}: {e}")
+            # Update state once per file (after all destinations succeeded)
+            file_id = f"{repo_name}:{rel_file}"
+            self.state[file_id] = {
+                'hash': change['new_hash'],
+                'integrated_at': datetime.now().isoformat(),
+                'size': src_path.stat().st_size
+            }
+            integrated = True
         
         if integrated:
             self.save_state()
             print("Documentation changes integrated successfully")
-            
-            # Trigger site rebuild if significant changes
-            # In a full implementation, we'd check if changes warrant rebuild
-            # and trigger mkdocs build
-            
+        
         return integrated
     
     def run_once(self):
