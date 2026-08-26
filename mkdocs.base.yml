@@ -18,6 +18,7 @@ theme:
     - navigation.indexes
     - navigation.sections
     - toc.follow
+    - content.image.zoom
 plugins:
   - autotranslate:
       languages: [en, nl]
@@ -49,3 +50,4 @@ markdown_extensions:
       permalink: true
 hooks:
   - hooks/slugmap.py
+  - hooks/lightbox.py
