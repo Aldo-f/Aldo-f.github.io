@@ -267,7 +267,19 @@ class DocWatcher:
         print(f"Starting documentation scan at {datetime.now()}")
         changes = self.scan_all_repositories()
         if changes:
-            self.integrate_changes(changes)
+            integrated = self.integrate_changes(changes)
+            if integrated:
+                # Publish chain: invalidate RAG cache, push site (Pages
+                # deploy), verify live, run test suite. Only fires when
+                # files actually changed.
+                post_sync = Path(__file__).resolve().parent.parent / "scripts" / "post_sync.sh"
+                if post_sync.exists():
+                    try:
+                        subprocess.run(["bash", str(post_sync)], timeout=900)
+                    except Exception as e:
+                        print(f"post_sync failed: {e}")
+                else:
+                    print("post_sync.sh missing - skipping publish chain")
         else:
             print("No changes detected")
         print(f"Scan completed at {datetime.now()}")
