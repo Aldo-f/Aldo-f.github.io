@@ -54,3 +54,4 @@ markdown_extensions:
 hooks:
   - hooks/slugmap.py
   - hooks/lightbox.py
+  - hooks/chat.py
