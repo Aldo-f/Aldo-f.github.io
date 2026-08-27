@@ -20,6 +20,7 @@ CSS_NAME = "assets/css/chat.css"
 
 _CHAT_JS = """"(function () {
   'use strict';
+  console.log('FreeLLM Chat Widget: Initializing...');
 
   // Chat widget state
   let isOpen = false;

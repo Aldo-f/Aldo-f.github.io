@@ -1,0 +1,43 @@
+# Plan: Integrate FreeLLM API as OpenAI-compatible backend for documentation site chat widget
+
+## Problem
+The current chat widget in the Aldo-f documentation site uses OpenRouter API, but the user wants to:
+1. Use their own FreeLLM API instance as an OpenAI-compatible endpoint
+2. Have it work both locally and on the live site (aldo-f.github.io)
+3. Use the provided API key and endpoint URL
+
+## Solution
+Modify the chat widget in `hooks/chat.py` to:
+1. Use the FreeLLM API endpoint: https://freellm.aldof.duckdns.org/v1/chat/completions
+2. Use the provided API key: freellmapi-f19ae62770dd60a1f67dd9369ffbc062199354f212040db8
+3. Maintain the same OpenAI-compatible request/response format
+4. Test the integration thoroughly
+
+## Implementation Steps
+1. Update the API endpoint URL in the chat widget JavaScript
+2. Update the Authorization header with the FreeLLM API key
+3. Verify the model parameter works with FreeLLM API (may need to adjust)
+4. Test locally using Python HTTP server
+5. Test the documentation site build process
+6. Verify the chat widget works on the live site
+
+## Testing Approach
+1. Build documentation site locally with `properdocs build`
+2. Start local HTTP server to serve the site
+3. Test chat widget functionality:
+   - Button opens/closes chat interface
+   - Messages send and receive responses
+   - Error handling works
+   - Styling and animations work correctly
+4. Verify the site still builds without errors
+5. Prepare for deployment to aldo-f.github.io
+
+## Files to Modify
+- `/home/aldo/dev/06-apps-aldo-f-github-io/hooks/chat.py` - Update API endpoint and key
+
+## Success Criteria
+- Chat widget appears and functions correctly on documentation site
+- Messages send to FreeLLM API and receive appropriate responses
+- Site builds successfully for both English and Dutch versions
+- No JavaScript errors in browser console
+- Widget maintains existing styling and UX
