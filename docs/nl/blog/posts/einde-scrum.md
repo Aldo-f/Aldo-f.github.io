@@ -28,6 +28,8 @@ Eerst werd er afgetast wie welke zaken voor zich zou nemen, er werd vooral per p
   * Pagina's: navigatie, registratie, login (in navbar), eigen profiel, ...
   * Functionaliteit: login, localStorage, favorieten, lovecoins (acties en aanpassing), ...
 
+<!-- more -->
+
 ### Wat ging er goed?
 * Communicatie; wat mij betreft ging dit heel vlot, iedereen wist wat de andere deed (al was het maar beperkt), vragen konden aan elkaar gesteld worden, en er diende bijna niet op elkaar gewacht te worden (op basis van code).
 

@@ -46,6 +46,8 @@ executor script and an attester — deterministic code, no LLM involved — so
 an agent can run the check itself and verify the receipt instead of trusting
 prose.
 
+<!-- more -->
+
 ## A minimal RAG pipeline
 
 With structured documents in place, retrieval needs three things: embed the

@@ -35,6 +35,12 @@ jobs:
       - name: Build NL site (serves at /nl/)
         run: mkdocs build --strict -f mkdocs.nl.yml -d site/nl
 
+      - name: Run Pagefind on EN site
+        run: pagefind --site site
+
+      - name: Run Pagefind on NL site
+        run: pagefind --site site/nl
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

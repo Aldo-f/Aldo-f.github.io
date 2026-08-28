@@ -10,12 +10,16 @@ extra:
     - name: Nederlands
       link: /nl/
       lang: nl
+  extra_css:
+    - https://unpkg.com/pagefind@latest/pagefind-ui.css
+  extra_javascript:
+    - https://unpkg.com/pagefind@latest/pagefind-ui.js
+    - /js/pagefind-init.js
 plugins:
   - blog:
       blog_dir: blog
       post_date_format: yyyy-MM-dd
       archive: false
-  - search
   - section-index
   - multirepo:
       nav_repos:

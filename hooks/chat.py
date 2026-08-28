@@ -1,11 +1,11 @@
-"""MkDocs hook: OpenRouter chat widget (feature 005).
-
+""""MkDocs hook: OpenRouter chat widget (feature 005).
+  
 Runs inside BOTH language builds (wired via `hooks:` in mkdocs.*.yml):
-
-1. on_config  — registers the emitted chat.js and chat.css in extra_javascript/extra_css so
-                they ship with the build.
-2. on_post_build — emits the chat widget files into the site directory.
-
+  
+  1. on_config  — registers the emitted chat.js and chat.css in extra_javascript/extra_css so
+                 they ship with the build.
+  2. on_post_build — emits the chat widget files into the site directory.
+  
 The chat widget provides a simple interface to chat with AI models via OpenRouter.
 """
 
@@ -16,7 +16,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 JS_NAME = "assets/javascripts/chat.js"
-CSS_NAME = "assets/css/chat.css"
+CSS_NAME = "assets/css/chat.js"
 
 _CHAT_JS = """"(function () {
   'use strict';
@@ -75,7 +75,6 @@ _CHAT_JS = """"(function () {
     widget.style.flexDirection = 'column';
     widget.style.zIndex = '1000';
     widget.style.border = '1px solid #e5e7eb';
-    widget.style.overflow = 'hidden';
     widget.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
     widget.style.opacity = '0';
     widget.style.transform = 'translateY(20px)';
@@ -113,16 +112,13 @@ _CHAT_JS = """"(function () {
     closeBtn.style.justifyContent = 'center';
     closeBtn.onmouseover = () => {
       closeBtn.style.backgroundColor = '#f3f4f6';
-      closeBtn.style.color = '#1f2937';
     };
     closeBtn.onmouseout = () => {
-      closeBtn.style.backgroundColor = 'transparent';
       closeBtn.style.color = '#6b7280';
     };
     closeBtn.onclick = () => {
       closeChat();
     };
-    
     header.appendChild(title);
     header.appendChild(closeBtn);
     widget.appendChild(header);
@@ -170,7 +166,7 @@ _CHAT_JS = """"(function () {
     };
     
     const sendBtn = document.createElement('button');
-    sendBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a19.79 19.79 0 0 1 8.63 3.07 19.5 19.5 0 0 1 6 6 19.5 19.5 0 0 1 6 6 19.79 19.79 0 0 1 3.07 8.67A2 2 0 0 1 21.18 22v-3a2.82 2.82 0 0 0 .82-2.12l-3-4a2.82 2.82 0 0 0-1.06-2.82 2.82 0 0 0-2.82-1.06l-4-3A2.82 2.82 0 0 0 2 4.11v3a2.82 2.82 0 0 0-1.18 2.12A11.79 11.79 0 0 0 5 12c0 1.35.28 2.65.75 3.82l4 4a2.82 2.82 0 0 0 2.82 1.06l4-3A2.82 2.82 0 0 0 16.07 8h3a2.82 2.82 0 0 0 2.12-.82z"></path></svg>';
+    sendBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.5 19.5 0 0 1 6 6 19.79 19.79 0 0 1 3.07 8.67A2 2 0 0 1 21.18 22v-3a2.82 2.82 0 0 0 .82-2.12l-3-4a2.82 2.82 0 0 0-1.06-2.82 2.82 0 0 0-2.82-1.06l-4-3A2.82 2.82 0 0 0 2 4.11v3a2.82 2.82 0 0 0-1.18 2.12A11.79 11.79 0 0 0 5 12c0 1.35.28 2.65.75 3.82l4 4a2.82 2.82 0 0 0 2.82 1.06l4-3A2.82 2.82 0 0 0 16.07 8h3a2.82 2.82 0 0 0 2.12-.82z"></path></svg>';
     sendBtn.style.backgroundColor = '#6366f1';
     sendBtn.style.color = 'white';
     sendBtn.style.border = 'none';
@@ -193,7 +189,7 @@ _CHAT_JS = """"(function () {
     inputContainer.appendChild(input);
     inputContainer.appendChild(sendBtn);
     widget.appendChild(inputContainer);
-
+    
     document.body.appendChild(widget);
   }
 
@@ -317,60 +313,49 @@ _CHAT_JS = """"(function () {
     
     typingContent.appendChild(typingDots);
     
-    const typingMessageDiv = document.createElement('div');
-    typingMessageDiv.style.display = 'flex';
-    typingMessageDiv.style.flexDirection = 'row';
-    typingMessageDiv.style.alignItems = 'flex-start';
-    typingMessageDiv.appendChild(typingAvatar);
-    typingMessageDiv.appendChild(typingContent);
+    typingDiv.appendChild(typingAvatar);
+    typingDiv.appendChild(typingContent);
     
-    const style = document.createElement('style');
-    style.textContent = '@keyframes typing { 0%, 60% { transform: translateX(0); } 30% { transform: translateX(8px); } }';
-    document.head.appendChild(style);
-    
-    typingMessageDiv.appendChild(typingContent);
-    document.getElementById('chat-messages').appendChild(typingMessageDiv);
+    document.getElementById('chat-messages').appendChild(typingDiv);
     document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
     
     try {
-      // Call FreeLLM API (OpenAI-compatible endpoint)
-      const response = await fetch('https://freellm.aldof.duckdns.org/v1/chat/completions', {
+      // Call RAG API
+      const response = await fetch('https://rag.aldof.duckdns.org/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer freellmapi-f19ae62770dd60a1f67dd9369ffbc062199354f212040db8',
-          'HTTP-Referer': window.location.origin,
-          'X-OpenRouter-Title': 'Aldo-f Docs'
+          'X-API-Key': '{{RAG_API_KEY}}' // Placeholder for build-time replacement
         },
         body: JSON.stringify({
-          model: 'auto',  // Use auto-routing for FreeLLM API
-          messages: [
-            { role: 'user', content: message }
-          ],
-          temperature: 0.7,
-          max_tokens: 1000
+          question: message,
+          k: 3
         })
       });
       
       const data = await response.json();
       
       // Remove typing indicator
-      const typingIndicator = document.getElementById('typing-indicator');
-      if (typingIndicator) {
-        typingIndicator.remove();
+      if (typingDiv) {
+        typingDiv.remove();
       }
       
-      if (data.choices && data.choices[0] && data.choices[0].message) {
-        const aiMessage = data.choices[0].message.content;
-        addMessage(aiMessage, false);
+      if (data && data.answer) {
+        // Optionally, log sources and confidence for debugging
+        console.log('RAG response:', data);
+        addMessage(data.answer, false);
+        // If we want to show sources, we could do it here, but the UI doesn't have a place for them yet.
+        // For now, we just log them.
+        if (data.sources) {
+          console.log('Sources:', data.sources);
+        }
       } else {
         addMessage('Sorry, I encountered an error. Please try again.', false);
       }
     } catch (error) {
       // Remove typing indicator
-      const typingIndicator = document.getElementById('typing-indicator');
-      if (typingIndicator) {
-        typingIndicator.remove();
+      if (typingDiv) {
+        typingDiv.remove();
       }
       
       addMessage('Sorry, I encountered an error. Please check your connection and try again.', false);
@@ -423,7 +408,6 @@ _CHAT_CSS = """/* Chat widget styles */
   flex-direction: column;
   z-index: 1000;
   border: 1px solid #e5e7eb;
-  overflow: hidden;
   opacity: 0;
   transform: translateY(20px);
   pointer-events: none;
@@ -498,134 +482,12 @@ _CHAT_CSS = """/* Chat widget styles */
   align-items: center;
   justify-content: center;
   font-size: 0.875rem;
-  font-weight: 600;
-  margin: 0 8px 0 0;
 }
+"""
 
-.chat-avatar.user {
-  background-color: #6366f1;
-  color: white;
-  margin: 0 0 0 8px;
-}
-
-.chat-avatar.ai {
-  background-color: #f3f4f6;
-  color: #6b7280;
-  margin: 0 8px 0 0;
-}
-
-.chat-content {
-  padding: 12px 16px;
-  border-radius: 16px 16px 4px 16px;
-  background-color: #6366f1;
-  color: white;
-  line-height: 1.5;
-  font-size: 0.95rem;
-  word-wrap: break-word;
-  max-width: 100%;
-}
-
-.chat-content.ai {
-  background-color: #f3f4f6;
-  color: #1f2937;
-  border-radius: 16px 16px 16px 4px;
-  margin-right: auto;
-}
-
-.chat-input-container {
-  padding: 16px;
-  border-top: 1px solid #f3f4f6;
-  display: flex;
-  gap: 12px;
-  background-color: #f8fafc;
-}
-
-#chat-input {
-  flex: 1;
-  padding: 12px 16px;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-#chat-input:focus {
-  border-color: #6366f1;
-}
-
-#chat-input::placeholder {
-  color: #9ca3af;
-}
-
-#chat-send-btn {
-  background-color: #6366f1;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
-}
-
-#chat-send-btn:hover {
-  background-color: #4f46e5;
-}
-
-.typing-indicator {
-  display: flex;
-  align-items: center;
-  max-width: 80%;
-  margin-left: auto;
-}
-
-.typing-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: #f3f4f6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #6b7280;
-}
-
-.typing-content {
-  padding: 12px 16px;
-  border-radius: 16px 16px 16px 4px;
-  background-color: #f3f4f6;
-  color: #1f2937;
-  line-height: 1.5;
-  font-size: 0.95rem;
-}
-
-.typing-dots {
-  display: inline-block;
-}
-
-.typing-dots span {
-  display: inline-block;
-  width: 2px;
-  height: 2px;
-  margin: 0 2px;
-  background-color: #6b7280;
-  border-radius: 50%;
-  animation: typing 1.5s infinite;
-}
-
-@keyframes typing {
-  0%, 60% { transform: translateX(0); }
-  30% { transform: translateX(8px); }
-}"""
 
 def on_config(config, **_kwargs):
-    """Register chat assets in extra_javascript and extra_css."""
+    """Register chat assets in extra_javascript/extra_css so they ship with the build."""
     extra_js = list(config.get("extra_javascript") or [])
     if JS_NAME not in extra_js:
         extra_js.append(JS_NAME)
@@ -637,18 +499,16 @@ def on_config(config, **_kwargs):
     config["extra_css"] = extra_css
     return config
 
-def on_post_build(config, **_kwargs):
+
+def on_post_build(*, config, **kwargs):
     """Emit chat widget files to site directory."""
     site_dir = Path(config.site_dir)
-    
     # Emit JavaScript
     js_path = site_dir / JS_NAME
     js_path.parent.mkdir(parents=True, exist_ok=True)
     js_path.write_text(_CHAT_JS, encoding="utf-8")
-    
     # Emit CSS
     css_path = site_dir / CSS_NAME
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(_CHAT_CSS, encoding="utf-8")
-    
     print(f"chat: emitted {JS_NAME} and {CSS_NAME}")

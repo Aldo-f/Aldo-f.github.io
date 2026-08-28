@@ -1,0 +1,5 @@
+options:
+  additional_languages:
+    nl:
+      label: Dutch
+  dev: false

@@ -9,6 +9,8 @@ Dit is het eerste bericht op de nieuwe blogsectie van de documentatiehub.
 Korte notities, aankondigingen van nieuwe versies en verslagen die niet thuishoren in de
 handleiding van een specifiek project, zullen vanaf nu hier verschijnen.
 
+<!-- more -->
+
 Het publiceren hier is bewust eenvoudig gehouden: één Markdown-bestand met een titel en een
 datum is voldoende. Verwacht onregelmatige maar eerlijke updates over de projecten op deze
 hub — inclusief de eigenzinnige projecten, zoals het xylophone-framework-experiment dat

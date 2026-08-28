@@ -80,11 +80,11 @@ _LIGHTBOX_JS = """(function () {
     // click target may be the svg itself, a child element, or a wrapper div
     // Also need to check for shadow roots in mermaid elements
     if (!node.closest) return null;
-    
+
     // Check direct matches first
     var directSvg = node.closest('svg.mermaid');
     if (directSvg) return directSvg;
-    
+
     var directMermaid = node.closest('.mermaid');
     if (directMermaid) {
       // Check if this mermaid element has a shadow root with SVG inside
@@ -95,7 +95,7 @@ _LIGHTBOX_JS = """(function () {
       // Fallback to the mermaid element itself
       return directMermaid;
     }
-    
+
     var directSvgAny = node.closest('svg');
     return directSvgAny;
   }
@@ -117,7 +117,31 @@ _LIGHTBOX_JS = """(function () {
       var inner = mermaidRoot.querySelector('svg') || svgHit;
       // If inner is still not an SVG, try to find SVG in shadow root
       if (!(inner instanceof SVGElement) && mermaidRoot.shadowRoot) {
-        inner = mermaidRoot.shadowRoot.querySelector('svg') || inner;
+        var svgInShadow = mermaidRoot.shadowRoot.querySelector('svg');
+        if (svgInShadow) {
+          inner = svgInShadow;
+        } else {
+          // Shadow root exists but is empty (rendering not complete yet)
+          // We'll try again after a short delay
+          setTimeout(function() {
+            if (mermaidRoot && mermaidRoot.shadowRoot) {
+              var retrySvg = mermaidRoot.shadowRoot.querySelector('svg');
+              if (retrySvg && retrySvg instanceof SVGElement) {
+                ev.preventDefault();
+                openSvg(retrySvg);
+              } else {
+                // Fallback to using the mermaid div itself if still no SVG after delay
+                ev.preventDefault();
+                openSvg(inner);
+              }
+            } else {
+              // Fallback to using the mermaid div itself
+              ev.preventDefault();
+              openSvg(inner);
+            }
+          }, 100); // 100ms delay
+          return; // Important: return early to avoid double-processing
+        }
       }
       ev.preventDefault();
       openSvg(inner);
@@ -155,9 +179,18 @@ _LIGHTBOX_CSS = """.lightbox-overlay {
 .lightbox-svg {
   display: inline-block;
   min-width: 100%;
+  max-width: 100%;
+  max-height: 90vh;
   background: #ffffff;
   border-radius: 4px;
   padding: 1rem;
+  overflow: auto;
+}
+.lightbox-svg svg {
+  max-width: 100%;
+  max-height: 90vh;
+  height: auto;
+  width: auto;
 }
 .lightbox-close {
   position: fixed;
@@ -191,7 +224,7 @@ def on_config(config, **_kwargs):
     return config
 
 
-def on_post_build(config, **_kwargs):
+def on_post_build(*, config, **kwargs):
     site = Path(config.site_dir)
     js_path = site / JS_NAME
     js_path.parent.mkdir(parents=True, exist_ok=True)

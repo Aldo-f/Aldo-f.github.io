@@ -29,6 +29,9 @@ Vooral de login is belangrijk in deze sprint, dit aangezien er in principe geen 
 
 
 Problemen die in vandaag zelf heb ondervonden:
+
+<!-- more -->
+
 * Een git server opzetten gaat niet altijd even vlot.
   * Er een groep aangemaakt waar iedereen lid van werd, dit om de code maximaal als eigenaar te hebben van alle leden
   * Hierbij een duidelijk workflow creëren, die daadwerkelijk gevolgd kan worden is niet altijd even gemakkelijk.

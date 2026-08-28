@@ -46,6 +46,8 @@ uitvoeringsscript en een verificatieprogramma — deterministische code, zonder 
 een agent de controle zelf kan uitvoeren en het resultaat kan verifiëren in plaats van af te gaan op
 tekstuele beschrijvingen.
 
+<!-- more -->
+
 ## Een minimale RAG-pijplijn
 
 Zodra er gestructureerde documenten beschikbaar zijn, zijn er drie stappen nodig voor het ophalen van informatie: de
