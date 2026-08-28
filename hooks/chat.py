@@ -18,7 +18,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 JS_NAME = "assets/javascripts/chat.js"
 CSS_NAME = "assets/css/chat.js"
 
-_CHAT_JS = """"(function () {
+_CHAT_JS = """(function () {
   'use strict';
   console.log('FreeLLM Chat Widget: Initializing...');
 
