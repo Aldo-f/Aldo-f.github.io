@@ -18,8 +18,7 @@ from pathlib import Path
 JS_NAME = "assets/javascripts/lightbox.js"
 CSS_NAME = "assets/css/lightbox.css"
 
-_LIGHTBOX_JS = """\
-(function () {
+_LIGHTBOX_JS = """(function () {
   'use strict';
 
   var overlay = null;
@@ -79,7 +78,26 @@ _LIGHTBOX_JS = """\
 
   function findSvg(node) {
     // click target may be the svg itself, a child element, or a wrapper div
-    return node.closest ? (node.closest('svg.mermaid') || node.closest('.mermaid') || node.closest('svg')) : null;
+    // Also need to check for shadow roots in mermaid elements
+    if (!node.closest) return null;
+    
+    // Check direct matches first
+    var directSvg = node.closest('svg.mermaid');
+    if (directSvg) return directSvg;
+    
+    var directMermaid = node.closest('.mermaid');
+    if (directMermaid) {
+      // Check if this mermaid element has a shadow root with SVG inside
+      if (directMermaid.shadowRoot) {
+        var svgInShadow = directMermaid.shadowRoot.querySelector('svg');
+        if (svgInShadow) return svgInShadow;
+      }
+      // Fallback to the mermaid element itself
+      return directMermaid;
+    }
+    
+    var directSvgAny = node.closest('svg');
+    return directSvgAny;
   }
 
   document.addEventListener('click', function (ev) {
@@ -97,6 +115,10 @@ _LIGHTBOX_JS = """\
     if (svgHit) {
       var mermaidRoot = svgHit.closest('.mermaid') || svgHit;
       var inner = mermaidRoot.querySelector('svg') || svgHit;
+      // If inner is still not an SVG, try to find SVG in shadow root
+      if (!(inner instanceof SVGElement) && mermaidRoot.shadowRoot) {
+        inner = mermaidRoot.shadowRoot.querySelector('svg') || inner;
+      }
       ev.preventDefault();
       openSvg(inner);
     }
@@ -106,11 +128,9 @@ _LIGHTBOX_JS = """\
   var style = document.createElement('style');
   style.textContent = '.md-content img, .mermaid svg { cursor: zoom-in; }';
   document.head.appendChild(style);
-})();
-"""
+})();"""
 
-_LIGHTBOX_CSS = """\
-.lightbox-overlay {
+_LIGHTBOX_CSS = """.lightbox-overlay {
   display: none;
   position: fixed;
   inset: 0;
@@ -157,7 +177,6 @@ _LIGHTBOX_CSS = """\
   background: rgba(255, 255, 255, 0.3);
 }
 """
-
 
 def on_config(config, **_kwargs):
     extra_js = list(config.get("extra_javascript") or [])
