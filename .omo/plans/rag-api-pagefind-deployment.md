@@ -130,7 +130,7 @@
   QA scenarios: happy (results in correct language) + failure (no results, wrong language, broken index)
   Commit: Y | test(search): verify Pagefind EN/NL relevance
 
-- [ ] 9. Verify chat widget uses RAG API
+- [x] 9. Verify chat widget uses RAG API
   What to do / Must NOT do: Open deployed site, open chat, ask "What is Jellyfin health check?", verify answer cites OKF source with confidence and that the request includes the API key header.
   Parallelization: Wave 2 | Blocked by: 4 | Blocks: 10
   References: hooks/chat.py:274-379, rag/rag_api.py:27-31
