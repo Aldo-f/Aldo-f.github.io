@@ -19,12 +19,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "rag"))
 from rag_query import OKFRAGPipeline
 
 app = FastAPI(title="OKF RAG API")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://aldo-f.github.io"],
     allow_methods=["POST"],
     allow_headers=["Content-Type", "X-API-Key"],
 )
+
 pipeline = OKFRAGPipeline(bundle_path=str(Path(__file__).resolve().parent.parent))
 
 
