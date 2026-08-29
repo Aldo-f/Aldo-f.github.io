@@ -15,16 +15,16 @@ mkdir -p "$TMPDIR"
 
 echo "=== Step 1 – create virtual environment (if missing) ==="
 if [ ! -d "$BUNDLE/.venv" ]; then
-  python3 -m venv "$BUNDLE/.venv"
+  uv venv --link-mode=hardlink "$BUNDLE/.venv"
 fi
 source "$BUNDLE/.venv/bin/activate"
 
 echo "=== Step 2 – install Python deps (CPU-only torch, RAG, faiss, yaml) ==="
-pip install -U pip setuptools wheel
+uv pip install -U pip setuptools wheel
 # CPU-only torch first, so sentence-transformers doesn't pull the
 # multi-GB CUDA build (this is a Raspberry Pi — no NVIDIA GPU).
-pip install torch --index-url https://download.pytorch.org/whl/cpu
-pip install -r "$BUNDLE/rag/requirements.txt"
+uv pip install torch --index-url https://download.pytorch.org/whl/cpu
+uv pip install -r "$BUNDLE/rag/requirements.txt"
 
 echo "=== Step 3 – build initial FAISS index (once) ==="
 cd "$BUNDLE"
@@ -37,12 +37,12 @@ print(f"Indexed {p.index.ntotal if p.index is not None else 0} chunks")
 PY
 
 echo "=== Step 4 – register Hermes skill ==="
-hermes skill add \
-  --name okf_rag_query \
-  --description "Query the OKF home-lab knowledge bundle (RAG)" \
-  --exec "$BUNDLE/rag/okf_rag_serve.py" \
-  --input-schema '{"type":"object","properties":{"question":{"type":"string"},"k":{"type":"integer"}},"required":["question"]}' \
-  --output-schema '{"type":"object","properties":{"answer":{"type":"string"},"confidence":{"type":"number"},"sources":{"type":"array","items":{"type":"object"}}},"required":["answer"]}' \
+hermes skill add \\
+  --name okf_rag_query \\
+  --description "Query the OKF home-lab knowledge bundle (RAG)" \\
+  --exec "$BUNDLE/rag/okf_rag_serve.py" \\
+  --input-schema '{"type":"object","properties":{"question":{"type":"string"},"k":{"type":"integer"}},"required":["question"]}' \\
+  --output-schema '{"type":"object","properties":{"answer":{"type":"string"},"confidence":{"type":"number"},"sources":{"type":"array","items":{"type":"object"}}},"required":["answer"]}' \\
   || echo "(skill already registered or hermes CLI unavailable – skipping)"
 
 echo "=== Step 5 – install documentation watcher as user service ==="
