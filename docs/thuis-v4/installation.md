@@ -1,53 +1,44 @@
+---
+sidebar_position: 2
+---
+
 # Installation
 
-## Prerequisites
+## Requirements
 
-Install the required system dependencies:
+- Python 3.8 or newer
+- git
+- A VRT MAX account (free or paid)
 
-```bash
-# Ubuntu/Debian
-sudo apt install ffmpeg python3-venv
+## Steps
 
-# macOS
-brew install ffmpeg
-
-# Windows
-winget install ffmpeg
-```
-
-## Setup
+Open a terminal and run:
 
 ```bash
 # Clone the repository
 git clone https://github.com/Aldo-f/thuis.git
 cd thuis
 
-# Create virtual environment
-python3 -m venv venv
+# Create a virtual environment (recommended)
+python3 -m venv .venv
 
-# Activate virtual environment
-source venv/bin/activate  # Linux/Mac
-# or: .\venv\Scripts\activate  # Windows
+# Activate the virtual environment
+source .venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
-
-# Install Playwright browsers
-playwright install chromium
-
-# Configure credentials
-python thuis.py --setup
 ```
 
-## Verify Installation
+This installs a [patched version of yt-dlp](https://github.com/Aldo-f/yt-dlp) (tag `v2026.06.09-patch1`) that can handle VRT MAX's login flow.
+
+## Verify the installation
 
 ```bash
-# Check ffmpeg
-ffmpeg -version
+.venv/bin/yt-dlp --version
+```
 
-# Check Python
-python --version
+You should see:
 
-# Run help
-python thuis.py --help
+```
+2026.06.09
 ```
