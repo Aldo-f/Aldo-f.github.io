@@ -33,6 +33,7 @@ plugins:
       post_date_format: yyyy-MM-dd
       archive: false
   - section-index
+  - search
 extra:
   social:
     - icon: fontawesome/brands/github

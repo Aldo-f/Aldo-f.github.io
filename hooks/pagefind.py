@@ -10,4 +10,12 @@ def on_post_build(config):
     dst_js.parent.mkdir(parents=True, exist_ok=True)
     dst_js.write_bytes(src_js.read_bytes())
     print(f"Copied {src_js} to {dst_js}")
+    
+    # Check if pagefind is configured in plugins and create proper pagefind index structure
+    if 'search' in config.plugins:
+        # Ensure pagefind directory exists
+        pagefind_dir = site_dir / 'pagefind'
+        pagefind_dir.mkdir(parents=True, exist_ok=True)
+        print(f"Created {pagefind_dir} for Pagefind search index")
+    
     return config
