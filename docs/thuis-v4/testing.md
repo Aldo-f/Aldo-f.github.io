@@ -30,5 +30,11 @@ These tests verify that the tool correctly identifies:
 
 These tests actually download videos to verify the download functionality works correctly.
 
+!!! info "Console verbosity"
+    Default console output is minimal. DEBUG lines go to `logs/` only. Use `--log-level DEBUG` for console DEBUG output.
+
+!!! info "Secret masking"
+    The `--password` value is masked as `***` in `Running:` console lines.
+
 !!! warning "Download tests are slow"
     Download tests can take several minutes to complete.

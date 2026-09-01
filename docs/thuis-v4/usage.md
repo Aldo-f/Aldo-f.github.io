@@ -130,9 +130,81 @@ Use `--retry` to skip downloads where the output file already exists:
 
 When set, the tool checks if the destination file is already on disk and skips the download instead of overwriting. This is useful for re-running on a partially completed list without re-downloading existing files.
 
-### Normalize video files
+### Watchlist Mode
 
-The `normalize` subcommand renames video files in a directory to a consistent scene format:
+Process multiple URLs from text files with optional scheduling. Each series has its own watchlist file.
+
+```bash
+# Dry run a single watchlist
+./thuis.sh --watchlist watchlists/Fc_De_Kampioenen.txt --dry-run
+
+# Process manual entries (requires --now)
+./thuis.sh --watchlist watchlists/Fc_De_Kampioenen.txt --now
+
+# Process multiple series at once
+./thuis.sh --watchlist watchlists/Fc_De_Kampioenen.txt \
+           --watchlist watchlists/Flikken.txt \
+           --watchlist watchlists/Flikken_Maastricht.txt \
+           --watchlist watchlists/Thuis.txt \
+           --now --dry-run
+
+# Process podcasts (scheduled entries run automatically, manual need --now)
+./thuis.sh --watchlist watchlists/podcast.txt --now --dry-run
+```
+
+#### Watchlist File Format
+
+1. **First non-comment line**: Output directory (absolute, relative, or `~/` expanded)
+2. **Subsequent lines**: URL entries with optional schedule
+
+| Schedule | Meaning |
+|----------|---------|
+| (none) | Manual entry — requires `--now` flag |
+| `[daily]` | Run once per day |
+| `[weekly]` | Run once per week |
+| `[weekdays 10:00]` | Run weekdays at given time |
+
+```text
+# watchlists/podcast.txt
+/mnt/HDD1/nextcloud/data/aldo/files/Media/podcasts/_seed
+
+# De Gifmenger (manual — needs --now)
+/mnt/HDD1/nextcloud/data/aldo/files/Media/podcasts/_seed
+https://www.vrt.be/vrtmax/podcasts/ketnet/w/waanzinnig-maar-waar--/
+
+# Scheduled entries run automatically from cron
+[weekly] https://www.vrt.be/vrtmax/podcasts/ketnet/w/waanzinnig-maar-waar--/
+```
+
+#### Example Watchlist Files
+
+| File | Output | Schedule |
+|------|--------|----------|
+| `watchlists/Fc_De_Kampioenen.txt` | TV (`tv/`) | Manual |
+| `watchlists/Flikken.txt` | TV (`tv/`) | Manual |
+| `watchlists/Flikken_Maastricht.txt` | TV (`tv/`) | Manual |
+| `watchlists/Thuis.txt` | TV (`tv/`) | Manual |
+| `watchlists/podcast.txt` | Podcasts (`_seed/`) | Weekly |
+
+## Example output
+
+```
+$ ./thuis.sh --dry-run https://www.vrt.be/vrtmax/a/show/some-episode
+[thuis] Found 1 video(s)
+[1/1] Processing: https://www.vrt.be/vrtmax/a/show/some-episode
+Running: /path/to/.venv/bin/python3 -m yt_dlp -f bestaudio --no-warnings \
+  --username kuxelu@ipdeer.com --password *** \
+  -o /path/to/output/Some.Episode.m4a \
+  https://ondemand-radio.vrtcdn.be/...
+Downloading: Some Episode (2025-04-07).m4a
+Done: Some Episode (2025-04-07).m4a
+```
+
+Secrets (`--password`) are masked as `***` in the console `Running:` line.
+
+## Normalize video files
+
+Rename video files in a directory to a consistent scene format:
 
 ```bash
 thuis normalize /path/to/videos
@@ -143,7 +215,7 @@ Options:
 | Flag | Description |
 |------|-------------|
 | `--dry-run` | Show what would happen without making changes |
-| `--cleanup` | Remove duplicates (files with `_1` suffix) and stale `.part` files |
+| `--cleanup` | Remove duplicates (`_1` suffix) and stale `.part` files |
 
 ```bash
 # Preview changes
@@ -153,16 +225,17 @@ thuis normalize --dry-run /path/to/videos
 thuis normalize --cleanup /path/to/videos
 ```
 
-## Example output
+## Log output
 
+By default, logs are written to `logs/` only. Use `--log-level` to see them in the console:
+
+```bash
+./thuis.sh --log-level DEBUG https://www.vrt.be/vrtmax/a/show/...
 ```
-$ ./thuis.sh --dry-run https://www.vrt.be/vrtmax/a/show/some-episode
-[thuis] Using default credentials (kuxelu@ipdeer.com)
-[thuis] Running: .venv/bin/yt-dlp --username o-auth2 --password '***' \
-  --format 'bestvideo[height<=?1080]+bestaudio/best[height<=?1080]' \
-  --merge-output-format mp4 \
-  --print filename \
-  --dry-run \
-  'https://www.vrt.be/vrtmax/a/show/some-episode'
-[thuis] Output: Some Episode (2025-04-07) [some-episode].mp4
+
+To tail the latest log file in real-time:
+
+```bash
+./thuis.sh --follow
 ```
+

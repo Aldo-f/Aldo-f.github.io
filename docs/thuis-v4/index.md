@@ -11,7 +11,11 @@ Download videos from VRT MAX with automatic authentication.
 
 - **Automatic Login** - Authenticate via Playwright browser automation
 - **HLS Stream Download** - Extract and download HLS streams with FFmpeg
-- **DRM Detection** - Detects DRM-protected content
+- **DRM Detection** - Detects DRM-protected content via HLS manifest (`_nodrm_` / `_drm_`)
+- **Watchlist Mode** - Process multiple URLs from text files with scheduling (`[daily]`, `[weekly]`)
+- **Secret Masking** - `--password` masked as `***` in console `Running:` output
+- **Log Control** - `--log-level` (default: only `logs/` file; `DEBUG` enables console)
+- **Normalize** - Rename video files to consistent scene format (`normalize` subcommand)
 - **Simple CLI** - Easy-to-use command line interface
 
 ---
@@ -21,6 +25,10 @@ Download videos from VRT MAX with automatic authentication.
 ```bash
 # Setup (first time)
 python thuis.py --setup
+
+# Or use uv (recommended)
+uv venv --link-mode=hardlink
+uv pip install -r requirements.txt
 
 # Download a video
 python thuis.py "https://www.vrt.be/vrtmax/a-z/thuis/31/thuis-s31a6017/"

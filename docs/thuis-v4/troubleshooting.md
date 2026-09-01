@@ -15,7 +15,7 @@
 
 2. Run with debug mode to see what's happening:
    ```bash
-   python thuis.py <url> --no-headless
+   ./thuis.sh <url>
    ```
 
 3. Make sure your VRT MAX subscription is active.
@@ -57,10 +57,10 @@
 **Solution:**
 ```bash
 # Activate virtual environment
-source venv/bin/activate
+source .venv/bin/activate
 
 # Reinstall dependencies
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 ```
 
 ---
