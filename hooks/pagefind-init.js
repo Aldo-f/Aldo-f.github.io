@@ -1,4 +1,11 @@
-document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      const search = document.getElementById('search');
+      if (search) { search.click(); }
+    }
+  });
+  document.addEventListener('DOMContentLoaded', () => {
   const search = document.getElementById('search');
   if (search) {
     search.addEventListener('click', async () => {
