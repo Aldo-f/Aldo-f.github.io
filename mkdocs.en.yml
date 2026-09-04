@@ -47,12 +47,15 @@ plugins:
           import_url: https://gitlab.com/Aldo-f/blanky?branch=main
           imports:
             - docs
+        - name: opencode-multi-model-fallback
+          import_url: https://github.com/Aldo-f/opencode-multi-model-fallback?branch=main
+          imports:
+            - docs
         - name: blanky-v1
           import_url: https://gitlab.com/Aldo-f/blanky?branch=v1-docs
           imports:
             - docs
 nav:
-  - Home: index.md
   - About: about.md
   - Blog: blog/index.md
   - Projects:
