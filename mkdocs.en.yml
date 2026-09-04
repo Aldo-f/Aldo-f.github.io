@@ -13,8 +13,7 @@ extra:
   extra_css: []
   extra_javascript: []
 plugins:
-  - search:
-      separator: '[^\w\-\.]+'
+  - search
   - blog:
       blog_dir: blog
       post_date_format: yyyy-MM-dd
