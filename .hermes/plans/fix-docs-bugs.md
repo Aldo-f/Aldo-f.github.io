@@ -1,6 +1,6 @@
 # Plan: Fix aldo-f.github.io docs bugs
 
-## Status: ✅ RESOLVED (2026-09-04)
+## Status: ✅ FULLY RESOLVED (2026-09-04 13:19) — search verified + Ctrl+K shortcut active
 
 ## Bugs found (verified from `gh run` logs + code inspection)
 
