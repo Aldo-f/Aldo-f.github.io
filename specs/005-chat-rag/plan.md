@@ -1,53 +1,33 @@
 # Implementation Plan: Chat Widget (005-chat-rag)
 
-**Branch**: `005-chat-rag`
-**Date**: 2026-09-04
-**Spec**: [spec.md](./spec.md)
+**Branch**: `005-chat-rag` | **Date**: 2026-09-04 | **Spec**: [spec.md](./spec.md)
 
-## Summary
+---
 
-Fix the broken chat widget in `hooks/chat.py` and make it fully functional with RAG API integration. Current state: widget JS emits but `assets/css/chat.css` is missing (hook naming bug), `RAG_API_KEY` not injected, sources not shown in UI.
+## Confirmed Decisions (from user clarification)
 
-## Technical Context
+- `RAG_API_KEY` → GitHub Secret `RAG_API_KEY` → env var → `chat.py` injects at build
+- Data source → ONLY `rag.aldof.duckdns.org/search` (no direct OKF `.specify/` query)
+- Sources display → YES, show `data.sources` as citation links in chat UI
+- Fallback when RAG down → show error: "Sorry, I encountered an error..."
+- `~/dev/okf-home-lab/` stays as-is (no rename); it IS the RAG service
 
-| | |
-|---|---|
-| **Language** | Python 3 (MkDocs hook) + Vanilla JS (widget) |
-| **Primary Deps** | MkDocs, mkdocs-material, RAG service |
-| **Storage** | In-memory (no persistence) |
-| **Testing** | Manual via browser + `curl` |
-| **Target** | `aldo-f.github.io` (GitHub Pages) |
-| **Project Type** | MkDocs hook + JS widget |
-| **Scale** | Single site, no auth |
-| **Performance** | RTT to RAG endpoint + render latency |
+---
 
-## Known Gaps (from spec.md)
+## Fix List (current bugs in hooks/chat.py)
 
-1. `CSS_NAME` bug — writes `.js` filename, not `.css`
-2. `RAG_API_KEY` — placeholder `{{RAG_API_KEY}}` not injected at build time
-3. `data.sources` — logged to console, not shown in UI
-4. RAG endpoint failure — no fallback behavior defined
-5. OKF `.specify/` files — unclear if queried directly or via RAG
+| # | Bug | Fix | Line |
+|---|-----|-----|------|
+| 1 | `CSS_NAME = "assets/css/chat.js"` writes wrong filename | Change to `"assets/css/chat.css"` | 19 |
+| 2 | `{{RAG_API_KEY}}` placeholder not replaced at build | Read `os.environ.get("RAG_API_KEY")`, replace in JS string before emit | 328 (JS) |
+| 3 | `data.sources` only logged, not shown | Add citation links below AI message in chat widget | JS: after `addMessage()` |
+| 4 | `deploy.yml` doesn't pass RAG_API_KEY | Add `env:` to build steps with `RAG_API_KEY: ${{ secrets.RAG_API_KEY }}` | deploy.yml |
 
-## Constitution Check
+---
 
-Not applicable (no external constraints detected — MkDocs build is standard Python tooling).
+## Verification Steps
 
-## Project Structure
-
-```text
-06-apps-aldo-f-github-io/
-├── hooks/
-│   └── chat.py           # FIX: CSS_NAME + RAG_API_KEY injection
-├── specs/
-│   └── 005-chat-rag/
-│       ├── spec.md        # This spec
-│       └── plan.md        # This plan
-└── site/                  # Generated output (gitignored)
-```
-
-## Complexity Tracking
-
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| None | — | — |
+1. `curl -s -w "%{http_code}" https://aldo-f.github.io/assets/css/chat.css` → 200
+2. `curl -s -w "%{http_code}" https://aldo-f.github.io/assets/javascripts/chat.js` → 200 (already OK)
+3. Live site: open chat, ask question → shows `data.answer` + sources links
+4. Block RAG endpoint (simulate down) → chat shows error message
