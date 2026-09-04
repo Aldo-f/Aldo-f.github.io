@@ -1,37 +1,37 @@
 # Thuis
 
-Download videos from VRT MAX with automatic authentication.
+VRT MAX downloader using yt-dlp with Widevine DRM support.
 
-![Python](https://img.shields.io/badge/python-3.9+-blue)
+![Python](https://img.shields.io/badge/python-3.8+-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ---
 
 ## Features
 
-- **Automatic Login** - Authenticate via Playwright browser automation
-- **HLS Stream Download** - Extract and download HLS streams with FFmpeg
-- **DRM Detection** - Detects DRM-protected content via HLS manifest (`_nodrm_` / `_drm_`)
+- **yt-dlp based** - Uses patched yt-dlp for VRT MAX authentication and streaming
+- **DRM Support** - Decrypt Widevine DRM content with N_m3u8DL-RE or mp4decrypt
 - **Watchlist Mode** - Process multiple URLs from text files with scheduling (`[daily]`, `[weekly]`)
-- **Secret Masking** - `--password` masked as `***` in console `Running:` output
-- **Log Control** - `--log-level` (default: only `logs/` file; `DEBUG` enables console)
-- **Normalize** - Rename video files to consistent scene format (`normalize` subcommand)
-- **Simple CLI** - Easy-to-use command line interface
+- **Transcoding** - Convert downloads to 720p with FFmpeg
+- **Resume Handling** - Automatically handles interrupted downloads
+- **Season/Show Download** - Download entire seasons or all episodes of a show
+- **Normalize** - Rename video files to consistent scene format
 
 ---
 
 ## Quick Start
 
 ```bash
-# Setup (first time)
-python thuis.py --setup
+# Clone the repository
+git clone <repository-url> thuis
+cd thuis
 
-# Or use uv (recommended)
+# Create a virtual environment
 uv venv --link-mode=hardlink
 uv pip install -r requirements.txt
 
 # Download a video
-python thuis.py "https://www.vrt.be/vrtmax/a-z/thuis/31/thuis-s31a6017/"
+./thuis.sh https://www.vrt.be/vrtmax/a-z/thuis/
 ```
 
 ---
@@ -40,8 +40,9 @@ python thuis.py "https://www.vrt.be/vrtmax/a-z/thuis/31/thuis-s31a6017/"
 
 | Requirement | Description |
 |-------------|-------------|
-| Python 3.9+ | Required for async/await support |
-| ffmpeg | Required for video download |
+| Python 3.8+ | Required for type hints |
+| ffmpeg | Required for transcoding |
+| yt-dlp | Installed via requirements.txt |
 | VRT MAX account | Required for authentication |
 
 ---
@@ -50,7 +51,6 @@ python thuis.py "https://www.vrt.be/vrtmax/a-z/thuis/31/thuis-s31a6017/"
 
 - [Installation](installation.md)
 - [Usage](usage.md)
-- [Testing](testing.md)
-- [DRM Protection](drm.md)
-- [Troubleshooting](troubleshooting.md)
+- [DRM Setup](drm.md)
+- [Requirements](REQUIREMENTS.md)
 - [GitHub](https://github.com/Aldo-f/thuis)
