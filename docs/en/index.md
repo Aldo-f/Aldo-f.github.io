@@ -1,3 +1,8 @@
+---
+search:
+  boost: 1.05
+---
+
 # Aldo Fieuw — documentation hub
 
 Welcome. This site collects the documentation for the software I build and
