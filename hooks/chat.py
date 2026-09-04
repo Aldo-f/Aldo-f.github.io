@@ -1,22 +1,24 @@
-""""MkDocs hook: OpenRouter chat widget (feature 005).
-  
+""""MkDocs hook: RAG chat widget (spec 005-chat-rag).
+
 Runs inside BOTH language builds (wired via `hooks:` in mkdocs.*.yml):
-  
+
   1. on_config  — registers the emitted chat.js and chat.css in extra_javascript/extra_css so
                  they ship with the build.
   2. on_post_build — emits the chat widget files into the site directory.
-  
-The chat widget provides a simple interface to chat with AI models via OpenRouter.
+
+The chat widget calls https://rag.aldof.duckdns.org/search with the build-time-injected
+RAG_API_KEY. Sources are rendered as inline citations below the assistant message.
 """
 
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 JS_NAME = "assets/javascripts/chat.js"
-CSS_NAME = "assets/css/chat.js"
+CSS_NAME = "assets/css/chat.css"
 
 _CHAT_JS = """(function () {
   'use strict';
@@ -344,10 +346,18 @@ _CHAT_JS = """(function () {
         // Optionally, log sources and confidence for debugging
         console.log('RAG response:', data);
         addMessage(data.answer, false);
-        // If we want to show sources, we could do it here, but the UI doesn't have a place for them yet.
-        // For now, we just log them.
-        if (data.sources) {
-          console.log('Sources:', data.sources);
+        // Show sources as inline citations below the assistant message
+        if (data.sources && Array.isArray(data.sources)) {
+          const sourcesDiv = document.createElement('div');
+          sourcesDiv.className = 'chat-sources';
+          sourcesDiv.style.cssText = 'font-size:0.75rem;color:#666;margin-top:4px;padding-left:12px;';
+          sourcesDiv.innerHTML = '<strong>Sources:</strong> ' + data.sources.map(s => {
+            const url = s.url || s.link || '#';
+            const title = s.title || s.source || 'Reference';
+            return '<a href="' + url + '" target="_blank" rel="noopener">' + title + '</a>';
+          }).join(', ');
+          const bubble = document.querySelector('.chat-bubble:last-of-type');
+          if (bubble) bubble.appendChild(sourcesDiv);
         }
       } else {
         addMessage('Sorry, I encountered an error. Please try again.', false);
@@ -501,14 +511,17 @@ def on_config(config, **_kwargs):
 
 
 def on_post_build(*, config, **kwargs):
-    """Emit chat widget files to site directory."""
+    """Emit chat widget files to site directory with build-time RAG_API_KEY injection."""
     site_dir = Path(config.site_dir)
+    rag_api_key = os.environ.get("RAG_API_KEY", "UNCONFIGURED")
+    # Inject RAG_API_KEY into JS at build time — never leaks to client source in git
+    chat_js = _CHAT_JS.replace("{{RAG_API_KEY}}", rag_api_key)
     # Emit JavaScript
     js_path = site_dir / JS_NAME
     js_path.parent.mkdir(parents=True, exist_ok=True)
-    js_path.write_text(_CHAT_JS, encoding="utf-8")
+    js_path.write_text(chat_js, encoding="utf-8")
     # Emit CSS
     css_path = site_dir / CSS_NAME
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(_CHAT_CSS, encoding="utf-8")
-    print(f"chat: emitted {JS_NAME} and {CSS_NAME}")
+    print(f"chat: emitted {JS_NAME} and {CSS_NAME} (RAG_API_KEY={'SET' if rag_api_key != 'UNCONFIGURED' else 'UNCONFIGURED'})")

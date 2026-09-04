@@ -29,8 +29,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build EN site (serves at root)
-        run: mkdocs build --strict -f mkdocs.en.yml -d site
+      - name: Build EN site (serves at root, injects RAG_API_KEY)
+        env:
+          RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
+        run: RAG_API_KEY=$RAG_API_KEY mkdocs build --strict -f mkdocs.en.yml -d site
 
       - name: Build NL site (serves at /nl/)
         run: mkdocs build --strict -f mkdocs.nl.yml -d site/nl
