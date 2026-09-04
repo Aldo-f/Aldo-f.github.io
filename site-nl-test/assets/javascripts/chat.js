@@ -1,26 +1,4 @@
-""""MkDocs hook: RAG chat widget (spec 005-chat-rag).
-
-Runs inside BOTH language builds (wired via `hooks:` in mkdocs.*.yml):
-
-  1. on_config  — registers the emitted chat.js and chat.css in extra_javascript/extra_css so
-                 they ship with the build.
-  2. on_post_build — emits the chat widget files into the site directory.
-
-The chat widget calls https://rag.aldof.duckdns.org/search with the build-time-injected
-RAG_API_KEY. Sources are rendered as inline citations below the assistant message.
-"""
-
-from __future__ import annotations
-
-import json
-import os
-from pathlib import Path
-
-REPO_ROOT = Path(__file__).resolve().parent.parent
-JS_NAME = "assets/javascripts/chat.js"
-CSS_NAME = "assets/css/chat.css"
-
-_CHAT_JS = """(function () {
+(function () {
   'use strict';
   console.log('FreeLLM Chat Widget: Initializing...');
 
@@ -346,18 +324,10 @@ _CHAT_JS = """(function () {
         // Optionally, log sources and confidence for debugging
         console.log('RAG response:', data);
         addMessage(data.answer, false);
-        // Show sources as inline citations below the assistant message
-        if (data.sources && Array.isArray(data.sources)) {
-          const sourcesDiv = document.createElement('div');
-          sourcesDiv.className = 'chat-sources';
-          sourcesDiv.style.cssText = 'font-size:0.75rem;color:#666;margin-top:4px;padding-left:12px;';
-          sourcesDiv.innerHTML = '<strong>Sources:</strong> ' + data.sources.map(s => {
-            const url = s.url || s.link || '#';
-            const title = s.title || s.source || 'Reference';
-            return '<a href="' + url + '" target="_blank" rel="noopener">' + title + '</a>';
-          }).join(', ');
-          const bubble = document.querySelector('.chat-bubble:last-of-type');
-          if (bubble) bubble.appendChild(sourcesDiv);
+        // If we want to show sources, we could do it here, but the UI doesn't have a place for them yet.
+        // For now, we just log them.
+        if (data.sources) {
+          console.log('Sources:', data.sources);
         }
       } else {
         addMessage('Sorry, I encountered an error. Please try again.', false);
@@ -378,150 +348,4 @@ _CHAT_JS = """(function () {
     createChatButton();
     createChatWidget();
   });
-});"""
-
-_CHAT_CSS = """/* Chat widget styles */
-#chat-toggle-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: #6366f1;
-  color: white;
-  border: none;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  cursor: pointer;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-#chat-toggle-btn:hover {
-  transform: scale(1.05);
-  background-color: #4f46e5;
-}
-
-#chat-widget {
-  position: fixed;
-  bottom: 90px;
-  right: 24px;
-  width: 350px;
-  height: 500px;
-  background-color: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  z-index: 1000;
-  border: 1px solid #e5e7eb;
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#chat-widget .header {
-  padding: 16px;
-  border-bottom: 1px solid #f3f4f6;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f8fafc;
-}
-
-#chat-widget h3 {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #1f2937;
-}
-
-#chat-widget button {
-  background: none;
-  border: none;
-  color: #6b7280;
-  font-size: 1.25rem;
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#chat-widget button:hover {
-  background-color: #f3f4f6;
-  color: #1f2937;
-}
-
-#chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.chat-message {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-start;
-  max-width: 80%;
-}
-
-.chat-message.user {
-  margin-left: auto;
-}
-
-.chat-message.ai {
-  margin-right: auto;
-}
-
-.chat-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.875rem;
-}
-"""
-
-
-def on_config(config, **_kwargs):
-    """Register chat assets in extra_javascript/extra_css so they ship with the build."""
-    extra_js = list(config.get("extra_javascript") or [])
-    if JS_NAME not in extra_js:
-        extra_js.append(JS_NAME)
-    config["extra_javascript"] = extra_js
-    
-    extra_css = list(config.get("extra_css") or [])
-    if CSS_NAME not in extra_css:
-        extra_css.append(CSS_NAME)
-    config["extra_css"] = extra_css
-    return config
-
-
-def on_post_build(*, config, **kwargs):
-    """Emit chat widget files to site directory with build-time RAG_API_KEY injection."""
-    site_dir = Path(config.site_dir)
-    rag_api_key = os.environ.get("RAG_API_KEY", "UNCONFIGURED")
-    # Inject RAG_API_KEY into JS at build time — never leaks to client source in git
-    chat_js = _CHAT_JS.replace("{{RAG_API_KEY}}", rag_api_key)
-    # Emit JavaScript
-    js_path = site_dir / JS_NAME
-    js_path.parent.mkdir(parents=True, exist_ok=True)
-    js_path.write_text(chat_js, encoding="utf-8")
-    # Emit CSS
-    css_path = site_dir / CSS_NAME
-    css_path.parent.mkdir(parents=True, exist_ok=True)
-    css_path.write_text(_CHAT_CSS, encoding="utf-8")
-    print(f"chat: emitted {JS_NAME} and {CSS_NAME} (RAG_API_KEY={'SET' if rag_api_key != 'UNCONFIGURED' else 'UNCONFIGURED'})")
+});
