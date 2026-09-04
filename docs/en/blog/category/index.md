@@ -4,8 +4,11 @@ All topics covered on this blog, newest-first inside each category.
 
 | Category | Posts |
 |----------|------:|
+| [Belgium](belgium/) | 1 |
 | [General](general/) | 1 |
+| [Home Lab](home-lab/) | 1 |
 | [Jekyll update](jekyll-update/) | 1 |
+| [Media](media/) | 1 |
 | [Meta](meta/) | 2 |
 | [Scrum](scrum/) | 2 |
 | [VDAB](vdab/) | 2 |
