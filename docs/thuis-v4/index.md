@@ -31,7 +31,7 @@ uv venv --link-mode=hardlink
 uv pip install -r requirements.txt
 
 # Download a video
-./thuis.sh https://www.vrt.be/vrtmax/a-z/thuis/
+./thuis.sh https://www.vrt.be/vrtmax/a-z/your-show/
 ```
 
 ---
