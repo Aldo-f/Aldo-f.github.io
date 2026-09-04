@@ -250,6 +250,8 @@ _CHAT_JS = """(function () {
     }
     
     const messageContent = document.createElement('div');
+    messageContent.className = 'chat-bubble-content';
+    messageDiv.className = isUser ? 'chat-bubble user' : 'chat-bubble ai';
     messageContent.style.padding = '12px 16px';
     messageContent.style.borderRadius = isUser ? '16px 16px 4px 16px' : '16px 16px 16px 4px';
     messageContent.style.backgroundColor = isUser ? '#6366f1' : '#f3f4f6';
@@ -258,16 +260,16 @@ _CHAT_JS = """(function () {
     messageContent.style.fontSize = '0.95rem';
     messageContent.style.wordWrap = 'break-word';
     messageContent.style.maxWidth = '100%';
-    
+
     // Handle markdown-like formatting (simple)
     messageContent.textContent = content;
-    
+
     messageDiv.appendChild(isUser ? messageContent : avatar);
     messageDiv.appendChild(!isUser ? messageContent : avatar);
-    
+
     messagesContainer.appendChild(messageDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  }
+    return messageDiv;
 
   async function sendMessage() {
     const input = document.getElementById('chat-input');
@@ -327,7 +329,9 @@ _CHAT_JS = """(function () {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': '{{RAG_API_KEY}}' // Placeholder for build-time replacement
+          // Note: RAG API key removed from client JS (P1 fix — key cannot be exposed publicly).
+          // RAG API is accessible within private network; public users cannot reach rag.aldof.duckdns.org.
+          // Future: add per-user token or rate-limiting if exposure becomes a concern.
         },
         body: JSON.stringify({
           question: message,
@@ -345,20 +349,24 @@ _CHAT_JS = """(function () {
       if (data && data.answer) {
         // Optionally, log sources and confidence for debugging
         console.log('RAG response:', data);
-        addMessage(data.answer, false);
-        // Show sources as inline citations below the assistant message
-        if (data.sources && Array.isArray(data.sources)) {
-          const sourcesDiv = document.createElement('div');
-          sourcesDiv.className = 'chat-sources';
-          sourcesDiv.style.cssText = 'font-size:0.75rem;color:#666;margin-top:4px;padding-left:12px;';
-          sourcesDiv.innerHTML = '<strong>Sources:</strong> ' + data.sources.map(s => {
-            const url = s.url || s.link || '#';
-            const title = s.title || s.source || 'Reference';
-            return '<a href="' + url + '" target="_blank" rel="noopener">' + title + '</a>';
-          }).join(', ');
-          const bubble = document.querySelector('.chat-bubble:last-of-type');
-          if (bubble) bubble.appendChild(sourcesDiv);
-        }
+        addMessage(data.answer, false).then(bubble => {
+          // Show sources as inline citations below the assistant message (XSS-safe)
+          if (data.sources && Array.isArray(data.sources)) {
+            const sourcesDiv = document.createElement('div');
+            sourcesDiv.className = 'chat-sources';
+            sourcesDiv.style.cssText = 'font-size:0.75rem;color:#666;margin-top:4px;padding-left:12px;';
+            const escape = s => String(s)
+              .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            sourcesDiv.innerHTML = '<strong>Sources:</strong> ' + data.sources.map(s => {
+              const url = (s.url || s.link || '#').trim();
+              const title = escape(s.title || s.source || 'Reference');
+              const safeUrl = url.startsWith('http') ? escape(url) : '#';
+              return '<a href="' + safeUrl + '" target="_blank" rel="noopener noreferrer">' + title + '</a>';
+            }).join(', ');
+            if (bubble) bubble.appendChild(sourcesDiv);
+          }
+        });
       } else {
         addMessage('Sorry, I encountered an error. Please try again.', false);
       }
@@ -511,17 +519,13 @@ def on_config(config, **_kwargs):
 
 
 def on_post_build(*, config, **kwargs):
-    """Emit chat widget files to site directory with build-time RAG_API_KEY injection."""
+    """Emit chat widget files to site directory (no key injection — P1)."""
     site_dir = Path(config.site_dir)
-    rag_api_key = os.environ.get("RAG_API_KEY", "UNCONFIGURED")
-    # Inject RAG_API_KEY into JS at build time — never leaks to client source in git
-    chat_js = _CHAT_JS.replace("{{RAG_API_KEY}}", rag_api_key)
-    # Emit JavaScript
     js_path = site_dir / JS_NAME
     js_path.parent.mkdir(parents=True, exist_ok=True)
-    js_path.write_text(chat_js, encoding="utf-8")
+    js_path.write_text(_CHAT_JS, encoding="utf-8")  # P1: never inject RAG_API_KEY into public JS
     # Emit CSS
     css_path = site_dir / CSS_NAME
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(_CHAT_CSS, encoding="utf-8")
-    print(f"chat: emitted {JS_NAME} and {CSS_NAME} (RAG_API_KEY={'SET' if rag_api_key != 'UNCONFIGURED' else 'UNCONFIGURED'})")
+    print(f"chat: emitted {JS_NAME} and {CSS_NAME}")
