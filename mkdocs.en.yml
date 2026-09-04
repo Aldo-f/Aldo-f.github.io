@@ -114,6 +114,6 @@ nav:
                   - Probleemoplossing: thuis-v3/docs/nl/troubleshooting.md
       - Home-lab Docs: home-lab-docs.md
       - OpenCode Fallback Plugin:
-          - Overview: https://github.com/aldof/opencode-rate-limit-fallback-multi
-          - Local dev: opencode-rate-limit-fallback-multi/docs/index.md
+          - Overview: https://github.com/Aldo-f/opencode-multi-model-fallback
+          - README: opencode-multi-model-fallback/docs/index.md
 
