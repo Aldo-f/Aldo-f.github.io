@@ -56,4 +56,3 @@ hooks:
   - hooks/slugmap.py
   - hooks/lightbox.py
   - hooks/chat.py
-  - hooks/pagefind.py
