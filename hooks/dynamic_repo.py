@@ -1,11 +1,13 @@
 """MkDocs hook: dynamic repo links based on current page path.
 
-Injects JavaScript to fix repository links after page load.
+Overrides the source partial to inject JavaScript that fixes repository links
+after page load, based on the current page path.
 """
 
 from __future__ import annotations
 
 import sys
+import json
 from pathlib import Path
 
 # Map path prefixes to their source repositories
@@ -25,29 +27,21 @@ DEFAULT_REPO_URL = "https://github.com/Aldo-f/Aldo-f.github.io"
 DEFAULT_REPO_NAME = "Aldo-f/Aldo-f.github.io"
 
 
-def _find_repo(page_path: str) -> tuple[str, str]:
-    """Find the repository URL and name for a given page path."""
-    # Normalize path
-    path = page_path.replace("\\", "/").lower()
-    
+def _get_js() -> str:
+    """Generate the JavaScript code for dynamic repo links."""
+    # Build mapping as JSON
+    mapping = {}
     for prefix, (repo_url, repo_name) in REPO_MAP.items():
-        if prefix in path:
-            return repo_url, repo_name
+        mapping[prefix] = {"url": repo_url, "name": repo_name}
     
-    return DEFAULT_REPO_URL, DEFAULT_REPO_NAME
-
-
-JS_CODE = """
-(function() {
+    js = """(function() {
   'use strict';
   var path = window.location.pathname;
   var map = %s;
   var defaultUrl = %s;
   var defaultName = %s;
-  
   var repoUrl = defaultUrl;
   var repoName = defaultName;
-  
   for (var prefix in map) {
     if (path.indexOf(prefix) === 0 || path.indexOf('/' + prefix) !== -1) {
       repoUrl = map[prefix].url;
@@ -55,8 +49,6 @@ JS_CODE = """
       break;
     }
   }
-  
-  // Fix the repository link
   var source = document.querySelector('[data-md-component="source"]');
   if (source) {
     var link = source.querySelector('a');
@@ -65,7 +57,8 @@ JS_CODE = """
     if (repoDiv) repoDiv.textContent = repoName;
   }
 })();
-"""
+""" % (json.dumps(mapping), json.dumps(DEFAULT_REPO_URL), json.dumps(DEFAULT_REPO_NAME))
+    return js
 
 
 def on_config(config, **kwargs):
@@ -79,21 +72,10 @@ def on_config(config, **kwargs):
 
 
 def on_post_build(config, **kwargs):
-    """Write the JavaScript file with repo mappings."""
+    """Write the JavaScript file."""
     site = Path(config.site_dir)
     js_path = site / "assets" / "javascripts" / "dynamic-repo.js"
     js_path.parent.mkdir(parents=True, exist_ok=True)
-    
-    # Build the mapping object
-    mapping = {}
-    for prefix, (repo_url, repo_name) in REPO_MAP.items():
-        mapping[prefix] = {"url": repo_url, "name": repo_name}
-    
-    js_content = JS_CODE % (
-        repr(mapping),
-        repr(DEFAULT_REPO_URL),
-        repr(DEFAULT_REPO_NAME),
-    )
-    
+    js_content = _get_js()
     js_path.write_text(js_content, encoding="utf-8")
     print(f"dynamic-repo: wrote {js_path}", file=sys.stderr)
