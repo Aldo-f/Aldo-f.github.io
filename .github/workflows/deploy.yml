@@ -35,34 +35,6 @@ jobs:
       - name: Build NL site (serves at /nl/)
         run: mkdocs build --strict -f mkdocs.nl.yml -d site/nl
 
-      - name: Run Pagefind search index
-        run: |
-          pagefind --site site --verbose
-          mkdir -p site/js
-          cat > site/js/pagefind-init.js << 'EOF'
-          document.addEventListener('DOMContentLoaded', () => {
-            const searchEl = document.querySelector('[data-md-component="search"]');
-            if (!searchEl) return;
-            const query = searchEl.querySelector('[name="q"]');
-            if (!query) return;
-            query.addEventListener('keydown', async (e) => {
-              if (e.key !== 'Enter' || e.target.value.trim() === '') return;
-              e.preventDefault();
-              const results = await window.$pagefind.default(e.target.value.trim(), {
-                selector: 'article, h1, h2, h3, p, a',
-                exclude: ['[data-pagefind-ignore]']
-              });
-              // Display results
-              const resultsEl = document.createElement('div');
-              resultsEl.className = 'pagefind-results';
-              resultsEl.innerHTML = results.data.map(r =>
-                `<a href="${r.meta.location}"><h4>${r.data.title}</h4><p>${r.data.excerpt}</p></a>`
-              ).join('');
-              searchEl.appendChild(resultsEl);
-            });
-          });
-          EOF
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
