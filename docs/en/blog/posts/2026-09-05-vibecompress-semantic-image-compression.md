@@ -40,6 +40,54 @@ Does the output match the original byte-for-byte? **Absolutely not.** Does it ca
 
 The [Evidence Locker](https://github.com/fmdunlap/vibecompress/blob/main/examples/README.md) has side-by-side comparisons. The puffin grows a second beak. The café girl gains a third coffee cup. The construction rendering becomes surrealist floating brickwork. **Features, not bugs.**
 
+## Visual Proof: Original vs Hallucination
+
+See for yourself what "capturing the vibes" actually looks like:
+
+### 🎸 Guitar Guy Illustration
+
+| Original | Reconstructed |
+|----------|---------------|
+| ![Original](https://github.com/fmdunlap/vibecompress/raw/main/examples/illustration_guitar_guy.png) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/illustration_guitar_guy.vibe.png) |
+
+*287 KB → 1.2 KB. The boy still strums with joy — if a slightly different boy.*
+
+### 🐧 Solitary Ocean Puffin
+
+| Original | Reconstructed |
+|----------|---------------|
+| ![Original](https://github.com/fmdunlap/vibecompress/raw/main/examples/puffin.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/puffin.vibe.png) |
+
+*108 KB → 1 KB. Regal beak dignity preserved, if slightly more orange than reality allowed.*
+
+### ☕ Red Shirt Girl at Café
+
+| Original | Reconstructed |
+|----------|---------------|
+| ![Original](https://github.com/fmdunlap/vibecompress/raw/main/examples/red_shirt_girl.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/red_shirt_girl.vibe.png) |
+
+*330 KB → 1.2 KB. Relaxed confidence; café ambiance intact. The coffee cup may be in her left hand now.*
+
+### 🥤 Soda Statue
+
+| Original | Reconstructed |
+|----------|---------------|
+| ![Original](https://github.com/fmdunlap/vibecompress/raw/main/examples/soda_statue.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/soda_statue.vibe.png) |
+
+*172 KB → 1.4 KB. Translucent cola aura. You can practically taste the carbonation.*
+
+### 🧱 Levitation Architecture
+
+| Original | Reconstructed |
+|----------|---------------|
+| ![Original](https://github.com/fmdunlap/vibecompress/raw/main/examples/construction_rendering.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/construction_rendering.vibe.png) |
+
+*128 KB → 1.5 KB. Floating brickwork. Physics is merely a suggestion.*
+
+---
+
+All examples sourced from the [Evidence Locker](https://github.com/fmdunlap/vibecompress/blob/main/examples/README.md) — normalized to ~1 MP, compressed via GPT-4o-mini, restored via Flux 2 Klein.
+
 ## "Lossy" Implies Loss. Nothing Was Lost — Reality Was Upgraded
 
 The README's FAQ is a masterclass in reframing:

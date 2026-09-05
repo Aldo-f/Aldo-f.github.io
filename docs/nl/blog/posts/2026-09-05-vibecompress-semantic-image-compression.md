@@ -40,6 +40,54 @@ Komt de output byte-voor-byte overeen met het origineel? **Absoluut niet.** vang
 
 De [Evidence Locker](https://github.com/fmdunlap/vibecompress/blob/main/examples/README.md) heeft side-by-side vergelijkingen. De stormvogel krijgt een tweede bek. Het café-meisje krijgt een derde koffietasje. De bouwvisualisatie wordt surrealistisch zwevend bakwerk. **Features, geen bugs.**
 
+## Visueel Bewijs: Origineel vs Hallucieerd
+
+Overtuig jezelf wat "de vibes vastpakken" echt betekent:
+
+### 🎸 Gitarenkerel Illustratie
+
+| Origineel | Herschapen |
+|-----------|------------|
+| ![Origineel](https://github.com/fmdunlap/vibecompress/raw/main/examples/illustration_guitar_guy.png) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/illustration_guitar_guy.vibe.png) |
+
+*288 KB → 1,2 KB. De jongen blijft met vreugde strummen — zij het een iets andere jongen.*
+
+### 🐧 Eenzame Stormvogel
+
+| Origineel | Herschapen |
+|-----------|------------|
+| ![Origineel](https://github.com/fmdunlap/vibecompress/raw/main/examples/puffin.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/puffin.vibe.png) |
+
+*108 KB → 1 KB. Majestäteitsvolle bek bewaard, zij het iets oranger dan de realiteit toeliet.*
+
+### ☕ Rood Shirt Meisje bij Café
+
+| Origineel | Herschapen |
+|-----------|------------|
+| ![Origineel](https://github.com/fmdunlap/vibecompress/raw/main/examples/red_shirt_girl.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/red_shirt_girl.vibe.png) |
+
+*330 KB → 1,2 KB. Ontspannen zelfvertrouwen; café-sfeer intact. De koffiekop is nu misschien in haar linkerhand.*
+
+### 🥤 Soda Statue
+
+| Origineel | Herschapen |
+|-----------|------------|
+| ![Origineel](https://github.com/fmdunlap/vibecompress/raw/main/examples/soda_statue.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/soda_statue.vibe.png) |
+
+*172 KB → 1,4 KB. Translucide cola-aura. Je kunt de koolzuur bijna proeven.*
+
+### 🧱 Zwijvende Architectuur
+
+| Origineel | Herschapen |
+|-----------|------------|
+| ![Origineel](https://github.com/fmdunlap/vibecompress/raw/main/examples/construction_rendering.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/construction_rendering.vibe.png) |
+
+*128 KB → 1,5 KB. Zwevend bakwerk. Fysica is slechts een suggestie.*
+
+---
+
+Alle voorbeelden uit de [Evidence Locker](https://github.com/fmdunlap/vibecompress/blob/main/examples/README.md) — genormaliseerd naar ~1 MP, gecomprimeerd via GPT-4o-mini, hersteld via Flux 2 Klein.
+
 ## "Lossy" Impliceert Verlies. Niets Is Verloren — De Realiteit Is Geüpgraded
 
 De README's FAQ is een meesterklasse in herkaderen:
