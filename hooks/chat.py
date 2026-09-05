@@ -270,6 +270,7 @@ _CHAT_JS = """(function () {
     messagesContainer.appendChild(messageDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
     return messageDiv;
+  }
 
   async function sendMessage() {
     const input = document.getElementById('chat-input');
