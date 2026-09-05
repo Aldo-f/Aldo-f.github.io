@@ -12,17 +12,11 @@ MERMAID_INIT_JS = """
 (function() {
   'use strict';
   
-  console.log('Mermaid init started');
-  
-  // Wait for mermaid to load, then render diagrams
   function initMermaid() {
     if (typeof mermaid === 'undefined') {
-      console.log('Mermaid not loaded yet, retrying...');
       setTimeout(initMermaid, 100);
       return;
     }
-    
-    console.log('Mermaid loaded, version:', mermaid.version);
     
     mermaid.initialize({
       startOnLoad: false,
@@ -30,21 +24,13 @@ MERMAID_INIT_JS = """
       securityLevel: 'loose'
     });
     
-    // For mermaid v10+, use the run() function
+    // Use mermaid.run if available (v10+), otherwise use init
     if (typeof mermaid.run === 'function') {
-      console.log('Using mermaid.run()');
-      mermaid.run({
-        querySelector: '.mermaid'
-      }).then(function() {
-        console.log('Mermaid rendering complete');
-      }).catch(function(err) {
+      mermaid.run().catch(function(err) {
         console.error('Mermaid run error:', err);
       });
-    } else if (typeof mermaid.init === 'function') {
-      console.log('Using mermaid.init()');
-      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
     } else {
-      console.error('No mermaid render function found');
+      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
     }
   }
   
@@ -67,7 +53,7 @@ def on_page_content(html, page, config, files):
     def decode_entities(match):
         code = match.group(1)
         decoded = html_module.unescape(code)
-        # Also convert self-closing br to non-self-closing for mermaid compatibility
+        # Convert self-closing br to non-self-closing for mermaid compatibility
         decoded = decoded.replace('<br/>', '<br>')
         return f'<pre class="mermaid">{decoded}</pre>'
 
@@ -90,6 +76,7 @@ def on_post_page(output, page, config, files=None):
     def decode_entities(match):
         code = match.group(1)
         decoded = html_module.unescape(code)
+        decoded = decoded.replace('<br/>', '<br>')
         return f'<pre class="mermaid">{decoded}</pre>'
     
     output = re.sub(r'<pre class="mermaid">(.*?)</pre>', decode_entities, output, flags=re.DOTALL)
