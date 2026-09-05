@@ -1,29 +1,37 @@
 (function() {
   'use strict';
+  console.log('[dynamic-repo] Script loaded, path:', window.location.pathname);
   
-  function fixRepoLinks() {
-    var path = window.location.pathname;
-    var map = {"thuis/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "thuis-v3/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "thuis-v4/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "thuis-v5/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "clock/": {"url": "https://github.com/Aldo-f/clock", "name": "Aldo-f/clock"}, "blanky/": {"url": "https://gitlab.com/Aldo-f/blanky", "name": "Aldo-f/blanky"}, "blanky-v1/": {"url": "https://gitlab.com/Aldo-f/blanky", "name": "Aldo-f/blanky"}, "opencode-multi-model-fallback/": {"url": "https://github.com/Aldo-f/opencode-multi-model-fallback", "name": "Aldo-f/opencode-multi-model-fallback"}};
-    var defaultUrl = "https://github.com/Aldo-f/Aldo-f.github.io";
-    var defaultName = "Aldo-f/Aldo-f.github.io";
-    var repoUrl = defaultUrl;
-    var repoName = defaultName;
-    
-    for (var prefix in map) {
-      if (path.indexOf(prefix) === 0 || path.indexOf('/' + prefix) !== -1) {
-        repoUrl = map[prefix].url;
-        repoName = map[prefix].name;
-        break;
-      }
+  var path = window.location.pathname;
+  var map = {"thuis/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "thuis-v3/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "thuis-v4/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "thuis-v5/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "clock/": {"url": "https://github.com/Aldo-f/clock", "name": "Aldo-f/clock"}, "blanky/": {"url": "https://gitlab.com/Aldo-f/blanky", "name": "Aldo-f/blanky"}, "blanky-v1/": {"url": "https://gitlab.com/Aldo-f/blanky", "name": "Aldo-f/blanky"}, "opencode-multi-model-fallback/": {"url": "https://github.com/Aldo-f/opencode-multi-model-fallback", "name": "Aldo-f/opencode-multi-model-fallback"}};
+  var defaultUrl = "https://github.com/Aldo-f/Aldo-f.github.io";
+  var defaultName = "Aldo-f/Aldo-f.github.io";
+  var repoUrl = defaultUrl;
+  var repoName = defaultName;
+  
+  for (var prefix in map) {
+    if (path.indexOf(prefix) === 0 || path.indexOf('/' + prefix) !== -1) {
+      repoUrl = map[prefix].url;
+      repoName = map[prefix].name;
+      console.log('[dynamic-repo] Matched prefix:', prefix, '->', repoUrl);
+      break;
     }
-    
-    // Fix all source elements (header and mobile nav)
+  }
+  
+  function updateRepoSource() {
+    console.log('[dynamic-repo] updateRepoSource called');
     var sources = document.querySelectorAll('[data-md-component="source"]');
+    console.log('[dynamic-repo] Found', sources.length, 'source elements');
     sources.forEach(function(source) {
       var link = source.querySelector('a');
       var repoDiv = source.querySelector('.md-source__repository');
-      if (link) link.href = repoUrl;
+      console.log('[dynamic-repo] link:', link, 'repoDiv:', repoDiv);
+      if (link) {
+        console.log('[dynamic-repo] Updating href from', link.href, 'to', repoUrl);
+        link.href = repoUrl;
+      }
       if (repoDiv) {
+        console.log('[dynamic-repo] Updating text from', repoDiv.textContent, 'to', repoName);
         repoDiv.textContent = repoName;
         fetchRepoStats(repoUrl, repoDiv);
       }
@@ -79,8 +87,8 @@
   
   // Run immediately and also on DOMContentLoaded for safety
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', fixRepoLinks);
+    document.addEventListener('DOMContentLoaded', updateRepoSource);
   } else {
-    fixRepoLinks();
+    updateRepoSource();
   }
 })();
