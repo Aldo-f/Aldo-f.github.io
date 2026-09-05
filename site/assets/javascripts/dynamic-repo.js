@@ -23,7 +23,8 @@
     var sources = document.querySelectorAll('[data-md-component="source"]');
     console.log('[dynamic-repo] Found', sources.length, 'source elements');
     sources.forEach(function(source) {
-      var link = source.querySelector('a');
+      // The source element IS the <a> tag, not a container
+      var link = source;
       var repoDiv = source.querySelector('.md-source__repository');
       console.log('[dynamic-repo] link:', link, 'repoDiv:', repoDiv);
       if (link) {
