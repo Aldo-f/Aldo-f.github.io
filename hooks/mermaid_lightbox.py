@@ -31,7 +31,11 @@ _LIGHTBOX_ADDON_JS = """
     
     // Find all mermaid containers
     document.querySelectorAll('.mermaid-code').forEach(function(container) {
-      const code = container.textContent;
+      // Decode HTML entities (e.g., &lt;br/&gt; -> <br/>)
+      const text = container.textContent;
+      const decoder = document.createElement('textarea');
+      decoder.innerHTML = text;
+      const code = decoder.value;
       const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
       
       mermaid.render(id, code).then(function(svgCode) {
