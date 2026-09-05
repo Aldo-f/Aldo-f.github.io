@@ -12,7 +12,7 @@ tags:
   - pixel
 ---
 
-While AI compression tools like **vibecompress** replace your photos with hallucinations, the humble JPEG format has been doing something completely different for decades: mathematics instead of guessing. Here's exactly how it works.
+While AI compression tools like **[vibecompress](../2026/09/05/why-store-pixels-when-you-can-store-vibes-meet-vibecompress/)** replace your photos with hallucinations, the humble JPEG format has been doing something completely different for decades: mathematics instead of guessing. Here's exactly how it works.
 
 ## The Full Pipeline
 
