@@ -15,7 +15,45 @@ MERMAID_JS_URL = "https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.j
 _LIGHTBOX_ADDON_JS = """
 (function() {
   'use strict';
-
+  
+  // Wait for mermaid to load, then render diagrams
+  function initMermaid() {
+    // Wait for mermaid to be fully loaded
+    if (typeof mermaid === 'undefined' || typeof mermaid.render !== 'function') {
+      setTimeout(initMermaid, 100);
+      return;
+    }
+    
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+    
+    // Find all mermaid containers
+    document.querySelectorAll('.mermaid-code').forEach(function(container) {
+      const code = container.textContent;
+      const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
+      
+      mermaid.render(id, code).then(function(svgCode) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'mermaid-svg';
+        wrapper.innerHTML = svgCode;
+        container.parentNode.replaceChild(wrapper, container);
+        
+        // Add click handler for zoom
+        wrapper.addEventListener('click', function(e) {
+          if (e.target.closest('a') || e.target.closest('button')) return;
+          e.preventDefault();
+          openMermaidLightbox(svgCode);
+        });
+        wrapper.style.cursor = 'zoom-in';
+      }).catch(function(err) {
+        console.error('Mermaid render error:', err);
+      });
+    });
+  }
+  
   function openMermaidLightbox(svgCode) {
     var overlay = document.getElementById('mermaid-lightbox');
     if (!overlay) {
@@ -24,13 +62,13 @@ _LIGHTBOX_ADDON_JS = """
       overlay.className = 'mermaid-lightbox';
       overlay.innerHTML = '<button class="mermaid-close">&#10005;</button><div class="mermaid-content"></div>';
       document.body.appendChild(overlay);
-
+      
       overlay.addEventListener('click', function(e) {
         if (e.target === overlay || e.target.closest('.mermaid-close')) {
           overlay.classList.remove('open');
         }
       });
-
+      
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           var lb = document.getElementById('mermaid-lightbox');
@@ -38,57 +76,11 @@ _LIGHTBOX_ADDON_JS = """
         }
       });
     }
-
+    
     overlay.querySelector('.mermaid-content').innerHTML = svgCode;
     overlay.classList.add('open');
   }
-
-  // Wait for mermaid to load, then render diagrams
-  function initMermaid() {
-    // Wait for mermaid to be fully loaded
-    if (typeof mermaid === 'undefined' || !mermaid.render) {
-      setTimeout(initMermaid, 100);
-      return;
-    }
-
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'default',
-      securityLevel: 'loose'
-    });
-
-    // Find all mermaid containers
-    document.querySelectorAll('.mermaid-code').forEach(function(container) {
-      // Decode HTML entities (e.g., &lt;br/&gt; -> <br/>)
-      const text = container.textContent;
-      const decoder = document.createElement('textarea');
-      decoder.innerHTML = text;
-      const code = decoder.value;
-      const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
-
-      try {
-        mermaid.render(id, code).then(function(svgCode) {
-          const wrapper = document.createElement('div');
-          wrapper.className = 'mermaid-svg';
-          wrapper.innerHTML = svgCode;
-          container.parentNode.replaceChild(wrapper, container);
-
-          // Add click handler for zoom
-          wrapper.addEventListener('click', function(e) {
-            if (e.target.closest('a') || e.target.closest('button')) return;
-            e.preventDefault();
-            openMermaidLightbox(svgCode);
-          });
-          wrapper.style.cursor = 'zoom-in';
-        }).catch(function(err) {
-          console.error('Mermaid render error:', err);
-        });
-      } catch (err) {
-        console.error('Mermaid initialization error:', err);
-      }
-    });
-  }
-
+  
   // Start initialization
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initMermaid);
