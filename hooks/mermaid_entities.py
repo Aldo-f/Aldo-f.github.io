@@ -1,21 +1,18 @@
-"""MkDocs hook: decode HTML entities in mermaid code blocks and initialize rendering."""
+"""MkDocs hook: decode HTML entities in mermaid code blocks."""
 
 from __future__ import annotations
 
 import re
 import html as html_module
 
-MERMAID_JS_URL = "https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.esm.min.mjs"
-
-MERMAID_INIT_JS = f"""
-<script type="module">
-import mermaid from '{MERMAID_JS_URL}';
-
-mermaid.initialize({{
+# Minimal init script - mermaid is already loaded via extra_javascript in mkdocs.base.yml
+MERMAID_INIT_JS = """
+<script>
+mermaid.initialize({
   startOnLoad: true,
   theme: 'default',
   securityLevel: 'loose'
-}});
+});
 </script>
 """
 
@@ -44,7 +41,7 @@ def on_page_content(html, page, config, files):
 
 
 def on_post_page(output, page, config, files=None):
-    """Add mermaid JS after template rendering."""
+    """Add mermaid init script after template rendering."""
     if 'mermaid' not in output.lower():
         return output
 
@@ -54,14 +51,14 @@ def on_post_page(output, page, config, files=None):
         decoded = html_module.unescape(code)
         decoded = decoded.replace('<br/>', '<br>')
         return f'<pre class="mermaid">{decoded}</pre>'
-    
+   
     output = re.sub(r'<pre class="mermaid">(.*?)</pre>', decode_entities, output, flags=re.DOTALL)
 
-    # Add mermaid JS and init script if not present
-    if MERMAID_JS_URL not in output:
+    # Add mermaid init script if not present
+    if 'mermaid.initialize' not in output:
         output = output.replace('</body>', 
-                               f'<script src="{MERMAID_JS_URL}"></script>\n{MERMAID_INIT_JS}\n  </body>')
-    
+                               f'{MERMAID_INIT_JS}\n  </body>')
+   
     return output
 
 
