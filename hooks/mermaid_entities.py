@@ -19,19 +19,10 @@ MERMAID_INIT_JS = """
     }
     
     mermaid.initialize({
-      startOnLoad: false,
+      startOnLoad: true,
       theme: 'default',
       securityLevel: 'loose'
     });
-    
-    // Use mermaid.run if available (v10+), otherwise use init
-    if (typeof mermaid.run === 'function') {
-      mermaid.run().catch(function(err) {
-        console.error('Mermaid run error:', err);
-      });
-    } else {
-      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
-    }
   }
   
   if (document.readyState === 'loading') {
