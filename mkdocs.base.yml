@@ -35,11 +35,11 @@ plugins:
       post_date_format: yyyy-MM-dd
       archive: true
   - search
-  - mermaid2:
-      version: "10.4.0"
   - section-index
 extra:
   mermaid_version: "10.4.0"
+  extra_javascript:
+    - https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/Aldo-f

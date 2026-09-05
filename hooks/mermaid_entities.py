@@ -1,13 +1,38 @@
-"""MkDocs hook: decode HTML entities in mermaid code blocks."""
+"""MkDocs hook: decode HTML entities in mermaid code blocks and initialize rendering."""
 
 from __future__ import annotations
 
 import re
 import html as html_module
 
+MERMAID_INIT_JS = """
+(function() {
+  'use strict';
+  
+  function initMermaid() {
+    if (typeof mermaid === 'undefined') {
+      setTimeout(initMermaid, 50);
+      return;
+    }
+    
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMermaid);
+  } else {
+    initMermaid();
+  }
+})();
+"""
+
 
 def on_page_content(html, page, config, files):
-    """Decode HTML entities in mermaid code blocks."""
+    """Decode HTML entities in mermaid code blocks and inject init script."""
     if 'mermaid' not in html.lower():
         return html
 
@@ -15,8 +40,18 @@ def on_page_content(html, page, config, files):
     def decode_entities(match):
         code = match.group(1)
         decoded = html_module.unescape(code)
-        return f'<pre class="mermaid"><code>{decoded}</code></pre>'
+        return f'<pre class="mermaid">{decoded}</pre>'
 
     html = re.sub(r'<pre class="mermaid"><code>(.*?)</code></pre>', decode_entities, html, flags=re.DOTALL)
+    
+    # Also handle the newer format with <code> tags
+    html = re.sub(r'<pre class="mermaid">\s*(.*?)\s*</pre>', 
+                  lambda m: f'<pre class="mermaid">{html_module.unescape(m.group(1))}</pre>', 
+                  html, flags=re.DOTALL)
+
+    # Add mermaid initialization script if not present
+    if 'mermaid.initialize' not in html and 'mermaid.min.js' in html:
+        html = html.replace('</body>', 
+                           f'{MERMAID_INIT_JS}\n  </body>')
 
     return html
