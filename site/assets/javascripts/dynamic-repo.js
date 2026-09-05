@@ -86,10 +86,18 @@
     return n.toString();
   }
   
-  // Run immediately and also on DOMContentLoaded for safety
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', updateRepoSource);
-  } else {
+  // Run on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', updateRepoSource);
+  
+  // Also run on instant loading (pjax) - Material theme fires 'md-navigator-ready' or similar
+  document.addEventListener('pjax:complete', updateRepoSource);
+  document.addEventListener('md-content-loaded', updateRepoSource);
+  
+  // And also run on any navigation (popstate for history API)
+  window.addEventListener('popstate', updateRepoSource);
+  
+  // Run immediately in case DOM is already ready
+  if (document.readyState !== 'loading') {
     updateRepoSource();
   }
 })();
