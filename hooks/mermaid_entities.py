@@ -5,36 +5,17 @@ from __future__ import annotations
 import re
 import html as html_module
 
-MERMAID_JS_URL = "https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"
+MERMAID_JS_URL = "https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.esm.min.mjs"
 
 MERMAID_INIT_JS = f"""
-<script>
-(function() {{
-  'use strict';
-  
-  function initMermaid() {{
-    if (typeof mermaid === 'undefined') {{
-      setTimeout(initMermaid, 100);
-      return;
-    }}
-    
-    // mermaid v10 with startOnLoad: true initializes on window.onload
-    // If we're already past that, manually run init
-    if (document.readyState === 'complete') {{
-      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
-    }}
-  }}
-  
-  // Load mermaid if not already loaded
-  if (typeof mermaid === 'undefined') {{
-    var script = document.createElement('script');
-    script.src = '{MERMAID_JS_URL}';
-    script.onload = initMermaid;
-    document.head.appendChild(script);
-  }} else {{
-    initMermaid();
-  }}
-}})();
+<script type="module">
+import mermaid from '{MERMAID_JS_URL}';
+
+mermaid.initialize({{
+  startOnLoad: true,
+  theme: 'default',
+  securityLevel: 'loose'
+}});
 </script>
 """
 
