@@ -35,7 +35,8 @@ plugins:
       post_date_format: yyyy-MM-dd
       archive: false
   - search
-  - mermaid2
+  - mermaid2:
+      version: "10.4.0"
   - section-index
 extra:
   mermaid_version: "10.4.0"
@@ -52,11 +53,6 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
   - toc:
       permalink: true
 hooks:
