@@ -16,6 +16,7 @@ extra:
     - https://unpkg.com/pagefind@latest/pagefind-ui.css
     - assets/css/giscus-no-branding.css
   extra_javascript:
+    - https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js
     - https://unpkg.com/pagefind@latest/pagefind-ui.js
     - /js/pagefind-init.js
 plugins:
