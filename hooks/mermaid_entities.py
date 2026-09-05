@@ -20,28 +20,15 @@ MERMAID_INIT_JS = """
     }
     
     mermaid.initialize({
-      startOnLoad: false,
+      startOnLoad: true,
       theme: 'default',
       securityLevel: 'loose'
     });
     
-    // Use mermaid.run for v10+
+    // For mermaid v10+, use the run() function
     if (typeof mermaid.run === 'function') {
-      mermaid.run({
-        querySelector: '.mermaid'
-      });
-    } else {
-      // Fallback for older versions
-      document.querySelectorAll('.mermaid').forEach(function(element) {
-        const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
-        mermaid.render(id, element.textContent).then(function(svgCode) {
-          const wrapper = document.createElement('div');
-          wrapper.className = 'mermaid-svg';
-          wrapper.innerHTML = svgCode;
-          element.parentNode.replaceChild(wrapper, element);
-        }).catch(function(err) {
-          console.error('Mermaid render error:', err);
-        });
+      mermaid.run().catch(function(err) {
+        console.error('Mermaid run error:', err);
       });
     }
   }
