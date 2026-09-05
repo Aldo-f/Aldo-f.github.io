@@ -6,6 +6,7 @@ repo_url: https://github.com/Aldo-f/Aldo-f.github.io
 repo_name: Aldo-f/Aldo-f.github.io
 theme:
   name: material
+  custom_dir: overrides
   palette:
     - scheme: default
       primary: indigo
@@ -45,6 +46,10 @@ extra:
       link: https://mastodon.social/@AldoF
 markdown_extensions:
   - tables
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -55,4 +60,6 @@ markdown_extensions:
 hooks:
   - hooks/slugmap.py
   - hooks/lightbox.py
+  - hooks/related_posts.py
   - hooks/chat.py
+  - hooks/socialmedia.py
