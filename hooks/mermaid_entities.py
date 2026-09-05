@@ -67,6 +67,8 @@ def on_page_content(html, page, config, files):
     def decode_entities(match):
         code = match.group(1)
         decoded = html_module.unescape(code)
+        # Also convert self-closing br to non-self-closing for mermaid compatibility
+        decoded = decoded.replace('<br/>', '<br>')
         return f'<pre class="mermaid">{decoded}</pre>'
 
     # Handle multiple formats
