@@ -10,8 +10,10 @@ extra:
     - name: Nederlands
       link: /nl/
       lang: nl
-  extra_css: []
-  extra_javascript: []
+  extra_css:
+    - assets/css/giscus-no-branding.css
+  extra_javascript:
+    - https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js
 plugins:
   - search
   - blog:
@@ -117,4 +119,3 @@ nav:
       - OpenCode Fallback Plugin:
           - Overview: https://github.com/Aldo-f/opencode-multi-model-fallback
           - README: opencode-multi-model-fallback/docs/index.md
-
