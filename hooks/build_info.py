@@ -38,16 +38,14 @@ def on_post_build(*, config, **kwargs):
   var raw = typeof BUILD_TIME !== 'undefined' ? BUILD_TIME : null;
   if (!raw) return;
   var d = new Date(raw);
-  var formatted = d.toLocaleString(undefined, {
-    year: 'numeric', month: 'short', day: '2-digit',
-    hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
-  });
-  var el = document.createElement('div');
-  el.id = 'build-footer';
-  el.style.cssText = 'font-size:0.55rem;color:#aaa;margin-top:1px;text-align:right;opacity:0.65;';
-  el.textContent = 'Build: ' + formatted;
-  var copyright = document.querySelector('.md-copyright');
-  if (copyright) copyright.appendChild(el);
+  var formatted = d.getFullYear() + '-' +
+    String(d.getMonth()+1).padStart(2,'0') + '-' +
+    String(d.getDate()).padStart(2,'0') + ' ' +
+    String(d.getHours()).padStart(2,'0') + ':' +
+    String(d.getMinutes()).padStart(2,'0') + ' ' +
+    d.toLocaleTimeString(undefined, {timeZoneName:'short'});
+  var el = document.getElementById('build-timestamp');
+  if (el) el.textContent = '— Build ' + formatted;
 })();
 """, encoding="utf-8")
 
