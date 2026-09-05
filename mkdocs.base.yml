@@ -37,10 +37,10 @@ plugins:
   - search
   - mermaid
   - section-index
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js
 extra:
   mermaid_version: "10.4.0"
-  extra_javascript:
-    - https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/Aldo-f
