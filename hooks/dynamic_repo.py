@@ -36,25 +36,38 @@ def _get_js() -> str:
     
     js = """(function() {
   'use strict';
-  var path = window.location.pathname;
-  var map = %s;
-  var defaultUrl = %s;
-  var defaultName = %s;
-  var repoUrl = defaultUrl;
-  var repoName = defaultName;
-  for (var prefix in map) {
-    if (path.indexOf(prefix) === 0 || path.indexOf('/' + prefix) !== -1) {
-      repoUrl = map[prefix].url;
-      repoName = map[prefix].name;
-      break;
+  
+  function fixRepoLinks() {
+    var path = window.location.pathname;
+    var map = %s;
+    var defaultUrl = %s;
+    var defaultName = %s;
+    var repoUrl = defaultUrl;
+    var repoName = defaultName;
+    
+    for (var prefix in map) {
+      if (path.indexOf(prefix) === 0 || path.indexOf('/' + prefix) !== -1) {
+        repoUrl = map[prefix].url;
+        repoName = map[prefix].name;
+        break;
+      }
     }
+    
+    // Fix all source elements (header and mobile nav)
+    var sources = document.querySelectorAll('[data-md-component="source"]');
+    sources.forEach(function(source) {
+      var link = source.querySelector('a');
+      var repoDiv = source.querySelector('.md-source__repository');
+      if (link) link.href = repoUrl;
+      if (repoDiv) repoDiv.textContent = repoName;
+    });
   }
-  var source = document.querySelector('[data-md-component="source"]');
-  if (source) {
-    var link = source.querySelector('a');
-    var repoDiv = source.querySelector('.md-source__repository');
-    if (link) link.href = repoUrl;
-    if (repoDiv) repoDiv.textContent = repoName;
+  
+  // Run immediately and also on DOMContentLoaded for safety
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fixRepoLinks);
+  } else {
+    fixRepoLinks();
   }
 })();
 """ % (json.dumps(mapping), json.dumps(DEFAULT_REPO_URL), json.dumps(DEFAULT_REPO_NAME))
