@@ -67,3 +67,4 @@ hooks:
   - hooks/dynamic_repo.py
   - hooks/chat.py
   - hooks/socialmedia.py
+  - hooks/mermaid_entities.py
