@@ -18,6 +18,8 @@ extra:
     - https://unpkg.com/pagefind@latest/pagefind-ui.js
     - /js/pagefind-init.js
 plugins:
+  - search:
+      lang: nl
   - autotranslate:
       languages: [en, nl]
       paths: [blog/posts, about.md, projects.md, index.md]
