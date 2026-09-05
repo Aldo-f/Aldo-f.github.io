@@ -1,5 +1,5 @@
 ---
-title: "Waarom Pixels Opslaan Als Je Vibes Kan Opslaan? Ontmoet vibecompress"
+title: "Waarom pixels opslaan als je vibes kan opslaan? Ontmoet vibecompress"
 date: 2026-09-05
 categories:
   - AI
