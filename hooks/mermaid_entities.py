@@ -30,9 +30,11 @@ MERMAID_INIT_JS = """
 })();
 """
 
+MERMAID_JS_URL = "https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"
+
 
 def on_page_content(html, page, config, files):
-    """Decode HTML entities in mermaid code blocks and inject init script."""
+    """Decode HTML entities in mermaid code blocks and inject mermaid scripts."""
     if 'mermaid' not in html.lower():
         return html
 
@@ -49,9 +51,25 @@ def on_page_content(html, page, config, files):
                   lambda m: f'<pre class="mermaid">{html_module.unescape(m.group(1))}</pre>', 
                   html, flags=re.DOTALL)
 
-    # Add mermaid initialization script if not present
-    if 'mermaid.initialize' not in html and 'mermaid.min.js' in html:
+    # Add mermaid JS and initialization if not present
+    if MERMAID_JS_URL not in html:
+        html = html.replace('</body>', 
+                           f'<script src="{MERMAID_JS_URL}"></script>\n{MERMAID_INIT_JS}\n  </body>')
+    elif 'mermaid.initialize' not in html:
         html = html.replace('</body>', 
                            f'{MERMAID_INIT_JS}\n  </body>')
 
     return html
+
+
+def on_config(config, **kwargs):
+    """Ensure mermaid CSS is included if needed."""
+    extra_css = list(config.get("extra_css") or [])
+    # Mermaid2 plugin handles its own CSS, so we don't need to add anything here
+    config["extra_css"] = extra_css
+    return config
+
+
+def on_post_build(config):
+    """Log completion."""
+    print("mermaid hook: processed all pages")
