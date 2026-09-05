@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import re
 import html as html_module
+from pathlib import Path
 
 MERMAID_INIT_JS = """
+<script>
 (function() {
   'use strict';
   
@@ -28,13 +30,14 @@ MERMAID_INIT_JS = """
     initMermaid();
   }
 })();
+</script>
 """
 
 MERMAID_JS_URL = "https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"
 
 
 def on_page_content(html, page, config, files):
-    """Decode HTML entities in mermaid code blocks and inject mermaid scripts."""
+    """Decode HTML entities in mermaid code blocks."""
     if 'mermaid' not in html.lower():
         return html
 
@@ -44,32 +47,40 @@ def on_page_content(html, page, config, files):
         decoded = html_module.unescape(code)
         return f'<pre class="mermaid">{decoded}</pre>'
 
+    # Handle multiple formats
     html = re.sub(r'<pre class="mermaid"><code>(.*?)</code></pre>', decode_entities, html, flags=re.DOTALL)
-    
-    # Also handle the newer format with <code> tags
+    html = re.sub(r'<pre><code class="language-mermaid">(.*?)</code></pre>', decode_entities, html, flags=re.DOTALL)
     html = re.sub(r'<pre class="mermaid">\s*(.*?)\s*</pre>', 
                   lambda m: f'<pre class="mermaid">{html_module.unescape(m.group(1))}</pre>', 
                   html, flags=re.DOTALL)
 
-    # Add mermaid JS and initialization if not present
-    if MERMAID_JS_URL not in html:
-        html = html.replace('</body>', 
-                           f'<script src="{MERMAID_JS_URL}"></script>\n{MERMAID_INIT_JS}\n  </body>')
-    elif 'mermaid.initialize' not in html:
-        html = html.replace('</body>', 
-                           f'{MERMAID_INIT_JS}\n  </body>')
-
     return html
 
 
-def on_config(config, **kwargs):
-    """Ensure mermaid CSS is included if needed."""
-    extra_css = list(config.get("extra_css") or [])
-    # Mermaid2 plugin handles its own CSS, so we don't need to add anything here
-    config["extra_css"] = extra_css
-    return config
+def on_post_page(output, page, config, files):
+    """Add mermaid JS after template rendering."""
+    if 'mermaid' not in output.lower():
+        return output
+
+    # Decode any remaining HTML entities in mermaid blocks
+    def decode_entities(match):
+        code = match.group(1)
+        decoded = html_module.unescape(code)
+        return f'<pre class="mermaid">{decoded}</pre>'
+    
+    output = re.sub(r'<pre class="mermaid">(.*?)</pre>', decode_entities, output, flags=re.DOTALL)
+
+    # Add mermaid JS if not present
+    if MERMAID_JS_URL not in output:
+        output = output.replace('</body>', 
+                               f'<script src="{MERMAID_JS_URL}"></script>\n{MERMAID_INIT_JS}\n  </body>')
+    elif 'mermaid.initialize' not in output:
+        output = output.replace('</body>', 
+                               f'{MERMAID_INIT_JS}\n  </body>')
+    
+    return output
 
 
 def on_post_build(config):
     """Log completion."""
-    print("mermaid hook: processed all pages")
+    print("mermaid hook: post-build complete")
