@@ -57,7 +57,7 @@ def on_page_content(html, page, config, files):
     return html
 
 
-def on_post_page(output, page, config, files):
+def on_post_page(output, page, config, **kwargs):
     """Add mermaid JS after template rendering."""
     if 'mermaid' not in output.lower():
         return output
