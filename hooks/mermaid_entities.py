@@ -5,19 +5,55 @@ from __future__ import annotations
 import re
 import html as html_module
 
-MERMAID_INIT_JS = """
-<script type="module">
-import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.esm.min.mjs';
+MERMAID_JS_URL = "https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"
 
-mermaid.initialize({
-  startOnLoad: true,
-  theme: 'default',
-  securityLevel: 'loose'
-});
+MERMAID_INIT_JS = """
+<script>
+(function() {
+  'use strict';
+  
+  // Wait for mermaid to load, then render diagrams
+  function initMermaid() {
+    if (typeof mermaid === 'undefined') {
+      setTimeout(initMermaid, 100);
+      return;
+    }
+    
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'default',
+      securityLevel: 'loose'
+    });
+    
+    // Use mermaid.run for v10+
+    if (typeof mermaid.run === 'function') {
+      mermaid.run({
+        querySelector: '.mermaid'
+      });
+    } else {
+      // Fallback for older versions
+      document.querySelectorAll('.mermaid').forEach(function(element) {
+        const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
+        mermaid.render(id, element.textContent).then(function(svgCode) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'mermaid-svg';
+          wrapper.innerHTML = svgCode;
+          element.parentNode.replaceChild(wrapper, element);
+        }).catch(function(err) {
+          console.error('Mermaid render error:', err);
+        });
+      });
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMermaid);
+  } else {
+    initMermaid();
+  }
+})();
 </script>
 """
-
-MERMAID_JS_URL = "https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"
 
 
 def on_page_content(html, page, config, files):
@@ -25,12 +61,10 @@ def on_page_content(html, page, config, files):
     if 'mermaid' not in html.lower():
         return html
 
-    # Decode HTML entities in mermaid code blocks (e.g., <br/> -> <br/>)
+    # Decode HTML entities in mermaid code blocks
     def decode_entities(match):
         code = match.group(1)
         decoded = html_module.unescape(code)
-        # Convert <br/> to proper HTML for mermaid
-        decoded = decoded.replace('<br/>', '<br>').replace('&lt;br/&gt;', '<br>')
         return f'<pre class="mermaid">{decoded}</pre>'
 
     # Handle multiple formats
@@ -52,15 +86,14 @@ def on_post_page(output, page, config, files=None):
     def decode_entities(match):
         code = match.group(1)
         decoded = html_module.unescape(code)
-        decoded = decoded.replace('<br/>', '<br>').replace('&lt;br/&gt;', '<br>')
         return f'<pre class="mermaid">{decoded}</pre>'
     
     output = re.sub(r'<pre class="mermaid">(.*?)</pre>', decode_entities, output, flags=re.DOTALL)
 
-    # Add mermaid ES module JS if not present
-    if 'mermaid.esm.min.mjs' not in output:
-        output = output.replace('</head>', 
-                               f'{MERMAID_INIT_JS}\n  </head>')
+    # Add mermaid JS and init script if not present
+    if MERMAID_JS_URL not in output:
+        output = output.replace('</body>', 
+                               f'<script src="{MERMAID_JS_URL}"></script>\n{MERMAID_INIT_JS}\n  </body>')
     
     return output
 
