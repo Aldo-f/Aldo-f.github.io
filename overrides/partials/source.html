@@ -1,0 +1,32 @@
+<a href="{{ config.repo_url }}" title="{{ lang.t('source') }}" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    {% include ".icons/material/git.svg" %}
+  </div>
+  <div class="md-source__repository">
+    {{ config.repo_name }}
+  </div>
+</a>
+<script>
+(function() {
+  var path = window.location.pathname;
+  var map = {"thuis/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "thuis-v3/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "thuis-v4/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "thuis-v5/": {"url": "https://github.com/Aldo-f/thuis", "name": "Aldo-f/thuis"}, "clock/": {"url": "https://github.com/Aldo-f/clock", "name": "Aldo-f/clock"}, "blanky/": {"url": "https://gitlab.com/Aldo-f/blanky", "name": "Aldo-f/blanky"}, "blanky-v1/": {"url": "https://gitlab.com/Aldo-f/blanky", "name": "Aldo-f/blanky"}, "opencode-multi-model-fallback/": {"url": "https://github.com/Aldo-f/opencode-multi-model-fallback", "name": "Aldo-f/opencode-multi-model-fallback"}};
+  var defaultUrl = "https://github.com/Aldo-f/Aldo-f.github.io";
+  var defaultName = "Aldo-f/Aldo-f.github.io";
+  var repoUrl = defaultUrl;
+  var repoName = defaultName;
+  for (var prefix in map) {
+    if (path.indexOf(prefix) === 0 || path.indexOf('/' + prefix) !== -1) {
+      repoUrl = map[prefix].url;
+      repoName = map[prefix].name;
+      break;
+    }
+  }
+  var source = document.querySelector('[data-md-component="source"]');
+  if (source) {
+    var link = source.querySelector('a');
+    var repoDiv = source.querySelector('.md-source__repository');
+    if (link) link.href = repoUrl;
+    if (repoDiv) repoDiv.textContent = repoName;
+  }
+})();
+</script>

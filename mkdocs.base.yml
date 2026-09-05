@@ -61,5 +61,6 @@ hooks:
   - hooks/slugmap.py
   - hooks/lightbox.py
   - hooks/related_posts.py
+  - hooks/dynamic_repo.py
   - hooks/chat.py
   - hooks/socialmedia.py

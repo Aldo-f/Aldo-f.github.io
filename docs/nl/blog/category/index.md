@@ -9,8 +9,10 @@ All topics covered on this blog, newest-first inside each category.
 | [General](general/) | 1 |
 | [Jekyll update](jekyll-update/) | 1 |
 | [Meta](meta/) | 2 |
+| [Multimedia](multimedia/) | 1 |
 | [Satire](satire/) | 1 |
 | [Scrum](scrum/) | 2 |
+| [Techniek](techniek/) | 1 |
 | [VDAB](vdab/) | 2 |
 
 Or browse [everything chronologically](../index.md).
