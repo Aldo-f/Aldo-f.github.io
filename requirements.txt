@@ -3,4 +3,5 @@ mkdocs-material
 mkdocs-multirepo-plugin
 mkdocs-section-index
 mkdocs-autotranslate
+mkdocs-mermaid2-plugin
 pagefind
