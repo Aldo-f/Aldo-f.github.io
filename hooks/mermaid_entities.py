@@ -12,24 +12,39 @@ MERMAID_INIT_JS = """
 (function() {
   'use strict';
   
+  console.log('Mermaid init started');
+  
   // Wait for mermaid to load, then render diagrams
   function initMermaid() {
     if (typeof mermaid === 'undefined') {
+      console.log('Mermaid not loaded yet, retrying...');
       setTimeout(initMermaid, 100);
       return;
     }
     
+    console.log('Mermaid loaded, version:', mermaid.version);
+    
     mermaid.initialize({
-      startOnLoad: true,
+      startOnLoad: false,
       theme: 'default',
       securityLevel: 'loose'
     });
     
     // For mermaid v10+, use the run() function
     if (typeof mermaid.run === 'function') {
-      mermaid.run().catch(function(err) {
+      console.log('Using mermaid.run()');
+      mermaid.run({
+        querySelector: '.mermaid'
+      }).then(function() {
+        console.log('Mermaid rendering complete');
+      }).catch(function(err) {
         console.error('Mermaid run error:', err);
       });
+    } else if (typeof mermaid.init === 'function') {
+      console.log('Using mermaid.init()');
+      mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+    } else {
+      console.error('No mermaid render function found');
     }
   }
   
