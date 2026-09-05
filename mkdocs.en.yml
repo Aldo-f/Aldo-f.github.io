@@ -12,7 +12,6 @@ extra:
       lang: nl
   extra_css:
     - assets/css/giscus-no-branding.css
-  extra_javascript: []
 plugins:
   - search
   - blog:
