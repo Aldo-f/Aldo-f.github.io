@@ -18,7 +18,6 @@ extra:
   extra_javascript:
     - https://unpkg.com/pagefind@latest/pagefind-ui.js
     - /js/pagefind-init.js
-    - https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js
 plugins:
   - search:
       lang: nl
