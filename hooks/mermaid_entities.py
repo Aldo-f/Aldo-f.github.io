@@ -4,26 +4,32 @@ from __future__ import annotations
 
 import re
 import html as html_module
-from pathlib import Path
 
 MERMAID_INIT_JS = """
 <script>
 (function() {
   'use strict';
   
+  // Initialize mermaid once it's loaded
   function initMermaid() {
     if (typeof mermaid === 'undefined') {
-      setTimeout(initMermaid, 50);
+      setTimeout(initMermaid, 100);
       return;
     }
     
     mermaid.initialize({
-      startOnLoad: true,
+      startOnLoad: false,
       theme: 'default',
       securityLevel: 'loose'
     });
+    
+    // Render all mermaid diagrams
+    mermaid.run({
+      querySelector: '.mermaid'
+    });
   }
   
+  // Wait for DOM and mermaid to be ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initMermaid);
   } else {
@@ -57,7 +63,7 @@ def on_page_content(html, page, config, files):
     return html
 
 
-def on_post_page(output, page, config, **kwargs):
+def on_post_page(output, page, config, files):
     """Add mermaid JS after template rendering."""
     if 'mermaid' not in output.lower():
         return output
@@ -70,17 +76,14 @@ def on_post_page(output, page, config, **kwargs):
     
     output = re.sub(r'<pre class="mermaid">(.*?)</pre>', decode_entities, output, flags=re.DOTALL)
 
-    # Add mermaid JS if not present
+    # Add mermaid JS and init script if not present
     if MERMAID_JS_URL not in output:
         output = output.replace('</body>', 
                                f'<script src="{MERMAID_JS_URL}"></script>\n{MERMAID_INIT_JS}\n  </body>')
-    elif 'mermaid.initialize' not in output:
-        output = output.replace('</body>', 
-                               f'{MERMAID_INIT_JS}\n  </body>')
     
     return output
 
 
 def on_post_build(config):
     """Log completion."""
-    print("mermaid hook: post-build complete")
+    print("mermaid hook: complete")
