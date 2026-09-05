@@ -100,11 +100,27 @@ _LIGHTBOX_JS = """(function () {
     return directSvgAny;
   }
 
+  function isInteractiveElement(el) {
+    if (!el || !(el instanceof Element)) return false;
+    var tag = el.tagName.toLowerCase();
+    // Native interactive elements
+    if (['a', 'button', 'input', 'select', 'textarea', 'label', 'summary'].includes(tag)) return true;
+    // Elements with explicit interactive roles
+    if (el.getAttribute('role') === 'button' || el.getAttribute('role') === 'link') return true;
+    // Elements with onclick or tabindex (likely interactive)
+    if (el.hasAttribute('onclick') || el.hasAttribute('tabindex')) return true;
+    // Material theme nav elements
+    if (el.closest('.md-nav, .md-header, .md-tabs, .md-breadcrumbs, .md-footer')) return true;
+    // Any element inside a link (covers img, span, etc. inside <a>)
+    if (el.closest('a')) return true;
+    return false;
+  }
+
   document.addEventListener('click', function (ev) {
     var t = ev.target;
     if (!(t instanceof Element)) return;
     if (t.closest('.lightbox-overlay')) return;
-    if (t.closest('a')) return; // let linked images behave as links
+    if (isInteractiveElement(t)) return; // let all interactive elements behave normally
 
     if (t.tagName === 'IMG' && t.closest('.md-content')) {
       ev.preventDefault();
