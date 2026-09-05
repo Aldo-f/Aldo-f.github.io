@@ -1,6 +1,6 @@
 ---
 title: "DRM-free at Last: How I Made VRT MAX Watchlist Downloads Work on Raspberry Pi"
-date: 2026-09-07
+date: 2026-09-03
 categories:
   - Home Lab
   - Belgium
