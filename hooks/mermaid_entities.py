@@ -24,8 +24,17 @@ MERMAID_INIT_JS = """
     });
     
     // Render all mermaid diagrams
-    mermaid.run({
-      querySelector: '.mermaid'
+    const mermaidElements = document.querySelectorAll('.mermaid');
+    mermaidElements.forEach(function(element) {
+      const id = 'mermaid-' + Math.random().toString(36).substr(2, 9);
+      mermaid.render(id, element.textContent).then(function(svgCode) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'mermaid-svg';
+        wrapper.innerHTML = svgCode;
+        element.parentNode.replaceChild(wrapper, element);
+      }).catch(function(err) {
+        console.error('Mermaid render error:', err);
+      });
     });
   }
   
@@ -63,7 +72,7 @@ def on_page_content(html, page, config, files):
     return html
 
 
-def on_post_page(output, page, config, files):
+def on_post_page(output, page, config, files=None):
     """Add mermaid JS after template rendering."""
     if 'mermaid' not in output.lower():
         return output
