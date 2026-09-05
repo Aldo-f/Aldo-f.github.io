@@ -44,7 +44,7 @@ def on_post_build(*, config, **kwargs):
   });
   var el = document.createElement('div');
   el.id = 'build-footer';
-  el.style.cssText = 'font-size:0.65rem;color:#bbb;margin-top:2px;text-align:right;opacity:0.8;';
+  el.style.cssText = 'font-size:0.55rem;color:#aaa;margin-top:1px;text-align:right;opacity:0.65;';
   el.textContent = 'Build: ' + formatted;
   var copyright = document.querySelector('.md-copyright');
   if (copyright) copyright.appendChild(el);
