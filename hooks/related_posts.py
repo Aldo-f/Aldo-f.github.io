@@ -132,7 +132,12 @@ def on_page_markdown(markdown: str, page, config, **kwargs):
     """Inject related posts into blog post pages."""
     src_path = getattr(getattr(page, 'file', None), 'src_path', None)
 
+    # Only process individual blog posts, not indexes or category pages
     if not src_path or ("blog/posts/" not in src_path and "blog\\posts\\" not in src_path):
+        return markdown
+
+    # Skip if this is an index page (e.g., blog/index.md, category/index.md)
+    if src_path.endswith("/index.md") or src_path.endswith("\\index.md"):
         return markdown
 
     blog_posts = getattr(config, '_blog_posts', None)
