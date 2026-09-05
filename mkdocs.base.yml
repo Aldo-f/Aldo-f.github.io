@@ -33,7 +33,7 @@ plugins:
   - blog:
       blog_dir: blog
       post_date_format: yyyy-MM-dd
-      archive: false
+      archive: true
   - search
   - mermaid2:
       version: "10.4.0"
@@ -62,3 +62,4 @@ hooks:
   - hooks/dynamic_repo.py
   - hooks/chat.py
   - hooks/socialmedia.py
+  - hooks/mermaid_lightbox.py

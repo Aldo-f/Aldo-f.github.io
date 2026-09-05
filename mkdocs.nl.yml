@@ -29,7 +29,8 @@ plugins:
   - blog:
       blog_dir: blog
       post_date_format: yyyy-MM-dd
-      archive: false
+      archive: true
+      archive_url_date_format: yyyy/MM
   - section-index
   - multirepo:
       nav_repos:
