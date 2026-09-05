@@ -4,9 +4,12 @@ All topics covered on this blog, newest-first inside each category.
 
 | Category | Posts |
 |----------|------:|
+| [AI](ai/) | 1 |
+| [Compressie](compressie/) | 1 |
 | [General](general/) | 1 |
 | [Jekyll update](jekyll-update/) | 1 |
 | [Meta](meta/) | 2 |
+| [Satire](satire/) | 1 |
 | [Scrum](scrum/) | 2 |
 | [VDAB](vdab/) | 2 |
 
