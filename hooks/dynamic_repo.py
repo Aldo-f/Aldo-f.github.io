@@ -33,94 +33,100 @@ def _get_js() -> str:
     for prefix, (repo_url, repo_name) in REPO_MAP.items():
         mapping[prefix] = {"url": repo_url, "name": repo_name}
     
-    js = """(function() {
+    # Use json.dumps for the mapping, and format with .format() to avoid % issues
+    js_template = """(function() {{
   'use strict';
   
   var path = window.location.pathname;
-  var map = %s;
-  var defaultUrl = %s;
-  var defaultName = %s;
+  var map = {mapping};
+  var defaultUrl = {default_url};
+  var defaultName = {default_name};
   var repoUrl = defaultUrl;
   var repoName = defaultName;
   
-  for (var prefix in map) {
-    if (path.indexOf(prefix) === 0 || path.indexOf('/' + prefix) !== -1) {
+  for (var prefix in map) {{
+    if (path.indexOf(prefix) === 0 || path.indexOf('/' + prefix) !== -1) {{
       repoUrl = map[prefix].url;
       repoName = map[prefix].name;
       break;
-    }
-  }
+    }}
+  }}
   
-  function updateRepoSource() {
+  function updateRepoSource() {{
     var sources = document.querySelectorAll('[data-md-component="source"]');
-    sources.forEach(function(source) {
+    sources.forEach(function(source) {{
       var link = source.querySelector('a');
       var repoDiv = source.querySelector('.md-source__repository');
       if (link) link.href = repoUrl;
-      if (repoDiv) {
+      if (repoDiv) {{
         repoDiv.textContent = repoName;
         // Fetch and append stats
         fetchRepoStats(repoUrl, repoDiv);
-      }
-    });
-  }
+      }}
+    }});
+  }}
   
-  function fetchRepoStats(url, element) {
+  function fetchRepoStats(url, element) {{
     var api_url;
     var is_gitlab = url.includes('gitlab.com');
     var is_github = url.includes('github.com');
     
-    if (is_github) {
+    if (is_github) {{
       var match = url.match(/github\\.com\\/(.+)\\/(.+)/);
-      if (match) {
+      if (match) {{
         api_url = 'https://api.github.com/repos/' + match[1] + '/' + match[2];
         fetch(api_url)
-          .then(function(r) { return r.json(); })
-          .then(function(data) {
+          .then(function(r) {{ return r.json(); }})
+          .then(function(data) {{
             var stats = [];
             if (data.stargazers_count) stats.push('⭐ ' + formatNumber(data.stargazers_count));
             if (data.forks_count) stats.push('🍴 ' + formatNumber(data.forks_count));
-            if (stats.length > 0) {
+            if (stats.length > 0) {{
               element.innerHTML = repoName + ' <span class="repo-stats">' + stats.join(' ') + '</span>';
-            }
-          })
-          .catch(function() {});
-      }
-    } else if (is_gitlab) {
+            }}
+          }})
+          .catch(function() {{}});
+      }}
+    }} else if (is_gitlab) {{
       var match = url.match(/gitlab\\.com\\/(.+)\\/(.+)/);
-      if (match) {
+      if (match) {{
         api_url = 'https://gitlab.com/api/v4/projects/' + match[1] + '%2F' + match[2];
         fetch(api_url)
-          .then(function(r) { return r.json(); })
-          .then(function(data) {
+          .then(function(r) {{ return r.json(); }})
+          .then(function(data) {{
             var stats = [];
             if (data.star_count) stats.push('⭐ ' + formatNumber(data.star_count));
             if (data.forks_count) stats.push('🍴 ' + formatNumber(data.forks_count));
-            if (stats.length > 0) {
+            if (stats.length > 0) {{
               element.innerHTML = repoName + ' <span class="repo-stats">' + stats.join(' ') + '</span>';
-            }
-          })
-          .catch(function() {});
-      }
-    }
-  }
+            }}
+          }})
+          .catch(function() {{}});
+      }}
+    }}
+  }}
   
-  function formatNumber(n) {
-    if (n >= 1000) {
+  function formatNumber(n) {{
+    if (n >= 1000) {{
       return (n / 1000).toFixed(1) + 'k';
-    }
+    }}
     return n.toString();
-  }
+  }}
   
   // Run immediately and also on DOMContentLoaded for safety
-  if (document.readyState === 'loading') {
+  if (document.readyState === 'loading') {{
     document.addEventListener('DOMContentLoaded', updateRepoSource);
-  } else {
+  }} else {{
     updateRepoSource();
-  }
-})();
-""" % (json.dumps(mapping), json.dumps(DEFAULT_REPO_URL), json.dumps(DEFAULT_REPO_NAME))
-    return js
+  }}
+}})();
+"""
+    
+    return js_template.format(
+        mapping=json.dumps(mapping),
+        default_url=json.dumps(DEFAULT_REPO_URL),
+        default_name=json.dumps(DEFAULT_REPO_NAME),
+    )
 
 
 def on_config(config, **kwargs):
