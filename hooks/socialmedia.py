@@ -20,9 +20,17 @@ def on_page_markdown(markdown, **kwargs):
     page_url = config.site_url + page.url
     page_title = urllib.parse.quote(page.title + '\n')
 
-    return markdown + dedent(f"""\\
-    [Share on :fontawesome-brands-x-twitter:]({x_intent}?text={page_title}&url={page_url}){{ .md-button }}
-    [Share on :fontawesome-brands-linkedin:]({linkedin_sharer}?url={page_url}){{ .md-button }}
-    [Share on :fontawesome-brands-mastodon:]({mastodon_sharer}?text={page_title}&url={page_url}){{ .md-button }}
-    [Share on :fontawesome-brands-facebook:]({fb_sharer}?u={page_url}){{ .md-button }}
-    """)
+    icon_x = "{:fontawesome-brands-x-twitter:}"
+    icon_linkedin = "{:fontawesome-brands-linkedin:}"
+    icon_mastodon = "{:fontawesome-brands-mastodon:}"
+    icon_facebook = "{:fontawesome-brands-facebook:}"
+
+    html = f"""\
+    <p style="margin-top:1em;padding-top:.5em;border-top:1px solid var(--md-default-fg-color--lightest)">
+      <a href="{x_intent}?text={page_title}&url={page_url}" target="_blank" rel="noopener" title="Share on X" style="margin-right:.5em;text-decoration:none">{icon_x}</a>
+      <a href="{linkedin_sharer}?url={page_url}" target="_blank" rel="noopener" title="Share on LinkedIn" style="margin-right:.5em;text-decoration:none">{icon_linkedin}</a>
+      <a href="{mastodon_sharer}?text={page_title}&url={page_url}" target="_blank" rel="noopener" title="Share on Mastodon" style="margin-right:.5em;text-decoration:none">{icon_mastodon}</a>
+      <a href="{fb_sharer}?u={page_url}" target="_blank" rel="noopener" title="Share on Facebook" style="margin-right:.5em;text-decoration:none">{icon_facebook}</a>
+    </p>
+    """
+    return markdown + dedent(html)
