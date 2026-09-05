@@ -219,4 +219,13 @@ def on_page_content(html, page, config, files):
             print(f"[mermaid-lightbox] Applied pattern for page: {page.title if page else 'unknown'}")
         html = new_html
 
+    # Decode HTML entities in mermaid code (e.g., &lt;br/&gt; -> <br/>)
+    import html as html_module
+    def decode_entities(match):
+        code = match.group(1)
+        decoded = html_module.unescape(code)
+        return f'<div class="mermaid-code">{decoded}</div>'
+
+    html = re.sub(r'<div class="mermaid-code">(.*?)</div>', decode_entities, html, flags=re.DOTALL)
+
     return html
