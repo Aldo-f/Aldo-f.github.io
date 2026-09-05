@@ -1,7 +1,6 @@
 """MkDocs hook: dynamic repo links based on current page path.
 
-Overrides the source partial to inject JavaScript that fixes repository links
-after page load, based on the current page path.
+Fetches and displays star/fork counts from GitHub/GitLab API.
 """
 
 from __future__ import annotations
@@ -37,37 +36,87 @@ def _get_js() -> str:
     js = """(function() {
   'use strict';
   
-  function fixRepoLinks() {
-    var path = window.location.pathname;
-    var map = %s;
-    var defaultUrl = %s;
-    var defaultName = %s;
-    var repoUrl = defaultUrl;
-    var repoName = defaultName;
-    
-    for (var prefix in map) {
-      if (path.indexOf(prefix) === 0 || path.indexOf('/' + prefix) !== -1) {
-        repoUrl = map[prefix].url;
-        repoName = map[prefix].name;
-        break;
-      }
+  var path = window.location.pathname;
+  var map = %s;
+  var defaultUrl = %s;
+  var defaultName = %s;
+  var repoUrl = defaultUrl;
+  var repoName = defaultName;
+  
+  for (var prefix in map) {
+    if (path.indexOf(prefix) === 0 || path.indexOf('/' + prefix) !== -1) {
+      repoUrl = map[prefix].url;
+      repoName = map[prefix].name;
+      break;
     }
-    
-    // Fix all source elements (header and mobile nav)
+  }
+  
+  function updateRepoSource() {
     var sources = document.querySelectorAll('[data-md-component="source"]');
     sources.forEach(function(source) {
       var link = source.querySelector('a');
       var repoDiv = source.querySelector('.md-source__repository');
       if (link) link.href = repoUrl;
-      if (repoDiv) repoDiv.textContent = repoName;
+      if (repoDiv) {
+        repoDiv.textContent = repoName;
+        // Fetch and append stats
+        fetchRepoStats(repoUrl, repoDiv);
+      }
     });
+  }
+  
+  function fetchRepoStats(url, element) {
+    var api_url;
+    var is_gitlab = url.includes('gitlab.com');
+    var is_github = url.includes('github.com');
+    
+    if (is_github) {
+      var match = url.match(/github\\.com\\/(.+)\\/(.+)/);
+      if (match) {
+        api_url = 'https://api.github.com/repos/' + match[1] + '/' + match[2];
+        fetch(api_url)
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            var stats = [];
+            if (data.stargazers_count) stats.push('⭐ ' + formatNumber(data.stargazers_count));
+            if (data.forks_count) stats.push('🍴 ' + formatNumber(data.forks_count));
+            if (stats.length > 0) {
+              element.innerHTML = repoName + ' <span class="repo-stats">' + stats.join(' ') + '</span>';
+            }
+          })
+          .catch(function() {});
+      }
+    } else if (is_gitlab) {
+      var match = url.match(/gitlab\\.com\\/(.+)\\/(.+)/);
+      if (match) {
+        api_url = 'https://gitlab.com/api/v4/projects/' + match[1] + '%2F' + match[2];
+        fetch(api_url)
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            var stats = [];
+            if (data.star_count) stats.push('⭐ ' + formatNumber(data.star_count));
+            if (data.forks_count) stats.push('🍴 ' + formatNumber(data.forks_count));
+            if (stats.length > 0) {
+              element.innerHTML = repoName + ' <span class="repo-stats">' + stats.join(' ') + '</span>';
+            }
+          })
+          .catch(function() {});
+      }
+    }
+  }
+  
+  function formatNumber(n) {
+    if (n >= 1000) {
+      return (n / 1000).toFixed(1) + 'k';
+    }
+    return n.toString();
   }
   
   // Run immediately and also on DOMContentLoaded for safety
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', fixRepoLinks);
+    document.addEventListener('DOMContentLoaded', updateRepoSource);
   } else {
-    fixRepoLinks();
+    updateRepoSource();
   }
 })();
 """ % (json.dumps(mapping), json.dumps(DEFAULT_REPO_URL), json.dumps(DEFAULT_REPO_NAME))
