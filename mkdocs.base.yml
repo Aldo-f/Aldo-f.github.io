@@ -69,3 +69,4 @@ hooks:
   - hooks/socialmedia.py
   - hooks/mermaid_entities.py
   - hooks/build_info.py
+  - hooks/blanky.py

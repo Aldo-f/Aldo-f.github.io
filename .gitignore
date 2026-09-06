@@ -10,3 +10,4 @@ __pycache__/
 .omo/
 .mem0_index_hash
 site-*-test/
+node_modules/

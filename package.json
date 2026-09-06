@@ -1,0 +1,28 @@
+{
+  "name": "06-apps-aldo-f-github-io",
+  "version": "1.0.0",
+  "description": "Personal documentation hub for Aldo Fieuw's projects and home-lab services.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aldo-f/Aldo-f.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Aldo-f/Aldo-f.github.io/issues"
+  },
+  "homepage": "https://github.com/Aldo-f/Aldo-f.github.io#readme",
+  "dependencies": {
+    "js-blanky": "^2.0.1"
+  }
+}
