@@ -70,7 +70,6 @@ nav:
           - Features: clock/docs/features.md
           - Development: clock/docs/development.md
       - Blanky:
-          - 'Blanky main': blanky/docs/index.md
           - 'Blanky v1': blanky-v1/docs/index.md
       - Thuis:
           - 'Thuis main':
