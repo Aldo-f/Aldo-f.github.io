@@ -382,10 +382,15 @@ _CHAT_JS = """(function () {
   }
 
   // Initialize
-  document.addEventListener('DOMContentLoaded', function() {
+  function init() {
     createChatButton();
     createChatWidget();
-  });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 });"""
 
 _CHAT_CSS = """/* Chat widget styles */
