@@ -111,8 +111,8 @@ _LIGHTBOX_JS = """(function () {
     if (el.hasAttribute('onclick') || el.hasAttribute('tabindex')) return true;
     // Material theme nav elements
     if (el.closest('.md-nav, .md-header, .md-tabs, .md-breadcrumbs, .md-footer')) return true;
-    // Any element inside a link (covers img, span, etc. inside <a>)
-    if (el.closest('a')) return true;
+    // Any element inside a link or button (covers img, svg, span, etc.)
+    if (el.closest('a, button, input, select, textarea, label, summary')) return true;
     return false;
   }
 
