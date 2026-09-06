@@ -108,7 +108,7 @@ _CHAT_JS = """(function () {
     closeBtn.style.padding = '4px';
     closeBtn.style.borderRadius = '50%';
     closeBtn.style.width = '36px';
-    closeBtn.height = '36px';
+    closeBtn.style.height = '36px';
     closeBtn.style.display = 'flex';
     closeBtn.style.alignItems = 'center';
     closeBtn.style.justifyContent = 'center';
@@ -350,24 +350,23 @@ _CHAT_JS = """(function () {
       if (data && data.answer) {
         // Optionally, log sources and confidence for debugging
         console.log('RAG response:', data);
-        addMessage(data.answer, false).then(bubble => {
-          // Show sources as inline citations below the assistant message (XSS-safe)
-          if (data.sources && Array.isArray(data.sources)) {
-            const sourcesDiv = document.createElement('div');
-            sourcesDiv.className = 'chat-sources';
-            sourcesDiv.style.cssText = 'font-size:0.75rem;color:#666;margin-top:4px;padding-left:12px;';
-            const escape = s => String(s)
-              .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-            sourcesDiv.innerHTML = '<strong>Sources:</strong> ' + data.sources.map(s => {
-              const url = (s.url || s.link || '#').trim();
-              const title = escape(s.title || s.source || 'Reference');
-              const safeUrl = url.startsWith('http') ? escape(url) : '#';
-              return '<a href="' + safeUrl + '" target="_blank" rel="noopener noreferrer">' + title + '</a>';
-            }).join(', ');
-            if (bubble) bubble.appendChild(sourcesDiv);
-          }
-        });
+        const bubble = addMessage(data.answer, false);
+        // Show sources as inline citations below the assistant message (XSS-safe)
+        if (data.sources && Array.isArray(data.sources)) {
+          const sourcesDiv = document.createElement('div');
+          sourcesDiv.className = 'chat-sources';
+          sourcesDiv.style.cssText = 'font-size:0.75rem;color:#666;margin-top:4px;padding-left:12px;';
+          const escape = s => String(s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+          sourcesDiv.innerHTML = '<strong>Sources:</strong> ' + data.sources.map(s => {
+            const url = (s.url || s.link || '#').trim();
+            const title = escape(s.title || s.source || 'Reference');
+            const safeUrl = url.startsWith('http') ? escape(url) : '#';
+            return '<a href="' + safeUrl + '" target="_blank" rel="noopener noreferrer">' + title + '</a>';
+          }).join(', ');
+          if (bubble) bubble.appendChild(sourcesDiv);
+        }
       } else {
         addMessage('Sorry, I encountered an error. Please try again.', false);
       }
