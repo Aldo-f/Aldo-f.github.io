@@ -1,4 +1,0 @@
-/* Hide giscus branding ("powered by giscus") */
-.gsc-left-header > em {
-  display: none !important;
-}
