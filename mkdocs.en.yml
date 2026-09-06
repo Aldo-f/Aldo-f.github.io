@@ -116,7 +116,7 @@ nav:
                   - Testen: thuis-v3/docs/nl/testing.md
                   - DRM: thuis-v3/docs/nl/drm.md
                   - Probleemoplossing: thuis-v3/docs/nl/troubleshooting.md
-      - Home-lab: home-lab-docs.md
       - OpenCode Fallback Plugin:
           - Overview: https://github.com/Aldo-f/opencode-multi-model-fallback
           - README: opencode-multi-model-fallback/docs/index.md
+      - Home-lab: home-lab-docs.md
