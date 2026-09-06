@@ -389,9 +389,9 @@ _CHAT_JS = """(function () {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
-    init();
+    setTimeout(init, 0);
   }
-});"""
+})();"""
 
 _CHAT_CSS = """/* Chat widget styles */
 #chat-toggle-btn {
