@@ -22,16 +22,16 @@ Choosing the right package manager isn't just about convenience—it's about dis
 </tbody></table>
 
 <div style="margin:0.5rem 0; display:flex; flex-wrap:wrap; gap:0.5rem">
-<button onclick="toggleCol('eco')" style="background:#f0f0f0;border:none;border-radius:20px;padding:4px 12px;font-size:0.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Ecosystem</button>
-<button onclick="toggleCol('store')" style="background:#f0f0f0;border:none;border-radius:20px;padding:4px 12px;font-size:0.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Store</button>
-<button onclick="toggleCol('link')" style="background:#f0f0f0;border:none;border-radius:20px;padding:4px 12px;font-size:0.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Linking</button>
-<button onclick="toggleCol('fallback')" style="background:#f0f0f0;border:none;border-radius:20px;padding:4px 12px;font-size:0.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Fallback</button>
-<button onclick="toggleCol('lock')" style="background:#f0f0f0;border:none;border-radius:20px;padding:4px 12px;font-size:0.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Lockfile</button>
-<button onclick="toggleCol('speed')" style="background:#f0f0f0;border:none;border-radius:20px;padding:4px 12px;font-size:0.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Speed</button>
-<button onclick="toggleCol('runtime')" style="background:#f0f0f0;border:none;border-radius:20px;padding:4px 12px;font-size:0.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Runtime?</button>
-<button onclick="toggleCol('mature')" style="background:#f0f0f0;border:none;border-radius:20px;padding:4px 12px;font-size:0.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Maturity</button>
-<button onclick="swapRC()" style="background:#6366f1;color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:0.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15)">Swap rows/cols</button>
-<button onclick="resetTable()" style="background:#e53935;color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:0.85rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15)">Reset</button>
+<button onclick="toggleCol('eco')" style="background:#f0f0f0;border:none;border-radius:20px;padding:2px 8px;font-size:0.75rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Ecosystem</button>
+<button onclick="toggleCol('store')" style="background:#f0f0f0;border:none;border-radius:20px;padding:2px 8px;font-size:0.75rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Store</button>
+<button onclick="toggleCol('link')" style="background:#f0f0f0;border:none;border-radius:20px;padding:2px 8px;font-size:0.75rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Linking</button>
+<button onclick="toggleCol('fallback')" style="background:#f0f0f0;border:none;border-radius:20px;padding:2px 8px;font-size:0.75rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Fallback</button>
+<button onclick="toggleCol('lock')" style="background:#f0f0f0;border:none;border-radius:20px;padding:2px 8px;font-size:0.75rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Lockfile</button>
+<button onclick="toggleCol('speed')" style="background:#f0f0f0;border:none;border-radius:20px;padding:2px 8px;font-size:0.75rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Speed</button>
+<button onclick="toggleCol('runtime')" style="background:#f0f0f0;border:none;border-radius:20px;padding:2px 8px;font-size:0.75rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Runtime?</button>
+<button onclick="toggleCol('mature')" style="background:#f0f0f0;border:none;border-radius:20px;padding:2px 8px;font-size:0.75rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15);transition:background 0.2s">Maturity</button>
+<button onclick="swapRC()" style="background:#6366f1;color:#fff;border:none;border-radius:20px;padding:2px 8px;font-size:0.75rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15)">Swap rows/cols</button>
+<button onclick="resetTable()" style="background:#e53935;color:#fff;border:none;border-radius:20px;padding:2px 8px;font-size:0.75rem;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.15)">Reset</button>
 </div>
 <p style="font-size:0.75rem;color:#555;margin-top:0.25rem">Click a pill to toggle that column • Swap to turn rows into columns • Reset clears filters</p>
 
