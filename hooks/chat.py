@@ -593,14 +593,16 @@ def on_post_build(*, config, **kwargs):
     """Emit chat widget files to site directory, injecting RAG_API_KEY at build time."""
     site_dir = Path(config.site_dir)
     
-    # Load RAG_API_KEY from okf-home-lab/.env file
-    env_path = Path(__file__).resolve().parent.parent.parent / "okf-home-lab" / ".env"
-    api_key = ""
-    if env_path.exists():
-        for line in env_path.read_text().splitlines():
-            if line.startswith("RAG_API_KEY="):
-                api_key = line.split("=", 1)[1].strip()
-                break
+    # Load RAG_API_KEY: prefer GitHub Actions env var, fall back to .env file
+    api_key = os.environ.get("RAG_API_KEY", "")
+    if not api_key:
+        # Fallback: read from okf-home-lab/.env file (local development)
+        env_path = Path(__file__).resolve().parent.parent.parent / "okf-home-lab" / ".env"
+        if env_path.exists():
+            for line in env_path.read_text().splitlines():
+                if line.startswith("RAG_API_KEY="):
+                    api_key = line.split("=", 1)[1].strip()
+                    break
     
     js_text = _inject_key(_CHAT_JS_TEMPLATE, api_key)
 
