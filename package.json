@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/Aldo-f/Aldo-f.github.io#readme",
   "dependencies": {
-    "js-blanky": "^2.0.1"
+    "js-blanky": "^2.0.1",
+    "playwright": "^1.63.0"
   },
   "devDependencies": {
     "husky": "^9.1.7"

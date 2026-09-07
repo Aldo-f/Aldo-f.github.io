@@ -59,7 +59,7 @@ def _find_blog_posts(docs_dir: Path) -> list[Path]:
 
 
 def _build_index(posts: list[Path]) -> tuple[dict, dict]:
-    """Build tag and category indexes."""
+    """Build tag and category indexes keyed by resolved file path."""
     tag_index: dict[str, list[tuple[Path, dict]]] = defaultdict(list)
     cat_index: dict[str, list[tuple[Path, dict]]] = defaultdict(list)
     for post_path in posts:
@@ -105,7 +105,8 @@ def _get_related(
     result = []
     for path, _score in related:
         try:
-            rel_url = "/" + path.relative_to(blog_base.parent).as_posix()
+            # Preserve language folder in URL (e.g., /nl/blog/...)
+            rel_url = "/" + path.relative_to(blog_base.parent.parent).as_posix()
         except ValueError:
             rel_url = "/" + path.name
         content = path.read_text(encoding="utf-8")
@@ -161,12 +162,16 @@ def on_page_markdown(markdown: str, page, config, **kwargs):
         return markdown
 
     sections = []
+    # Determine language from docs_dir to show translated label
+    docs_dir_str = str(config.docs_dir).lower()
+    section_label = "See also" if "/en/" in docs_dir_str or docs_dir_str.endswith("/en") else "Lees ook"
+
     for title, url in related:
         sections.append(f'<a href="{url}">{title}</a>')
 
     related_html = f"""
 <div class="related-posts md-typeset">
-<h2 id="related-posts">Lees ook</h2>
+<h2 id="related-posts">{section_label}</h2>
 <ul class="related-list">
 {"".join(f'<li>{s}</li>' for s in sections)}
 </ul>

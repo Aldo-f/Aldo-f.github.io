@@ -1,6 +1,6 @@
-# Weekly Blog Ideas — 2026-09-01 to 2026-09-07
+# Blog Post Proposals — Week of September 7, 2026
 
-> Generated from: Hermes session search + `git log --since="7 days ago"` across all repos in `~/dev`.
+> Generated from: Hermes session search + `git log --since="7 days ago"` across all repos in `~/dev`. All proposals are based on real work completed in the past 7 days (Sept 1–7, 2026).
 
 ---
 
@@ -63,5 +63,4 @@
 **Tags:** `neo-brutalist`, `css`, `dark-mode`, `homepage`, `tdd`, `home-lab`, `frontend`, `raspberry-pi-5`
 
 ---
-
 *Proposals based on real work from the past 7 days (Sept 1–7, 2026). All commits and session references are verifiable in the `~/dev` git repos and Hermes session DB.*

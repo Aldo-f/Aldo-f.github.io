@@ -31,9 +31,13 @@ jobs:
           npm install
 
       - name: Build EN site (serves at root)
+        env:
+          RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
         run: mkdocs build --strict -f mkdocs.en.yml -d site
 
       - name: Build NL site (serves at /nl/)
+        env:
+          RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
         run: mkdocs build --strict -f mkdocs.nl.yml -d site/nl
 
       - name: Upload artifact
