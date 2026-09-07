@@ -193,7 +193,7 @@ Choosing the right package manager isn't just about convenience—it's about dis
 
 ### npm install flow
 ```mermaid
-flowchart TD
+flowchart LR
     A[registry] --> B[download]
     B --> C[node_modules]
     C -.-> D[(project copy)]
@@ -202,7 +202,7 @@ flowchart TD
 
 ### pnpm install flow
 ```mermaid
-flowchart TD
+flowchart LR
     A[global store] --> B[hard link]
     B --> C[.pnpm virtual store]
     C --> D[symlink]
@@ -212,7 +212,7 @@ flowchart TD
 
 ### Bun install flow
 ```mermaid
-flowchart TD
+flowchart LR
     A[global cache] --> B[hard link]
     B -.-> C[(copy fallback)]
     C --> D[node_modules]
@@ -220,7 +220,7 @@ flowchart TD
 
 ### pip install flow
 ```mermaid
-flowchart TD
+flowchart LR
     A[PyPI] --> B[download]
     B --> C[venv site-packages]
     C -.-> D[(project copy)]
@@ -228,7 +228,7 @@ flowchart TD
 
 ### uv install flow
 ```mermaid
-flowchart TD
+flowchart LR
     A[global cache] --> B[hard link or reflink]
     B -.-> C[(copy fallback)]
     C --> D[venv site-packages]
