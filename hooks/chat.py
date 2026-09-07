@@ -379,8 +379,34 @@ _CHAT_JS_TEMPLATE = """(function () {
     }
   }
 
+  // RAG health check — verify the endpoint is reachable and returns a valid response
+  // before revealing the FAB. Invalid/missing API key or unreachable service → button stays hidden.
+  async function checkRagHealth() {
+    try {
+      const res = await fetch('https://rag.aldof.duckdns.org/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': '{{RAG_API_KEY}}',
+        },
+        body: JSON.stringify({ question: '_health_check_', k: 1 })
+      });
+      if (!res.ok) return false;
+      const json = await res.json();
+      // A valid response has at least an 'answer' string with content
+      return !!(json && typeof json.answer === 'string' && json.answer.trim().length > 0);
+    } catch (_) {
+      return false;
+    }
+  }
+
   // Initialize
-  function init() {
+  async function init() {
+    const isHealthy = await checkRagHealth();
+    if (!isHealthy) {
+      console.log('RAG unavailable — chat button hidden');
+      return; // FAB + widget never created
+    }
     createChatButton();
     createChatWidget();
   }
