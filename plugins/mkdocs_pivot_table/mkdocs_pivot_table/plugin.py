@@ -60,23 +60,34 @@ def _build_table_html(headers, rows, table_id):
         f'<button type="button" class="pivot-btn" data-action="reset" data-for="{table_id}">&#8634; Reset</button>'
     )
     col_key_map = {
-        "Ecosystem":"eco","Store/cache":"store","Linking":"link",
-        "Fallback":"fallback","Lockfile":"lock","Speed":"speed",
-        "Runtime?":"runtime","Maturity":"mature",
+        "Ecosystem": "eco",
+        "Store/cache": "store",
+        "Linking": "link",
+        "Fallback": "fallback",
+        "Lockfile": "lock",
+        "Speed": "speed",
+        "Runtime?": "runtime",
+        "Maturity": "mature",
     }
     for hi, header_text in enumerate(headers[1:], start=1):
         key = col_key_map.get(header_text)
         if key:
-            h.append(f'<button type="button" class="pivot-btn" onclick="toggleCol(\'{key}\')" id="pill{key}">Hide {header_text}</button>')
-    row_key_map = {"npm":"npm","pnpm":"pnpm","Bun":"bun","pip":"pip","uv":"uv"}
+            h.append(
+                f'<button type="button" class="pivot-btn" onclick="toggleCol(\'{key}\')" id="pill{key}">Hide {header_text}</button>'
+            )
+    row_key_map = {"npm": "npm", "pnpm": "pnpm", "Bun": "bun", "pip": "pip", "uv": "uv"}
     seen = set()
     for row in rows:
         first = row[0] if row else ""
         k = row_key_map.get(first)
         if k and k not in seen:
             seen.add(k)
-            h.append(f'<button type="button" class="pivot-btn" onclick="toggleRow(\'{k}\')" id="row{k}">Hide {first}</button>')
-    h.append('<span class="pivot-hint">click headers to sort &middot; drag to reorder &middot; state saved in URL</span>')
+            h.append(
+                f'<button type="button" class="pivot-btn" onclick="toggleRow(\'{k}\')" id="row{k}">Hide {first}</button>'
+            )
+    h.append(
+        '<span class="pivot-hint">click headers to sort &middot; drag to reorder &middot; state saved in URL</span>'
+    )
     h.append("</div>")
     h.append(
         f'<table id="{table_id}" class="pivot-table" '
