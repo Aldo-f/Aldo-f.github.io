@@ -17,15 +17,8 @@ so what you read always matches the code.
 | Project | What it is | Docs |
 |---------|------------|------|
 | **Thuis** | VRT MAX video downloader with automatic auth (v3→v5) | [Latest](thuis/docs/index.md) · [All versions](projects.md) |
-| **Vaultwarden Backup** | Automated cloud backup | [Docs](vaultwarden-backup/docs/index.md) |
 | **Clock** | React clock studio (13 clocks + AI customizer) | [Docs](clock/docs/index.md) |
 | **Blanky** | External link opener library | [Docs](blanky/docs/index.md) |
-| **OpenCode Multi-Model Fallback** | Auto-switches fallback models on rate limits | [Docs](opencode-multi-model-fallback/docs/index.md) |
 | **Blanky v1** | Legacy Blanky version | [Docs](blanky-v1/docs/index.md) |
-
-- New here? Read [what this site is](about.md).
-- Latest writing: [the blog](blog/) — recently: how I made these docs
-  readable by AI agents.
-- Running my stack? See [Home-lab documentation](home-lab-docs.md).
-
-*Deze site bestaat ook in het [Nederlands](/nl/).*
+| **OpenCode Multi-Model Fallback** | Auto-switches fallback models on rate limits | [Docs](opencode-multi-model-fallback/docs/index.md) |
+| **Vaultwarden Backup** | Automated cloud backup | [Docs](vaultwarden-backup/docs/index.md) |

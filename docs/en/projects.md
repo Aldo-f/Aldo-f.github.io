@@ -16,16 +16,6 @@ VRT MAX video downloader with automatic auth (v3→v5).
 | v4 | [Thuis v4](thuis-v4/website/docs/intro.md) | tag `v4.1.0` |
 | v3 | [Thuis v3](thuis-v3/docs/index.md) | tag `v3.0.0` |
 
-Source: [None](None)
-
-
-## Vaultwarden Backup
-
-Automated cloud backup.
-
-- Docs: [Vaultwarden Backup](vaultwarden-backup/docs/index.md)
-- Source: [https://github.com/Aldo-f/07-security-vaultwarden-backup](https://github.com/Aldo-f/07-security-vaultwarden-backup)
-
 
 ## Clock
 
@@ -43,6 +33,14 @@ External link opener library.
 - Source: [https://gitlab.com/Aldo-f/blanky](https://gitlab.com/Aldo-f/blanky)
 
 
+## Blanky v1
+
+Legacy Blanky version.
+
+- Docs: [Blanky v1](blanky-v1/docs/index.md)
+- Source: [https://gitlab.com/Aldo-f/blanky](https://gitlab.com/Aldo-f/blanky)
+
+
 ## OpenCode Multi-Model Fallback
 
 Auto-switches fallback models on rate limits.
@@ -52,12 +50,12 @@ Auto-switches fallback models on rate limits.
 - Install: `npm install @aldo-f/opencode-multi-model-fallback`
 
 
-## Blanky v1
+## Vaultwarden Backup
 
-Legacy Blanky version.
+Automated cloud backup.
 
-- Docs: [Blanky v1](blanky-v1/docs/index.md)
-- Source: [https://gitlab.com/Aldo-f/blanky](https://gitlab.com/Aldo-f/blanky)
+- Docs: [Vaultwarden Backup](vaultwarden-backup/docs/index.md)
+- Source: [https://github.com/Aldo-f/07-security-vaultwarden-backup](https://github.com/Aldo-f/07-security-vaultwarden-backup)
 
 
 ## Home lab

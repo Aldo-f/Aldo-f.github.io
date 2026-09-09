@@ -66,17 +66,6 @@ nav:
   - Blog: blog/index.md
   - Projects:
       - projects.md
-      - Radio Community:
-          - Overview: radio-community/index.md
-          - Getting started: radio-community/getting-started.md
-          - Project: radio-community/project.md
-      - Clock:
-          - clock/docs/index.md
-          - Features: clock/docs/features.md
-          - Development: clock/docs/development.md
-      - Blanky:
-          - 'Blanky main': blanky/docs/index.md
-          - 'Blanky v1': blanky-v1/docs/index.md
       - Thuis:
           - 'Thuis main':
               - Overview: thuis/docs/index.md
@@ -121,6 +110,13 @@ nav:
                   - Testen: thuis-v3/docs/nl/testing.md
                   - DRM: thuis-v3/docs/nl/drm.md
                   - Probleemoplossing: thuis-v3/docs/nl/troubleshooting.md
+      - Clock:
+          - clock/docs/index.md
+          - Features: clock/docs/features.md
+          - Development: clock/docs/development.md
+      - Blanky:
+          - 'Blanky main': blanky/docs/index.md
+          - 'Blanky v1': blanky-v1/docs/index.md
       - OpenCode Fallback Plugin:
           - Overview: https://github.com/Aldo-f/opencode-multi-model-fallback
           - README: opencode-multi-model-fallback/docs/index.md
