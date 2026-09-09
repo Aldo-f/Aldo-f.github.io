@@ -23,7 +23,7 @@ class RawMarkdownPlugin(BasePlugin):
         """
         suffix = self.config["suffix"]
         self._virtual_files = {}  # Maps virtual src_path -> original abs_src_path
-        
+
         # Collect multirepo repo names to skip them (multirepo handles its own files)
         multirepo_name_set = set()
         multirepo_plugin = config.plugins.get("multirepo")
@@ -32,15 +32,21 @@ class RawMarkdownPlugin(BasePlugin):
             if hasattr(mr_config, "nav_repos"):
                 multirepo_name_set = {e.get("name", "") for e in mr_config.nav_repos}
             elif isinstance(mr_config, dict):
-                multirepo_name_set = {e.get("name", "") for e in mr_config.get("nav_repos", [])}
+                multirepo_name_set = {
+                    e.get("name", "") for e in mr_config.get("nav_repos", [])
+                }
 
         for file in list(files):
             # Skip blog directory — the blog plugin handles its own markdown files
-            if file.src_path.endswith(".md") and not file.src_path.startswith("blog/posts/"):
+            if file.src_path.endswith(".md") and not file.src_path.startswith(
+                "blog/posts/"
+            ):
                 # For multirepo-imported repos, skip creating virtual files here;
                 # the multirepo plugin clones docs to a temp dir and those files are
                 # served by the multirepo plugin's own read_source mechanism.
-                is_mr = any(name in (file.src_path or "") for name in multirepo_name_set)
+                is_mr = any(
+                    name in (file.src_path or "") for name in multirepo_name_set
+                )
                 if is_mr:
                     continue
 
