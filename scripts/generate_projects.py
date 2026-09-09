@@ -154,27 +154,36 @@ def generate_projects_md(nav_repos: list[dict]) -> str:
         source_url = repo_to_source_url(import_url)
 
         if name == "clock":
-            lines.extend([
-                "## Clock — *Clocky*\n",
-                "A React clock studio with 13 hand-built clocks (marble run, nixie tubes,\n"
-                "split-flap, game of life, …) and an AI customizer backed by a configurable\n"
-                "provider waterfall.\n",
-                f"- Docs: [Clock]({doc_link})",
-                f"- Source: [{source_url}]({source_url})\n",
-            ])
+            lines.extend(
+                [
+                    "## Clock — *Clocky*\n",
+                    "A React clock studio with 13 hand-built clocks (marble run, nixie tubes,\n"
+                    "split-flap, game of life, …) and an AI customizer backed by a configurable\n"
+                    "provider waterfall.\n",
+                    f"- Docs: [Clock]({doc_link})",
+                    f"- Source: [{source_url}]({source_url})\n",
+                ]
+            )
         elif name == "thuis":
-            lines.extend([
-                "## Thuis\n",
-                "VRT MAX video downloader with automatic authentication. The hub tracks its\n"
-                "documentation across major versions:\n",
-                "",
-                "| Version | Docs | Source ref |",
-                "|---------|------|------------|",
-            ])
+            lines.extend(
+                [
+                    "## Thuis\n",
+                    "VRT MAX video downloader with automatic authentication. The hub tracks its\n"
+                    "documentation across major versions:\n",
+                    "",
+                    "| Version | Docs | Source ref |",
+                    "|---------|------|------------|",
+                ]
+            )
             # Thuis versions
             thuis_versions = [
                 ("main", "Thuis main", "thuis/docs/index.md", "`main` branch"),
-                ("v5", "Thuis v5", "thuis-v5/website/docs/intro.md", "`v5/main` branch"),
+                (
+                    "v5",
+                    "Thuis v5",
+                    "thuis-v5/website/docs/intro.md",
+                    "`v5/main` branch",
+                ),
                 ("v4", "Thuis v4", "thuis-v4/website/docs/intro.md", "tag `v4.1.0`"),
                 ("v3", "Thuis v3", "thuis-v3/docs/index.md", "tag `v3.0.0`"),
             ]
@@ -182,48 +191,60 @@ def generate_projects_md(nav_repos: list[dict]) -> str:
                 lines.append(f"| {ver_name} | [{ver_display}]({ver_doc}) | {ver_ref} |")
             lines.extend(["", f"Source: [{source_url}]({source_url})\n"])
         elif name == "radio-community":
-            lines.extend([
-                "## Radio Community\n",
-                "Democratic internet radio: communities vote on the playlist, streams are\n"
-                "served through Icecast/Liquidsoap. Documentation covers the architecture,\n"
-                "API and streaming setup.\n",
-                f"- Docs: [Radio Community]({doc_link})\n",
-            ])
+            lines.extend(
+                [
+                    "## Radio Community\n",
+                    "Democratic internet radio: communities vote on the playlist, streams are\n"
+                    "served through Icecast/Liquidsoap. Documentation covers the architecture,\n"
+                    "API and streaming setup.\n",
+                    f"- Docs: [Radio Community]({doc_link})\n",
+                ]
+            )
         elif name == "neo-brutalist-home":
-            lines.extend([
-                "## Neo-Brutalist Home\n",
-                "A dashboard design exploration in neo-brutalist style.\n",
-                f"- Source: part of [this hub's repos]({source_url})\n",
-            ])
+            lines.extend(
+                [
+                    "## Neo-Brutalist Home\n",
+                    "A dashboard design exploration in neo-brutalist style.\n",
+                    f"- Source: part of [this hub's repos]({source_url})\n",
+                ]
+            )
         elif name == "opencode-multi-model-fallback":
-            lines.extend([
-                "## OpenCode Multi-Model Fallback\n",
-                "OpenCode plugin that automatically switches through a hierarchy of fallback models when rate limits are hit.\n",
-                f"- Docs: [opencode-multi-model-fallback]({doc_link})",
-                f"- Source: [{source_url}]({source_url})",
-                "- Install: `npm install @aldo-f/opencode-multi-model-fallback`\n",
-            ])
+            lines.extend(
+                [
+                    "## OpenCode Multi-Model Fallback\n",
+                    "OpenCode plugin that automatically switches through a hierarchy of fallback models when rate limits are hit.\n",
+                    f"- Docs: [opencode-multi-model-fallback]({doc_link})",
+                    f"- Source: [{source_url}]({source_url})",
+                    "- Install: `npm install @aldo-f/opencode-multi-model-fallback`\n",
+                ]
+            )
         elif name == "blanky":
-            lines.extend([
-                "## Blanky\n",
-                "External link opener library.\n",
-                f"- Docs: [Blanky]({doc_link})",
-                f"- Source: [{source_url}]({source_url})\n",
-            ])
+            lines.extend(
+                [
+                    "## Blanky\n",
+                    "External link opener library.\n",
+                    f"- Docs: [Blanky]({doc_link})",
+                    f"- Source: [{source_url}]({source_url})\n",
+                ]
+            )
         elif name == "blanky-v1":
-            lines.extend([
-                "## Blanky v1\n",
-                "Legacy version of Blanky.\n",
-                f"- Docs: [Blanky v1]({doc_link})",
-                f"- Source: [{source_url}]({source_url})\n",
-            ])
+            lines.extend(
+                [
+                    "## Blanky v1\n",
+                    "Legacy version of Blanky.\n",
+                    f"- Docs: [Blanky v1]({doc_link})",
+                    f"- Source: [{source_url}]({source_url})\n",
+                ]
+            )
         elif name == "vaultwarden-backup":
-            lines.extend([
-                "## Vaultwarden Backup\n",
-                "Automated Vaultwarden backup to cloud storage.\n",
-                f"- Docs: [Vaultwarden Backup]({doc_link})",
-                f"- Source: [{source_url}]({source_url})\n",
-            ])
+            lines.extend(
+                [
+                    "## Vaultwarden Backup\n",
+                    "Automated Vaultwarden backup to cloud storage.\n",
+                    f"- Docs: [Vaultwarden Backup]({doc_link})",
+                    f"- Source: [{source_url}]({source_url})\n",
+                ]
+            )
         elif name == "thuis-v3":
             pass  # Handled under Thuis
         elif name == "thuis-v4":
@@ -231,21 +252,27 @@ def generate_projects_md(nav_repos: list[dict]) -> str:
         elif name == "thuis-v5":
             pass  # Handled under Thuis
         else:
-            lines.extend([
-                f"## {display}\n",
-                f"- Docs: [{display}]({doc_link})",
-                f"- Source: [{source_url}]({source_url})\n",
-            ])
+            lines.extend(
+                [
+                    f"## {display}\n",
+                    f"- Docs: [{display}]({doc_link})",
+                    f"- Source: [{source_url}]({source_url})\n",
+                ]
+            )
 
     lines.append("## Home lab\n")
-    lines.append("The infrastructure behind all of this — two Raspberry Pis, Ansible-managed\n")
+    lines.append(
+        "The infrastructure behind all of this — two Raspberry Pis, Ansible-managed\n"
+    )
     lines.append("services, Traefik reverse proxy — is described in\n")
     lines.append("[Home-lab documentation](home-lab-docs.md).\n")
 
     return "\n".join(lines)
 
 
-def update_file(path: Path, marker_start: str, marker_end: str, new_content: str) -> bool:
+def update_file(
+    path: Path, marker_start: str, marker_end: str, new_content: str
+) -> bool:
     """Replace content between markers in a file. Returns True if changed."""
     content = path.read_text(encoding="utf-8")
 
@@ -291,7 +318,9 @@ def main():
     if next_section == -1:
         next_section = len(index_content)
 
-    new_index = index_content[:projects_start] + index_table + index_content[next_section:]
+    new_index = (
+        index_content[:projects_start] + index_table + index_content[next_section:]
+    )
     if new_index != index_content:
         INDEX_MD.write_text(new_index, encoding="utf-8")
         print("✅ Updated docs/en/index.md")

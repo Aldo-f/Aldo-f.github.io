@@ -6,6 +6,7 @@ from mkdocs.structure.files import File
 
 log = logging.getLogger("mkdocs.plugins")
 
+
 class RawMarkdownPlugin(BasePlugin):
     config_scheme = (("suffix", config_options.Type(str, default=".md")),)
 
@@ -15,7 +16,9 @@ class RawMarkdownPlugin(BasePlugin):
         self._virtual_files = {}  # Maps virtual src_path to original abs_src_path
         for file in list(files):
             # Only process markdown source files (skip blog directory which has its own plugin)
-            if file.src_path.endswith(".md") and not file.src_path.startswith("blog/posts/"):
+            if file.src_path.endswith(".md") and not file.src_path.startswith(
+                "blog/posts/"
+            ):
                 # Create virtual path with suffix (e.g., "index.md" -> "index.md.md")
                 virtual_path = file.src_path + suffix
                 # Store the original file's absolute source path
