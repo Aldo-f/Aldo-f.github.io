@@ -11,3 +11,11 @@ __pycache__/
 .mem0_index_hash
 site-*-test/
 node_modules/
+plugins/mkdocs_raw_markdown/dist/
+plugins/mkdocs_raw_markdown/*.egg-info/
+plugins/mkdocs_pivot_table/*.egg-info/
+
+# Build artifacts
+plugins/mkdocs_raw_markdown/dist/
+plugins/mkdocs_raw_markdown/*.egg-info/
+plugins/mkdocs_pivot_table/*.egg-info/

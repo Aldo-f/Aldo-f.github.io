@@ -1,0 +1,31 @@
+name: Plugin Coverage + Tests
+
+on:
+  push:
+    branches: ["**"]
+    paths: ["plugins/**", ".github/workflows/coverage.yml"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install plugin + test deps
+        run: |
+          pip install --upgrade pip
+          pip install pytest pytest-cov
+          pip install -e ./plugins/mkdocs_pivot_table/
+      - name: Run plugin tests with coverage
+        run: pytest plugins/tests/test_mkdocs_pivot_table.py -v --cov=mkdocs_pivot_table --cov-report=xml --cov-report=term-missing
+      - name: Upload coverage to Codecov
+        if: github.event_name == 'push'
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}

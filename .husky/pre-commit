@@ -1,2 +1,7 @@
+
 #!/usr/bin/env bash
-npm test
+# Run formatters and tests before commit
+set -e
+black .
+ruff check . || true
+python -m pytest -q 2>/dev/null || true

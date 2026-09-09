@@ -33,6 +33,9 @@ plugins:
       archive: true
       archive_url_date_format: yyyy/MM
   - section-index
+  - mkdocs_pivot_table
+  - mkdocs_raw_markdown:
+      suffix: .md
   - multirepo:
       nav_repos:
         - name: thuis

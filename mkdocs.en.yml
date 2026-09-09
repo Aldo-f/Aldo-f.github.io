@@ -22,10 +22,17 @@ plugins:
       archive: true
       archive_url_date_format: yyyy/MM
   - section-index
+  - mkdocs_pivot_table
+  - mkdocs_raw_markdown:
+      suffix: .md
   - multirepo:
       nav_repos:
         - name: thuis
           import_url: https://github.com/Aldo-f/thuis?branch=main
+          imports:
+            - docs
+        - name: vaultwarden-backup
+          import_url: https://github.com/Aldo-f/07-security-vaultwarden-backup?branch=main
           imports:
             - docs
         - name: thuis-v3
@@ -120,3 +127,5 @@ nav:
           - Overview: https://github.com/Aldo-f/opencode-multi-model-fallback
           - README: opencode-multi-model-fallback/docs/index.md
       - Home-lab: home-lab-docs.md
+      - Vaultwarden Backup:
+          - vaultwarden-backup/docs/index.md
