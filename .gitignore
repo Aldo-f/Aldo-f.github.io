@@ -20,3 +20,6 @@ plugins/mkdocs_raw_markdown/dist/
 plugins/mkdocs_raw_markdown/*.egg-info/
 plugins/mkdocs_pivot_table/*.egg-info/
 .gitignore site-check/
+.github/workflows/test-skip.yml
+plugins/tests/*
+tests/test_*
