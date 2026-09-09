@@ -5,3 +5,5 @@ mkdocs-section-index
 mkdocs-autotranslate
 mkdocs-mermaid2-plugin
 pagefind
+mkdocs-pivot-table
+mkdocs-raw-markdown
