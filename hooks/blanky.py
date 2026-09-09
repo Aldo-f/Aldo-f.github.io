@@ -18,7 +18,9 @@ def on_post_build(*, config, **kwargs):
     site_dir = Path(config.site_dir)
 
     if not PKG_JS.is_file():
-        raise FileNotFoundError(f"js-blanky not installed at {PKG_JS}. Run `npm install js-blanky`.")
+        raise FileNotFoundError(
+            f"js-blanky not installed at {PKG_JS}. Run `npm install js-blanky`."
+        )
 
     # Copy blanky UMD bundle from node_modules
     js_path = site_dir / JS_NAME

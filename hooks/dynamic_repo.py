@@ -19,7 +19,10 @@ REPO_MAP = {
     "clock/": ("https://github.com/Aldo-f/clock", "Aldo-f/clock"),
     "blanky/": ("https://gitlab.com/Aldo-f/blanky", "Aldo-f/blanky"),
     "blanky-v1/": ("https://gitlab.com/Aldo-f/blanky", "Aldo-f/blanky"),
-    "opencode-multi-model-fallback/": ("https://github.com/Aldo-f/opencode-multi-model-fallback", "Aldo-f/opencode-multi-model-fallback"),
+    "opencode-multi-model-fallback/": (
+        "https://github.com/Aldo-f/opencode-multi-model-fallback",
+        "Aldo-f/opencode-multi-model-fallback",
+    ),
 }
 
 DEFAULT_REPO_URL = "https://github.com/Aldo-f/Aldo-f.github.io"
@@ -32,7 +35,7 @@ def _get_js() -> str:
     mapping = {}
     for prefix, (repo_url, repo_name) in REPO_MAP.items():
         mapping[prefix] = {"url": repo_url, "name": repo_name}
-    
+
     # Use json.dumps for the mapping, and format with .format() to avoid % issues
     js_template = """(function() {{
   'use strict';
@@ -130,7 +133,7 @@ def _get_js() -> str:
   }}
 }})();
 """
-    
+
     return js_template.format(
         mapping=json.dumps(mapping),
         default_url=json.dumps(DEFAULT_REPO_URL),

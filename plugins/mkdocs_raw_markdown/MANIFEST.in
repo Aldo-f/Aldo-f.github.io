@@ -1,1 +1,2 @@
-recursive-include .husky *
+recursive-include . *.py
+global-include README.md

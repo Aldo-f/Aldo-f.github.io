@@ -12,6 +12,7 @@ URL = "http://127.0.0.1:8000/search"
 def _server_running() -> bool:
     try:
         import urllib.request
+
         urllib.request.urlopen("http://127.0.0.1:8000/openapi.json", timeout=2)
         return True
     except Exception:
@@ -21,10 +22,19 @@ def _server_running() -> bool:
 def test_search_endpoint():
     if not _server_running():
         proc = subprocess.Popen(
-            [sys.executable, "-m", "uvicorn", "rag_api:app",
-             "--host", "127.0.0.1", "--port", "8000"],
+            [
+                sys.executable,
+                "-m",
+                "uvicorn",
+                "rag_api:app",
+                "--host",
+                "127.0.0.1",
+                "--port",
+                "8000",
+            ],
             cwd=str(BUNDLE / "rag"),
-            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
         )
         for _ in range(60):
             if _server_running():
@@ -35,7 +45,9 @@ def test_search_endpoint():
             raise RuntimeError("RAG API did not start within 60s")
 
     response = requests.post(
-        URL, json={"question": "How to enable Jellyfin hardware transcoding?"}, timeout=120
+        URL,
+        json={"question": "How to enable Jellyfin hardware transcoding?"},
+        timeout=120,
     )
     assert response.status_code == 200
     data = response.json()

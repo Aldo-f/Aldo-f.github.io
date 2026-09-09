@@ -597,7 +597,10 @@ _CHAT_CSS = """\
 def _inject_key(js_template: str, api_key: str) -> str:
     """Replace the API key placeholder with the real key."""
     if not api_key:
-        print("chat: WARNING — RAG_API_KEY not set, chat will fail at runtime", file=sys.stderr)
+        print(
+            "chat: WARNING — RAG_API_KEY not set, chat will fail at runtime",
+            file=sys.stderr,
+        )
     return js_template.replace("{{RAG_API_KEY}}", api_key or "")
 
 
@@ -618,18 +621,20 @@ def on_config(config, **kwargs):
 def on_post_build(*, config, **kwargs):
     """Emit chat widget files to site directory, injecting RAG_API_KEY at build time."""
     site_dir = Path(config.site_dir)
-    
+
     # Load RAG_API_KEY: prefer GitHub Actions env var, fall back to .env file
     api_key = os.environ.get("RAG_API_KEY", "")
     if not api_key:
         # Fallback: read from okf-home-lab/.env file (local development)
-        env_path = Path(__file__).resolve().parent.parent.parent / "okf-home-lab" / ".env"
+        env_path = (
+            Path(__file__).resolve().parent.parent.parent / "okf-home-lab" / ".env"
+        )
         if env_path.exists():
             for line in env_path.read_text().splitlines():
                 if line.startswith("RAG_API_KEY="):
                     api_key = line.split("=", 1)[1].strip()
                     break
-    
+
     js_text = _inject_key(_CHAT_JS_TEMPLATE, api_key)
 
     js_path = site_dir / JS_NAME
@@ -639,4 +644,6 @@ def on_post_build(*, config, **kwargs):
     css_path = site_dir / CSS_NAME
     css_path.parent.mkdir(parents=True, exist_ok=True)
     css_path.write_text(_CHAT_CSS, encoding="utf-8")
-    print(f"chat: emitted {js_path.relative_to(site_dir)} + {css_path.relative_to(site_dir)}")
+    print(
+        f"chat: emitted {js_path.relative_to(site_dir)} + {css_path.relative_to(site_dir)}"
+    )

@@ -43,8 +43,15 @@ class FakeTranslator:
         return out
 
 
-def write_post(dir_path: Path, slug: str, title: str, body: str,
-               date="2026-01-01", cats=("General",), draft=False):
+def write_post(
+    dir_path: Path,
+    slug: str,
+    title: str,
+    body: str,
+    date="2026-01-01",
+    cats=("General",),
+    draft=False,
+):
     cats_yaml = "".join(f"\n  - {c}" for c in cats)
     draft_line = "\ndraft: true" if draft else ""
     p = dir_path / f"{slug}.md"
@@ -78,9 +85,11 @@ def main() -> int:
         {"hallo": ("Hallo", "Hallo body", "Hallo body")},
     )
     report = bt.fill_gaps(root, translator=tr, write=False)
-    check("dry-run detects EN->NL gap",
-          report.created == [("en", "nl", "hello"), ("nl", "en", "hallo")],
-          f"got {report.created}")
+    check(
+        "dry-run detects EN->NL gap",
+        report.created == [("en", "nl", "hello"), ("nl", "en", "hallo")],
+        f"got {report.created}",
+    )
 
     # 2. dry-run writes nothing
     check("dry-run creates no file", not (nl / "hello.md").exists())
@@ -95,8 +104,10 @@ def main() -> int:
     check("categories preserved", "- General" in text)
     check("no draft flag added", "draft:" not in text)
     check("body translated", "[EN] Hello body star" in text)
-    check("provenance marker present",
-          "translated from `en/hello`" in text and "deepl" in text.lower())
+    check(
+        "provenance marker present",
+        "translated from `en/hello`" in text and "deepl" in text.lower(),
+    )
 
     # 4. idempotence: second run is a no-op
     FakeTranslator.calls = 0
@@ -117,10 +128,14 @@ def main() -> int:
     # simpler: rewrite explicitly as draft
     (en2 / "secret.md").write_text(
         "---\ntitle: Secret\ndate: 2026-01-01\ncategories:\n  - General\ndraft: true\n---\n\nbody\n",
-        encoding="utf-8")
+        encoding="utf-8",
+    )
     rep3 = bt.fill_gaps(root2, translator=tr, write=False)
-    check("drafts skipped", rep3.created == [] and not (nl2 / "secret.md").exists(),
-          f"got {rep3.created}")
+    check(
+        "drafts skipped",
+        rep3.created == [] and not (nl2 / "secret.md").exists(),
+        f"got {rep3.created}",
+    )
 
     # 6. code fences pass through untranslated
     root3, en3, nl3 = fresh_env(
@@ -129,7 +144,11 @@ def main() -> int:
     )
     bt.fill_gaps(root3, translator=tr, write=True)
     t3 = (nl3 / "codey.md").read_text(encoding="utf-8")
-    check("code fence untouched", "```\nzeester code\n```" in t3 and "zeester code" in t3, t3)
+    check(
+        "code fence untouched",
+        "```\nzeester code\n```" in t3 and "zeester code" in t3,
+        t3,
+    )
     # FakeTranslator tags with the SOURCE lang + applies its word swap:
     # prose 'After zeester.' must become '[EN] After star.'
     check("prose around fence translated", "[EN] After star." in t3, t3)

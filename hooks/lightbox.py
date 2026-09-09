@@ -227,6 +227,7 @@ _LIGHTBOX_CSS = """.lightbox-overlay {
 }
 """
 
+
 def on_config(config, **_kwargs):
     extra_js = list(config.get("extra_javascript") or [])
     if JS_NAME not in extra_js:

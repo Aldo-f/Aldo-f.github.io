@@ -32,7 +32,8 @@ def on_post_build(*, config, **kwargs):
 
     footer_path = site_dir / FOOTER_JS
     footer_path.parent.mkdir(parents=True, exist_ok=True)
-    footer_path.write_text("""\
+    footer_path.write_text(
+        """\
 (function () {
   'use strict';
   var raw = typeof BUILD_TIME !== 'undefined' ? BUILD_TIME : null;
@@ -47,9 +48,13 @@ def on_post_build(*, config, **kwargs):
   var el = document.getElementById('build-timestamp');
   if (el) el.textContent = '— Build ' + formatted;
 })();
-""", encoding="utf-8")
+""",
+        encoding="utf-8",
+    )
 
-    print(f"build-info: wrote {js_path.relative_to(site_dir)} and {footer_path.relative_to(site_dir)} = {now.isoformat()}")
+    print(
+        f"build-info: wrote {js_path.relative_to(site_dir)} and {footer_path.relative_to(site_dir)} = {now.isoformat()}"
+    )
 
 
 def on_config(config, **kwargs):

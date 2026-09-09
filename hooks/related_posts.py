@@ -131,24 +131,26 @@ def on_config(config, **kwargs):
 
 def on_page_markdown(markdown: str, page, config, **kwargs):
     """Inject related posts into blog post pages."""
-    src_path = getattr(getattr(page, 'file', None), 'src_path', None)
+    src_path = getattr(getattr(page, "file", None), "src_path", None)
 
     # Only process individual blog posts, not indexes or category pages
-    if not src_path or ("blog/posts/" not in src_path and "blog\\posts\\" not in src_path):
+    if not src_path or (
+        "blog/posts/" not in src_path and "blog\\posts\\" not in src_path
+    ):
         return markdown
 
     # Skip if this is an index page (e.g., blog/index.md, category/index.md)
     if src_path.endswith("/index.md") or src_path.endswith("\\index.md"):
         return markdown
 
-    blog_posts = getattr(config, '_blog_posts', None)
-    tag_index = getattr(config, '_blog_tag_index', {})
-    cat_index = getattr(config, '_blog_cat_index', {})
+    blog_posts = getattr(config, "_blog_posts", None)
+    tag_index = getattr(config, "_blog_tag_index", {})
+    cat_index = getattr(config, "_blog_cat_index", {})
 
     if not blog_posts:
         return markdown
 
-    current_path = Path(getattr(page.file, 'abs_src_path', '')).resolve()
+    current_path = Path(getattr(page.file, "abs_src_path", "")).resolve()
     current_tags = [t.lower() for t in page.meta.get("tags", [])]
     current_cats = [c.lower() for c in page.meta.get("categories", [])]
 
@@ -164,7 +166,11 @@ def on_page_markdown(markdown: str, page, config, **kwargs):
     sections = []
     # Determine language from docs_dir to show translated label
     docs_dir_str = str(config.docs_dir).lower()
-    section_label = "See also" if "/en/" in docs_dir_str or docs_dir_str.endswith("/en") else "Lees ook"
+    section_label = (
+        "See also"
+        if "/en/" in docs_dir_str or docs_dir_str.endswith("/en")
+        else "Lees ook"
+    )
 
     for title, url in related:
         sections.append(f'<a href="{url}">{title}</a>')
@@ -183,14 +189,19 @@ def on_page_markdown(markdown: str, page, config, **kwargs):
     else:
         markdown = markdown.rstrip() + "\n\n" + related_html
 
-    print(f"[RELATED] Injected {len(related)} related posts into {src_path}", file=sys.stderr)
+    print(
+        f"[RELATED] Injected {len(related)} related posts into {src_path}",
+        file=sys.stderr,
+    )
     return markdown
 
 
 def on_post_page(output: str, page, config, **kwargs):
     """Add CSS for related posts."""
-    src_path = getattr(getattr(page, 'file', None), 'src_path', None)
-    if not src_path or ("/blog/posts/" not in src_path and "\\blog\\posts\\" not in src_path):
+    src_path = getattr(getattr(page, "file", None), "src_path", None)
+    if not src_path or (
+        "/blog/posts/" not in src_path and "\\blog\\posts\\" not in src_path
+    ):
         return output
 
     css = """

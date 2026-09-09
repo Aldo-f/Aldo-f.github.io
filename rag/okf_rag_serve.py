@@ -16,6 +16,7 @@ _pipeline = None
 _stamp_path = pathlib.Path(__file__).parent.parent / ".rag_index_stamp"
 _last_stamp = None
 
+
 def get_pipeline():
     global _pipeline, _last_stamp
     current = _stamp_path.stat().st_mtime if _stamp_path.exists() else None
@@ -25,6 +26,7 @@ def get_pipeline():
         _pipeline = OKFRAGPipeline(str(bundle_root))
         _last_stamp = current
     return _pipeline
+
 
 def main():
     payload = json.load(sys.stdin)
@@ -39,6 +41,7 @@ def main():
     finally:
         sys.stdout = real_stdout
     json.dump(result, sys.stdout, ensure_ascii=False, indent=2)
+
 
 if __name__ == "__main__":
     main()

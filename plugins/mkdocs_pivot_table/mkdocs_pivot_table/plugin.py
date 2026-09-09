@@ -19,21 +19,18 @@ from mkdocs.plugins import BasePlugin
 from mkdocs.config.config_options import Type as PluginType
 
 
-PIVOT_PATTERN = re.compile(
-    r'\[pivot-table\]\s*\n(.*?)\n\s*\[/pivot-table\]',
-    re.DOTALL
-)
+PIVOT_PATTERN = re.compile(r"\[pivot-table\]\s*\n(.*?)\n\s*\[/pivot-table\]", re.DOTALL)
 
 
 def _parse_pivot_table(md_text):
     """Parse markdown pipe-table into (headers, rows)."""
-    lines = [l.strip() for l in md_text.strip().split('\n') if l.strip()]
+    lines = [l.strip() for l in md_text.strip().split("\n") if l.strip()]
     if len(lines) < 2:
         return [], []
-    headers = [c.strip() for c in lines[0].split('|') if c.strip()]
+    headers = [c.strip() for c in lines[0].split("|") if c.strip()]
     rows = []
     for line in lines[2:]:
-        cells = [c.strip() for c in line.split('|') if c.strip()]
+        cells = [c.strip() for c in line.split("|") if c.strip()]
         if cells:
             rows.append(cells)
     return headers, rows
@@ -44,36 +41,44 @@ def _generate_table_id(idx):
 
 
 def _escape_attr(s):
-    return (s.replace("&", "&amp;")
-                .replace('"', "&quot;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;"))
+    return (
+        s.replace("&", "&amp;")
+        .replace('"', "&quot;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+    )
 
 
 def _build_table_html(headers, rows, table_id):
     """Generate the static HTML skeleton for an interactive table."""
     h = [f'<div class="pivot-table-wrap" data-pivot="{table_id}">']
     h.append(f'<div class="pivot-toolbar" data-for="{table_id}">')
-    h.append(f'<button type="button" class="pivot-btn" data-action="swap" data-for="{table_id}">&#8644; Swap R/Col</button>')
-    h.append(f'<button type="button" class="pivot-btn" data-action="reset" data-for="{table_id}">&#8634; Reset</button>')
-    h.append('<span class="pivot-hint">click headers to sort &middot; drag to reorder &middot; state saved in URL</span>')
-    h.append('</div>')
+    h.append(
+        f'<button type="button" class="pivot-btn" data-action="swap" data-for="{table_id}">&#8644; Swap R/Col</button>'
+    )
+    h.append(
+        f'<button type="button" class="pivot-btn" data-action="reset" data-for="{table_id}">&#8634; Reset</button>'
+    )
+    h.append(
+        '<span class="pivot-hint">click headers to sort &middot; drag to reorder &middot; state saved in URL</span>'
+    )
+    h.append("</div>")
     h.append(
         f'<table id="{table_id}" class="pivot-table" '
         'border="1" cellpadding="5" cellspacing="0" '
         'style="border-collapse:collapse;font-size:0.85rem;width:100%">'
     )
-    h.append('<thead><tr>')
+    h.append("<thead><tr>")
     for i, col in enumerate(headers):
         h.append(f'<th draggable="true" data-col="{i}">{_escape_attr(col)}</th>')
-    h.append('</tr></thead><tbody>')
+    h.append("</tr></thead><tbody>")
     for ri, row in enumerate(rows):
-        h.append('<tr>')
+        h.append("<tr>")
         for ci, cell in enumerate(row):
             h.append(f'<td data-col="{ci}">{_escape_attr(cell)}</td>')
-        h.append('</tr>')
-    h.append('</tbody></table></div>')
-    return '\n'.join(h)
+        h.append("</tr>")
+    h.append("</tbody></table></div>")
+    return "\n".join(h)
 
 
 PIVOT_CSS = """.pivot-table-wrap{margin:1rem 0}.pivot-toolbar{margin:0.5rem 0;display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap}.pivot-btn{padding:0.25rem 0.6rem;cursor:pointer;border:1px solid var(--md-primary-fg-color,#3f51b5);background:var(--md-primary-fg-color,#3f51b5);color:#fff;border-radius:4px;font-size:0.8rem}.pivot-btn:hover{opacity:0.85}.pivot-hint{font-size:0.75rem;opacity:0.6}.pivot-table th[draggable=true]{cursor:grab;user-select:none}.pivot-table th[draggable=true]:active{cursor:grabbing}.pivot-table th.sorted-asc::after{content:" \\25B2"}.pivot-table th.sorted-desc::after{content:" \\25BC"}.pivot-table th.drag-over{border-left:3px solid var(--md-accent-fg-color,#ff4081)}"""
@@ -175,6 +180,7 @@ PIVOT_JS = r"""
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();"""
 
+
 class PivotTablePlugin(BasePlugin):
     """MkDocs plugin for interactive comparison tables.
 
@@ -184,11 +190,14 @@ class PivotTablePlugin(BasePlugin):
     """
 
     config_scheme = (
-        ('asset_url', PluginType(
-            str,
-            default="https://cdn.jsdelivr.net/npm/pivot-table-kit@0.1.0/dist/pivot-table.js"
-        )),
-        ('asset_inline', PluginType(bool, default=False)),
+        (
+            "asset_url",
+            PluginType(
+                str,
+                default="https://cdn.jsdelivr.net/npm/pivot-table-kit@0.1.0/dist/pivot-table.js",
+            ),
+        ),
+        ("asset_inline", PluginType(bool, default=False)),
     )
 
     def on_config(self, config):
@@ -204,10 +213,12 @@ class PivotTablePlugin(BasePlugin):
         out_parts = []
         last = 0
         for idx, m in enumerate(matches, start=1):
-            out_parts.append(source[last:m.start()])
+            out_parts.append(source[last : m.start()])
             md_text = m.group(1)
             headers, rows = _parse_pivot_table(md_text)
-            page_key = (page.file.src_path if page and hasattr(page, 'file') else 'global')
+            page_key = (
+                page.file.src_path if page and hasattr(page, "file") else "global"
+            )
             table_id = f"pivot-{page_key.replace('/', '-').replace('.', '-')}-{idx}"
             if headers and rows:
                 out_parts.append(_build_table_html(headers, rows, table_id))
@@ -216,7 +227,7 @@ class PivotTablePlugin(BasePlugin):
                 out_parts.append(m.group(0))
             last = m.end()
         out_parts.append(source[last:])
-        return ''.join(out_parts), []
+        return "".join(out_parts), []
 
     def on_page_markdown(self, markdown, page, config, files):
         """Process raw markdown to substitute pivot blocks before HTML conversion."""
@@ -230,41 +241,44 @@ class PivotTablePlugin(BasePlugin):
         if not self._has_table:
             return
 
-        site_dir = config['site_dir']
+        site_dir = config["site_dir"]
         for root, _dirs, files in os.walk(site_dir):
             for fname in files:
-                if not fname.endswith('.html'):
+                if not fname.endswith(".html"):
                     continue
                 fpath = os.path.join(root, fname)
-                with open(fpath, 'r', encoding='utf-8') as fh:
+                with open(fpath, "r", encoding="utf-8") as fh:
                     html = fh.read()
                 if 'class="pivot-table"' not in html:
                     continue
-                if 'pivot-table-style' not in html:
+                if "pivot-table-style" not in html:
                     html = html.replace(
-                        '</head>',
+                        "</head>",
                         f'<style class="pivot-table-style">\n{PIVOT_CSS}\n</style>\n</head>',
-                        1
+                        1,
                     )
-                if 'pivot-table-script' not in html:
-                    scripts = [f'<script class="pivot-table-script">\n{PIVOT_JS}\n</script>']
-                    if self.config['asset_url'] and not self.config['asset_inline']:
+                if "pivot-table-script" not in html:
+                    scripts = [
+                        f'<script class="pivot-table-script">\n{PIVOT_JS}\n</script>'
+                    ]
+                    if self.config["asset_url"] and not self.config["asset_inline"]:
                         scripts.append(
                             f'<script class="pivot-table-script"'
                             f' src="{self.config["asset_url"]}"></script>'
                         )
-                    html = html.replace('</body>', '\n'.join(scripts) + '\n</body>', 1)
-                with open(fpath, 'w', encoding='utf-8') as fh:
+                    html = html.replace("</body>", "\n".join(scripts) + "\n</body>", 1)
+                with open(fpath, "w", encoding="utf-8") as fh:
                     fh.write(html)
+
 
 # Expose plugin class and helpers for tests and import
 __all__ = [
-    'PivotTablePlugin',
-    'PIVOT_PATTERN',
-    '_parse_pivot_table',
-    '_build_table_html',
-    '_generate_table_id',
-    'PIVOT_CSS',
-    'PIVOT_JS',
-    '__version__',
+    "PivotTablePlugin",
+    "PIVOT_PATTERN",
+    "_parse_pivot_table",
+    "_build_table_html",
+    "_generate_table_id",
+    "PIVOT_CSS",
+    "PIVOT_JS",
+    "__version__",
 ]

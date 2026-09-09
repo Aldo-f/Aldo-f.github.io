@@ -135,11 +135,14 @@ def stage(tmp: Path, tag: str, langs: tuple[str, ...]) -> Path:
             (work / name).write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
     hooks_src = REPO / "hooks"
     if hooks_src.is_dir():
-        shutil.copytree(hooks_src, work / "hooks",
-                        ignore=shutil.ignore_patterns("__pycache__"))
+        shutil.copytree(
+            hooks_src, work / "hooks", ignore=shutil.ignore_patterns("__pycache__")
+        )
     en_cfg = work / "mkdocs.en.yml"
     if en_cfg.is_file() and "multirepo" in en_cfg.read_text(encoding="utf-8"):
-        en_cfg.write_text(_prune_multirepo(en_cfg.read_text(encoding="utf-8")), encoding="utf-8")
+        en_cfg.write_text(
+            _prune_multirepo(en_cfg.read_text(encoding="utf-8")), encoding="utf-8"
+        )
     for lang in langs:
         root = LANG_ROOTS[lang]
         if not root.is_dir():
@@ -179,7 +182,9 @@ def fetch(url: str) -> tuple[int, str]:
         return err.code, ""
 
 
-def assert_route(base: str, route: str, must: list[str], must_not: list[str] | None = None):
+def assert_route(
+    base: str, route: str, must: list[str], must_not: list[str] | None = None
+):
     status, body = fetch(base + route)
     assert status == 200, f"{route} returned HTTP {status}"
     for m in must:
@@ -191,6 +196,7 @@ def assert_route(base: str, route: str, must: list[str], must_not: list[str] | N
 # --------------------------------------------------------------------------
 # Checks
 # --------------------------------------------------------------------------
+
 
 def make_probe_post(work: Path) -> Path:
     probe = work / "docs" / "en" / "blog" / "posts" / "zz-probe-alpha.md"
@@ -229,8 +235,9 @@ def check_publish_mechanics(tmp: Path) -> str:
     probe = make_probe_post(work)
     rc, out = run_build(work, "mkdocs.en.yml", "site")
     assert rc == 0, f"post-probe build failed rc={rc}\n{out[-1000:]}"
-    assert PROBE_TITLE in listing.read_text(encoding="utf-8"), \
-        "adding one file did not publish the post (FR-3)"
+    assert PROBE_TITLE in listing.read_text(
+        encoding="utf-8"
+    ), "adding one file did not publish the post (FR-3)"
     probe.unlink()
     rc, out = run_build(work, "mkdocs.en.yml", "site")
     assert rc == 0, f"cleanup build failed rc={rc}\n{out[-1000:]}"
@@ -280,7 +287,9 @@ def expected_counts(posts_dir: Path) -> dict[str, int]:
 def check_category_tables(base: str) -> str:
     def overview(lang_root: str) -> dict[str, int]:
         rows = {}
-        status, body = fetch(base + f"/{'nl/' if lang_root == 'nl' else ''}blog/category/")
+        status, body = fetch(
+            base + f"/{'nl/' if lang_root == 'nl' else ''}blog/category/"
+        )
         assert status == 200, f"{lang_root} overview HTTP {status}"
         cells = re.findall(r"<td[^>]*>(.*?)</td>", body, re.DOTALL)
         names = [re.sub(r"<[^>]+>", "", c).strip() for c in cells[::2]]
@@ -296,8 +305,9 @@ def check_category_tables(base: str) -> str:
     nl_live = overview("nl")
     nl_want = expected_counts(REPO / "docs" / "nl" / "blog" / "posts")
     assert nl_live == nl_want, f"NL overview {nl_live} != source-derived {nl_want}"
-    assert nl_want.get("Scrum") == 2 and nl_want.get("VDAB") == 2, \
-        f"NL posts missing? {nl_want}"
+    assert (
+        nl_want.get("Scrum") == 2 and nl_want.get("VDAB") == 2
+    ), f"NL posts missing? {nl_want}"
     return f"EN {len(en_want)} cats, NL {len(nl_want)} cats — tables match sources"
 
 
@@ -309,9 +319,14 @@ def main() -> int:
     with tempfile.TemporaryDirectory(prefix="verify-blog-") as td:
         tmp = Path(td)
 
-        check("staged strict builds EN+NL (zero warnings)", lambda: check_staged_builds(tmp))
-        check("publish mechanics: single file add/remove (FR-3, SC-2)",
-              lambda: check_publish_mechanics(tmp))
+        check(
+            "staged strict builds EN+NL (zero warnings)",
+            lambda: check_staged_builds(tmp),
+        )
+        check(
+            "publish mechanics: single file add/remove (FR-3, SC-2)",
+            lambda: check_publish_mechanics(tmp),
+        )
 
         # ---- REAL repo builds (multirepo included on EN) -------------------
         rc_en, out_en = run_build(REPO, "mkdocs.en.yml", "site")
@@ -347,10 +362,15 @@ def main() -> int:
             check("existing routes intact (SC-4, FR-8)", nav_everywhere)
 
             def en_listing():
-                assert_route(base, "/blog/", [
-                    "How this documentation hub is built",
-                    "Einde Scrum",
-                ], ["Roadmap notes"])
+                assert_route(
+                    base,
+                    "/blog/",
+                    [
+                        "How this documentation hub is built",
+                        "Einde Scrum",
+                    ],
+                    ["Roadmap notes"],
+                )
                 h = fetch(base + "/blog/")[1]
                 i_new = h.find("How this documentation hub is built")
                 i_old = h.find("Einde Scrum")
@@ -360,10 +380,15 @@ def main() -> int:
             check("EN blog listing (FR-4)", en_listing)
 
             def en_post():
-                status, body = fetch(base + "/blog/2026/08/20/how-this-documentation-hub-is-built/")
+                status, body = fetch(
+                    base + "/blog/2026/08/20/how-this-documentation-hub-is-built/"
+                )
                 assert status == 200, f"post HTTP {status}"
                 assert "quokka-buildkit" in body
-                assert 'rel="prev"' in body and "how-this-documentation-hub-is-built" in body
+                assert (
+                    'rel="prev"' in body
+                    and "how-this-documentation-hub-is-built" in body
+                )
                 assert "md-post__nav" in body or "md-footer__link" in body
                 return "body + visible prev-link"
 
@@ -373,8 +398,9 @@ def main() -> int:
             def selector():
                 status, home = fetch(base + "/")
                 assert status == 200
-                assert 'hreflang="nl"' in home and "/nl/" in home, \
-                    "no NL switcher target on EN home"
+                assert (
+                    'hreflang="nl"' in home and "/nl/" in home
+                ), "no NL switcher target on EN home"
                 assert "md-select__link" in home or '<link rel="alternate"' in home
                 status, nl_home = fetch(base + "/nl/")
                 assert status == 200
@@ -390,24 +416,31 @@ def main() -> int:
                 import json as _json
 
                 data = _json.loads(body)
-                assert data.get("/nl/blog/2026/08/20/hoe-dit-documentatiecentrum-is-opgezet/") == \
-                    "/blog/2026/08/20/how-this-documentation-hub-is-built/", f"missing NL->EN: {list(data)[:3]}"
-                assert data.get("/blog/2026/08/20/how-this-documentation-hub-is-built/") == \
-                    "/nl/blog/2026/08/20/hoe-dit-documentatiecentrum-is-opgezet/", "missing EN->NL"
-                assert not any("roadmap-notes-draft" in k for k in data), \
-                    "draft leaked into slugmap"
+                assert (
+                    data.get(
+                        "/nl/blog/2026/08/20/hoe-dit-documentatiecentrum-is-opgezet/"
+                    )
+                    == "/blog/2026/08/20/how-this-documentation-hub-is-built/"
+                ), f"missing NL->EN: {list(data)[:3]}"
+                assert (
+                    data.get("/blog/2026/08/20/how-this-documentation-hub-is-built/")
+                    == "/nl/blog/2026/08/20/hoe-dit-documentatiecentrum-is-opgezet/"
+                ), "missing EN->NL"
+                assert not any(
+                    "roadmap-notes-draft" in k for k in data
+                ), "draft leaked into slugmap"
                 return f"{len(data)} mirror entries"
 
             check("slugmap.json served with real pairs (004)", slugmap_file)
 
             def switch_js():
                 for route in ("/", "/nl/", "/blog/", "/nl/blog/"):
-                    status, js = fetch(base +
-                                       "/assets/javascripts/slug-switch.js")
+                    status, js = fetch(base + "/assets/javascripts/slug-switch.js")
                     assert status == 200, f"switch JS HTTP {status} ({route})"
                     break
-                assert "slugmap.json" in js and "hreflang" in js, \
-                    "interceptor logic missing"
+                assert (
+                    "slugmap.json" in js and "hreflang" in js
+                ), "interceptor logic missing"
                 # referenced from a served page
                 _, page = fetch(base + "/nl/blog/")
                 return "JS emitted + wired"
@@ -420,9 +453,12 @@ def main() -> int:
                 assert status == 200, f"/nl/ HTTP {status}"
                 assert 'lang="nl"' in body, "document lang is not nl"
                 assert_route(base, "/nl/about/", [])
-                assert_route(base, "/nl/blog/",
-                             ["Einde Scrum", "Start van de Scrum-week", "1 april"],
-                             ["How this documentation hub is built", "Roadmap notes"])
+                assert_route(
+                    base,
+                    "/nl/blog/",
+                    ["Einde Scrum", "Start van de Scrum-week", "1 april"],
+                    ["How this documentation hub is built", "Roadmap notes"],
+                )
                 h = fetch(base + "/nl/blog/")[1]
                 i1 = h.find("Einde Scrum")
                 i2 = h.find("Start van de Scrum-week")
@@ -440,14 +476,16 @@ def main() -> int:
                 # titles) — follow the listing link instead of guessing:
                 _, listing = fetch(base + "/nl/blog/")
                 m = re.search(
-                    r'href="([^"]+)"[^>]*>\s*Hoe dit documentatiecentrum is opgezet', listing
+                    r'href="([^"]+)"[^>]*>\s*Hoe dit documentatiecentrum is opgezet',
+                    listing,
                 )
                 assert m, "NL post listing check"
                 href = m.group(1)
                 status2, body2 = fetch(base + "/nl/blog/" + href)
                 assert status2 == 200, f"mirrored post {href} HTTP {status2}"
-                assert "quokka-buildkit" in body2 or "tovarij" in body2, \
-                    "translated body not rendered"
+                assert (
+                    "quokka-buildkit" in body2 or "tovarij" in body2
+                ), "translated body not rendered"
                 return "NL + mirrored posts render at their localized slugs"
 
             check("NL post pages render (FR-3)", nl_post)
@@ -472,7 +510,9 @@ def main() -> int:
             def run_generator():
                 proc = subprocess.run(
                     [sys.executable, str(REPO / "scripts" / "gen_category_index.py")],
-                    capture_output=True, text=True, timeout=60,
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
                 )
                 assert proc.returncode == 0, "generator failed:\n" + proc.stderr[-500:]
                 return proc.stdout.strip().replace("\n", " | ")
@@ -486,23 +526,30 @@ def main() -> int:
                     cur = p.read_text(encoding="utf-8")
                     head = subprocess.run(
                         ["git", "-C", str(REPO), "show", f"HEAD:{p.relative_to(REPO)}"],
-                        capture_output=True, text=True,
+                        capture_output=True,
+                        text=True,
                     )
                     if head.returncode == 0 and head.stdout != cur:
                         stale.append(lang)
-                assert not stale, f"STALE generated overviews: {stale} — rerun scripts/gen_category_index.py"
+                assert (
+                    not stale
+                ), f"STALE generated overviews: {stale} — rerun scripts/gen_category_index.py"
                 return "committed copies byte-match regeneration"
 
             check("generated overviews are fresh", indexes_fresh)
 
-            check("per-language category tables (FR-4, US3)",
-                  lambda: check_category_tables(base))
+            check(
+                "per-language category tables (FR-4, US3)",
+                lambda: check_category_tables(base),
+            )
 
             # ---- FR-7: search per language ----------------------------------
             def search():
                 status, idx_en = fetch(base + "/search/search_index.json")
                 assert status == 200
-                assert "quokka-buildkit" in idx_en or "xylophone" in idx_en, "EN post not indexed"
+                assert (
+                    "quokka-buildkit" in idx_en or "xylophone" in idx_en
+                ), "EN post not indexed"
                 assert DRAFT_SLUG not in idx_en
                 status, idx_nl = fetch(base + "/nl/search/search_index.json")
                 assert status == 200, f"NL search index HTTP {status}"
@@ -510,8 +557,9 @@ def main() -> int:
                 # since 003, EN posts are mirrored into NL (translated):
                 # the translated mirror must be indexed too. Isolation is
                 # guaranteed by draft exclusion, asserted below.
-                assert "quokka-buildkit" in idx_nl, \
-                    "mirrored post missing from NL index"
+                assert (
+                    "quokka-buildkit" in idx_nl
+                ), "mirrored post missing from NL index"
                 assert DRAFT_SLUG not in idx_nl, "draft leaked into NL index"
                 return "EN and NL indexes correct"
 

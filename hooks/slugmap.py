@@ -120,13 +120,16 @@ def write_site(root: Path, out_path: Path) -> int:
             existing = {}
     merged = {**existing, **mapping}
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(merged, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    out_path.write_text(
+        json.dumps(merged, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     return len(merged)
 
 
 # --------------------------------------------------------------------------
 # MkDocs hooks API
 # --------------------------------------------------------------------------
+
 
 def on_config(config, **_kwargs):
     extra = list(config.get("extra_javascript") or [])
@@ -150,7 +153,9 @@ def on_post_build(config, **_kwargs):
     lang = "nl" if str(site).endswith("/nl") else "en"
     custom = site / "404" / "index.html"
     if custom.exists():
-        (site / "404.html").write_text(custom.read_text(encoding="utf-8"), encoding="utf-8")
+        (site / "404.html").write_text(
+            custom.read_text(encoding="utf-8"), encoding="utf-8"
+        )
         print(f"404: promoted {lang} custom page to 404.html")
 
     print(f"slugmap: wrote {n} mirror entries + {JS_NAME}")

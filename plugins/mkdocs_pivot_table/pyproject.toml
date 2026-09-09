@@ -7,7 +7,7 @@ name = "mkdocs-pivot-table"
 version = "0.1.0"
 description = "Interactive sortable/filterable comparison tables for MkDocs"
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
 requires-python = ">=3.9"
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -18,7 +18,6 @@ classifiers = [
 dependencies = [
     "mkdocs>=1.5.0",
     "beautifulsoup4>=4.12.0",
-    "pyjs>=0.1.0",
 ]
 
 [project.optional-dependencies]
@@ -34,6 +33,9 @@ Repository = "https://github.com/Aldo-f/Aldo-f.github-io"
 
 [tool.setuptools.packages.find]
 where = ["."]
+
+[project.entry-points."mkdocs.plugins"]
+mkdocs_pivot_table = "mkdocs_pivot_table.plugin:PivotTablePlugin"
 
 [tool.black]
 line-length = 100

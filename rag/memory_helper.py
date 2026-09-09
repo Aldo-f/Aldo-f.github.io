@@ -1,5 +1,6 @@
 import subprocess
 
+
 def get_memory_provider() -> str:
     """Return the value of `hermes config get memory.provider`.
     Falls back to "faiss" if the command fails.

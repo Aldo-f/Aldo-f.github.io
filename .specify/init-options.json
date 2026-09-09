@@ -1,9 +1,16 @@
 {
-  "ai": "hermes",
-  "ai_skills": true,
-  "feature_numbering": "sequential",
-  "here": true,
-  "integration": "hermes",
-  "script": "sh",
-  "speckit_version": "1.0.1"
+  "speckit_version": "1.0.4",
+  "name": "mkdocs-raw-markdown",
+  "description": "Serve raw markdown files via .md URL suffix",
+  "author": "Aldo",
+  "license": "MIT",
+  "python_requires": ">=3.9",
+  "dependencies": [
+    "mkdocs>=1.5.0"
+  ],
+  "devDependencies": [
+    "ruff",
+    "black",
+    "husky"
+  ]
 }

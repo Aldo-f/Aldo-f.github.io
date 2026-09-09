@@ -1,16 +1,21 @@
 """Every known app repo must have an explicit destination mapping."""
+
 from pathlib import Path
 import sys
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "documentation_watcher"))
+sys.path.insert(
+    0, str(Path(__file__).resolve().parent.parent / "documentation_watcher")
+)
 import watcher  # noqa: E402
 
 
 def test_all_dev_app_repos_are_mapped():
     dev = Path.home() / "dev"
-    repos = {p.name for p in dev.iterdir()
-             if p.is_dir() and p.name.startswith("06-apps-")
-             and "-legacy" not in p.name}
+    repos = {
+        p.name
+        for p in dev.iterdir()
+        if p.is_dir() and p.name.startswith("06-apps-") and "-legacy" not in p.name
+    }
     mapped = set(watcher.REPO_DEST_MAP)
     missing = repos - mapped
     assert not missing, f"Repos without destination mapping: {sorted(missing)}"

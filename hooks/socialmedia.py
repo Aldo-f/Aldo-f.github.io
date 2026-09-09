@@ -20,13 +20,13 @@ ICON_FACEBOOK = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
 
 
 def on_page_markdown(markdown, **kwargs):
-    page = kwargs['page']
-    config = kwargs['config']
+    page = kwargs["page"]
+    config = kwargs["config"]
     if not include.match(page.url):
         return markdown
 
     page_url = config.site_url + page.url
-    page_title = urllib.parse.quote(page.title + '\n')
+    page_title = urllib.parse.quote(page.title + "\n")
 
     html = f"""\
     <p style="margin-top:1em;padding-top:.5em;border-top:1px solid var(--md-default-fg-color--lightest)">

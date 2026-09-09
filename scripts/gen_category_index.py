@@ -98,10 +98,7 @@ def render(counts: dict[str, int]) -> str:
 
 
 def main() -> int:
-    roots = sorted(
-        p for p in REPO.glob("docs/*/blog/posts")
-        if p.is_dir()
-    )
+    roots = sorted(p for p in REPO.glob("docs/*/blog/posts") if p.is_dir())
     if not roots:
         print("ERROR: no docs/<lang>/blog/posts directories found", file=sys.stderr)
         return 1
