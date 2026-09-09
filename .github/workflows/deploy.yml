@@ -28,7 +28,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install mkdocs-raw-markdown mkdocs-pivot-table
+          pip install -e ./plugins/mkdocs_raw_markdown -e ./plugins/mkdocs_pivot_table
           npm install
 
       - name: Build EN site (serves at root)
