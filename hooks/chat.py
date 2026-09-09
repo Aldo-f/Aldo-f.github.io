@@ -605,45 +605,17 @@ def _inject_key(js_template: str, api_key: str) -> str:
 
 
 def on_config(config, **kwargs):
-    """Register chat assets in extra_javascript/extra_css so they ship with the build."""
-    extra_js = list(config.get("extra_javascript") or [])
-    if JS_NAME not in extra_js:
-        extra_js.append(JS_NAME)
-    config["extra_javascript"] = extra_js
-
-    extra_css = list(config.get("extra_css") or [])
-    if CSS_NAME not in extra_css:
-        extra_css.append(CSS_NAME)
-    config["extra_css"] = extra_css
+    """Register chat assets in extra_javascript/extra_css so they ship with the build.
+    CHANGED: Chat widget is disabled for now — health check always returns false
+    so the FAB is never created, keeping the UI clean.
+    """
+    # Chat widget disabled — no assets registered
     return config
 
 
 def on_post_build(*, config, **kwargs):
-    """Emit chat widget files to site directory, injecting RAG_API_KEY at build time."""
-    site_dir = Path(config.site_dir)
-
-    # Load RAG_API_KEY: prefer GitHub Actions env var, fall back to .env file
-    api_key = os.environ.get("RAG_API_KEY", "")
-    if not api_key:
-        # Fallback: read from okf-home-lab/.env file (local development)
-        env_path = (
-            Path(__file__).resolve().parent.parent.parent / "okf-home-lab" / ".env"
-        )
-        if env_path.exists():
-            for line in env_path.read_text().splitlines():
-                if line.startswith("RAG_API_KEY="):
-                    api_key = line.split("=", 1)[1].strip()
-                    break
-
-    js_text = _inject_key(_CHAT_JS_TEMPLATE, api_key)
-
-    js_path = site_dir / JS_NAME
-    js_path.parent.mkdir(parents=True, exist_ok=True)
-    js_path.write_text(js_text, encoding="utf-8")
-
-    css_path = site_dir / CSS_NAME
-    css_path.parent.mkdir(parents=True, exist_ok=True)
-    css_path.write_text(_CHAT_CSS, encoding="utf-8")
-    print(
-        f"chat: emitted {js_path.relative_to(site_dir)} + {css_path.relative_to(site_dir)}"
-    )
+    """Emit chat widget files to site directory, injecting RAG_API_KEY at build time.
+    CHANGED: Chat widget is disabled — no files emitted.
+    """
+    # Chat widget disabled — nothing to emit
+    pass

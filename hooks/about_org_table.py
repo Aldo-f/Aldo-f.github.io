@@ -149,15 +149,51 @@ if __name__ == "__main__":
 
     # Test with mkdocs.en.yml nav_repos
     test_nav_repos = [
-        {"name": "thuis", "import_url": "https://github.com/Aldo-f/thuis?branch=main", "imports": ["docs"]},
-        {"name": "vaultwarden-backup", "import_url": "https://github.com/Aldo-f/07-security-vaultwarden-backup?branch=main", "imports": ["docs"]},
-        {"name": "thuis-v3", "import_url": "https://github.com/Aldo-f/thuis?branch=v3.0.0", "imports": ["docs"]},
-        {"name": "thuis-v4", "import_url": "https://github.com/Aldo-f/thuis?branch=v4.1.0&docs_dir=website/docs/*", "imports": ["docs"]},
-        {"name": "thuis-v5", "import_url": "https://github.com/Aldo-f/thuis?branch=v5/main&docs_dir=website/docs/*", "imports": ["docs"]},
-        {"name": "clock", "import_url": "https://github.com/Aldo-f/clock?branch=main", "imports": ["docs"]},
-        {"name": "blanky", "import_url": "https://gitlab.com/Aldo-f/blanky?branch=main", "imports": ["docs"]},
-        {"name": "opencode-multi-model-fallback", "import_url": "https://github.com/Aldo-f/opencode-multi-model-fallback?branch=main", "imports": ["docs"]},
-        {"name": "blanky-v1", "import_url": "https://gitlab.com/Aldo-f/blanky?branch=v1-docs", "imports": ["docs"]},
+        {
+            "name": "thuis",
+            "import_url": "https://github.com/Aldo-f/thuis?branch=main",
+            "imports": ["docs"],
+        },
+        {
+            "name": "vaultwarden-backup",
+            "import_url": "https://github.com/Aldo-f/07-security-vaultwarden-backup?branch=main",
+            "imports": ["docs"],
+        },
+        {
+            "name": "thuis-v3",
+            "import_url": "https://github.com/Aldo-f/thuis?branch=v3.0.0",
+            "imports": ["docs"],
+        },
+        {
+            "name": "thuis-v4",
+            "import_url": "https://github.com/Aldo-f/thuis?branch=v4.1.0&docs_dir=website/docs/*",
+            "imports": ["docs"],
+        },
+        {
+            "name": "thuis-v5",
+            "import_url": "https://github.com/Aldo-f/thuis?branch=v5/main&docs_dir=website/docs/*",
+            "imports": ["docs"],
+        },
+        {
+            "name": "clock",
+            "import_url": "https://github.com/Aldo-f/clock?branch=main",
+            "imports": ["docs"],
+        },
+        {
+            "name": "blanky",
+            "import_url": "https://gitlab.com/Aldo-f/blanky?branch=main",
+            "imports": ["docs"],
+        },
+        {
+            "name": "opencode-multi-model-fallback",
+            "import_url": "https://github.com/Aldo-f/opencode-multi-model-fallback?branch=main",
+            "imports": ["docs"],
+        },
+        {
+            "name": "blanky-v1",
+            "import_url": "https://gitlab.com/Aldo-f/blanky?branch=v1-docs",
+            "imports": ["docs"],
+        },
     ]
 
     print(_build_table(test_nav_repos))

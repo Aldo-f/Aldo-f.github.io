@@ -16,9 +16,14 @@ PROJECTS_MD = REPO_ROOT / "docs" / "en" / "projects.md"
 # DEFAULT PROJECT ORDER — consistent across all locations (menu, homepage, projects-page)
 # Edit this list to change the canonical order; entries not listed appear at the end in nav_repos order.
 PROJECT_ORDER = [
-    "thuis", "clock", "blanky", "blanky-v1",
-    "opencode-multi-model-fallback", "vaultwarden-backup",
-    "radio-community", "neo-brutalist-home",
+    "thuis",
+    "clock",
+    "blanky",
+    "blanky-v1",
+    "opencode-multi-model-fallback",
+    "vaultwarden-backup",
+    "radio-community",
+    "neo-brutalist-home",
 ]
 
 # SINGLE SOT OBJECT — edit HERE to add/update any repo
@@ -176,34 +181,34 @@ def make_projects_md(repos: list[str]) -> str:
 def main() -> int:
     repos = parse_nav_repos()
     print(f"SOT: {len(repos)} repos from nav_repos")
-    
+
     # Generate content
     index_table = make_index_table(repos)
     projects_content = make_projects_md(repos)
-    
+
     # Update index.md - replace the Projects table section
     content = INDEX_MD.read_text(encoding="utf-8")
-    
+
     # Find the Projects section and replace it
     start = content.find("## Projects\n")
     if start == -1:
         print("❌ Could not find '## Projects' in index.md")
         return 1
-    
+
     # Find next major section after Projects (## heading or end of file)
     # Look for next heading at same level
-    after_projects = content[start + len("## Projects\n"):]
+    after_projects = content[start + len("## Projects\n") :]
     next_heading = after_projects.find("\n## ")
     if next_heading != -1:
         end = start + len("## Projects\n") + next_heading
     else:
         end = len(content)
-    
+
     # Replace the section
     new_content = content[:start] + index_table + content[end:]
     INDEX_MD.write_text(new_content, encoding="utf-8")
     print("✅ Updated docs/en/index.md")
-    
+
     PROJECTS_MD.write_text(projects_content, encoding="utf-8")
     print("✅ Updated docs/en/projects.md")
     print("\nDone! Rebuild with: mkdocs build -f mkdocs.en.yml")
