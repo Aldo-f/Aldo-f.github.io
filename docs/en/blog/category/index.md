@@ -16,6 +16,7 @@ All topics covered on this blog, newest-first inside each category.
 | [Satire](satire/) | 1 |
 | [Scrum](scrum/) | 2 |
 | [Technique](technique/) | 1 |
+| [Uncategorized](uncategorized/) | 2 |
 | [VDAB](vdab/) | 2 |
 
 Or browse [everything chronologically](../index.md).
