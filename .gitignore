@@ -24,3 +24,8 @@ plugins/mkdocs_pivot_table/*.egg-info/
 node_modules/
 __pycache__/
 *.log
+.env
+.env.*
+node_modules/
+__pycache__/
+*.log
