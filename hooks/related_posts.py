@@ -65,6 +65,9 @@ def _build_index(posts: list[Path]) -> tuple[dict, dict]:
     for post_path in posts:
         content = post_path.read_text(encoding="utf-8")
         fm, _ = _parse_frontmatter(content)
+        # Skip draft posts
+        if fm.get("draft", "").lower() == "true":
+            continue
         post_tags = [t.lower() for t in fm.get("tags", [])]
         post_cats = [c.lower() for c in fm.get("categories", [])]
         for tag in post_tags:

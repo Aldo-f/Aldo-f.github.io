@@ -91,15 +91,51 @@ def _build_projects_md(nav_repos: list[dict]) -> str:
 
 def on_page_markdown(markdown: str, page, config, files, **kwargs):
     """Inject generated content into projects.md."""
-    if page.file.src_path != "projects.md":
+    import sys
+
+    src_path = getattr(getattr(page, "file", None), "src_path", None)
+    abs_src_path = getattr(getattr(page, "file", None), "abs_src_path", None)
+
+    if src_path != "projects.md" or not abs_src_path:
         return markdown
 
-    multirepo = config.plugins.get("multirepo")
-    if not multirepo or not hasattr(multirepo, "config"):
-        return markdown
+    # Read nav_repos from config file
+    import yaml
 
-    nav_repos = getattr(multirepo.config, "nav_repos", [])
+    nav_repos = []
+    config_file = Path(config.config_file_path)
+    if "mkdocs.en.yml" in str(config_file) or "mkdocs.nl.yml" in str(config_file):
+        content = config_file.read_text()
+        in_nav_repos = False
+        for line in content.split("\n"):
+            stripped = line.strip()
+            if "nav_repos:" in stripped and not stripped.startswith("#"):
+                in_nav_repos = True
+                continue
+            if in_nav_repos:
+                if stripped.startswith("- name:"):
+                    name = stripped.split(":", 1)[1].strip().strip('"').strip("'")
+                    nav_repos.append({"name": name})
+                elif (
+                    stripped
+                    and not stripped.startswith("#")
+                    and not stripped.startswith("- ")
+                    and not stripped.startswith("import_url:")
+                    and not stripped.startswith("imports:")
+                    and not stripped.startswith("docs_dir:")
+                ):
+                    break
+
     if not nav_repos:
+        print(
+            "[HOOK] projects_from_nav_repos: no nav_repos found, skipping",
+            file=sys.stderr,
+        )
         return markdown
 
-    return _build_projects_md(nav_repos)
+    result = _build_projects_md(nav_repos)
+    print(
+        f"[HOOK] projects_from_nav_repos: injected {len(result)} chars into {src_path}",
+        file=sys.stderr,
+    )
+    return result

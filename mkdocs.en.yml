@@ -65,7 +65,7 @@ plugins:
             - docs
 nav:
   - About: about.md
-  - Blog: blog/index.md
+  - Blog: blog.md
   - Projects:
       - projects.md
       - Thuis:
