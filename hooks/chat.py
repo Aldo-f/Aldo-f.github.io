@@ -94,7 +94,7 @@ _CHAT_JS_TEMPLATE = """(function () {
     header.style.backgroundColor = 'var(--md-default-bg-color--container, #f8fafc)';
 
     const title = document.createElement('h3');
-    title.textContent = 'AIldo — your OKF assistant';
+    title.textContent = 'AIdo — your OKF assistant';
     title.style.margin = '0';
     title.style.fontSize = '1.25rem';
     title.style.fontWeight = '600';
@@ -255,7 +255,7 @@ _CHAT_JS_TEMPLATE = """(function () {
       messageDiv.style.marginLeft = 'auto';
     } else {
       avatar.style.backgroundColor = 'var(--md-default-fg-color--light, #f3f4f6)';
-      avatar.textContent = 'AIldo';
+      avatar.textContent = 'AIdo';
       avatar.style.backgroundColor = '#6366f1';
       avatar.style.color = 'white';
       avatar.style.fontWeight = '700';
