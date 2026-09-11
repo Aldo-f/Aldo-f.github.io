@@ -67,10 +67,10 @@ _CHAT_JS_TEMPLATE = """(function () {
     const widget = document.createElement('div');
     widget.id = 'chat-widget';
     widget.style.position = 'fixed';
-    widget.style.bottom = '90px';
-    widget.style.right = '24px';
-    widget.style.width = '350px';
-    widget.style.height = '500px';
+    widget.style.bottom = '5vh';
+    widget.style.right = '2.5vw';
+    widget.style.width = '95vw';
+    widget.style.height = '90vh';
     widget.style.backgroundColor = 'var(--md-default-bg-color, white)';
     widget.style.borderRadius = '16px';
     widget.style.boxShadow = 'var(--md-shadow-z2, 0 10px 25px -5px rgba(0,0,0,0.1))';
@@ -94,7 +94,7 @@ _CHAT_JS_TEMPLATE = """(function () {
     header.style.backgroundColor = 'var(--md-default-bg-color--container, #f8fafc)';
 
     const title = document.createElement('h3');
-    title.textContent = 'Chat with AI';
+    title.textContent = 'AIldo — your OKF assistant';
     title.style.margin = '0';
     title.style.fontSize = '1.25rem';
     title.style.fontWeight = '600';
@@ -244,11 +244,26 @@ _CHAT_JS_TEMPLATE = """(function () {
     if (isUser) {
       avatar.style.backgroundColor = 'var(--md-primary-fg-color, #6366f1)';
       avatar.textContent = 'U';
+      avatar.style.backgroundColor = '#6366f1';
+      avatar.style.color = 'white';
+      avatar.style.fontWeight = '700';
+      avatar.style.fontSize = '0.75rem';
+      avatar.style.display = 'flex';
+      avatar.style.alignItems = 'center';
+      avatar.style.justifyContent = 'center';
+      avatar.style.borderRadius = '50%';
       messageDiv.style.marginLeft = 'auto';
     } else {
       avatar.style.backgroundColor = 'var(--md-default-fg-color--light, #f3f4f6)';
-      avatar.textContent = 'AI';
-      avatar.style.color = 'var(--md-default-fg-color--medium, #6b7280)';
+      avatar.textContent = 'AIldo';
+      avatar.style.backgroundColor = '#6366f1';
+      avatar.style.color = 'white';
+      avatar.style.fontWeight = '700';
+      avatar.style.fontSize = '0.75rem';
+      avatar.style.display = 'flex';
+      avatar.style.alignItems = 'center';
+      avatar.style.justifyContent = 'center';
+      avatar.style.borderRadius = '50%';
       messageDiv.style.marginRight = 'auto';
     }
 
@@ -260,7 +275,7 @@ _CHAT_JS_TEMPLATE = """(function () {
     messageContent.style.backgroundColor = isUser ? 'var(--md-primary-fg-color, #6366f1)' : 'var(--md-default-fg-color--light, #f3f4f6)';
     messageContent.style.color = isUser ? 'white' : 'var(--md-default-fg-color, #1f2937)';
     messageContent.style.lineHeight = '1.5';
-    messageContent.style.fontSize = '0.95rem';
+    messageContent.style.fontSize = '0.8rem';
     messageContent.style.wordWrap = 'break-word';
     messageContent.style.maxWidth = '100%';
 
@@ -605,18 +620,19 @@ def _inject_key(js_template: str, api_key: Optional[str]) -> str:
     return js_template.replace("{{RAG_API_KEY}}", api_key or "")
 
 
-def _load_api_key():
-    """Load RAG_API_KEY from the OKF RAG .env file (path: /home/aldo/dev/02-ai-okf-home-lab/.env)."""
+def _load_api_key() -> Optional[str]:
+    """Load RAG_API_KEY: env first (CI secret), then .env file (local)."""
+    env_key = os.environ.get("RAG_API_KEY", "")
+    if env_key and not env_key.startswith("***"):
+        return env_key
     okf_env_path = Path("/home/aldo/dev/02-ai-okf-home-lab/.env")
-    if not okf_env_path.exists():
-        print(f"chat: WARNING — .env file not found at {okf_env_path}", file=sys.stderr)
-        return None
-
-    for line in okf_env_path.read_text().splitlines():
-        if line.startswith("RAG_API_KEY="):
-            return line.split("=", 1)[1]
-
-    print("chat: WARNING — RAG_API_KEY not found in .env file", file=sys.stderr)
+    if okf_env_path.exists():
+        for line in okf_env_path.read_text().splitlines():
+            if line.startswith("RAG_API_KEY="):
+                val = line.split("=", 1)[1]
+                if val and not val.startswith("***"):
+                    return val
+    print("chat: WARNING — RAG_API_KEY not set (env or .env)", file=sys.stderr)
     return None
 
 
