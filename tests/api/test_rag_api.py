@@ -5,8 +5,22 @@ from pathlib import Path
 
 import requests
 
-BUNDLE = Path(__file__).resolve().parents[2]
+BUNDLE = Path(__file__).resolve().parents[2] / ".." / "02-ai-okf-home-lab"
+BUNDLE = BUNDLE.resolve()
+# Maintain backward compatibility: if .env / rag folder missing, fall back to repo root
+if not (BUNDLE / ".env").exists():
+    BUNDLE = Path(__file__).resolve().parents[2]
 URL = "http://127.0.0.1:8000/search"
+
+
+def _load_api_key():
+    """Load RAG_API_KEY from the OKF RAG .env file."""
+    env_path = BUNDLE / ".env"
+    if env_path.exists():
+        for line in env_path.read_text().splitlines():
+            if line.startswith("RAG_API_KEY="):
+                return line.split("=", 1)[1]
+    return None
 
 
 def _server_running() -> bool:
@@ -47,6 +61,7 @@ def test_search_endpoint():
     response = requests.post(
         URL,
         json={"question": "How to enable Jellyfin hardware transcoding?"},
+        headers={"X-API-Key": _load_api_key() or ""},
         timeout=120,
     )
     assert response.status_code == 200

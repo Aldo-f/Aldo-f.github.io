@@ -24,7 +24,7 @@ CHECK_INTERVAL = 300  # 5 minutes
 # the generic else-branch is gone on purpose: unknown repos must fail
 # tests/test_watcher_map.py instead of silently landing somewhere odd.
 DOCS_SITE_DOCS = str(DOCS_SITE / "docs")
-OKF_BUNDLE = str(Path(__file__).resolve().parent.parent)
+OKF_BUNDLE = str(Path("/home/aldo/dev/02-ai-okf-home-lab"))
 
 REPO_DEST_MAP = {
     "06-apps-clock": [f"{DOCS_SITE_DOCS}/clock"],
@@ -49,6 +49,19 @@ REPO_DEST_MAP = {
     # tests stay green and the watcher has an explicit entry.
     "06-apps-aldo-f-github-io": [f"{OKF_BUNDLE}/docs/aldo-f-github-io"],
     "06-apps-nextcloud": [f"{OKF_BUNDLE}/docs/nextcloud"],
+    # Additional Aldo app repos
+    "06-apps-nocturna": [f"{DOCS_SITE_DOCS}/nocturna", f"{OKF_BUNDLE}/docs/nocturna"],
+    "06-apps-toolbox": [f"{DOCS_SITE_DOCS}/toolbox", f"{OKF_BUNDLE}/docs/toolbox"],
+    "06-apps-urbanfix": [f"{DOCS_SITE_DOCS}/urbanfix", f"{OKF_BUNDLE}/docs/urbanfix"],
+    "06-apps-interest-calculator": [f"{DOCS_SITE_DOCS}/interest-calculator"],
+    "06-apps-mkdocs-template": [f"{DOCS_SITE_DOCS}/mkdocs-template"],
+    "06-apps-neobrutalism-demo": [f"{DOCS_SITE_DOCS}/neobrutalism-demo"],
+    "06-apps-opencode-multi-model-fallback": [
+        f"{DOCS_SITE_DOCS}/opencode-multi-model-fallback"
+    ],
+    "06-apps-thuis-plugin-dedrm": [f"{DOCS_SITE_DOCS}/thuis-plugin-dedrm"],
+    "06-apps-thuis-tool-dedrm": [f"{DOCS_SITE_DOCS}/thuis-tool-dedrm"],
+    "06-apps-yt-dlp": [f"{DOCS_SITE_DOCS}/yt-dlp"],
 }
 
 
