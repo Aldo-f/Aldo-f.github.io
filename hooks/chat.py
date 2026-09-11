@@ -25,6 +25,12 @@ _CHAT_JS_TEMPLATE = """(function () {
   'use strict';
   console.log('FreeLLM Chat Widget: Initializing...');
 
+  // Detect language from browser preference or URL fallback
+  const browserLang = navigator.language || navigator.userLanguage;
+  const isNL = browserLang.startsWith('nl') || window.location.pathname.startsWith('/nl/');
+  const chatTitle = isNL ? 'AIdo — je OKF assistent' : 'AIdo — your OKF assistant';
+  const chatPlaceholder = isNL ? 'Vraag me iets...' : 'Ask me anything...';
+
   // Chat widget state
   let isOpen = false;
   let messages = [];
@@ -94,7 +100,7 @@ _CHAT_JS_TEMPLATE = """(function () {
     header.style.backgroundColor = 'var(--md-default-bg-color--container, #f8fafc)';
 
     const title = document.createElement('h3');
-    title.textContent = 'AIdo — your OKF assistant';
+    title.textContent = chatTitle;
     title.style.margin = '0';
     title.style.fontSize = '1.25rem';
     title.style.fontWeight = '600';
@@ -150,7 +156,7 @@ _CHAT_JS_TEMPLATE = """(function () {
     const input = document.createElement('input');
     input.id = 'chat-input';
     input.type = 'text';
-    input.placeholder = 'Ask me anything...';
+    input.placeholder = chatPlaceholder;
     input.style.flex = '1';
     input.style.padding = '12px 16px';
     input.style.border = '1px solid var(--md-input-border-color, #e5e7eb)';

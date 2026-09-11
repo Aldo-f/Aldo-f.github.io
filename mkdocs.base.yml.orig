@@ -20,6 +20,7 @@ theme:
     - search.highlight
     - search.share
     - search.suggest
+    - navigation.indexes
     - navigation.sections
     - toc.follow
     - content.image.zoom
