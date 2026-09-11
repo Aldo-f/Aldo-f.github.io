@@ -13,10 +13,10 @@ The voting system allows community members to influence which tracks get played 
 
 ### Voting Actions
 
-| Action | Value | UI |
-|--------|-------|-----|
-| Upvote | `+1` | Swipe right |
-| Downvote | `-1` | Swipe left |
+| Action   | Value | UI          |
+| -------- | ----- | ----------- |
+| Upvote   | `+1`  | Swipe right |
+| Downvote | `-1`  | Swipe left  |
 
 ### Voting Rules
 
@@ -42,6 +42,7 @@ POST /api/communities/:id/votes
 ```
 
 **Values:**
+
 - `1` - Upvote (swipe right)
 - `-1` - Downvote (swipe left)
 
@@ -71,4 +72,4 @@ Tracks are displayed with their current score in the frontend:
 The voting score directly influences the playlist algorithm. See [Playlist Algorithm](playlist-algorithm.md) for details on how votes affect track selection.
 
 !!! note "Vote Weight"
-    Each vote carries significant weight in the algorithm. A score of 15 means 15 more net positive votes than negative votes for this track.
+Each vote carries significant weight in the algorithm. A score of 15 means 15 more net positive votes than negative votes for this track.

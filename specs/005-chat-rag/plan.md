@@ -14,16 +14,16 @@ Floating chat widget on `aldo-f.github.io` connects to RAG endpoint at `rag.aldo
 
 ## Confirmed Decisions
 
-| # | Decision | Source / Note |
-|---|----------|---------------|
-| 1 | `RAG_API_KEY` | GitHub Secret `RAG_API_KEY` → env var → `chat.py` injects at build |
-| 2 | Data source | ONLY `rag.aldof.duckdns.org/search`; no direct OKF `.specify/` query |
-| 3 | Sources in UI | YES — show `data.sources` as citation links below AI message |
-| 4 | Fallback (RAG down) | Show error message (current JS already does this) |
-| 5 | Key storage | `.env` file in `okf-home-lab/`; `.env` NOT in git (`.gitignore`ed); `.env.example` with command; NO logging to docker/logs (security) |
-| 6 | Auto-gen | `rag_api.py` creates `RAG_API_KEY='aido_rag_'+secrets.token_hex(16)` if `.env` missing; writes to `.env` only |
-| 7 | Service architecture | `~/dev/okf-home-lab/` is native Python (not docker); stays at root; root cleaned to `docs/`, `rag/`, `scripts/`, `tests/`; docs/docs files moved to `docs/root/` |
-| 8 | URL / routing | `rag.aldof.duckdns.org` served via Traefik (existing) |
+| #   | Decision             | Source / Note                                                                                                                                                    |
+| --- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | `RAG_API_KEY`        | GitHub Secret `RAG_API_KEY` → env var → `chat.py` injects at build                                                                                               |
+| 2   | Data source          | ONLY `rag.aldof.duckdns.org/search`; no direct OKF `.specify/` query                                                                                             |
+| 3   | Sources in UI        | YES — show `data.sources` as citation links below AI message                                                                                                     |
+| 4   | Fallback (RAG down)  | Show error message (current JS already does this)                                                                                                                |
+| 5   | Key storage          | `.env` file in `okf-home-lab/`; `.env` NOT in git (`.gitignore`ed); `.env.example` with command; NO logging to docker/logs (security)                            |
+| 6   | Auto-gen             | `rag_api.py` creates `RAG_API_KEY='aido_rag_'+secrets.token_hex(16)` if `.env` missing; writes to `.env` only                                                    |
+| 7   | Service architecture | `~/dev/okf-home-lab/` is native Python (not docker); stays at root; root cleaned to `docs/`, `rag/`, `scripts/`, `tests/`; docs/docs files moved to `docs/root/` |
+| 8   | URL / routing        | `rag.aldof.duckdns.org` served via Traefik (existing)                                                                                                            |
 
 ---
 

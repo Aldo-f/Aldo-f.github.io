@@ -14,7 +14,7 @@
 
 1. **One method:** everything hangs off the existing watcher loop. No GitHub webhooks, no extra cron jobs, no new services. Fewer moving parts = fewer breakage points.
 2. **Split agent-visible vs public-visible:** YES, this is correct.
-   - The OKF bundle is *machine* knowledge (YAML front-matter, receipts, hashes) — noise for human readers, and it exposes internal paths/hostnames publicly today.
+   - The OKF bundle is _machine_ knowledge (YAML front-matter, receipts, hashes) — noise for human readers, and it exposes internal paths/hostnames publicly today.
    - Agents don't need it published; they call `rag_query.py` locally against `~/dev/okf-home-lab/`.
    - The public site keeps only a human "How to use" page describing the home-lab docs structure. This also removes sensitive detail (IPs, health-check endpoints, credentials layout) from the public internet.
 
@@ -54,6 +54,7 @@ No other mechanisms introduced. Everything reuses git, bash, existing venv, exis
 **Objective:** Every `06-apps-*` repo resolves to explicit destination(s); no silent generic fallback.
 
 **Files:**
+
 - Modify: `~/dev/okf-home-lab/documentation_watcher/watcher.py:205-235` (the integrate_changes if/elif block)
 
 **Step 1: Write failing test**
@@ -140,6 +141,7 @@ git commit -m "feat(watcher): data-driven repo->destination map, all apps covere
 **Objective:** RAG knowledge base receives the same updates the site gets.
 
 **Files:**
+
 - Modify: `~/dev/okf-home-lab/documentation_watcher/watcher.py` (destinations from Task 1 already include bundle paths where wanted)
 
 **Step 1: Write failing test**
@@ -178,6 +180,7 @@ git commit -m "feat(watcher): mirror app docs into OKF bundle"
 **Objective:** After any synced change, the whole chain fires automatically.
 
 **Files:**
+
 - Create: `~/dev/okf-home-lab/scripts/post_sync.sh`
 
 **Step 1: Write the script (complete)**
@@ -250,6 +253,7 @@ git commit -m "feat(sync): post_sync chain - invalidate RAG, push, verify live, 
 **Objective:** Watcher invokes the chain only when files actually changed.
 
 **Files:**
+
 - Modify: `~/dev/okf-home-lab/documentation_watcher/watcher.py` (`run_once()`, near line 250)
 
 **Step 1: Implementation**
@@ -288,6 +292,7 @@ git commit -m "feat(watcher): trigger post_sync publish chain after integration"
 **Objective:** Public site shows only human "how to use" docs; agents fetch OKF/RAG locally.
 
 **Files:**
+
 - Modify: `~/dev/06-apps-aldo-f-github-io/mkdocs.en.yml` (delete nav lines ~108–115 "OKF Home Lab" block)
 - Delete: `~/dev/06-apps-aldo-f-github-io/docs/en/okf-home-lab/` (entire copied tree)
 - Create: `~/dev/06-apps-aldo-f-github-io/docs/en/home-lab-docs.md`
@@ -304,13 +309,13 @@ self-hosted applications.
 
 ## What you'll find here
 
-| Section | Content |
-|---------|---------|
+| Section               | Content                                                    |
+| --------------------- | ---------------------------------------------------------- |
 | Thuis (v3/v4/v5/main) | VRT MAX video downloader — install, usage, troubleshooting |
-| Clocky | React clock studio — features and development |
-| Blanky | Project docs, main and v1 |
-| Radio Community | Democratic internet radio — architecture, API, streaming |
-| Passive Income (PINO) | Orchestrator for passive-income providers |
+| Clocky                | React clock studio — features and development              |
+| Blanky                | Project docs, main and v1                                  |
+| Radio Community       | Democratic internet radio — architecture, API, streaming   |
+| Passive Income (PINO) | Orchestrator for passive-income providers                  |
 
 Documentation for each project lives in its own section (see the navigation)
 and is pulled straight from that project's repository, so it always matches
@@ -330,13 +335,13 @@ intentionally not published on this site.
 In `mkdocs.en.yml`: replace the whole `OKF Home Lab:` block with:
 
 ```yaml
-      - Home-lab Docs: home-lab-docs.md
+- Home-lab Docs: home-lab-docs.md
 ```
 
 In `mkdocs.nl.yml`, add under nav:
 
 ```yaml
-  - Home-lab Docs: home-lab-docs.md
+- Home-lab Docs: home-lab-docs.md
 ```
 
 **Step 4: Delete the exposed tree**
@@ -372,6 +377,7 @@ Then verify live: `curl -fsS https://aldo-f.github.io/home-lab-docs/` → contai
 **Objective:** Demonstrate the full automatic chain works, no manual steps.
 
 **Steps:**
+
 1. Pick a mapped repo, e.g. edit `~/dev/06-apps-radio-community/docs/getting-started.md` (append a harmless comment line).
 2. Wait ≤ 6 min (watcher cycle + post_sync).
 3. Verify all three surfaces updated:
@@ -387,14 +393,14 @@ Then verify live: `curl -fsS https://aldo-f.github.io/home-lab-docs/` → contai
 
 ## Files likely to change (summary)
 
-| File | Action |
-|---|---|
-| `~/dev/okf-home-lab/documentation_watcher/watcher.py` | modify (map, bundle mirroring, post_sync hook) |
-| `~/dev/okf-home-lab/scripts/post_sync.sh` | create |
-| `~/dev/okf-home-lab/tests/test_watcher_map.py` | create |
-| `~/dev/06-apps-aldo-f-github-io/mkdocs.en.yml` / `mkdocs.nl.yml` | modify (nav swap) |
-| `~/dev/06-apps-aldo-f-github-io/docs/en/okf-home-lab/` | delete |
-| `~/dev/06-apps-aldo-f-github-io/docs/{en,nl}/home-lab-docs.md` | create |
+| File                                                             | Action                                         |
+| ---------------------------------------------------------------- | ---------------------------------------------- |
+| `~/dev/okf-home-lab/documentation_watcher/watcher.py`            | modify (map, bundle mirroring, post_sync hook) |
+| `~/dev/okf-home-lab/scripts/post_sync.sh`                        | create                                         |
+| `~/dev/okf-home-lab/tests/test_watcher_map.py`                   | create                                         |
+| `~/dev/06-apps-aldo-f-github-io/mkdocs.en.yml` / `mkdocs.nl.yml` | modify (nav swap)                              |
+| `~/dev/06-apps-aldo-f-github-io/docs/en/okf-home-lab/`           | delete                                         |
+| `~/dev/06-apps-aldo-f-github-io/docs/{en,nl}/home-lab-docs.md`   | create                                         |
 
 ## Tests / validation
 

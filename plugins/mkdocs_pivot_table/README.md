@@ -33,12 +33,13 @@ Place a table in your markdown using the `[pivot-table]` wrapper:
 
 ```markdown
 [pivot-table]
-| Feature | npm | pnpm | Bun | pip | uv |
-|---------|-----|------|------|-----|----|
-| Speed   | Slow | Fast | Fastest | Slow | Fast |
-| Dedup  | No  | Yes  | Yes   | No  | Yes  |
-| Runtime| No  | Yes  | Yes   | No  | Yes  |
-| Maturity| High| High | Medium| High| Medium|
+
+| Feature  | npm  | pnpm | Bun     | pip  | uv     |
+| -------- | ---- | ---- | ------- | ---- | ------ |
+| Speed    | Slow | Fast | Fastest | Slow | Fast   |
+| Dedup    | No   | Yes  | Yes     | No   | Yes    |
+| Runtime  | No   | Yes  | Yes     | No   | Yes    |
+| Maturity | High | High | Medium  | High | Medium |
 
 [reset-pivot]
 ```

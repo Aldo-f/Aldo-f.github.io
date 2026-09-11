@@ -20,23 +20,23 @@ Ontwikkelaar Forrest Dunlap, die duidelijk vroeg "wat als we de afbeelding gewoo
 
 ## De doorbraak: ontologische compressie
 
-Traditionele compressie vraagt: *hoe herstel ik deze exacte pixels?* vibecompress vraagt: *wat als de pixels nooit uitmaakten?*
+Traditionele compressie vraagt: _hoe herstel ik deze exacte pixels?_ vibecompress vraagt: _wat als de pixels nooit uitmaakten?_
 
 De pipeline is prachtig simpel:
 
 1. **Compresseren**: Voer je afbeelding in bij `gpt-4o-mini` (via OpenRouter). Het schrijft een uitputtend, poëtisch beschrijving — elke textuur, schaduw, emotionele resonantie. Die tekst wordt gegzipt in een `.vbz`-container (~1 KB).
 2. **Decompresseren**: Voer de prompt in bij `flux.2-klein-4b`. Het droomt de afbeelding terug in het bestaan.
 
-Komt de output byte-voor-byte overeen met het origineel? **Absoluut niet.** Vangt het de *vibes*? **100%.**
+Komt de output byte-voor-byte overeen met het origineel? **Absoluut niet.** Vangt het de _vibes_? **100%.**
 
 ## Echte benchmarks (nee, echt)
 
-| Origineel | `.vbz` | Bespaard | Oordeel |
-|-----------|--------|----------|---------|
-| Red Shirt Girl at Café (330 KB) | 1.193 bytes | **99,64%** | 🟢 Ontspannen zelfvertrouwen; café-sfeer intact |
-| Gitarenkerel Illustratie (288 KB) | 1.259 bytes | **99,56%** | 🟢 Zuivere akoestische vreugde bewaard |
-| Eenzame Stormvogel (108 KB) | 1.091 bytes | **98,99%** | 🟢 Majestäteitsvolle bek; oceaan-eenzaamheid |
-| Spiffo de Wasbeer (355 KB) | 1.023 bytes | **99,72%** | 🟢 100% wasbeer-energie |
+| Origineel                         | `.vbz`      | Bespaard   | Oordeel                                         |
+| --------------------------------- | ----------- | ---------- | ----------------------------------------------- |
+| Red Shirt Girl at Café (330 KB)   | 1.193 bytes | **99,64%** | 🟢 Ontspannen zelfvertrouwen; café-sfeer intact |
+| Gitarenkerel Illustratie (288 KB) | 1.259 bytes | **99,56%** | 🟢 Zuivere akoestische vreugde bewaard          |
+| Eenzame Stormvogel (108 KB)       | 1.091 bytes | **98,99%** | 🟢 Majestäteitsvolle bek; oceaan-eenzaamheid    |
+| Spiffo de Wasbeer (355 KB)        | 1.023 bytes | **99,72%** | 🟢 100% wasbeer-energie                         |
 
 De [Evidence Locker](https://github.com/fmdunlap/vibecompress/blob/main/examples/README.md) heeft side-by-side vergelijkingen. De stormvogel krijgt een tweede bek. Het café-meisje krijgt een derde koffietasje. De bouwvisualisatie wordt surrealistisch zwevend bakwerk. **Features, geen bugs.**
 
@@ -46,43 +46,43 @@ Overtuig jezelf wat "de vibes vastpakken" echt betekent:
 
 ### 🎸 Gitarenkerel illustratie
 
-| Origineel | Herschapen |
-|-----------|------------|
+| Origineel                                                                                            | Herschapen                                                                                           |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | ![Origineel](https://github.com/fmdunlap/vibecompress/raw/main/examples/illustration_guitar_guy.png) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/illustration_guitar_guy.vibe.png) |
 
-*288 KB → 1,2 KB. De jongen blijft met vreugde strummen — zij het een iets andere jongen.*
+_288 KB → 1,2 KB. De jongen blijft met vreugde strummen — zij het een iets andere jongen._
 
 ### 🐧 Eenzame stormvogel
 
-| Origineel | Herschapen |
-|-----------|------------|
+| Origineel                                                                           | Herschapen                                                                          |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | ![Origineel](https://github.com/fmdunlap/vibecompress/raw/main/examples/puffin.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/puffin.vibe.png) |
 
-*108 KB → 1 KB. Majestäteitsvolle bek bewaard, zij het iets oranger dan de realiteit toeliet.*
+_108 KB → 1 KB. Majestäteitsvolle bek bewaard, zij het iets oranger dan de realiteit toeliet._
 
 ### ☕ Rood shirtmeisje bij café
 
-| Origineel | Herschapen |
-|-----------|------------|
+| Origineel                                                                                   | Herschapen                                                                                  |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | ![Origineel](https://github.com/fmdunlap/vibecompress/raw/main/examples/red_shirt_girl.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/red_shirt_girl.vibe.png) |
 
-*330 KB → 1,2 KB. Ontspannen zelfvertrouwen; café-sfeer intact. De koffiekop is nu misschien in haar linkerhand.*
+_330 KB → 1,2 KB. Ontspannen zelfvertrouwen; café-sfeer intact. De koffiekop is nu misschien in haar linkerhand._
 
 ### 🥤 Soda statue
 
-| Origineel | Herschapen |
-|-----------|------------|
+| Origineel                                                                                | Herschapen                                                                               |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | ![Origineel](https://github.com/fmdunlap/vibecompress/raw/main/examples/soda_statue.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/soda_statue.vibe.png) |
 
-*172 KB → 1,4 KB. Translucide cola-aura. Je kunt de koolzuur bijna proeven.*
+_172 KB → 1,4 KB. Translucide cola-aura. Je kunt de koolzuur bijna proeven._
 
 ### 🧱 Zwijvende architectuur
 
-| Origineel | Herschapen |
-|-----------|------------|
+| Origineel                                                                                           | Herschapen                                                                                          |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | ![Origineel](https://github.com/fmdunlap/vibecompress/raw/main/examples/construction_rendering.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/construction_rendering.vibe.png) |
 
-*128 KB → 1,5 KB. Zwevend bakwerk. Fysica is slechts een suggestie.*
+_128 KB → 1,5 KB. Zwevend bakwerk. Fysica is slechts een suggestie._
 
 ---
 
@@ -108,7 +108,7 @@ De README's FAQ is een meesterklasse in herkaderen:
 
 - [x] Afbeeldingen (`.vbz`)
 - [ ] **Audio (`.vbza`)**: Transcriberen via Whisper → tekst comprimeren → decomprimeren door Suno een death metal cover te laten genereren
-- [ ] **Video (`.vbzv`)**: Elke 10-minutenscene samenvatten in een haiku. Reconstructeren met Sora. De hele *Lord of the Rings*-trilogie opslaan in 14 KB
+- [ ] **Video (`.vbzv`)**: Elke 10-minutenscene samenvatten in een haiku. Reconstructeren met Sora. De hele _Lord of the Rings_-trilogie opslaan in 14 KB
 - [ ] **Vibe-Diff**: Git diff-tool die je alleen waarschuwt als de spirituele aura van je bedrijfslogo is verminderd
 
 ## Zelf proberen (nul dependencies)
@@ -126,4 +126,4 @@ Geen API-key? `npx vibecompress -s -i foto.jpg` draait in offline mock-modus.
 
 ---
 
-*Bron: [fmdunlap/vibecompress](https://github.com/fmdunlap/vibecompress) — MIT-licentie. "Geen pixels zijn gekwetst bij het maken van dit formaat (ze zijn gewoon verwijderd)."*
+_Bron: [fmdunlap/vibecompress](https://github.com/fmdunlap/vibecompress) — MIT-licentie. "Geen pixels zijn gekwetst bij het maken van dit formaat (ze zijn gewoon verwijderd)."_

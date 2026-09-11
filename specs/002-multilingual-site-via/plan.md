@@ -28,13 +28,13 @@ strict builds + served-route assertions on merged `site/`)
 
 ## Constitution Check
 
-| Principle | Status | Evidence |
-|-----------|--------|----------|
-| I. Build Purity | PASS | FR-6/SC-1: both builds strict zero-warning |
-| II. Nav-Explicitness | PASS | Each language build has its own explicit `nav:` |
-| III. Upstream-First | PASS | Uses Material's official multi-build recipe (#2346); no new deps; rejected third-party i18n plugin |
-| IV. Output Hygiene | PASS | Only tracked sources added; `site/` stays ignored |
-| V. Verified Before Deployed | PASS | RED captured before restructure; GREEN = harness 100% ×2 interpreters; CI + live curl checks |
+| Principle                   | Status | Evidence                                                                                           |
+| --------------------------- | ------ | -------------------------------------------------------------------------------------------------- |
+| I. Build Purity             | PASS   | FR-6/SC-1: both builds strict zero-warning                                                         |
+| II. Nav-Explicitness        | PASS   | Each language build has its own explicit `nav:`                                                    |
+| III. Upstream-First         | PASS   | Uses Material's official multi-build recipe (#2346); no new deps; rejected third-party i18n plugin |
+| IV. Output Hygiene          | PASS   | Only tracked sources added; `site/` stays ignored                                                  |
+| V. Verified Before Deployed | PASS   | RED captured before restructure; GREEN = harness 100% ×2 interpreters; CI + live curl checks       |
 
 ## Design Decisions
 
@@ -56,7 +56,7 @@ strict builds + served-route assertions on merged `site/`)
 5. **Harness v2**: stages each language separately (copies the three configs +
    that language's `docs/`), probes publishing on EN, serves merged `site/`
    and asserts EN regressions + NL routes + selector/hreflang/lang attributes
-   + NL category table {General:1, Scrum:2, VDAB:2}, draft absence in both.
+   - NL category table {General:1, Scrum:2, VDAB:2}, draft absence in both.
 
 ## Project Structure
 

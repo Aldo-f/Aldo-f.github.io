@@ -15,13 +15,13 @@ Floating chat widget on `aldo-f.github.io` (MkDocs docs site) that connects to t
 
 ## Clarifications Confirmed
 
-| Item | Decision | Source |
-|------|----------|--------|
-| `RAG_API_KEY` injection | GitHub Secret `RAG_API_KEY` → env var → injected at build time in `chat.py` | User confirmed |
-| Data source | `rag.aldof.duckdns.org` only — no direct OKF `.specify/` query | User confirmed |
-| Sources in UI | YES — show `data.sources` inline in chat as citations | User deferred to agent recommendation |
-| Fallback | Show error message when RAG endpoint unreachable | User confirmed |
-| RAG service location | `~/dev/okf-home-lab/` — no rename needed | User to decide |
+| Item                    | Decision                                                                    | Source                                |
+| ----------------------- | --------------------------------------------------------------------------- | ------------------------------------- |
+| `RAG_API_KEY` injection | GitHub Secret `RAG_API_KEY` → env var → injected at build time in `chat.py` | User confirmed                        |
+| Data source             | `rag.aldof.duckdns.org` only — no direct OKF `.specify/` query              | User confirmed                        |
+| Sources in UI           | YES — show `data.sources` inline in chat as citations                       | User deferred to agent recommendation |
+| Fallback                | Show error message when RAG endpoint unreachable                            | User confirmed                        |
+| RAG service location    | `~/dev/okf-home-lab/` — no rename needed                                    | User to decide                        |
 
 ---
 
@@ -34,6 +34,7 @@ Floating chat widget on `aldo-f.github.io` (MkDocs docs site) that connects to t
 **Independent Test**: Open any docs page, click chat button, type "What is the Blanky main docs?", receive response from RAG showing `data.answer` and `data.sources` citations.
 
 **Acceptance Scenarios**:
+
 1. Given visitor on docs page, When clicking floating button (bottom-right), Then chat panel opens.
 2. Given chat open, When user enters a question, Then `fetch` sends POST to `rag.aldof.duckdns.org/search` with correct `Content-Type` and `X-API-Key` (from GitHub Secret).
 3. Given successful response, When response contains `data.answer`, Then message appears in chat with sources below.
@@ -66,12 +67,12 @@ Floating chat widget on `aldo-f.github.io` (MkDocs docs site) that connects to t
 
 No persistent DB needed.
 
-| Field | Type | Source | Notes |
-|-------|------|--------|-------|
-| `messages` | array | In-memory JS | Per-session, not persisted |
-| `message.text` | string | User input or `data.answer` | Plain text (no markdown render in v1) |
-| `data.answer` | string | RAG response | Displayed as AI message |
-| `data.sources` | array | RAG response | Rendered as citation links below answer |
+| Field          | Type   | Source                      | Notes                                   |
+| -------------- | ------ | --------------------------- | --------------------------------------- |
+| `messages`     | array  | In-memory JS                | Per-session, not persisted              |
+| `message.text` | string | User input or `data.answer` | Plain text (no markdown render in v1)   |
+| `data.answer`  | string | RAG response                | Displayed as AI message                 |
+| `data.sources` | array  | RAG response                | Rendered as citation links below answer |
 
 ---
 

@@ -43,6 +43,7 @@ Resultaat: 50% minder kleurgegevens, met minimaal zichtbaar effect.
 Hier wordt het interessant. De JPEG-codec verdeelt de afbeelding in blokjes van 8x8 pixels. Voor elk blokje voert het de **Discrete Cosine Transform** uit — een wiskundige transformatie die de pixels omzet in frequenties.
 
 In plaats van te zeggen "pixel (2,3) is rood met waarde 187", zegt DCT: "dit blokje bestaat uit:
+
 - 1 gemiddelde helderheid (lage frequentie)
 - Een paar lichte schaduwen (middelhoge frequenties)
 - Geen harde randen (geen hoge frequenties)"
@@ -62,7 +63,7 @@ De kwantisatietabel is instelbaar: hogere waarden = meer compressie = slechtere 
 
 ## Stap 5: Zig-Zag Scannen
 
-De 8x8 matrix wordt nu in één lange rij gezet via een **zig-zag patroon**: van linksboven (laagste frequentie) naar rechtsonder (hoogste frequentie). 
+De 8x8 matrix wordt nu in één lange rij gezet via een **zig-zag patroon**: van linksboven (laagste frequentie) naar rechtsonder (hoogste frequentie).
 
 Waarom? Omdat na kwantisatie de rechteronderhoek vol nul wordt. Die nullen kunnen we efficiënt comprimeren met RUNLENGTH-codering.
 
@@ -75,7 +76,7 @@ Resultaat: een compact bitstream die de foto kan opslaan.
 ## Het Resultaat: Hoe Klinkt JPEG-Compressie in Getallen?
 
 | Origineel (RAW) | JPEG (kwaliteit 85) | JPEG (kwaliteit 50) |
-|-----------------|---------------------|---------------------|
+| --------------- | ------------------- | ------------------- |
 | 20.000 KB       | ~800 KB (96% klein) | ~200 KB (99% klein) |
 
 Opvallend: de "kwaliteit 50"-versie ziet er nog redelijk goed uit op schermgrootte, maar krijgt duidelijke blokkende artefacten bij close-up.
@@ -98,8 +99,8 @@ Voor die doeleinden bestaat PNG (lossless) of WebP (moderne opvolger). Maar voor
 
 JPEG werkt niet door te gissen wat de foto voorstelt (zoals AI-tools), maar door de foto wiskundig te ontleeden in frequenties, onbelangrijke details weg te knippen, en de rest compacter op te slaan. Het is compressie door slimme verwijdering, niet door hallucinatie.
 
-En dat is het essentiële verschil: bij JPEG weet je wat er op de foto zat. Bij AI-compressie weet je alleen wat *vibe* de foto had.
+En dat is het essentiële verschil: bij JPEG weet je wat er op de foto zat. Bij AI-compressie weet je alleen wat _vibe_ de foto had.
 
 ---
 
-*Lees ook: waarom we vibecompress niet serieus moeten nemen — [Waarom pixels opslaan als je vibes kan opslaan?](../2026/09/05/waarom-pixels-opslaan-als-je-vibes-kan-opslaan-ontmoet-vibecompress/)*
+_Lees ook: waarom we vibecompress niet serieus moeten nemen — [Waarom pixels opslaan als je vibes kan opslaan?](../2026/09/05/waarom-pixels-opslaan-als-je-vibes-kan-opslaan-ontmoet-vibecompress/)_

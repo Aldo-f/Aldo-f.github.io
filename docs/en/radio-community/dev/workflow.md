@@ -35,6 +35,7 @@ The container mounts `./frontend/dist` as read-only. This means:
 4. **Changes are immediately visible** - no Docker rebuild required
 
 Why this works:
+
 - Local `npm run build` writes to `frontend/dist/`
 - Container reads from mounted volume
 - No need to rebuild Docker image for frontend changes
@@ -42,6 +43,7 @@ Why this works:
 ### Backend Changes
 
 Rebuild required when changing:
+
 - `server.js` (backend code)
 - Adding new npm dependencies
 - Changing `Dockerfile` or `docker-compose.yml`
@@ -97,6 +99,7 @@ Downloaded music files are chowned to www-data:www-data (Dockerfile creates user
 ## Music Storage
 
 Music files are stored in the mounted host folder:
+
 ```
 /mnt/HDD1/nextcloud/data/aldo/files/Documents/Torrents/music/
 ```

@@ -87,6 +87,7 @@ Villa Politica
 ```
 
 Run `./thuis.sh --watchlist watchlists/tv.txt` via cron (or systemd timer) and it:
+
 - Checks for new episodes of each show
 - Classifies each episode (DRM vs clear)
 - Downloads using the appropriate pipeline
@@ -106,7 +107,8 @@ Three hard-won lessons:
 
 ## The Result
 
-What started as "can I download *De Slimste Mens* for offline viewing?" became a robust, self-hosted pipeline that:
+What started as "can I download _De Slimste Mens_ for offline viewing?" became a robust, self-hosted pipeline that:
+
 - Runs on a €80 Raspberry Pi 5
 - Handles both DRM and non-DRM content transparently
 - Schedules via simple watchlist files
@@ -116,4 +118,4 @@ The code lives in `~/dev/06-apps-thuis-v4` (submodule in the home-lab monorepo).
 
 ---
 
-*This post is based on commits `dc1f9d6` (DRM detection), `24403d2` (pywidevine integration), `bb4036e` (watchlist scheduler), and `7bafb52` (fallback optimization) in the thuis-v4 repository. All commits and test runs are verifiable in the `~/dev` git history.*
+_This post is based on commits `dc1f9d6` (DRM detection), `24403d2` (pywidevine integration), `bb4036e` (watchlist scheduler), and `7bafb52` (fallback optimization) in the thuis-v4 repository. All commits and test runs are verifiable in the `~/dev` git history._

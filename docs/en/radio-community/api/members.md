@@ -7,11 +7,11 @@ description: Members API endpoints reference
 
 ## Endpoints
 
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | `/api/communities/:id/members` | Yes | List members |
-| POST | `/api/communities/:id/members` | Yes | Add member |
-| DELETE | `/api/communities/:id/members/:userId` | Yes | Remove member |
+| Method | Endpoint                               | Auth | Description   |
+| ------ | -------------------------------------- | ---- | ------------- |
+| GET    | `/api/communities/:id/members`         | Yes  | List members  |
+| POST   | `/api/communities/:id/members`         | Yes  | Add member    |
+| DELETE | `/api/communities/:id/members/:userId` | Yes  | Remove member |
 
 ## GET /api/communities/:id/members
 
@@ -63,19 +63,17 @@ Add a member to a community. Requires admin permissions.
 
 ### Roles
 
-| Role | Description |
-|------|-------------|
-| `owner` | Community creator (can delete, manage admins) |
-| `admin` | Community admin (manage members, sources, streams) |
-| `member` | Regular member (listen, vote) |
+| Role     | Description                                        |
+| -------- | -------------------------------------------------- |
+| `owner`  | Community creator (can delete, manage admins)      |
+| `admin`  | Community admin (manage members, sources, streams) |
+| `member` | Regular member (listen, vote)                      |
 
-!!! note "Adding Members"
-    - Owners can add admins or members
-    - Admins can only add members (not other admins)
+!!! note "Adding Members" - Owners can add admins or members - Admins can only add members (not other admins)
 
 ## DELETE /api/communities/:id/members/:userId
 
 Remove a member from a community. Requires admin permissions.
 
 !!! warning "Removing Admins"
-    Only owners and platform admins can remove admins. Regular admins cannot remove other admins.
+Only owners and platform admins can remove admins. Regular admins cannot remove other admins.

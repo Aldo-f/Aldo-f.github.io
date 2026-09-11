@@ -110,7 +110,7 @@ The following are explicitly OUT OF SCOPE for this first iteration:
 
 ## Review & Acceptance Checklist
 
-*Gate phase: G - -*
+_Gate phase: G - -_
 
 - [ ] FR-1..FR-9 testable and unambiguous
 - [ ] Success criteria measurable and technology-agnostic where possible

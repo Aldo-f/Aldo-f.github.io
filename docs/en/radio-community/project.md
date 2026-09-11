@@ -3,6 +3,7 @@
 ## Overview
 
 **Radio Community** is a democratic internet radio platform where community members can:
+
 - Create and manage radio communities
 - Add music from various sources (Joe.be, Deezer, manual uploads)
 - Vote on tracks (swipe left/right)
@@ -44,67 +45,76 @@ radio-community/
 ## Stream Creation Flow
 
 ### Current Flow (Fixed 2026-03-28)
+
 1. **Create Community** - User creates community with name + description
 2. **Select Source** - User selects music source (joe_easy/deezer/manual) during creation
 3. **Fetch Tracks** - System fetches tracks from source
 4. **Auto-create Stream** - Stream is automatically created/started after tracks exist
 
 ### Key Behavior
+
 - **Stream NOT created during community creation** - prevents empty playlist issues
 - **Stream auto-restarts** when new tracks are added via fetch or sync
 - **Stream controls** available in admin UI (start/stop/restart)
 
 ### Previous Issue (Fixed)
+
 Previously, streams were created immediately during community creation (before sources existed), resulting in empty playlists and non-functional streams.
 
 ## API Endpoints
 
 ### Communities
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | /api/communities | No | List all communities |
-| GET | /api/communities/:id | Yes | Get community details |
-| POST | /api/communities | Yes | Create community (no stream creation) |
-| PUT | /api/communities/:id | Yes | Update community |
-| DELETE | /api/communities/:id | Yes | Delete community |
+
+| Method | Endpoint             | Auth | Description                           |
+| ------ | -------------------- | ---- | ------------------------------------- |
+| GET    | /api/communities     | No   | List all communities                  |
+| GET    | /api/communities/:id | Yes  | Get community details                 |
+| POST   | /api/communities     | Yes  | Create community (no stream creation) |
+| PUT    | /api/communities/:id | Yes  | Update community                      |
+| DELETE | /api/communities/:id | Yes  | Delete community                      |
 
 ### Sources
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | /api/communities/:id/sources | Yes | List sources |
-| POST | /api/communities/:id/sources | Yes | Create source |
-| PUT | /api/communities/:id/sources/:sourceId | Yes | Update source |
-| DELETE | /api/communities/:id/sources/:sourceId | Yes | Delete source |
-| POST | /api/communities/:id/sources/:sourceId/fetch | Yes | Fetch tracks from source |
-| POST | /api/communities/:id/sync | Yes | Sync tracks with filesystem |
+
+| Method | Endpoint                                     | Auth | Description                 |
+| ------ | -------------------------------------------- | ---- | --------------------------- |
+| GET    | /api/communities/:id/sources                 | Yes  | List sources                |
+| POST   | /api/communities/:id/sources                 | Yes  | Create source               |
+| PUT    | /api/communities/:id/sources/:sourceId       | Yes  | Update source               |
+| DELETE | /api/communities/:id/sources/:sourceId       | Yes  | Delete source               |
+| POST   | /api/communities/:id/sources/:sourceId/fetch | Yes  | Fetch tracks from source    |
+| POST   | /api/communities/:id/sync                    | Yes  | Sync tracks with filesystem |
 
 ### Tracks
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | /api/communities/:id/tracks | Yes | Get tracks with scores |
-| POST | /api/communities/:id/votes | Yes | Vote on track |
-| GET | /api/communities/:id/playlist.m3u | Yes | Get M3U playlist |
+
+| Method | Endpoint                          | Auth | Description            |
+| ------ | --------------------------------- | ---- | ---------------------- |
+| GET    | /api/communities/:id/tracks       | Yes  | Get tracks with scores |
+| POST   | /api/communities/:id/votes        | Yes  | Vote on track          |
+| GET    | /api/communities/:id/playlist.m3u | Yes  | Get M3U playlist       |
 
 ### Members
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | /api/communities/:id/members | Yes | List members |
-| POST | /api/communities/:id/members | Yes | Add member |
-| DELETE | /api/communities/:id/members/:userId | Yes | Remove member |
+
+| Method | Endpoint                             | Auth | Description   |
+| ------ | ------------------------------------ | ---- | ------------- |
+| GET    | /api/communities/:id/members         | Yes  | List members  |
+| POST   | /api/communities/:id/members         | Yes  | Add member    |
+| DELETE | /api/communities/:id/members/:userId | Yes  | Remove member |
 
 ### Stream Management
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | /api/communities/:id/stream | Yes | Get stream status |
-| POST | /api/communities/:id/stream/start | Yes | Start stream |
-| POST | /api/communities/:id/stream/stop | Yes | Stop stream |
-| POST | /api/communities/:id/stream/restart | Yes | Restart stream |
-| GET | /api/stream | No | Redirect to Icecast |
-| GET | /stream/:communityId | Yes | Proxy to Icecast |
+
+| Method | Endpoint                            | Auth | Description         |
+| ------ | ----------------------------------- | ---- | ------------------- |
+| GET    | /api/communities/:id/stream         | Yes  | Get stream status   |
+| POST   | /api/communities/:id/stream/start   | Yes  | Start stream        |
+| POST   | /api/communities/:id/stream/stop    | Yes  | Stop stream         |
+| POST   | /api/communities/:id/stream/restart | Yes  | Restart stream      |
+| GET    | /api/stream                         | No   | Redirect to Icecast |
+| GET    | /stream/:communityId                | Yes  | Proxy to Icecast    |
 
 ## Permissions
 
 ### Roles
+
 - **Owner**: User who created the community (can delete community, add/remove admins)
 - **Community Admin**: Member with role='admin' in community_members (everything except delete/add-remove admins)
 - **Community Member**: Member with role='member' in community_members (listen, vote)
@@ -112,65 +122,76 @@ Previously, streams were created immediately during community creation (before s
 - **Non-member**: Logged-in user who is NOT a member of this community
 
 ### Global Admin
+
 The platform admin is defined by the `ADMIN_EMAIL` environment variable (default: `aldo@test.be`). Platform admins have elevated permissions across ALL communities - they can manage any community even without being a member.
 
 ### Permission Matrix
 
-| Action | Owner | Community Admin | Platform Admin | Community Member | Non-member |
-|--------|-------|-----------------|----------------|------------------|------------|
-| **Community** |
-| View community | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Update community | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Delete community | ✅ | ❌ | ✅ | ❌ | ❌ |
-| **Stream** |
-| View stream status | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Start stream | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Stop stream | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Restart stream | ✅ | ✅ | ✅ | ❌ | ❌ |
-| **Sources** |
-| List sources | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Create source | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Update source | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Delete source | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Fetch tracks | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Activate source | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Sync tracks | ✅ | ✅ | ✅ | ❌ | ❌ |
-| **Members** |
-| List members | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Add member (as admin) | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Add member (as member) | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Remove member (who is admin) | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Remove member (who is member) | ✅ | ✅ | ✅ | ❌ | ❌ |
-| **Tracks** |
-| View tracks | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Vote on tracks | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Update track | ✅ | ✅ | ✅ | ❌ | ❌ |
-| **Global (any community)** |
-| Scan sources | - | - | ✅ | - | ❌ |
-| Manage affiliates | - | - | ✅ | - | ❌ |
+| Action                        | Owner | Community Admin | Platform Admin | Community Member | Non-member |
+| ----------------------------- | ----- | --------------- | -------------- | ---------------- | ---------- |
+| **Community**                 |
+| View community                | ✅    | ✅              | ✅             | ✅               | ✅         |
+| Update community              | ✅    | ✅              | ✅             | ❌               | ❌         |
+| Delete community              | ✅    | ❌              | ✅             | ❌               | ❌         |
+| **Stream**                    |
+| View stream status            | ✅    | ✅              | ✅             | ✅               | ❌         |
+| Start stream                  | ✅    | ✅              | ✅             | ❌               | ❌         |
+| Stop stream                   | ✅    | ✅              | ✅             | ❌               | ❌         |
+| Restart stream                | ✅    | ✅              | ✅             | ❌               | ❌         |
+| **Sources**                   |
+| List sources                  | ✅    | ✅              | ✅             | ✅               | ❌         |
+| Create source                 | ✅    | ✅              | ✅             | ❌               | ❌         |
+| Update source                 | ✅    | ✅              | ✅             | ❌               | ❌         |
+| Delete source                 | ✅    | ✅              | ✅             | ❌               | ❌         |
+| Fetch tracks                  | ✅    | ✅              | ✅             | ❌               | ❌         |
+| Activate source               | ✅    | ✅              | ✅             | ❌               | ❌         |
+| Sync tracks                   | ✅    | ✅              | ✅             | ❌               | ❌         |
+| **Members**                   |
+| List members                  | ✅    | ✅              | ✅             | ✅               | ❌         |
+| Add member (as admin)         | ✅    | ❌              | ✅             | ❌               | ❌         |
+| Add member (as member)        | ✅    | ✅              | ✅             | ❌               | ❌         |
+| Remove member (who is admin)  | ✅    | ❌              | ✅             | ❌               | ❌         |
+| Remove member (who is member) | ✅    | ✅              | ✅             | ❌               | ❌         |
+| **Tracks**                    |
+| View tracks                   | ✅    | ✅              | ✅             | ✅               | ❌         |
+| Vote on tracks                | ✅    | ✅              | ✅             | ✅               | ❌         |
+| Update track                  | ✅    | ✅              | ✅             | ❌               | ❌         |
+| **Global (any community)**    |
+| Scan sources                  | -     | -               | ✅             | -                | ❌         |
+| Manage affiliates             | -     | -               | ✅             | -                | ❌         |
 
 ### Implementation
+
 Admin access is checked via `isAdmin(req.user)` function in `utils/auth.js`:
+
 ```javascript
-const ADMIN_EMAIL = 'aldo@test.be';
+const ADMIN_EMAIL = "aldo@test.be";
 
 function isPlatformAdmin(user) {
-    return user && user.email === ADMIN_EMAIL;
+  return user && user.email === ADMIN_EMAIL;
 }
 ```
 
 For DRY permission handling, use the helper functions:
-```javascript
-const { PERMISSIONS, requirePermission } = require('./utils/auth');
 
-app.delete('/api/communities/:id', authenticateToken, async (req, res) => {
-    const denied = await requirePermission(req.user, communityId, PERMISSIONS.DELETE_COMMUNITY, dbGet, res);
-    if (denied) return denied;
-    // ... rest of handler
+```javascript
+const { PERMISSIONS, requirePermission } = require("./utils/auth");
+
+app.delete("/api/communities/:id", authenticateToken, async (req, res) => {
+  const denied = await requirePermission(
+    req.user,
+    communityId,
+    PERMISSIONS.DELETE_COMMUNITY,
+    dbGet,
+    res,
+  );
+  if (denied) return denied;
+  // ... rest of handler
 });
 ```
 
 Available helpers in `utils/auth.js`:
+
 - `isPlatformAdmin(user)` - Check if user is platform admin
 - `getUserRole(user, communityId, db)` - Get user's role in community
 - `hasPermission(user, communityId, permission, db)` - Check specific permission
@@ -181,23 +202,29 @@ Available helpers in `utils/auth.js`:
 ### Tables
 
 **communities**
+
 - id, name, slug, description, owner_user_id, active, created_at
 
 **sources**
+
 - id, community_id, type (joe_easy/deezer/manual), name, config_json, enabled
 
 **tracks**
+
 - id, source_id, title, artist, album, duration, bpm, deezer_id, file_path
 
 **community_members**
+
 - id, community_id, user_id, role (admin/member), stream_key
 
 **votes**
+
 - id, played_instance_id, user_id, value (-1/0/1), created_at
 
 ## 2-Step Community Creation
 
 ### User Flow
+
 1. **Step 1 - Community Info**
    - Enter community name (required)
    - Add description (optional)
@@ -211,6 +238,7 @@ Available helpers in `utils/auth.js`:
    - Click "Create" to complete
 
 ### Backend Flow
+
 1. POST /api/communities → create community
 2. POST /api/communities/:id/sources → create source
 3. POST /api/communities/:id/sources/:sourceId/fetch → fetch tracks (skip for manual)
@@ -226,6 +254,7 @@ Available helpers in `utils/auth.js`:
 ## Playlist Algorithm
 
 ### Score Calculation
+
 ```
 voteScore = (positive_votes - negative_votes) × 10
 freshnessBonus = min(days_since_added × 0.5, 10)
@@ -263,18 +292,23 @@ The stream uses weighted random selection with variety filters:
 ## Stream Management (Admin)
 
 ### Status Display
+
 The ManageCommunityPage shows stream status:
+
 - Stream Exists: Yes/No
 - Running: Yes/No/N/A
 - Container Name
 
 ### Manual Controls
+
 - **Start**: Create and start stream if not exists
 - **Stop**: Stop running stream (with confirmation)
 - **Restart**: Restart stream to pick up new tracks
 
 ### Automatic Stream Restart
+
 Stream automatically restarts when new tracks are added (so Liquidsoap picks up the updated playlist):
+
 1. New tracks fetched via joe_easy source
 2. New tracks fetched via deezer source
 3. Tracks synced via /sync endpoint
@@ -284,32 +318,35 @@ Stream automatically restarts when new tracks are added (so Liquidsoap picks up 
 ## Development Workflow
 
 ### Frontend Changes
+
 1. Make changes in `frontend/src/`
 2. Build: `cd frontend && npm run build`
 3. **No container restart needed** - frontend/dist is mounted as volume
 
 ### Backend Changes
+
 1. Changes to server.js require rebuild: `docker compose up -d --build`
 
 ## Environment Variables
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| PORT | 3000 | Server port |
-| DATABASE_URL | - | PostgreSQL connection string (required) |
-| AUTH_SERVICE_URL | http://auth-service:3008 | Auth service |
-| MUSIC_PATH | /music | Music storage |
-| DEEZER_ARL | - | Deezer download token |
-| SOURCE_JOE | https://api.joe.be/2.0 | Joe.be API URL |
-| JOE_STATION_ID | joe_easy | Default Joe.be station |
-| DEEZER_API_BASE | https://api.deezer.com | Deezer API |
-| ICECAST_HOST | icecast | Icecast server |
-| ICECAST_PORT | 8000 | Icecast port |
-| ADMIN_EMAIL | aldo@test.be | Platform admin email |
+| Variable         | Default                  | Description                             |
+| ---------------- | ------------------------ | --------------------------------------- |
+| PORT             | 3000                     | Server port                             |
+| DATABASE_URL     | -                        | PostgreSQL connection string (required) |
+| AUTH_SERVICE_URL | http://auth-service:3008 | Auth service                            |
+| MUSIC_PATH       | /music                   | Music storage                           |
+| DEEZER_ARL       | -                        | Deezer download token                   |
+| SOURCE_JOE       | https://api.joe.be/2.0   | Joe.be API URL                          |
+| JOE_STATION_ID   | joe_easy                 | Default Joe.be station                  |
+| DEEZER_API_BASE  | https://api.deezer.com   | Deezer API                              |
+| ICECAST_HOST     | icecast                  | Icecast server                          |
+| ICECAST_PORT     | 8000                     | Icecast port                            |
+| ADMIN_EMAIL      | aldo@test.be             | Platform admin email                    |
 
 ## Recent Changes (2026-03-29)
 
 ### Permission System Refactor
+
 1. **Created `utils/auth.js`**: DRY permission system with:
    - `ROLES` enum: OWNER, COMMUNITY_ADMIN, MEMBER, NON_MEMBER, PLATFORM_ADMIN
    - `PERMISSIONS` enum: 24 permission constants
@@ -319,16 +356,19 @@ Stream automatically restarts when new tracks are added (so Liquidsoap picks up 
 3. **Fixed isAdmin call signatures**: Changed `isAdmin(req.user.email)` to `isAdmin(req.user)` in 4 places
 
 ### Test Infrastructure Fix
+
 1. **Fixed missing imports**: Added `@playwright/test` imports to:
    - `tests/api/02-seed-flow.spec.js`
    - `tests/api/03-seed-source-create.spec.js`
 2. **Excluded unit tests**: Added `testIgnore` to `playwright.config.js`
 
 ### Files Changed (Permission System)
+
 - `utils/auth.js` (new - 260 lines)
 - `server.js` - Updated permission checks
 
 ### Files Changed (Tests)
+
 - `tests/api/02-seed-flow.spec.js` - Added Playwright import
 - `tests/api/03-seed-source-create.spec.js` - Added Playwright import
 - `playwright.config.js` - Added testIgnore for unit tests
@@ -338,6 +378,7 @@ Stream automatically restarts when new tracks are added (so Liquidsoap picks up 
 ## Recent Changes (2026-03-28)
 
 ### Stream Fix & 2-Step Creation
+
 1. **Fixed stream creation timing**: Removed stream creation from community creation (was causing empty playlists)
 2. **Auto-restart after track fetch**: Added streamManager.restartCommunityStream() after successful fetches
 3. **2-step CreateCommunityPage**: Community info → source selection → auto-create
@@ -345,6 +386,7 @@ Stream automatically restarts when new tracks are added (so Liquidsoap picks up 
 5. **Stream controls**: Start/Stop/Restart buttons with loading states
 
 ### Files Changed (Stream Fix)
+
 - `server.js` - Removed line 828-833, added restart calls at lines 1522-1529, 2087-2090, 2140-2143
 - `frontend/src/pages/CreateCommunityPage.tsx` - Complete rewrite with 2-step form
 - `frontend/src/pages/ManageCommunityPage.tsx` - Added stream status & controls
@@ -352,6 +394,7 @@ Stream automatically restarts when new tracks are added (so Liquidsoap picks up 
 ## Previous Refactoring (2026-03-27)
 
 ### Completed
+
 1. **Dead code removal**: Removed server.js.backup, debug-test.js, duplicate directory
 2. **DRY - Backend**: Extracted setOwnership to utils/fileUtils.js
 3. **DRY - Frontend**: Created shared types in frontend/src/types/index.ts
@@ -360,6 +403,7 @@ Stream automatically restarts when new tracks are added (so Liquidsoap picks up 
 4. **Middleware**: Created server/middleware/auth.js, membership.js
 
 ### Files Changed (Refactoring)
+
 - `utils/fileUtils.js` (new)
 - `streams/deezerDownloader.js` (refactored)
 - `streams/joeBeDownloader.js` (refactored)

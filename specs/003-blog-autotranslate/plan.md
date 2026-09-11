@@ -13,13 +13,13 @@ code fences through untouched, appending a provenance marker. Dry-run default,
 
 ## Key decisions
 
-| Decision | Rationale |
-|----------|-----------|
-| Script tool, not build-time MkDocs plugin | CI deploys must not spend API quota or publish unreviewed machine translation; output is committed after human review |
-| Plain DeepL mode, block-wise batching | `tag_handling=markdown` unsupported on free tier (HTTP 400 verified); blank-line block splitting keeps requests small and diffs clean |
-| Categories kept verbatim | Shared taxonomy across languages; NL table currently already uses neutral names |
-| Slugs identical across languages | 1:1 mapping enables gap detection and stable URLs (`/nl/blog/<same-path>`) |
-| Key from `DEEPL_API_KEY` or `~/.config/deepl/api_key` | Never in repo/git; file chmod 600 |
+| Decision                                              | Rationale                                                                                                                             |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Script tool, not build-time MkDocs plugin             | CI deploys must not spend API quota or publish unreviewed machine translation; output is committed after human review                 |
+| Plain DeepL mode, block-wise batching                 | `tag_handling=markdown` unsupported on free tier (HTTP 400 verified); blank-line block splitting keeps requests small and diffs clean |
+| Categories kept verbatim                              | Shared taxonomy across languages; NL table currently already uses neutral names                                                       |
+| Slugs identical across languages                      | 1:1 mapping enables gap detection and stable URLs (`/nl/blog/<same-path>`)                                                            |
+| Key from `DEEPL_API_KEY` or `~/.config/deepl/api_key` | Never in repo/git; file chmod 600                                                                                                     |
 
 ## Constitution check
 

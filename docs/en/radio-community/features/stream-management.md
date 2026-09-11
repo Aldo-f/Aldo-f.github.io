@@ -8,11 +8,13 @@ description: Radio Community stream management documentation
 ## Stream Components
 
 ### Icecast
+
 - Stream distribution server
 - Listens on port 8000 (configurable via ICECAST_PORT)
 - Serves mount points for each community
 
 ### Liquidsoap
+
 - Stream automation and playlist generation
 - Feeds audio to Icecast
 - Manages track selection based on algorithm
@@ -21,26 +23,26 @@ description: Radio Community stream management documentation
 
 The ManageCommunityPage shows stream status:
 
-| Field | Values |
-|-------|--------|
-| Stream Exists | Yes / No |
-| Running | Yes / No / N/A |
-| Container Name | string / null |
+| Field          | Values         |
+| -------------- | -------------- |
+| Stream Exists  | Yes / No       |
+| Running        | Yes / No / N/A |
+| Container Name | string / null  |
 
 ## Manual Controls
 
-| Action | Description | Permission |
-|--------|-------------|------------|
-| **Start** | Create and start stream if not exists | Admin |
-| **Stop** | Stop running stream (with confirmation) | Admin |
-| **Restart** | Restart stream to pick up new tracks | Admin |
+| Action      | Description                             | Permission |
+| ----------- | --------------------------------------- | ---------- |
+| **Start**   | Create and start stream if not exists   | Admin      |
+| **Stop**    | Stop running stream (with confirmation) | Admin      |
+| **Restart** | Restart stream to pick up new tracks    | Admin      |
 
 ### Start Stream
 
 Creates and starts a Liquidsoap container for the community.
 
 !!! warning "Prerequisites"
-    Stream can only start if the community has at least one track with a file path.
+Stream can only start if the community has at least one track with a file path.
 
 ### Stop Stream
 
@@ -59,16 +61,16 @@ Stream automatically restarts when new tracks are added:
 3. Tracks synced via /sync endpoint
 
 !!! note "Track Appending"
-    New tracks are APPENDED to the playlist, not replacing existing ones. The listening experience is not disrupted.
+New tracks are APPENDED to the playlist, not replacing existing ones. The listening experience is not disrupted.
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/communities/:id/stream` | Get stream status |
-| POST | `/api/communities/:id/stream/start` | Start stream |
-| POST | `/api/communities/:id/stream/stop` | Stop stream |
-| POST | `/api/communities/:id/stream/restart` | Restart stream |
+| Method | Endpoint                              | Description       |
+| ------ | ------------------------------------- | ----------------- |
+| GET    | `/api/communities/:id/stream`         | Get stream status |
+| POST   | `/api/communities/:id/stream/start`   | Start stream      |
+| POST   | `/api/communities/:id/stream/stop`    | Stop stream       |
+| POST   | `/api/communities/:id/stream/restart` | Restart stream    |
 
 ## Stream Access
 
@@ -83,6 +85,7 @@ https://your-domain.com/stream?key=YOUR_STREAM_KEY
 ### Stream Key
 
 Each member receives a unique stream key from the admin. This key is:
+
 - Generated when member is added
 - Used to validate access
 - Personal to each member

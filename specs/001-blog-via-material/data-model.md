@@ -6,16 +6,17 @@
 
 A markdown file under `docs/blog/posts/<slug>.md`.
 
-| Field | Source | Required | Rules |
-|-------|--------|----------|-------|
-| `title` | front matter | yes | string; becomes `<h1>` and listing entry text |
-| `date` | front matter | yes | ISO date `YYYY-MM-DD`; drives ordering + display |
-| `categories` | front matter | no | list of strings; each creates/joins a category view |
-| `draft` | front matter | no | boolean, default false; true ⇒ excluded from production build output entirely |
-| slug | filename | yes | `[a-z0-9-]+`; becomes URL segment `/blog/<year>/<month>/<day>/<slug>/` |
-| body | markdown below front matter | yes | first paragraph doubles as excerpt |
+| Field        | Source                      | Required | Rules                                                                         |
+| ------------ | --------------------------- | -------- | ----------------------------------------------------------------------------- |
+| `title`      | front matter                | yes      | string; becomes `<h1>` and listing entry text                                 |
+| `date`       | front matter                | yes      | ISO date `YYYY-MM-DD`; drives ordering + display                              |
+| `categories` | front matter                | no       | list of strings; each creates/joins a category view                           |
+| `draft`      | front matter                | no       | boolean, default false; true ⇒ excluded from production build output entirely |
+| slug         | filename                    | yes      | `[a-z0-9-]+`; becomes URL segment `/blog/<year>/<month>/<day>/<slug>/`        |
+| body         | markdown below front matter | yes      | first paragraph doubles as excerpt                                            |
 
 Validation rules (enforced by strict build):
+
 - missing/invalid `date` → build error (fail closed, per spec edge case)
 - duplicate slug+date combination → build error
 

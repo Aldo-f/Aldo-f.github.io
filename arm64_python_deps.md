@@ -13,11 +13,11 @@ PyYAML
 
 ## Why each pin
 
-| Package | Pin | Reason |
-|---|---|---|
-| numpy | >= 1.26.4 | `numpy==1.24.x` sdist fails to build on Python 3.13: `AttributeError: module 'pkgutil' has no attribute 'ImpImporter'` during `get_requires_for_build_wheel`. |
-| faiss-cpu | == 1.9.0.post1 | Older pins (1.7.x) have no aarch64 / cp313 wheel on PyPI/piwheels; pip errors with "No matching distribution". 1.9.0.post1 ships a `cp313 manylinux_2_17_aarch64` wheel. |
-| sentence-transformers | == 2.2.2 | Works with the above; pulls torch (large download — expect a long install on the Pi). |
+| Package               | Pin            | Reason                                                                                                                                                                   |
+| --------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| numpy                 | >= 1.26.4      | `numpy==1.24.x` sdist fails to build on Python 3.13: `AttributeError: module 'pkgutil' has no attribute 'ImpImporter'` during `get_requires_for_build_wheel`.            |
+| faiss-cpu             | == 1.9.0.post1 | Older pins (1.7.x) have no aarch64 / cp313 wheel on PyPI/piwheels; pip errors with "No matching distribution". 1.9.0.post1 ships a `cp313 manylinux_2_17_aarch64` wheel. |
+| sentence-transformers | == 2.2.2       | Works with the above; pulls torch (large download — expect a long install on the Pi).                                                                                    |
 
 ## FAISS fallback
 

@@ -9,18 +9,20 @@ Choosing the right package manager isn't just about convenience—it's about dis
 ## Quick comparison (interactive)
 
 [pivot-table]
-| Tool | Ecosystem | Store/cache | Linking | Fallback | Lockfile | Speed | Runtime? | Maturity |
-|------|-----------|-------------|---------|----------|----------|-------|----------|----------|
-| npm  | JS/TS     | ~/.npm      | Copy    | None     | package-lock.json | Slow   | No       | High     |
-| pnpm | JS/TS     | ~/.pnpm-store | Hard link | Copy | pnpm-lock.yaml   | Fast   | No       | High     |
-| Bun  | JS/TS     | ~/.bun/bin/cache | Hard link | Copy | bun.lockb        | Fastest| Yes      | Medium   |
-| pip  | Python    | ~/.cache/pip | Copy   | None     | requirements.txt | Slow   | No       | High     |
-| uv   | Python    | ~/.uv/cache | Hard/reflink | Copy | uv.lock          | Fast   | No       | Medium   |
-[/pivot-table]
+
+| Tool           | Ecosystem | Store/cache      | Linking      | Fallback | Lockfile          | Speed   | Runtime? | Maturity |
+| -------------- | --------- | ---------------- | ------------ | -------- | ----------------- | ------- | -------- | -------- |
+| npm            | JS/TS     | ~/.npm           | Copy         | None     | package-lock.json | Slow    | No       | High     |
+| pnpm           | JS/TS     | ~/.pnpm-store    | Hard link    | Copy     | pnpm-lock.yaml    | Fast    | No       | High     |
+| Bun            | JS/TS     | ~/.bun/bin/cache | Hard link    | Copy     | bun.lockb         | Fastest | Yes      | Medium   |
+| pip            | Python    | ~/.cache/pip     | Copy         | None     | requirements.txt  | Slow    | No       | High     |
+| uv             | Python    | ~/.uv/cache      | Hard/reflink | Copy     | uv.lock           | Fast    | No       | Medium   |
+| [/pivot-table] |
 
 ## Install flow diagrams
 
 ### npm install flow
+
 ```mermaid
 flowchart LR
     A[registry] --> B[download]
@@ -30,6 +32,7 @@ flowchart LR
 ```
 
 ### pnpm install flow
+
 ```mermaid
 flowchart LR
     A[global store] --> B[hard link]
@@ -40,6 +43,7 @@ flowchart LR
 ```
 
 ### Bun install flow
+
 ```mermaid
 flowchart LR
     A[global cache] --> B[hard link]
@@ -48,6 +52,7 @@ flowchart LR
 ```
 
 ### pip install flow
+
 ```mermaid
 flowchart LR
     A[PyPI] --> B[download]
@@ -56,6 +61,7 @@ flowchart LR
 ```
 
 ### uv install flow
+
 ```mermaid
 flowchart LR
     A[global cache] --> B[hard link or reflink]

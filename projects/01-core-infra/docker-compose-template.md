@@ -24,11 +24,13 @@ stale_after: 2027-02-25T09:15:00Z
 # Standard Docker Compose Template
 
 ## Overview
+
 This document describes the standard structure and conventions for Docker Compose files used in Aldo's home-lab infrastructure.
 
 ## Basic Structure
+
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   service_name:
@@ -54,11 +56,12 @@ networks:
 ```
 
 ## Conventions
+
 1. **Version**: Use version '3.8' for compatibility with Docker Engine 19.03+
 2. **Service Naming**: Use lowercase with underscores (e.g., `jellyfin`, `nextcloud`)
 3. **Container Naming**: Match service name for easy identification
 4. **Restart Policy**: Use `unless-stopped` for services that should survive reboots
-5. **Ports**: 
+5. **Ports**:
    - Map only necessary ports to host
    - Comment why each port is needed
    - Use consistent host port ranges when possible
@@ -76,6 +79,7 @@ networks:
    - Consider bridge vs overlay based on deployment needs
 
 ## Best Practices
+
 - Pin image tags (avoid `:latest` in production)
 - Use healthchecks where available
 - Limit container capabilities with `cap_drop` and `cap_add`
@@ -86,8 +90,9 @@ networks:
 - Use `.dockerignore` to exclude unnecessary files from build context
 
 ## Example: Media Service
+
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   mediaservice:
@@ -95,8 +100,8 @@ services:
     container_name: mediaservice
     restart: unless-stopped
     ports:
-      - "8096:8096"          # HTTP API
-      - "8920:8920"          # HTTPS (if enabled)
+      - "8096:8096" # HTTP API
+      - "8920:8920" # HTTPS (if enabled)
     environment:
       - PUID=1000
       - PGID=1000

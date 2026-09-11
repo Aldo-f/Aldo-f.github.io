@@ -24,9 +24,11 @@ stale_after: 2027-02-25T09:15:00Z
 # Raspberry Pi 5 (pi5)
 
 ## Overview
+
 The Raspberry Pi 5 (pi5) is a single-board computer serving as the primary node in Aldo's home-lab infrastructure.
 
 ## Specifications
+
 - Model: Raspberry Pi 5
 - Architecture: ARM64
 - Operating System: Debian
@@ -35,9 +37,11 @@ The Raspberry Pi 5 (pi5) is a single-board computer serving as the primary node 
 - Connected to: Shared HDD1 storage mount
 
 ## Services Hosted
+
 - [To be determined based on actual deployment]
 
 ## Relationships
+
 - Paired with: pi3 (192.168.0.3)
 - Storage: Shares HDD1 mount with pi3
 - Management: Controlled via Ansible from 01-core-infra/

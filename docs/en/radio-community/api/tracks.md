@@ -7,18 +7,18 @@ description: Tracks API endpoints reference
 
 ## Endpoints
 
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | `/api/communities/:id/tracks` | Yes | Get tracks with scores |
-| GET | `/api/communities/:id/tracks/:track_id/votes` | Yes | Get votes for track |
-| GET | `/api/communities/:id/current` | Yes | Get current playing track |
-| GET | `/api/communities/:id/playlist` | Yes | Get M3U playlist |
-| GET | `/api/communities/:id/playlist.json` | Yes | Get JSON playlist |
-| POST | `/api/communities/:id/votes` | Yes | Vote on track |
-| POST | `/api/communities/:id/fetch-joe` | Yes | Fetch from Joe.be |
-| POST | `/api/communities/:id/sync` | Yes | Sync with filesystem |
-| POST | `/api/communities/:id/tracks/:trackId/download` | Yes | Download track |
-| POST | `/api/communities/:id/tracks/download-all` | Yes | Download all missing |
+| Method | Endpoint                                        | Auth | Description               |
+| ------ | ----------------------------------------------- | ---- | ------------------------- |
+| GET    | `/api/communities/:id/tracks`                   | Yes  | Get tracks with scores    |
+| GET    | `/api/communities/:id/tracks/:track_id/votes`   | Yes  | Get votes for track       |
+| GET    | `/api/communities/:id/current`                  | Yes  | Get current playing track |
+| GET    | `/api/communities/:id/playlist`                 | Yes  | Get M3U playlist          |
+| GET    | `/api/communities/:id/playlist.json`            | Yes  | Get JSON playlist         |
+| POST   | `/api/communities/:id/votes`                    | Yes  | Vote on track             |
+| POST   | `/api/communities/:id/fetch-joe`                | Yes  | Fetch from Joe.be         |
+| POST   | `/api/communities/:id/sync`                     | Yes  | Sync with filesystem      |
+| POST   | `/api/communities/:id/tracks/:trackId/download` | Yes  | Download track            |
+| POST   | `/api/communities/:id/tracks/download-all`      | Yes  | Download all missing      |
 
 ## GET /api/communities/:id/tracks
 
@@ -28,10 +28,10 @@ Only returns tracks that have a `file_path` (downloadable tracks).
 
 ### Query Parameters
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `limit` | integer | Max tracks to return (default: 50) |
-| `offset` | integer | Offset for pagination |
+| Parameter | Type    | Description                        |
+| --------- | ------- | ---------------------------------- |
+| `limit`   | integer | Max tracks to return (default: 50) |
+| `offset`  | integer | Offset for pagination              |
 
 ### Response
 
@@ -120,13 +120,13 @@ Vote on a track. Requires authentication and membership.
 
 ### Values
 
-| Value | Meaning |
-|-------|---------|
-| `1` | Upvote (swipe right) |
-| `-1` | Downvote (swipe left) |
+| Value | Meaning               |
+| ----- | --------------------- |
+| `1`   | Upvote (swipe right)  |
+| `-1`  | Downvote (swipe left) |
 
 !!! note "One Vote Per Play"
-    One vote is allowed per track play instance. Users can vote again if the same track plays again.
+One vote is allowed per track play instance. Users can vote again if the same track plays again.
 
 ## POST /api/communities/:id/fetch-joe
 
@@ -153,7 +153,7 @@ Sync tracks with filesystem. Requires admin permissions.
 ```
 
 !!! note "File Path"
-    Tracks without `file_path` can be synced with the filesystem via this endpoint.
+Tracks without `file_path` can be synced with the filesystem via this endpoint.
 
 ## POST /api/communities/:id/tracks/:trackId/download
 

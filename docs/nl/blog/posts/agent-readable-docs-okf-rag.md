@@ -71,7 +71,7 @@ def query(question, k=3):
 ```
 
 Op de Pi draait dit volledig lokaal: PyTorch alleen op de CPU, geen GPU, geen cloudaanroepen
-tijdens een zoekopdracht. Als je vraagt *"Wat is het Jellyfin-commando voor de statuscontrole?"*
+tijdens een zoekopdracht. Als je vraagt _"Wat is het Jellyfin-commando voor de statuscontrole?"_
 krijg je de exacte `curl`-regel terug, met vermelding van het bronbestand, in minder dan een seconde
 zodra de index is opgewarmd. Wanneer Mem0 als provider is geconfigureerd, staan de vectoren
 daar in plaats van in FAISS — dezelfde interface, andere opslagplaats.
@@ -137,7 +137,7 @@ schakel dat is.
 
 ## Twee ingangen, één kennisbank
 
-De laatste beslissing was de meest interessante: wat moet *openbaar* zijn?
+De laatste beslissing was de meest interessante: wat moet _openbaar_ zijn?
 Ruwe machinegegevens — bonnen, hashes, interne hostnamen, eindpunten voor
 statuscontroles — zijn nuttig voor agents, maar ruis (en een klein aanvalsoppervlak) voor
 menselijke lezers. Daarom krijgen de twee doelgroepen aparte toegangen:

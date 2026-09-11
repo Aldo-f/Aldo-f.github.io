@@ -42,26 +42,32 @@ radio-community/
 ## Key Directories
 
 ### `/server.js`
+
 Main Express server handling:
+
 - API routes (80+ endpoints)
 - Frontend static file serving
 - Authentication middleware
 - Database operations
 
 ### `/utils/`
+
 - `auth.js` - Permission system with ROLES, PERMISSIONS, and helper functions
 - `slugify.js` - URL-safe slug generation for community names
 - `fileUtils.js` - File operations including ownership management
 
 ### `/streams/`
+
 - `streamManager.js` - Liquidsoap container lifecycle management
 - `joeBeDownloader.js` - Joe.be API integration and track fetching
 - `deezerDownloader.js` - Deezer API integration and track downloads
 
 ### `/frontend/src/`
+
 - 17 React components for UI
 - 6 route pages (Home, Community, Create, Manage, etc.)
 - Shared TypeScript types for consistency
 
 ### `/db/`
+
 - `init.postgres.sql` - Complete database schema and seed data

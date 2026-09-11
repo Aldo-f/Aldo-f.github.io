@@ -38,15 +38,16 @@ The application will be available at the configured domain.
 
 Choose a music source type:
 
-| Source Type | Configuration | Description |
-|-------------|---------------|-------------|
-| **Joe.be** | Select station (all hits, 70s, 80s, 90s, 00s, hot) | Automated Belgian radio |
-| **Deezer** | Enter playlist URL | Import from Deezer |
-| **Manual** | No config needed | Upload your own files |
+| Source Type | Configuration                                      | Description             |
+| ----------- | -------------------------------------------------- | ----------------------- |
+| **Joe.be**  | Select station (all hits, 70s, 80s, 90s, 00s, hot) | Automated Belgian radio |
+| **Deezer**  | Enter playlist URL                                 | Import from Deezer      |
+| **Manual**  | No config needed                                   | Upload your own files   |
 
 ### Step 3: Create
 
 Click "Create" to complete the process. The system will:
+
 1. Create the community
 2. Set up the selected source
 3. Fetch tracks (if using Joe.be or Deezer)
@@ -72,4 +73,5 @@ Community admins can add members who will receive their own stream keys for list
 - [API Reference](api/communities.md)
 - [Voting System](features/voting.md)
 - [Development Guide](dev/workflow.md)<!-- freshness-proof 1787726577 -->
+
 <!-- freshness-proof-final -->

@@ -44,15 +44,15 @@ designed to stay healthy to dozens of posts via pagination defaults
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-| Principle | Status | Evidence |
-|-----------|--------|----------|
-| I. Build Purity | PASS | Verification script asserts `mkdocs build --strict` exit 0 + zero WARNING lines |
-| II. Nav-Explicitness | PASS | Plan adds `- Blog: blog/index.md` to explicit `nav:`; generated category/archive/pagination pages attach under the Blog section automatically |
-| III. Upstream-First | PASS | Uses the bundled Material `blog` plugin; `requirements.txt` unchanged; no custom code re-implementing blog features |
-| IV. Generated-Output Hygiene | PASS | Only tracked-file changes: `mkdocs.yml`, `docs/blog/**`, `tests/verify_blog.py`, specs; `site/` remains gitignored |
-| V. Verified Before Deployed | PASS | RED observed before implementation; GREEN includes served-site HTTP checks; deployment only via existing CI workflow |
+| Principle                    | Status | Evidence                                                                                                                                      |
+| ---------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| I. Build Purity              | PASS   | Verification script asserts `mkdocs build --strict` exit 0 + zero WARNING lines                                                               |
+| II. Nav-Explicitness         | PASS   | Plan adds `- Blog: blog/index.md` to explicit `nav:`; generated category/archive/pagination pages attach under the Blog section automatically |
+| III. Upstream-First          | PASS   | Uses the bundled Material `blog` plugin; `requirements.txt` unchanged; no custom code re-implementing blog features                           |
+| IV. Generated-Output Hygiene | PASS   | Only tracked-file changes: `mkdocs.yml`, `docs/blog/**`, `tests/verify_blog.py`, specs; `site/` remains gitignored                            |
+| V. Verified Before Deployed  | PASS   | RED observed before implementation; GREEN includes served-site HTTP checks; deployment only via existing CI workflow                          |
 
 No violations → Complexity Tracking table stays empty.
 

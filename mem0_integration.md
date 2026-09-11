@@ -7,11 +7,13 @@ The OKF RAG pipeline can optionally use **Mem0** as the vector store instead of 
 - Platform mode that avoids Qdrant locking issues on the Raspberry Pi 5.
 
 ## When to use Mem0
+
 - When you need higher‑quality semantic search across large documentation bundles.
 - When you want automatic deduplication of similar concept embeddings.
 - When you prefer a managed cloud service over local storage.
 
 ## Setup steps
+
 1. **Configure the provider** (once per machine):
    ```bash
    hermes config set memory.provider mem0
@@ -30,19 +32,23 @@ The OKF RAG pipeline can optionally use **Mem0** as the vector store instead of 
    - Remove any `faiss` initialisation; Mem0 handles indexing internally.
 
 4. **Re‑generate embeddings** (will now be stored in Mem0):
+
    ```bash
    python scripts/generate_embeddings.py
    ```
+
    The script will detect the `memory.provider` setting and push vectors to Mem0.
 
 5. **Run validation & queries** as usual – the search command will now query Mem0 and return results with confidence scores.
 
 ## Pitfalls & gotchas
+
 - **Network latency** – Mem0 queries add a small round‑trip; ensure the Pi 5 has reliable internet.
 - **Rate limits** – respect the plan limits; batch embeddings to stay under the request quota.
 - **Cost** – Mem0 usage is billed per request; monitor usage via the Mem0 dashboard.
 
 ## Verification checklist
+
 - [ ] `hermes config get memory.provider` returns `mem0`.
 - [ ] `python scripts/generate_embeddings.py` finishes without errors.
 - [ ] `make search QUERY="..."` returns a result with a non‑zero confidence score.
@@ -50,4 +56,4 @@ The OKF RAG pipeline can optionally use **Mem0** as the vector store instead of 
 
 ---
 
-*This reference file is part of the OKF bundle management skill and should be kept up‑to‑date with any changes to the Mem0 API or authentication flow.*
+_This reference file is part of the OKF bundle management skill and should be kept up‑to‑date with any changes to the Mem0 API or authentication flow._

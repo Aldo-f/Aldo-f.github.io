@@ -7,6 +7,7 @@ The OpenAI-compatible chat assistant has been successfully integrated into your 
 ## 🔧 What Was Implemented
 
 ### Core Changes
+
 - **File Modified**: `hooks/chat.py`
 - **API Endpoint**: Changed from OpenRouter to `https://freellm.aldof.duckdns.org/v1/chat/completions`
 - **Authentication**: Updated to use your provided API key: `freellmapi-f19ae62770dd60a1f67dd9369ffbc062199354f212040db8`
@@ -14,6 +15,7 @@ The OpenAI-compatible chat assistant has been successfully integrated into your 
 - **Header Information**: Preserved `HTTP-Referer` and `X-OpenRouter-Title` for analytics
 
 ### Build Verification
+
 - ✅ English documentation site: `properdocs build -f mkdocs.en.yml`
 - ✅ Dutch documentation site: `properdocs build -f mkdocs.nl.yml`
 - ✅ Both builds complete without errors
@@ -43,6 +45,7 @@ The OpenAI-compatible chat assistant has been successfully integrated into your 
 ## 🎯 Result
 
 Visitors to your documentation site can now:
+
 - Ask natural language questions about your projects, home lab, and documentation
 - Receive intelligent responses powered by your FreeLLM API
 - Get help navigating your documentation hub
@@ -53,6 +56,7 @@ The chat widget maintains the same professional styling and user experience as b
 ## 📝 Next Steps
 
 The integration is complete and ready for production use. No further action is required unless you wish to:
+
 1. Adjust the styling or behavior of the chat widget
 2. Modify the API parameters (temperature, max_tokens, etc.)
 3. Add additional features like conversation history or context awareness

@@ -13,12 +13,12 @@ selector prefers the mapped twin URL.
 
 ## Design decisions
 
-| Decision | Rationale |
-|----------|-----------|
-| MkDocs hooks (native) instead of packaged plugin | zero packaging/pip overhead; hooks are first-class in mkdocs 1.6 |
-| Map written by BOTH builds to the same merged file | EN build writes EN→NL entries; NL build merges its own view; deterministic union keyed by URL path |
-| JS injected via `extra_javascript` + file emitted by the hook | survives strict builds; no theme overrides dir to maintain |
-| Lookup by normalized pathname | tolerant of trailing-slash/index.html variants |
+| Decision                                                      | Rationale                                                                                          |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| MkDocs hooks (native) instead of packaged plugin              | zero packaging/pip overhead; hooks are first-class in mkdocs 1.6                                   |
+| Map written by BOTH builds to the same merged file            | EN build writes EN→NL entries; NL build merges its own view; deterministic union keyed by URL path |
+| JS injected via `extra_javascript` + file emitted by the hook | survives strict builds; no theme overrides dir to maintain                                         |
+| Lookup by normalized pathname                                 | tolerant of trailing-slash/index.html variants                                                     |
 
 ## Tasks
 

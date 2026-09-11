@@ -4,6 +4,7 @@ Repo: `Aldo-f/Aldo-f.github.io`
 Bug: `mkdocs.en.yml` nav pointed to `opencode-multi-model-fallback/docs/index.md` but `nav_repos` had no import entry.
 
 Fix applied to `mkdocs.en.yml` (line 50-53):
+
 ```yaml
 - name: opencode-multi-model-fallback
   import_url: https://github.com/Aldo-f/opencode-multi-model-fallback?branch=main

@@ -53,6 +53,7 @@ curl -fsS -m 5 http://127.0.0.1:8096/health
 ```
 
 ## Expected Result
+
 - Exit code 0 indicates healthy service
 - Any non-zero exit code indicates unhealthy service
 - Output should be empty on success (due to `>/dev/null` redirect in actual usage)
@@ -62,7 +63,9 @@ curl -fsS -m 5 http://127.0.0.1:8096/health
 - The `-m 5` flag sets a 5-second timeout
 
 ## Verification
+
 This computation is verified by the attester script at `./references/attesters/check-http.py` which validates:
+
 1. The command was executed correctly
 2. The exit code matches expected values
 3. The output indicates a healthy service when appropriate

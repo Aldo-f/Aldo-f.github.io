@@ -2,7 +2,7 @@
 
 A quick index of everything documented on this hub.
 
-## Clock — *Clocky*
+## Clock — _Clocky_
 
 A React clock studio with 13 hand-built clocks (marble run, nixie tubes,
 split-flap, game of life, …) and an AI customizer backed by a configurable
@@ -16,12 +16,12 @@ provider waterfall.
 VRT MAX video downloader with automatic authentication. The hub tracks its
 documentation across major versions:
 
-| Version | Docs | Source ref |
-|---------|------|------------|
-| main | [Thuis main](thuis/docs/index.md) | `main` branch |
-| v5 | [Thuis v5](thuis-v5/website/docs/intro.md) | `v5/main` branch |
-| v4 | [Thuis v4](thuis-v4/website/docs/intro.md) | tag `v4.1.0` |
-| v3 | [Thuis v3](thuis-v3/docs/index.md) | tag `v3.0.0` |
+| Version | Docs                                       | Source ref       |
+| ------- | ------------------------------------------ | ---------------- |
+| main    | [Thuis main](thuis/docs/index.md)          | `main` branch    |
+| v5      | [Thuis v5](thuis-v5/website/docs/intro.md) | `v5/main` branch |
+| v4      | [Thuis v4](thuis-v4/website/docs/intro.md) | tag `v4.1.0`     |
+| v3      | [Thuis v3](thuis-v3/docs/index.md)         | tag `v3.0.0`     |
 
 Source: [github.com/Aldo-f/thuis](https://github.com/Aldo-f/thuis)
 

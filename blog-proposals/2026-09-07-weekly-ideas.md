@@ -9,6 +9,7 @@
 **Angle/hook:** VRT MAX streams are DRM-protected and notoriously hard to download. After weeks of work involving pywidevine, N_m3u8DL-RE, and a custom `_vrt_drm_*` field detector, the thuis-v4 downloader now gracefully handles both DRM and non-DRM content. This post covers the full journey — from detecting DRM in the HLS manifest to the fallback strategy that keeps non-DRM downloads fast.
 
 **Outline:**
+
 1. **The Problem:** Why VRT MAX refuses to play nice with standard downloaders and what `_vrt_drm_*` fields reveal about content protection
 2. **The Detection Layer:** How `drm_decrypt.py` and `probe.py` inspect HLS manifests to classify content before download
 3. **The DRM Pipeline:** pywidevine CDM integration and N_m3u8DL-RE configuration for encrypted streams
@@ -29,6 +30,7 @@
 **Angle/hook:** Every service on the home lab needed its own Traefik route, and the old approach meant 16 separate proxy folders cluttering the infrastructure. One commit (`0e05b285`) changed that — consolidating everything into `10-services-sablier-proxy/` with a clean three-layer flow: Traefik → Sablier wake-on-access → service. This post is about the architectural decision that made the whole stack cleaner and more maintainable.
 
 **Outline:**
+
 1. **Before the Consolidation:** What 16 proxy folders looked like in practice and why it was unsustainable
 2. **The Sablier Pattern:** How `traefik-sablier-proxy` replaced direct Traefik-to-container routing with a wake-on-access intermediary
 3. **The Unified Structure:** `service-definitions/` for upstreams, `simple-proxies/` for runtime configs — and why that separation matters
@@ -49,6 +51,7 @@
 **Angle/hook:** The neo-brutalist homepage (`06-apps-neo-brutalist-home`) is the front door to the entire home-lab — but its dark mode was broken. Buttons had fixed white backgrounds, service-group text was invisible, progress bars were invisible. Rather than eyeball it, the fix went through a formal plan-and-TDD cycle: write a plan, implement via CSS overrides, verify with grep assertions. This post is about treating CSS like production code.
 
 **Outline:**
+
 1. **The Symptoms:** White buttons on dark backgrounds, unreadable service names, featureless progress bars — and why "it just works in light mode" isn't good enough
 2. **The Plan File:** Writing `.hermes/plans/2025-08-31_1500_improve-dark-theme.md` as a spec-driven development artifact (7 tasks, CSS variable changes, component overrides)
 3. **CSS Variables as Architecture:** Adding `--nb-paper-dark`, `--nb-ink-dark`, `--nb-lime-dark` to the dark palette and how they cascade through every component
@@ -63,4 +66,5 @@
 **Tags:** `neo-brutalist`, `css`, `dark-mode`, `homepage`, `tdd`, `home-lab`, `frontend`, `raspberry-pi-5`
 
 ---
-*Proposals based on real work from the past 7 days (Sept 1–7, 2026). All commits and session references are verifiable in the `~/dev` git repos and Hermes session DB.*
+
+_Proposals based on real work from the past 7 days (Sept 1–7, 2026). All commits and session references are verifiable in the `~/dev` git repos and Hermes session DB._

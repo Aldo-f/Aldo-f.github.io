@@ -5,14 +5,14 @@ zelf-gehoste applicaties.
 
 ## Wat je hier vindt
 
-| Sectie | Inhoud |
-|--------|--------|
+| Sectie                | Inhoud                                                             |
+| --------------------- | ------------------------------------------------------------------ |
 | Thuis (v3/v4/v5/main) | VRT MAX video-downloader — installatie, gebruik, probleemoplossing |
-| Clocky | React klokstudio — features en ontwikkeling |
-| Blanky | Projectdocumentatie, main en v1 |
-| Radio Community | Democratische internetradio — architectuur, API, streaming |
-| Passive Income (PINO) | Orchestrator voor passive-income providers |
-| Neo-Brutalist Home | Dashboard design-exploratie |
+| Clocky                | React klokstudio — features en ontwikkeling                        |
+| Blanky                | Projectdocumentatie, main en v1                                    |
+| Radio Community       | Democratische internetradio — architectuur, API, streaming         |
+| Passive Income (PINO) | Orchestrator voor passive-income providers                         |
+| Neo-Brutalist Home    | Dashboard design-exploratie                                        |
 
 De documentatie van elk project staat in een eigen sectie (zie de navigatie)
 en wordt bij het bouwen van de site rechtstreeks uit de repository van dat
@@ -32,6 +32,7 @@ gestructureerde markdown-documentatie over de home-lab infrastructuur. Een RAG
 natuurlijke-taal queries mogelijk.
 
 **Pipeline flow:**
+
 1. Alle markdown bestanden in concept-mappen (`01-*`, `05-*`, `06-*`) plus
    `index.md` en `log.md` worden geladen
 2. Tekst wordt geëmbedd met `sentence-transformers/all-MiniLM-L6-v2`
@@ -41,18 +42,19 @@ natuurlijke-taal queries mogelijk.
 
 ### Bestandslocaties
 
-| Pad | Doel |
-|-----|------|
-| `~/dev/okf-home-lab/rag/rag_query.py` | Core RAG pipeline (`OKFRAGPipeline` klasse) |
-| `~/dev/okf-home-lab/rag/rag_api.py` | FastAPI wrapper (poort 8000) |
-| `~/dev/okf-home-lab/rag/mem0_store.py` | Mem0 Platform vector store client |
-| `~/dev/okf-home-lab/rag/memory_helper.py` | Leest `hermes config get memory.provider` |
-| `~/dev/okf-home-lab/rag/README.md` | Volledige RAG documentatie |
-| `~/dev/okf-home-lab/rag/requirements.txt` | Python afhankelijkheden |
+| Pad                                       | Doel                                        |
+| ----------------------------------------- | ------------------------------------------- |
+| `~/dev/okf-home-lab/rag/rag_query.py`     | Core RAG pipeline (`OKFRAGPipeline` klasse) |
+| `~/dev/okf-home-lab/rag/rag_api.py`       | FastAPI wrapper (poort 8000)                |
+| `~/dev/okf-home-lab/rag/mem0_store.py`    | Mem0 Platform vector store client           |
+| `~/dev/okf-home-lab/rag/memory_helper.py` | Leest `hermes config get memory.provider`   |
+| `~/dev/okf-home-lab/rag/README.md`        | Volledige RAG documentatie                  |
+| `~/dev/okf-home-lab/rag/requirements.txt` | Python afhankelijkheden                     |
 
 ### Commando's voor agents
 
 **Query via Python (direct):**
+
 ```python
 from rag_query import OKFRAGPipeline
 pipeline = OKFRAGPipeline('~/dev/okf-home-lab')
@@ -63,6 +65,7 @@ print(result['sources'])       # Lijst van {title, path, relevance}
 ```
 
 **Query via CLI:**
+
 ```bash
 cd ~/dev/okf-home-lab
 python3 rag/rag_query.py "Wat is het Jellyfin health-check commando?"
@@ -70,6 +73,7 @@ python3 rag/rag_query.py "Hoe deploy je Traefik?" --k 5
 ```
 
 **Query via HTTP API:**
+
 ```bash
 # Start de API server
 ./scripts/run_rag_api.sh
@@ -81,6 +85,7 @@ curl -s -X POST http://127.0.0.1:8000/search \
 ```
 
 **Vector store provider wisselen:**
+
 ```bash
 hermes config set memory.provider mem0    # Gebruik Mem0 Platform (vereist MEM0_API_KEY)
 hermes config set memory.provider faiss   # Gebruik lokale FAISS (standaard)
@@ -110,8 +115,8 @@ Wanneer je informatie nodig hebt over de home-lab infrastructuur:
 
 ### Probleemoplossing
 
-| Probleem | Oplossing |
-|----------|-----------|
+| Probleem                 | Oplossing                                                      |
+| ------------------------ | -------------------------------------------------------------- |
 | `MEM0_API_KEY not found` | Voeg `MEM0_API_KEY=...` toe aan `~/.hermes/.env` of export het |
-| "Index not built" | Zorg dat je vanuit de OKF bundle root draait |
-| Langzame eerste query | Eerste run bouwt de index; daaropvolgende queries zijn snel |
+| "Index not built"        | Zorg dat je vanuit de OKF bundle root draait                   |
+| Langzame eerste query    | Eerste run bouwt de index; daaropvolgende queries zijn snel    |

@@ -24,6 +24,7 @@ stale_after: 2027-02-25T09:15:00Z
 # RAG Pipeline Documentation
 
 ## Overview
+
 This directory contains a minimal Retrieval‑Augmented Generation (RAG) pipeline that enables natural‑language queries over the OKF home‑lab knowledge bundle.
 
 - **Embedding model**: `sentence-transformers/all-MiniLM-L6-v2`
@@ -32,6 +33,7 @@ This directory contains a minimal Retrieval‑Augmented Generation (RAG) pipelin
 - **Use case**: Quickly retrieve documentation excerpts and generate concise answers for agents.
 
 ## Installation
+
 ```bash
 # From the OKF home‑lab repo root
 cd rag
@@ -39,6 +41,7 @@ pip install -r requirements.txt
 ```
 
 ## Running a query
+
 ```python
 from rag_query import OKFRAGPipeline
 pipeline = OKFRAGPipeline('..')  # Path to the OKF bundle root
@@ -47,6 +50,7 @@ print(result['answer'])
 ```
 
 ## Expected output (example)
+
 ```
 Answer:
 Based on the documentation:
@@ -58,11 +62,13 @@ Sources:
 ```
 
 ## Limitations & Future Work
-- Currently returns the most relevant snippet as the answer.  
+
+- Currently returns the most relevant snippet as the answer.
 - Future versions could integrate an LLM (e.g., Ollama, llama.cpp) for richer generation.
 - Support for incremental indexing as new documentation is added.
 
 ## Verification
+
 - Run `python -m okf.validate okf-bundle/` (a custom validation script you may implement) to ensure every concept file contains valid front‑matter and required fields.
 - Execute the script and verify it returns a non-empty answer with a confidence score.
 

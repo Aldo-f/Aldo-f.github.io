@@ -29,24 +29,25 @@ description: Radio Community stream creation and management flow
 - **Stream controls** available in admin UI (start/stop/restart)
 
 !!! warning "Previous Issue (Fixed)"
-    Previously, streams were created immediately during community creation (before sources existed), resulting in empty playlists and non-functional streams.
+Previously, streams were created immediately during community creation (before sources existed), resulting in empty playlists and non-functional streams.
 
 ## Stream Management (Admin)
 
 ### Status Display
 
 The ManageCommunityPage shows stream status:
+
 - Stream Exists: Yes/No
 - Running: Yes/No/N/A
 - Container Name
 
 ### Manual Controls
 
-| Action | Description |
-|--------|-------------|
-| **Start** | Create and start stream if not exists |
-| **Stop** | Stop running stream (with confirmation) |
-| **Restart** | Restart stream to pick up new tracks |
+| Action      | Description                             |
+| ----------- | --------------------------------------- |
+| **Start**   | Create and start stream if not exists   |
+| **Stop**    | Stop running stream (with confirmation) |
+| **Restart** | Restart stream to pick up new tracks    |
 
 ### Automatic Stream Restart
 
@@ -57,16 +58,18 @@ Stream automatically restarts when new tracks are added:
 3. Tracks synced via /sync endpoint
 
 !!! note "Track Appending"
-    New tracks are APPENDED to the playlist, not replacing existing ones. The listening experience is not disrupted.
+New tracks are APPENDED to the playlist, not replacing existing ones. The listening experience is not disrupted.
 
 ## Stream Components
 
 ### Icecast
+
 - Stream distribution server
 - Listens on port 8000 (configurable)
 - Serves mount points for each community
 
 ### Liquidsoap
+
 - Stream automation
 - Generates playlists based on algorithm
 - Feeds audio to Icecast

@@ -14,12 +14,13 @@ prev/next links, categories with views, draft exclusion, and search integration
 (posts enter the standard `search` plugin index).
 
 **Alternatives considered**:
-- *mkdocs-blog-plugin (third-party)* — extra dependency, less maintained than
+
+- _mkdocs-blog-plugin (third-party)_ — extra dependency, less maintained than
   the official one; rejected by Principle III.
-- *Hand-maintained blog section* (markdown pages + manual listing) — violates
+- _Hand-maintained blog section_ (markdown pages + manual listing) — violates
   the zero-friction publishing requirement (FR-3) and duplicates upstream
   functionality.
-- *Separate blog engine (Hugo/Jekyll)* — second site, second deploy pipeline;
+- _Separate blog engine (Hugo/Jekyll)_ — second site, second deploy pipeline;
   massively over-scoped.
 
 ## R2 — Exact plugin configuration for mkdocs-material 9.7.7
@@ -67,6 +68,7 @@ against SC-4).
 ## R4 — Verification strategy against the real runtime
 
 **Decision**: A stdlib-only script `tests/verify_blog.py` that:
+
 1. Runs `mkdocs build --strict` twice: once on a temp copy of the repo content
    WITHOUT a probe post and once WITH an added probe post — asserting exit 0,
    zero WARNING lines, and that the listing page contains the probe title only
@@ -92,11 +94,11 @@ not evidence).
 
 **Decision**: Three posts demonstrating every requirement:
 
-| File | date | title | categories | draft |
-|------|------|-------|-----------|-------|
-| `welcome-to-the-blog.md` | 2026-08-23 | Welcome to the blog | General | no |
-| `building-this-hub.md` | 2026-08-20 | How this documentation hub is built | Meta | no |
-| `roadmap-notes-draft.md` | 2026-08-23 | Roadmap notes (draft) | General | **yes** |
+| File                     | date       | title                               | categories | draft   |
+| ------------------------ | ---------- | ----------------------------------- | ---------- | ------- |
+| `welcome-to-the-blog.md` | 2026-08-23 | Welcome to the blog                 | General    | no      |
+| `building-this-hub.md`   | 2026-08-20 | How this documentation hub is built | Meta       | no      |
+| `roadmap-notes-draft.md` | 2026-08-23 | Roadmap notes (draft)               | General    | **yes** |
 
 Each post has one distinctive body token used by verification (e.g.
 `xylophone-framework`) to prove full-content rendering and search indexing

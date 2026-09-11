@@ -7,19 +7,19 @@ description: Radio Community environment variables reference
 
 ## Variables
 
-| Variable | Required | Default | Description |
-|----------|----------|---------|-------------|
-| `PORT` | No | 3000 | Server port |
-| `DATABASE_URL` | Yes | - | PostgreSQL connection string |
-| `MUSIC_PATH` | No | /music | Path to music files |
-| `AUTH_SERVICE_URL` | No | http://auth-service:3008 | Auth service URL |
-| `SOURCE_JOE` | No | https://api.joe.be/2.0 | Joe.be API base URL |
-| `JOE_STATION_ID` | No | joe_easy | Default Joe.be station |
-| `DEEZER_ARL` | No | - | Deezer ARL token for downloading |
-| `DEEZER_API_BASE` | No | https://api.deezer.com | Deezer API base |
-| `ICECAST_HOST` | No | icecast | Icecast server host |
-| `ICECAST_PORT` | No | 8000 | Icecast server port |
-| `ADMIN_EMAIL` | No | aldo@test.be | Platform admin email |
+| Variable           | Required | Default                  | Description                      |
+| ------------------ | -------- | ------------------------ | -------------------------------- |
+| `PORT`             | No       | 3000                     | Server port                      |
+| `DATABASE_URL`     | Yes      | -                        | PostgreSQL connection string     |
+| `MUSIC_PATH`       | No       | /music                   | Path to music files              |
+| `AUTH_SERVICE_URL` | No       | http://auth-service:3008 | Auth service URL                 |
+| `SOURCE_JOE`       | No       | https://api.joe.be/2.0   | Joe.be API base URL              |
+| `JOE_STATION_ID`   | No       | joe_easy                 | Default Joe.be station           |
+| `DEEZER_ARL`       | No       | -                        | Deezer ARL token for downloading |
+| `DEEZER_API_BASE`  | No       | https://api.deezer.com   | Deezer API base                  |
+| `ICECAST_HOST`     | No       | icecast                  | Icecast server host              |
+| `ICECAST_PORT`     | No       | 8000                     | Icecast server port              |
+| `ADMIN_EMAIL`      | No       | aldo@test.be             | Platform admin email             |
 
 ## Required Variables
 
@@ -28,6 +28,7 @@ description: Radio Community environment variables reference
 PostgreSQL connection string. This is required for the application to function.
 
 Example:
+
 ```
 postgresql://user:password@localhost:5432/radiocommunity
 ```
@@ -51,7 +52,7 @@ Deeezer ARL token required for downloading tracks. Obtain this from your Deezer 
 Email address of the platform admin. Default is `aldo@test.be`. This user has global admin access to all communities.
 
 !!! note "Joe.be Auto-Fetch"
-    The Joe.be API auto-fetches every 6 hours if SOURCE_JOE is configured.
+The Joe.be API auto-fetches every 6 hours if SOURCE_JOE is configured.
 
 ## Docker Configuration
 

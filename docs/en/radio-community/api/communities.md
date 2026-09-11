@@ -7,13 +7,13 @@ description: Communities API endpoints reference
 
 ## Endpoints
 
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | `/api/communities` | No | List all communities |
-| GET | `/api/communities/:name` | No | Get community by name |
-| POST | `/api/communities` | Yes | Create new community |
-| PUT | `/api/communities/:id` | Yes | Update community |
-| DELETE | `/api/communities/:id` | Yes | Delete community |
+| Method | Endpoint                 | Auth | Description           |
+| ------ | ------------------------ | ---- | --------------------- |
+| GET    | `/api/communities`       | No   | List all communities  |
+| GET    | `/api/communities/:name` | No   | Get community by name |
+| POST   | `/api/communities`       | Yes  | Create new community  |
+| PUT    | `/api/communities/:id`   | Yes  | Update community      |
+| DELETE | `/api/communities/:id`   | Yes  | Delete community      |
 
 ## GET /api/communities
 
@@ -43,8 +43,8 @@ Get community by name (slug). Public endpoint, no authentication required.
 
 ### Parameters
 
-| Name | Type | Description |
-|------|------|-------------|
+| Name   | Type   | Description         |
+| ------ | ------ | ------------------- |
 | `name` | string | Community slug/name |
 
 ### Response
@@ -69,7 +69,7 @@ Get community by name (slug). Public endpoint, no authentication required.
 Create a new community. Requires authentication.
 
 !!! note "Stream Creation"
-    This endpoint only creates the community. Stream is auto-created after tracks are added via sources.
+This endpoint only creates the community. Stream is auto-created after tracks are added via sources.
 
 ### Request Body
 
@@ -115,4 +115,4 @@ Update community details. Requires authentication and owner/admin permissions.
 Delete a community. Requires owner or platform admin permissions.
 
 !!! warning "Data Loss"
-    Deleting a community will remove all associated sources, tracks, members, and play history.
+Deleting a community will remove all associated sources, tracks, members, and play history.

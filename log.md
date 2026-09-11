@@ -24,6 +24,7 @@ stale_after: 2027-02-25T09:15:00Z
 # Change Log
 
 ## 2026-08-25T09:15:00Z - Initial Bundle Creation
+
 - Created initial OKF v0.2 bundle structure
 - Added index.md and log.md files
 - Set up directory structure for all infrastructure components

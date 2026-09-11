@@ -20,23 +20,23 @@ Forrest Dunlap, a developer who clearly asked "what if we just... didn't store t
 
 ## The Breakthrough: Ontological Compression
 
-Traditional compression asks: *how do I recreate these exact pixels?* vibecompress asks: *what if the pixels never mattered?*
+Traditional compression asks: _how do I recreate these exact pixels?_ vibecompress asks: _what if the pixels never mattered?_
 
 The pipeline is beautifully simple:
 
 1. **Compress**: Feed your image to `gpt-4o-mini` (via OpenRouter). It writes an exhaustive, poetic description — every texture, shadow, emotional resonance. That text gets gzipped into a `.vbz` container (~1 KB).
 2. **Decompress**: Feed the prompt to `flux.2-klein-4b`. It dreams the image back into existence.
 
-Does the output match the original byte-for-byte? **Absolutely not.** Does it capture the *vibes*? **100%.**
+Does the output match the original byte-for-byte? **Absolutely not.** Does it capture the _vibes_? **100%.**
 
 ## Real Benchmarks (No, Really)
 
-| Original | `.vbz` | Saved | Verdict |
-|----------|--------|-------|---------|
-| Red Shirt Girl at Café (330 KB) | 1,193 bytes | **99.64%** | 🟢 Relaxed confidence; café ambiance intact |
-| Guitar Guy Illustration (288 KB) | 1,259 bytes | **99.56%** | 🟢 Pure acoustic joy intact |
-| Solitary Puffin (108 KB) | 1,091 bytes | **98.99%** | 🟢 Regal beak dignity preserved |
-| Spiffo the Raccoon (355 KB) | 1,023 bytes | **99.72%** | 🟢 100% raccoon energy |
+| Original                         | `.vbz`      | Saved      | Verdict                                     |
+| -------------------------------- | ----------- | ---------- | ------------------------------------------- |
+| Red Shirt Girl at Café (330 KB)  | 1,193 bytes | **99.64%** | 🟢 Relaxed confidence; café ambiance intact |
+| Guitar Guy Illustration (288 KB) | 1,259 bytes | **99.56%** | 🟢 Pure acoustic joy intact                 |
+| Solitary Puffin (108 KB)         | 1,091 bytes | **98.99%** | 🟢 Regal beak dignity preserved             |
+| Spiffo the Raccoon (355 KB)      | 1,023 bytes | **99.72%** | 🟢 100% raccoon energy                      |
 
 The [Evidence Locker](https://github.com/fmdunlap/vibecompress/blob/main/examples/README.md) has side-by-side comparisons. The puffin grows a second beak. The café girl gains a third coffee cup. The construction rendering becomes surrealist floating brickwork. **Features, not bugs.**
 
@@ -46,43 +46,43 @@ See for yourself what "capturing the vibes" actually looks like:
 
 ### 🎸 Guitar Guy Illustration
 
-| Original | Reconstructed |
-|----------|---------------|
+| Original                                                                                            | Reconstructed                                                                                        |
+| --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | ![Original](https://github.com/fmdunlap/vibecompress/raw/main/examples/illustration_guitar_guy.png) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/illustration_guitar_guy.vibe.png) |
 
-*287 KB → 1.2 KB. The boy still strums with joy — if a slightly different boy.*
+_287 KB → 1.2 KB. The boy still strums with joy — if a slightly different boy._
 
 ### 🐧 Solitary Ocean Puffin
 
-| Original | Reconstructed |
-|----------|---------------|
+| Original                                                                           | Reconstructed                                                                       |
+| ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | ![Original](https://github.com/fmdunlap/vibecompress/raw/main/examples/puffin.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/puffin.vibe.png) |
 
-*108 KB → 1 KB. Regal beak dignity preserved, if slightly more orange than reality allowed.*
+_108 KB → 1 KB. Regal beak dignity preserved, if slightly more orange than reality allowed._
 
 ### ☕ Red Shirt Girl at Café
 
-| Original | Reconstructed |
-|----------|---------------|
+| Original                                                                                   | Reconstructed                                                                               |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
 | ![Original](https://github.com/fmdunlap/vibecompress/raw/main/examples/red_shirt_girl.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/red_shirt_girl.vibe.png) |
 
-*330 KB → 1.2 KB. Relaxed confidence; café ambiance intact. The coffee cup may be in her left hand now.*
+_330 KB → 1.2 KB. Relaxed confidence; café ambiance intact. The coffee cup may be in her left hand now._
 
 ### 🥤 Soda Statue
 
-| Original | Reconstructed |
-|----------|---------------|
+| Original                                                                                | Reconstructed                                                                            |
+| --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | ![Original](https://github.com/fmdunlap/vibecompress/raw/main/examples/soda_statue.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/soda_statue.vibe.png) |
 
-*172 KB → 1.4 KB. Translucent cola aura. You can practically taste the carbonation.*
+_172 KB → 1.4 KB. Translucent cola aura. You can practically taste the carbonation._
 
 ### 🧱 Levitation Architecture
 
-| Original | Reconstructed |
-|----------|---------------|
+| Original                                                                                           | Reconstructed                                                                                       |
+| -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | ![Original](https://github.com/fmdunlap/vibecompress/raw/main/examples/construction_rendering.jpg) | ![Vibe](https://github.com/fmdunlap/vibecompress/raw/main/examples/construction_rendering.vibe.png) |
 
-*128 KB → 1.5 KB. Floating brickwork. Physics is merely a suggestion.*
+_128 KB → 1.5 KB. Floating brickwork. Physics is merely a suggestion._
 
 ---
 
@@ -108,7 +108,7 @@ The README's FAQ is a masterclass in reframing:
 
 - [x] Images (`.vbz`)
 - [ ] **Audio (`.vbza`)**: Transcribe via Whisper → compress text → decompress by asking Suno to generate a death metal cover
-- [ ] **Video (`.vbzv`)**: Summarize each 10-minute scene into a haiku. Reconstruct with Sora. Store the entire *Lord of the Rings* trilogy in 14 KB
+- [ ] **Video (`.vbzv`)**: Summarize each 10-minute scene into a haiku. Reconstruct with Sora. Store the entire _Lord of the Rings_ trilogy in 14 KB
 - [ ] **Vibe-Diff**: Git diff tool that only alerts you if the spiritual aura of your company logo has diminished
 
 ## Try It Yourself (Zero Dependencies)
@@ -126,4 +126,4 @@ No API key? `npx vibecompress -s -i photo.jpg` runs in offline mock mode.
 
 ---
 
-*Source: [fmdunlap/vibecompress](https://github.com/fmdunlap/vibecompress) — MIT licensed. "No pixels were harmed in the making of this format (they were simply deleted)."*
+_Source: [fmdunlap/vibecompress](https://github.com/fmdunlap/vibecompress) — MIT licensed. "No pixels were harmed in the making of this format (they were simply deleted)."_

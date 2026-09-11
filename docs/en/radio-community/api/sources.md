@@ -7,15 +7,15 @@ description: Sources API endpoints reference
 
 ## Endpoints
 
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| GET | `/api/communities/:id/sources` | Yes | List sources |
-| POST | `/api/communities/:id/sources` | Yes | Create source |
-| PUT | `/api/communities/:id/sources/:sourceId` | Yes | Update source |
-| DELETE | `/api/communities/:id/sources/:sourceId` | Yes | Delete source |
-| POST | `/api/communities/:id/sources/:sourceId/fetch` | Yes | Fetch tracks |
-| POST | `/api/communities/:id/sources/deezer/import` | Yes | Import from Deezer |
-| GET | `/api/sources` | Yes | List all sources (global) |
+| Method | Endpoint                                       | Auth | Description               |
+| ------ | ---------------------------------------------- | ---- | ------------------------- |
+| GET    | `/api/communities/:id/sources`                 | Yes  | List sources              |
+| POST   | `/api/communities/:id/sources`                 | Yes  | Create source             |
+| PUT    | `/api/communities/:id/sources/:sourceId`       | Yes  | Update source             |
+| DELETE | `/api/communities/:id/sources/:sourceId`       | Yes  | Delete source             |
+| POST   | `/api/communities/:id/sources/:sourceId/fetch` | Yes  | Fetch tracks              |
+| POST   | `/api/communities/:id/sources/deezer/import`   | Yes  | Import from Deezer        |
+| GET    | `/api/sources`                                 | Yes  | List all sources (global) |
 
 ## GET /api/communities/:id/sources
 
@@ -57,11 +57,11 @@ Create a source for a community. Requires admin permissions.
 
 ### Source Types
 
-| Type | Description | Config |
-|------|-------------|--------|
-| `joe_easy` | Joe.be Belgian radio | `station_id` (all_hits, 70s, 80s, 90s, 00s, hot) |
-| `deezer` | Deezer playlist import | `playlist_url` |
-| `manual` | Manual file uploads | No config needed |
+| Type       | Description            | Config                                           |
+| ---------- | ---------------------- | ------------------------------------------------ |
+| `joe_easy` | Joe.be Belgian radio   | `station_id` (all_hits, 70s, 80s, 90s, 00s, hot) |
+| `deezer`   | Deezer playlist import | `playlist_url`                                   |
+| `manual`   | Manual file uploads    | No config needed                                 |
 
 ## PUT /api/communities/:id/sources/:sourceId
 
@@ -96,7 +96,7 @@ Fetch tracks from a source. Requires admin permissions.
 ```
 
 !!! note "Stream Restart"
-    After successfully fetching tracks, the stream automatically restarts to include new tracks.
+After successfully fetching tracks, the stream automatically restarts to include new tracks.
 
 ## POST /api/communities/:id/sources/deezer/import
 

@@ -25,6 +25,7 @@
 ## Proposed approach
 
 Five sequential tasks, all content/config only:
+
 1. Rewrite the EN startpage as a real landing page; mirror to NL manually (homepage tone matters — hand-write NL rather than machine-translate).
 2. Refresh `projects.md`: add Radio Community + Neo-Brutalist Home + Home-lab Docs link, drop the private-repo section; generate the NL mirror via `autotranslate --write`.
 3. Replace Jekyll `404.html` with Material-native `docs/en/404.md` + `docs/nl/404.md`; delete the old root file.
@@ -40,6 +41,7 @@ Every task ends with a local strict build; final task runs the full verification
 **Objective:** A first-time visitor understands within seconds what this hub is and where to click next.
 
 **Files:**
+
 - Modify: `docs/en/index.md` (complete rewrite)
 
 **Step 1: Write the new content**
@@ -58,12 +60,12 @@ so what you read always matches the code.
 
 ## Projects
 
-| Project | What it is | Docs |
-|---------|------------|------|
-| **Clocky** | A React clock studio: 13 hand-built clocks plus an AI customizer | [Docs](clock/docs/index.md) · [GitHub](https://github.com/Aldo-f/clock) |
-| **Thuis** | VRT MAX video downloader with automatic authentication (v3 → v5) | [Latest](thuis-v5/website/docs/intro.md) · [All versions](projects.md) |
-| **Radio Community** | Democratic internet radio with voting-based playlists | [Docs](radio-community/index.md) |
-| **Neo-Brutalist Home** | Dashboard design exploration | [GitHub](https://github.com/Aldo-f/Aldo-f.github.io) |
+| Project                | What it is                                                       | Docs                                                                    |
+| ---------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| **Clocky**             | A React clock studio: 13 hand-built clocks plus an AI customizer | [Docs](clock/docs/index.md) · [GitHub](https://github.com/Aldo-f/clock) |
+| **Thuis**              | VRT MAX video downloader with automatic authentication (v3 → v5) | [Latest](thuis-v5/website/docs/intro.md) · [All versions](projects.md)  |
+| **Radio Community**    | Democratic internet radio with voting-based playlists            | [Docs](radio-community/index.md)                                        |
+| **Neo-Brutalist Home** | Dashboard design exploration                                     | [GitHub](https://github.com/Aldo-f/Aldo-f.github.io)                    |
 
 ## Start here
 
@@ -72,15 +74,17 @@ so what you read always matches the code.
   readable by AI agents.
 - Running my stack? See [Home-lab documentation](home-lab-docs.md).
 
-*Deze site bestaat ook in het [Nederlands](/nl/).*
+_Deze site bestaat ook in het [Nederlands](/nl/)._
 ```
 
 **Step 2: Verify locally**
 
 Run:
+
 ```bash
 cd /home/aldo/dev/06-apps-aldo-f-github-io && DISABLE_MKDOCS_2_WARNING=true ./venv/bin/python -m mkdocs build --strict -f mkdocs.en.yml -d site >/dev/null 2>&1; echo "exit=$?"
 ```
+
 Expected: `exit=0`
 
 Run: `grep -c "Clocky\|Thuis\|Radio Community" site/index.html`
@@ -101,6 +105,7 @@ git commit -m "feat(home): real landing page for first-time visitors (EN)"
 **Objective:** Dutch visitors get the same orientation quality; homepage copy is brand voice, so it is written manually rather than run through DeepL.
 
 **Files:**
+
 - Modify: `docs/nl/index.md` (complete rewrite)
 
 **Step 1: Write the new content**
@@ -119,11 +124,11 @@ zodat wat je leest altijd klopt met de code.
 
 ## Projecten
 
-| Project | Wat het is | Documentatie |
-|---------|------------|--------------|
-| **Clocky** | Een React-klokstudio: 13 handgebouwde klokken plus een AI-customizer | [Documentatie](/clock/docs/) · [GitHub](https://github.com/Aldo-f/clock) |
-| **Thuis** | VRT MAX-video-downloader met automatische authenticatie (v3 → v5) | [Nederlands](thuis/docs/nl/index.md) · [Alle versies](/projects/) |
-| **Radio Community** | Democratische internetradio met stemmen op de playlist | [Engels](/radio-community/) |
+| Project             | Wat het is                                                           | Documentatie                                                             |
+| ------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| **Clocky**          | Een React-klokstudio: 13 handgebouwde klokken plus een AI-customizer | [Documentatie](/clock/docs/) · [GitHub](https://github.com/Aldo-f/clock) |
+| **Thuis**           | VRT MAX-video-downloader met automatische authenticatie (v3 → v5)    | [Nederlands](thuis/docs/nl/index.md) · [Alle versies](/projects/)        |
+| **Radio Community** | Democratische internetradio met stemmen op de playlist               | [Engels](/radio-community/)                                              |
 
 ## Begin hier
 
@@ -131,7 +136,7 @@ zodat wat je leest altijd klopt met de code.
 - Recent geschreven: [de blog](blog/).
 - Draai je mijn stack mee? Zie [Home-lab documentatie](home-lab-docs.md).
 
-*This site is also available in [English](/).*
+_This site is also available in [English](/)._
 ```
 
 **Step 2: Verify**
@@ -156,6 +161,7 @@ git commit -m "feat(home): Dutch landing page matching new EN startpage"
 **Objective:** The project index matches reality (adds Radio Community, Neo-Brutalist Home, Home-lab Docs link; drops the stale home-lab section) and exists in Dutch.
 
 **Files:**
+
 - Modify: `docs/en/projects.md`
 - Create: `docs/nl/projects.md` (via autotranslate)
 
@@ -166,7 +172,7 @@ git commit -m "feat(home): Dutch landing page matching new EN startpage"
 
 A quick index of everything documented on this hub.
 
-## Clock — *Clocky*
+## Clock — _Clocky_
 
 A React clock studio with 13 hand-built clocks (marble run, nixie tubes,
 split-flap, game of life, …) and an AI customizer backed by a configurable
@@ -180,12 +186,12 @@ provider waterfall.
 VRT MAX video downloader with automatic authentication. The hub tracks its
 documentation across major versions:
 
-| Version | Docs | Source ref |
-|---------|------|------------|
-| main | [Thuis main](thuis/docs/index.md) | `main` branch |
-| v5 | [Thuis v5](thuis-v5/website/docs/intro.md) | `v5/main` branch |
-| v4 | [Thuis v4](thuis-v4/website/docs/intro.md) | tag `v4.1.0` |
-| v3 | [Thuis v3](thuis-v3/docs/index.md) | tag `v3.0.0` |
+| Version | Docs                                       | Source ref       |
+| ------- | ------------------------------------------ | ---------------- |
+| main    | [Thuis main](thuis/docs/index.md)          | `main` branch    |
+| v5      | [Thuis v5](thuis-v5/website/docs/intro.md) | `v5/main` branch |
+| v4      | [Thuis v4](thuis-v4/website/docs/intro.md) | tag `v4.1.0`     |
+| v3      | [Thuis v3](thuis-v3/docs/index.md)         | tag `v3.0.0`     |
 
 Source: [github.com/Aldo-f/thuis](https://github.com/Aldo-f/thuis)
 
@@ -213,10 +219,12 @@ services, Traefik reverse proxy — is described in
 **Step 2: Generate the NL mirror**
 
 Run:
+
 ```bash
 cd /home/aldo/dev/06-apps-aldo-f-github-io && source venv/bin/activate \
   && autotranslate --docs-dir docs --languages en nl --paths projects.md --write 2>&1 | tail -3
 ```
+
 Expected: `WROTE 1 post(s): nl <- en projects.md` (wording may vary slightly).
 
 **Step 3: Review the diff**
@@ -243,6 +251,7 @@ git commit -m "feat(projects): current project index (adds Radio Community, Neo-
 **Objective:** Visitors hitting a dead link get a styled, language-aware 404 instead of an unstyled Jekyll fragment.
 
 **Files:**
+
 - Create: `docs/en/404.md`
 - Create: `docs/nl/404.md`
 - Delete: `404.html` (repo root)
@@ -284,14 +293,17 @@ cd /home/aldo/dev/06-apps-aldo-f-github-io && git rm 404.html
 DISABLE_MKDOCS_2_WARNING=true ./venv/bin/python -m mkdocs build --strict -f mkdocs.en.yml -d site >/dev/null 2>&1; echo "exit=$?"
 grep -c "Page not found" site/404.html
 ```
+
 Expected: `exit=0` and count ≥ 1 (Material renders docs/en/404.md into site/404.html).
 
 Note: MkDocs generates one 404 per build; since the EN build writes to `site/` last-in-pipeline ordering can overwrite — verify BOTH files after both builds:
+
 ```bash
 DISABLE_MKDOCS_2_WARNING=true ./venv/bin/python -m mkdocs build --strict -f mkdocs.en.yml -d site >/dev/null 2>&1
 DISABLE_MKDOCS_2_WARNING=true ./venv/bin/python -m mkdocs build --strict -f mkdocs.nl.yml -d site/nl >/dev/null 2>&1
 grep -c "Pagina niet gevonden" site/nl/404.html
 ```
+
 Expected: ≥ 1. (If the NL build overwrites the root `site/404.html`, reorder so EN builds LAST in deploy.yml — check `.github/workflows/deploy.yml` step order; currently EN then NL which is correct because NL writes only under `site/nl/`.)
 
 **Step 5: Commit**
@@ -308,6 +320,7 @@ git commit -m "feat(404): styled Material 404 pages (EN/NL); drop Jekyll leftove
 **Objective:** Remove the orphaned CV download (user decision: DROP).
 
 **Files:**
+
 - Delete: `download/CV Aldo Fieuw.pdf`
 - Delete: `download/` directory (empty after removal)
 
@@ -336,6 +349,7 @@ git commit -m "chore: remove orphaned CV download"
 **Objective:** About reads as a visitor page; repo-onboarding moves to AGENTS.md; search engines get a description.
 
 **Files:**
+
 - Modify: `docs/en/about.md`
 - Modify: `docs/nl/about.md`
 - Modify: `~/dev/AGENTS.md` (only if the onboarding section isn't already covered there — check first; the hub's AGENTS.md already documents multirepo onboarding, so likely just delete from About)
@@ -376,6 +390,7 @@ Expected: both `exit=0`.
 ```bash
 source venv/bin/activate && python tests/verify_blog.py 2>&1 | grep -E "FAIL|passed"
 ```
+
 Expected: `17/17 checks passed`.
 
 **Step 6: Commit**
@@ -413,17 +428,17 @@ git commit -m "feat(about): visitor-facing about page + site_description; move r
 
 ## Files likely to change (summary)
 
-| File | Action |
-|---|---|
-| `docs/en/index.md` | rewrite |
-| `docs/nl/index.md` | rewrite |
-| `docs/en/projects.md` | rewrite |
-| `docs/nl/projects.md` | create (autotranslate) |
-| `docs/en/404.md`, `docs/nl/404.md` | create |
-| `404.html` (root) | delete |
-| `download/CV Aldo Fieuw.pdf` | delete |
-| `docs/en/about.md`, `docs/nl/about.md` | modify |
-| `mkdocs.base.yml` | add site_description |
+| File                                   | Action                 |
+| -------------------------------------- | ---------------------- |
+| `docs/en/index.md`                     | rewrite                |
+| `docs/nl/index.md`                     | rewrite                |
+| `docs/en/projects.md`                  | rewrite                |
+| `docs/nl/projects.md`                  | create (autotranslate) |
+| `docs/en/404.md`, `docs/nl/404.md`     | create                 |
+| `404.html` (root)                      | delete                 |
+| `download/CV Aldo Fieuw.pdf`           | delete                 |
+| `docs/en/about.md`, `docs/nl/about.md` | modify                 |
+| `mkdocs.base.yml`                      | add site_description   |
 
 ## Tests / validation
 

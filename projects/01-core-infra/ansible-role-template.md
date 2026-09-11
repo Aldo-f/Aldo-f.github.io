@@ -24,9 +24,11 @@ stale_after: 2027-02-25T09:15:00Z
 # Standard Ansible Role Template
 
 ## Overview
+
 This document describes the standard structure and conventions for Ansible roles used in Aldo's home-lab infrastructure.
 
 ## Role Structure
+
 ```
 role_name/
 ├── defaults/
@@ -48,9 +50,10 @@ role_name/
 ```
 
 ## Conventions
+
 1. **Naming**: Use lowercase with underscores (e.g., `docker_service`, `firewall_config`)
 2. **Documentation**: Every role must have a README.md with usage instructions
-3. **Variables**: 
+3. **Variables**:
    - Define sensible defaults in `defaults/main.yml`
    - Allow overrides via host/group vars or extra vars
    - Use descriptive variable names with clear prefixes
@@ -59,6 +62,7 @@ role_name/
 6. **Meta**: Include appropriate galaxy info and dependencies
 
 ## Best Practices
+
 - Keep roles focused on a single concern
 - Use blocks for error handling when appropriate
 - Tag tasks for selective execution

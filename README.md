@@ -12,13 +12,13 @@ Personal documentation hub for Aldo Fieuw's projects and home-lab services.
 
 Documentation collected from multiple repositories and served via [GitHub Pages](https://aldo-f.github.io):
 
-| Project | Description |
-|---------|-------------|
+| Project                                                            | Description                      |
+| ------------------------------------------------------------------ | -------------------------------- |
 | **[Thuis](https://aldo-f.github.io/thuis-v5/website/docs/intro/)** | VRT MAX video downloader (v3–v5) |
-| **[Clock](https://aldo-f.github.io/clock/docs/)** | React clock studio |
-| **[Blanky](https://aldo-f.github.io/blanky/docs/)** | External link opener library |
-| **[Radio Community](https://aldo-f.github.io/radio-community/)** | Democratic internet radio |
-| **[Home-lab](https://aldo-f.github.io/home-lab-docs/)** | Home infrastructure docs |
+| **[Clock](https://aldo-f.github.io/clock/docs/)**                  | React clock studio               |
+| **[Blanky](https://aldo-f.github.io/blanky/docs/)**                | External link opener library     |
+| **[Radio Community](https://aldo-f.github.io/radio-community/)**   | Democratic internet radio        |
+| **[Home-lab](https://aldo-f.github.io/home-lab-docs/)**            | Home infrastructure docs         |
 
 ## Structure
 

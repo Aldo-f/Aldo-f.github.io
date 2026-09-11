@@ -24,6 +24,7 @@ stale_after: 2027-02-25T09:15:00Z
 # Aldo's Home-Lab Infrastructure Knowledge Bundle
 
 This bundle contains structured knowledge about Aldo's home-lab infrastructure, including:
+
 - Raspberry Pi 3 and Pi 5 nodes
 - Ansible infrastructure templates
 - Media services (Jellyfin, Nextcloud, qBittorrent)
@@ -39,4 +40,4 @@ This bundle contains structured knowledge about Aldo's home-lab infrastructure, 
 
 Each section follows the OKF v0.2 specification with typed concepts, attested computations, and proper provenance tracking.
 
-*Last updated: 2026-08-25T09:15:00Z*
+_Last updated: 2026-08-25T09:15:00Z_

@@ -77,10 +77,10 @@ nav:
           - Features: clock/docs/features.md
           - Development: clock/docs/development.md
       - Blanky:
-          - 'Blanky main': blanky/docs/index.md
-          - 'Blanky v1': blanky-v1/docs/index.md
+          - "Blanky main": blanky/docs/index.md
+          - "Blanky v1": blanky-v1/docs/index.md
       - Thuis:
-          - 'Thuis main':
+          - "Thuis main":
               - Overview: thuis/docs/index.md
               - Installation: thuis/docs/installation.md
               - Usage: thuis/docs/usage.md
@@ -94,7 +94,7 @@ nav:
                   - Testen: thuis/docs/nl/testing.md
                   - DRM: thuis/docs/nl/drm.md
                   - Probleemoplossing: thuis/docs/nl/troubleshooting.md
-          - 'Thuis v5':
+          - "Thuis v5":
               - Overview: thuis-v5/website/docs/intro.md
               - Getting started: thuis-v5/website/docs/getting-started.md
               - Usage: thuis-v5/website/docs/usage.md
@@ -103,13 +103,13 @@ nav:
               - Credential vault: thuis-v5/website/docs/credential-vault.md
               - Provider adapter: thuis-v5/website/docs/provider-adapter.md
               - Search service: thuis-v5/website/docs/search-service.md
-          - 'Thuis v4':
+          - "Thuis v4":
               - Overview: thuis-v4/website/docs/intro.md
               - Installation: thuis-v4/website/docs/installation.md
               - Usage: thuis-v4/website/docs/usage.md
               - Credentials: thuis-v4/website/docs/credentials.md
               - Development: thuis-v4/website/docs/development.md
-          - 'Thuis v3':
+          - "Thuis v3":
               - Overview: thuis-v3/docs/index.md
               - Installation: thuis-v3/docs/installation.md
               - Usage: thuis-v3/docs/usage.md

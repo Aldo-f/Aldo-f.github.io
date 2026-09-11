@@ -24,5 +24,6 @@ stale_after: 2027-02-25T09:15:00Z
 # Nextcloud File Sync & Share Change Log
 
 ## 2026-08-25T09:15:00Z - Initial Documentation
+
 - Created initial documentation for 05-media-nextcloud directory
 - Added index.md and log.md files

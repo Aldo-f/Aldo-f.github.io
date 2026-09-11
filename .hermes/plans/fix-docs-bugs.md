@@ -15,10 +15,12 @@
 3. **Search broken** — NOT YET INVESTIGATED (user mentioned separately; needs pagefind/search plugin fix in mkdocs.base.yml)
 
 ## Results
+
 - `gh run list` shows latest deploy: **completed success** (52s)
 - `curl https://aldo-f.github.io/projects/` shows OpenCode Multi-Model Fallback section
 - All multirepo imports built successfully (opencode-multi-model-fallback, clock, blanky, blanky-v1, home-lab-docs, etc.)
 - No warnings, no aborts, strict mode passed
 
 ## Remaining
+
 - Search plugin issue (pagefind) — needs separate investigation

@@ -66,6 +66,7 @@ Result: 50% less color data, with minimal visible effect.
 Here's where it gets interesting. JPEG splits the image into 8×8 pixel blocks. For each block, it applies the **Discrete Cosine Transform** — a mathematical transformation that converts pixels into frequencies.
 
 Instead of saying "pixel (2,3) is red with value 187", DCT says: "this block consists of:
+
 - 1 average brightness (low frequency)
 - A few gentle shadows (mid frequencies)
 - No hard edges (no high frequencies)"
@@ -188,8 +189,8 @@ Result: a compact bitstream that stores the photo.
 
 ## The Numbers: What JPEG Compression Looks Like
 
-| Original (RAW) | JPEG (Quality 85) | JPEG (Quality 50) |
-|----------------|-------------------|-------------------|
+| Original (RAW) | JPEG (Quality 85)     | JPEG (Quality 50)     |
+| -------------- | --------------------- | --------------------- |
 | 20,000 KB      | ~800 KB (96% smaller) | ~200 KB (99% smaller) |
 
 Notably, the "quality 50" version still looks decent at screen size, but shows clear blocking artifacts up close.
@@ -212,8 +213,8 @@ For those use cases, PNG (lossless) or WebP (modern successor) exist. But for ph
 
 JPEG doesn't work by guessing what a photo depicts (like AI tools do). It works by mathematically decomposing the image into frequencies, cutting the unimportant details, and packing the rest more tightly. It's compression through smart deletion, not hallucination.
 
-And that's the essential difference: with JPEG, you know what was in the photo. With AI compression, you only know what *vibe* the photo had.
+And that's the essential difference: with JPEG, you know what was in the photo. With AI compression, you only know what _vibe_ the photo had.
 
 ---
 
-*Related: [Why Store Pixels When You Can Store Vibes? Meet vibecompress](../2026/09/05/why-store-pixels-when-you-can-store-vibes-meet-vibecompress/) — the satirical counterpart that replaces math with LLMs.*
+_Related: [Why Store Pixels When You Can Store Vibes? Meet vibecompress](../2026/09/05/why-store-pixels-when-you-can-store-vibes-meet-vibecompress/) — the satirical counterpart that replaces math with LLMs._

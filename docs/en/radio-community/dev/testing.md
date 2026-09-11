@@ -7,14 +7,14 @@ description: Radio Community testing guide
 
 ## Test Commands
 
-| Command | Purpose |
-|---------|---------|
-| `npm test` | Run all Playwright E2E tests |
-| `npm run test:ui` | Run tests with UI |
-| `npm run test:headed` | Run tests in headed mode |
-| `npm run test:unit` | Run Jest unit tests |
-| `npm run test:integration` | Run Jest integration tests |
-| `npm run test:e2e` | Run Playwright E2E tests only |
+| Command                    | Purpose                       |
+| -------------------------- | ----------------------------- |
+| `npm test`                 | Run all Playwright E2E tests  |
+| `npm run test:ui`          | Run tests with UI             |
+| `npm run test:headed`      | Run tests in headed mode      |
+| `npm run test:unit`        | Run Jest unit tests           |
+| `npm run test:integration` | Run Jest integration tests    |
+| `npm run test:e2e`         | Run Playwright E2E tests only |
 
 ## Single Test File
 
@@ -29,6 +29,7 @@ npx playwright test tests/e2e/filename.spec.js
 ### Playwright E2E Tests
 
 End-to-end tests in `tests/e2e/`:
+
 - API flow testing
 - Community creation flows
 - Source management
@@ -37,6 +38,7 @@ End-to-end tests in `tests/e2e/`:
 ### Jest Unit Tests
 
 Unit tests in `tests/unit/`:
+
 - Utility functions
 - Helper functions
 - Business logic
@@ -44,6 +46,7 @@ Unit tests in `tests/unit/`:
 ### Jest Integration Tests
 
 Integration tests in `tests/integration/`:
+
 - Database operations
 - API endpoint combinations
 
@@ -52,7 +55,7 @@ Integration tests in `tests/integration/`:
 Tests are configured via `playwright.config.js`.
 
 !!! note "Unit Test Exclusion"
-    Unit tests are excluded from Playwright runs via `testIgnore` in the configuration.
+Unit tests are excluded from Playwright runs via `testIgnore` in the configuration.
 
 ## Running Tests in Development
 
@@ -76,6 +79,7 @@ npm run test:integration
 ## Test Environment
 
 Tests require:
+
 - Docker services running (`docker compose up -d`)
 - PostgreSQL database accessible
 - Auth service available

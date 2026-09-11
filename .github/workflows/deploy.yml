@@ -17,12 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          fetch-depth: 0  # Needed for git history if needed by plugins
+          fetch-depth: 0 # Needed for git history if needed by plugins
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install dependencies
         run: |

@@ -71,7 +71,7 @@ def query(question, k=3):
 ```
 
 On the Pi this runs fully local: CPU-only PyTorch, no GPU, no cloud calls
-during a query. Asking *"What is the Jellyfin health-check command?"*
+during a query. Asking _"What is the Jellyfin health-check command?"_
 returns the exact `curl` line with its source file cited, in under a second
 once the index is warm. When Mem0 is configured as the provider the vectors
 live there instead of in FAISS — same interface, different store.
@@ -137,7 +137,7 @@ one.
 
 ## Two doors, one knowledge base
 
-The last decision was the most interesting one: what should be *public*?
+The last decision was the most interesting one: what should be _public_?
 Raw machine knowledge — receipts, hashes, internal hostnames, health-check
 endpoints — is useful to agents but noise (and mild attack-surface) for
 human readers. So the two audiences get separate doors:
