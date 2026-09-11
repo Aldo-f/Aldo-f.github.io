@@ -44,10 +44,10 @@
     const widget = document.createElement('div');
     widget.id = 'chat-widget';
     widget.style.position = 'fixed';
-    widget.style.bottom = '90px';
-    widget.style.right = '24px';
-    widget.style.width = '350px';
-    widget.style.height = '500px';
+    widget.style.bottom = '5vh';
+    widget.style.right = '2.5vw';
+    widget.style.width = '95vw';
+    widget.style.height = '90vh';
     widget.style.backgroundColor = 'var(--md-default-bg-color, white)';
     widget.style.borderRadius = '16px';
     widget.style.boxShadow = 'var(--md-shadow-z2, 0 10px 25px -5px rgba(0,0,0,0.1))';
@@ -71,7 +71,7 @@
     header.style.backgroundColor = 'var(--md-default-bg-color--container, #f8fafc)';
 
     const title = document.createElement('h3');
-    title.textContent = 'Chat with AI';
+    title.textContent = 'AIdo — your OKF assistant';
     title.style.margin = '0';
     title.style.fontSize = '1.25rem';
     title.style.fontWeight = '600';
@@ -221,11 +221,26 @@
     if (isUser) {
       avatar.style.backgroundColor = 'var(--md-primary-fg-color, #6366f1)';
       avatar.textContent = 'U';
+      avatar.style.backgroundColor = '#6366f1';
+      avatar.style.color = 'white';
+      avatar.style.fontWeight = '700';
+      avatar.style.fontSize = '0.75rem';
+      avatar.style.display = 'flex';
+      avatar.style.alignItems = 'center';
+      avatar.style.justifyContent = 'center';
+      avatar.style.borderRadius = '50%';
       messageDiv.style.marginLeft = 'auto';
     } else {
       avatar.style.backgroundColor = 'var(--md-default-fg-color--light, #f3f4f6)';
-      avatar.textContent = 'AI';
-      avatar.style.color = 'var(--md-default-fg-color--medium, #6b7280)';
+      avatar.textContent = 'AIdo';
+      avatar.style.backgroundColor = '#6366f1';
+      avatar.style.color = 'white';
+      avatar.style.fontWeight = '700';
+      avatar.style.fontSize = '0.75rem';
+      avatar.style.display = 'flex';
+      avatar.style.alignItems = 'center';
+      avatar.style.justifyContent = 'center';
+      avatar.style.borderRadius = '50%';
       messageDiv.style.marginRight = 'auto';
     }
 
@@ -237,7 +252,7 @@
     messageContent.style.backgroundColor = isUser ? 'var(--md-primary-fg-color, #6366f1)' : 'var(--md-default-fg-color--light, #f3f4f6)';
     messageContent.style.color = isUser ? 'white' : 'var(--md-default-fg-color, #1f2937)';
     messageContent.style.lineHeight = '1.5';
-    messageContent.style.fontSize = '0.95rem';
+    messageContent.style.fontSize = '0.8rem';
     messageContent.style.wordWrap = 'break-word';
     messageContent.style.maxWidth = '100%';
 

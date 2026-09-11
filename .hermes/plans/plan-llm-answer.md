@@ -1,0 +1,1 @@
+Goal: RAG retrieval -> freellm LLM -> typed answer at rag.aldof.duckdns.org. Steps: (1) patch rag_query.py _generate_answer() with openai-compatible POST; (2) add /chat endpoint in rag_api.py; (3) update hooks/chat.py FAB to call /chat; (4) verify with curl. Model: freellm/auto via env API key.
