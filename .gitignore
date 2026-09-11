@@ -19,3 +19,13 @@ plugins/mkdocs_pivot_table/*.egg-info/
 plugins/mkdocs_raw_markdown/dist/
 plugins/mkdocs_raw_markdown/*.egg-info/
 plugins/mkdocs_pivot_table/*.egg-info/
+.env
+.env.*
+node_modules/
+__pycache__/
+*.log
+.env
+.env.*
+node_modules/
+__pycache__/
+*.log
