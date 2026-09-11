@@ -166,18 +166,30 @@ def on_config(config, **kwargs):
 
 
 def on_page_markdown(markdown: str, page, config, files, **kwargs):
-    """Read and inject content directly."""
+    """Inject the org table into about.md.
+
+    Uses the markdown MkDocs already parsed (front matter stripped). Re-reading
+    the raw file would re-introduce YAML front matter, which Markdown then
+    treats as a setext heading (`title: "..."` + `---` → visible H2).
+    """
     import sys
-    from pathlib import Path
 
     src_path = getattr(getattr(page, "file", None), "src_path", None)
-    abs_src_path = getattr(getattr(page, "file", None), "abs_src_path", None)
+    if src_path != "about.md":
+        return markdown
 
-    if src_path in ["index.md", "about.md", "projects.md"] and abs_src_path:
-        # Read the file directly
-        with open(abs_src_path) as f:
-            content = f.read()
-        print(f"[HOOK] Reading {src_path}: {len(content)} chars", file=sys.stderr)
-        return content
+    nav_repos = getattr(config, "_about_nav_repos", None) or []
+    if not nav_repos:
+        print(
+            "[HOOK] about_org_table: no nav_repos, leaving about.md unchanged",
+            file=sys.stderr,
+        )
+        return markdown
 
-    return markdown
+    table = _build_table(nav_repos)
+    result = _inject_into_about(markdown, table)
+    print(
+        f"[HOOK] about_org_table: injected table ({len(table)} chars) into {src_path}",
+        file=sys.stderr,
+    )
+    return result
