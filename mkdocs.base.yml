@@ -34,7 +34,6 @@ plugins:
       post_date_format: yyyy-MM-dd
       archive: true
   - search
-  - section-index
 extra:
   mermaid_version: "10.4.0"
   extra_javascript:
