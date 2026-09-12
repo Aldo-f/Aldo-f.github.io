@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ base_url }}assets/css/chat.css">
+  <link rel="stylesheet" href="{{ base_url }}assets/css/lightbox.css">
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ base_url }}assets/javascripts/chat.js"></script>
+  <script src="{{ base_url }}assets/javascripts/lightbox.js"></script>
+{% endblock %}

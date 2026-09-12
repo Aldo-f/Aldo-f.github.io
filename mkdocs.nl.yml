@@ -5,6 +5,7 @@ site_dir: site/nl
 theme:
   language: nl
 extra:
+  base_url: /
   alternate:
     - name: English
       link: /../
@@ -14,11 +15,12 @@ extra:
       lang: nl
   extra_css:
     - https://unpkg.com/pagefind@latest/pagefind-ui.css
-    - assets/css/giscus-no-branding.css
+    - "{{ base_url }}assets/css/giscus-no-branding.css"
   extra_javascript:
     - https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js
     - https://unpkg.com/pagefind@latest/pagefind-ui.js
-    - /js/pagefind-init.js
+    - "{{ base_url }}js/pagefind-init.js"
+
 plugins:
   - search:
       lang: nl

@@ -153,9 +153,17 @@ def on_post_build(config, **_kwargs):
     lang = "nl" if str(site).endswith("/nl") else "en"
     custom = site / "404" / "index.html"
     if custom.exists():
-        (site / "404.html").write_text(
-            custom.read_text(encoding="utf-8"), encoding="utf-8"
-        )
-        print(f"404: promoted {lang} custom page to 404.html")
+        # Rewrite language‑prefixed asset URLs (e.g. "nl/assets/..." → "/assets/")
+        content = custom.read_text(encoding="utf-8")
+        # 1) nl/assets → /assets/
+        content = content.replace(f"{lang}/assets/", "/assets/")
+        # 2) relative up‑one‑level "../assets/" → /assets/
+        content = content.replace("../assets/", "/assets/")
+        # Overwrite the language‑specific page with absolute URLs for consistency
+        custom.write_text(content, encoding="utf-8")
+        # Write the promoted page to the **site root** (not the language sub‑dir)
+        (Path(config.site_dir).parent / "404.html").write_text(content, encoding="utf-8")
+        print(f"⚡ 404: promoted {lang} custom page to site root (asset URLs fixed)")
+
 
     print(f"slugmap: wrote {n} mirror entries + {JS_NAME}")
