@@ -1,0 +1,6 @@
+{% extends "partials/blog_post.html" %}
+{% block excerpt %}
+<div class="md-post__content md-typeset">
+  {{ page.excerpt.split(' ')[:10]|join(' ') }}…
+</div>
+{% endblock %}
