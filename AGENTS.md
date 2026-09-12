@@ -1,4 +1,68 @@
-# AGENTS.md — 06-apps-aldo-f-github-io
+# PROJECT KNOWLEDGE BASE
+
+**Generated:** {{timestamp}}
+**Commit:** {{short_sha}}
+**Branch:** {{branch}}
+
+## OVERVIEW
+Personal documentation hub built with MkDocs Material, aggregating multiple repositories via multirepo plugin.
+
+## STRUCTURE
+```
+06-apps-aldo-f-github-io/
+├── docs/                # EN/NL documentation sources
+├── plugins/             # Custom MkDocs plugins
+├── projects/            # Imported external docs (multirepo)
+├── hooks/               # Build hooks & utilities
+├── rag/                 # Retrieval‑augmented generation helpers
+├── tests/               # Test suite for RAG and site utilities
+├── overrides/           # MkDocs HTML overrides
+├── .github/             # CI workflows
+└── ...
+```
+
+## WHERE TO LOOK
+| Area | Location | Notes |
+|------|----------|-------|
+| Docs | `docs/` | EN/NL content, blog posts |
+| Plugins | `plugins/` | Custom MkDocs extensions |
+| Imported docs | `projects/` | Multirepo imports |
+| CI | `.github/workflows/` | Deploy pipeline |
+| RAG helpers | `rag/` | Retrieval‑augmented generation code |
+
+## CODE MAP
+*Symbol/Export overview omitted for brevity – generated via LSP/codegraph during build.*
+
+## CONVENTIONS
+- Use `mkdocs.{en,nl}.yml` to build language‑specific sites.
+- All configuration lives in `mkdocs.base.yml` and is inherited.
+- Documentation files use front‑matter `title:` and optional `draft: true`.
+
+## ANTI‑PATTERNS (THIS PROJECT)
+- Direct edits to `site/` – generated output should never be committed.
+- Storing secrets in repo files – use `credentials.local.jsonc` outside version control.
+- Duplicate top‑level `404.html` – keep only under `overrides/`.
+
+## UNIQUE STYLES
+- Multilingual builds with separate `mkdocs.en.yml` / `mkdocs.nl.yml`.
+- `plugins/mkdocs_raw_markdown` provides a custom raw‑markdown parser.
+
+## COMMANDS
+```bash
+# Build English site
+mkdocs build -f mkdocs.en.yml
+
+# Build Dutch site
+mkdocs build -f mkdocs.nl.yml
+
+# Run RAG server
+python -m rag.okf_rag_serve
+```
+
+## NOTES
+- Remember to run `./venv/bin/python scripts/generate_projects.py` after updating `mkdocs.yml` multirepo entries.
+- Keep `requirements.txt` in sync with Python dependencies used by CI.
+
 
 ## Overview
 Personal documentation hub (MkDocs + Material theme) deployed to https://aldo-f.github.io via GitHub Pages.

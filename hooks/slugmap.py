@@ -146,24 +146,31 @@ def on_post_build(config, **_kwargs):
     js_path.parent.mkdir(parents=True, exist_ok=True)
     js_path.write_text(_SWITCH_JS, encoding="utf-8")
 
-    # Material renders its own generic 404.html; our custom 404.md pages are
-    # built as regular pages (404/index.html). Promote the language-appropriate
-    # one to the root 404.html so dead links get a styled, localized page.
+    # ---- Custom 404 page integration (The 404 Dungeon) --------------------
+    # MkDocs Material renders overrides/404.html automatically (extends base.html).
+    # This hook only copies the shared JSON data file to the site's assets dir
+    # so the component can fetch it at runtime.
+    data_src = REPO_ROOT / "data" / "404_dungeon.json"
+    if data_src.exists():
+        # Copy to both EN and NL site dirs so both builds have the data file.
+        for dest_dir in [Path(config.site_dir), Path(config.site_dir).parent]:
+            data_dest_dir = dest_dir / "assets" / "data"
+            data_dest_dir.mkdir(parents=True, exist_ok=True)
+            data_dest = data_dest_dir / "404_dungeon.json"
+            data_dest.write_text(data_src.read_text(encoding="utf-8"), encoding="utf-8")
+            print(f"⚡ 404: copied dungeon data to {data_dest}")
+    else:
+        print("⚠ 404: data/404_dungeon.json not found; skipping data copy")
+
+    # ---- Asset rewrite for language-specific 404 pages ----
     site = Path(config.site_dir)
     lang = "nl" if str(site).endswith("/nl") else "en"
     custom = site / "404" / "index.html"
     if custom.exists():
-        # Rewrite language‑prefixed asset URLs (e.g. "nl/assets/..." → "/assets/")
         content = custom.read_text(encoding="utf-8")
-        # 1) nl/assets → /assets/
         content = content.replace(f"{lang}/assets/", "/assets/")
-        # 2) relative up‑one‑level "../assets/" → /assets/
         content = content.replace("../assets/", "/assets/")
-        # Overwrite the language‑specific page with absolute URLs for consistency
         custom.write_text(content, encoding="utf-8")
-        # Write the promoted page to the **site root** (not the language sub‑dir)
-        (Path(config.site_dir).parent / "404.html").write_text(content, encoding="utf-8")
-        print(f"⚡ 404: promoted {lang} custom page to site root (asset URLs fixed)")
-
+        print(f"⚡ 404: asset URLs fixed in {custom}")
 
     print(f"slugmap: wrote {n} mirror entries + {JS_NAME}")

@@ -12,4 +12,5 @@ documentation from various projects.
 - [Thuis](thuis/docs/index.md) — VRT MAX video downloader
 - [Clock](clock/docs/index.md) — Special clocks
 - [Blanky](blanky/docs/index.md) — External link opener
-- [Projects](projects.md) — Full project index
+- [Projects](projects.md)
+- [Abbreviations](/abbreviations/) — Full project index

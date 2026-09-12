@@ -31,7 +31,9 @@ def _parse_abbreviation(path: Path) -> dict[str, Any] | None:
         return None
 
     front_matter, body = match.groups()
-    abbreviation_match = re.search(r"^abbreviation:\s*(\S+)\s*$", front_matter, re.MULTILINE | re.I)
+    abbreviation_match = re.search(
+        r"^abbreviation:\s*(\S+)\s*$", front_matter, re.MULTILINE | re.I
+    )
     if not abbreviation_match:
         return None
 
@@ -100,7 +102,7 @@ def on_page_markdown(markdown: str, page: Any, config: Any, files: Any) -> str:
     """Inject the build-time data into the cheatsheet page."""
     if page.meta.get("title") == PAGE_TITLE:
         data = json.dumps(_abbreviations, ensure_ascii=False)
-        return f'<script>window.ABBREVIATIONS = {data};</script>\n{markdown}'
+        return f"<script>window.ABBREVIATIONS = {data};</script>\n{markdown}"
     return markdown
 
 
