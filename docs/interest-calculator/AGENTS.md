@@ -1,10 +1,39 @@
-# Agent Instructions
+# AGENTS.md — 06-apps-interest-calculator
 
-This project incorporates guidelines and principles from [Ponytail](https://ponytail.dev/) to ensure clean, efficient, and concise code generation.
+Interest calculator for Belgian mortgage dossiers. Bundled single-page app (Bun/TS + Vite).
 
-## Ponytail Development Guidelines
+## Structure
 
-1. **YAGNI (You Aren't Gonna Need It)**: Implement strictly what is requested. Avoid speculative abstractions, unnecessary wrapper functions, or premature over-engineering.
-2. **Minimal Code Footprint**: Write concise and effective code. Fewer lines mean easier maintainability, lower complexity, and fewer bugs.
-3. **Leverage Standard & Existing Tools**: Utilize built-in language/framework capabilities and existing dependencies before introducing new packages or custom frameworks.
-4. **Surgical & Focused Changes**: Make precise edits targeting only the relevant logic without refactoring unrelated parts of the codebase.
+```
+06-apps-interest-calculator/
+├── src/components/     # React components (DossierWorkflow, SharedView, Header, ReconciliationModal)
+├── server.ts           # Bun server (serves SPA + API)
+├── index.html          # Vite entry
+├── vite.config.ts      # Vite config
+├── tsconfig.json       # TypeScript config
+├── .env.example        # Required env vars template
+└── metadata.json       # AI Studio manifest
+```
+
+## Commands
+
+```bash
+bun install
+bun run dev          # http://localhost:3000
+bun run build        # → dist/
+bun start            # production
+```
+
+## Conventions
+
+- Bun runtime (not Node); use `bun.lock` not `package-lock.json`
+- Single-server architecture: Bun serves both API and static assets
+- Strict TypeScript — no `any`
+- Environment variables from `.env` (gitignored); `.env.example` is tracked
+
+## Anti-patterns
+
+- ❌ Don't add dependencies without updating `bun.lock`
+- ❌ Don't commit `.env` with real keys
+- ❌ Don't use Node.js — this is a Bun project
+- ❌ Don't add a database; uses `database.json` file storage
