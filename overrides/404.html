@@ -33,7 +33,7 @@ const MAX_CONF = 3;
 const response = await fetch('assets/data/404_dungeon.json');
 const scenes = await response.json();
 
-const LANG = 'nl'; // this override is used for the NL build
+const LANG = window.location.pathname.includes('/nl/') ? 'nl' : 'en'; // auto-detect language from URL
 let state = { node: 'start', confusion: 0 };
 
 function t(node, field) {
