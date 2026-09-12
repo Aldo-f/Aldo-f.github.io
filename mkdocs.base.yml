@@ -60,6 +60,7 @@ markdown_extensions:
       permalink: true
 hooks:
   - hooks/slugmap.py
+  - hooks/abbreviations.py
   - hooks/lightbox.py
   - hooks/related_posts.py
   - hooks/dynamic_repo.py
