@@ -6,4 +6,5 @@ mkdocs-autotranslate
 mkdocs-mermaid2-plugin
 pagefind
 -e plugins/mkdocs_pivot_table
-- ./plugins/mkdocs_raw_markdown
+pytest-playwright
+

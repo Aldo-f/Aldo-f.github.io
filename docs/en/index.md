@@ -13,4 +13,6 @@ documentation from various projects.
 - [Clock](clock/docs/index.md) — Special clocks
 - [Blanky](blanky/docs/index.md) — External link opener
 - [Projects](projects.md)
-- [Abbreviations](/abbreviations/) — Full project index
+- [Abbreviation Feature Overview](/abbreviation-feature/)
+
+
