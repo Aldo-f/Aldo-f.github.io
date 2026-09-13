@@ -15,7 +15,7 @@ title: Abbreviations Cheatsheet
 </div>
 
 <style>
-  :root { --accent: #ab57ff; --bg: #1e1e2e; --card: #2a2a3e; --text: #cdd6f4; --muted: #a6adc8; --border: #45475a; }
+    :root { --accent: #ab57ff; --bg: #ffffff; --card: #f0f0f0; --text: #000000; --muted: #555555; --border: #cccccc; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; padding: 2rem; line-height: 1.6; }
   h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
