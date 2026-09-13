@@ -19,7 +19,7 @@ extra:
   extra_javascript:
     - https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js
     - https://unpkg.com/pagefind@latest/pagefind-ui.js
-    - "{{ base_url }}js/pagefind-init.js"
+    - "assets/javascripts/pagefind-init.js"
 
 plugins:
   - search:
