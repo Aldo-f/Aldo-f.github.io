@@ -61,6 +61,9 @@ REPO_DEST_MAP = {
     ],
     "06-apps-thuis-plugin-dedrm": [f"{DOCS_SITE_DOCS}/thuis-plugin-dedrm"],
     "06-apps-thuis-tool-dedrm": [f"{DOCS_SITE_DOCS}/thuis-tool-dedrm"],
+    "06-apps-mkdocs-pivot-table": [f"{DOCS_SITE_DOCS}/mkdocs-pivot-table"],
+    "06-apps-mkdocs-autotranslate": [f"{DOCS_SITE_DOCS}/mkdocs-autotranslate"],
+    "06-apps-mkdocs-raw-markdown": [f"{DOCS_SITE_DOCS}/mkdocs-raw-markdown"],
     "06-apps-yt-dlp": [f"{DOCS_SITE_DOCS}/yt-dlp"],
 }
 

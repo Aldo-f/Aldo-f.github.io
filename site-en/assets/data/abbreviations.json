@@ -1,0 +1,63 @@
+[
+  {
+    "abbreviation": "DRY",
+    "answers": [
+      {
+        "title": "Don't Repeat Yourself",
+        "categories": [
+          "software-engineering",
+          "programming-principles"
+        ],
+        "definition": "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system."
+      },
+      {
+        "title": "Data Reduction Yield",
+        "categories": [
+          "data-science"
+        ],
+        "definition": "A metric measuring the compression ratio achieved by deduplication."
+      }
+    ]
+  },
+  {
+    "abbreviation": "SDD",
+    "answers": [
+      {
+        "title": "Specification-Driven Development",
+        "categories": [
+          "software-engineering",
+          "design"
+        ],
+        "definition": "Define the specification (spec-kit, interface contracts) before writing implementation code."
+      }
+    ]
+  },
+  {
+    "abbreviation": "TDD",
+    "answers": [
+      {
+        "title": "Test-Driven Development",
+        "categories": [
+          "software-engineering",
+          "agile",
+          "quality"
+        ],
+        "definition": "Write a failing test before writing the minimum code to make it pass, then refactor."
+      }
+    ]
+  },
+  {
+    "abbreviation": "YAGNI",
+    "answers": [
+      {
+        "title": "You Ain't Gonna Need It",
+        "categories": [
+          "software-engineering",
+          "programming-principles",
+          "agile"
+        ],
+        "definition": "Don't add functionality until it is actually needed. Implement only the requirements you have today."
+      }
+    ]
+  }
+]
