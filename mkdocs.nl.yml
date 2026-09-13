@@ -2,6 +2,10 @@ INHERIT: mkdocs.base.yml
 site_url: https://aldo-f.github.io/nl/
 docs_dir: docs/nl
 site_dir: site/nl
+extra_javascript:
+  - https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js
+  - https://unpkg.com/pagefind@latest/pagefind-ui.js
+  - "assets/javascripts/pagefind-init.js"
 theme:
   language: nl
 extra:
@@ -13,14 +17,6 @@ extra:
     - name: Nederlands
       link: /
       lang: nl
-  extra_css:
-    - https://unpkg.com/pagefind@latest/pagefind-ui.css
-    - "{{ base_url }}assets/css/giscus-no-branding.css"
-  extra_javascript:
-    - https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js
-    - https://unpkg.com/pagefind@latest/pagefind-ui.js
-    - "assets/javascripts/pagefind-init.js"
-
 plugins:
   - search:
       lang: nl

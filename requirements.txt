@@ -5,8 +5,7 @@ mkdocs-section-index
 mkdocs-autotranslate
 mkdocs-mermaid2-plugin
 pagefind
-
-
-
+mkdocs-pivot-table==0.4.0
+mkdocs-raw-markdown==0.1.0
 
 playwright

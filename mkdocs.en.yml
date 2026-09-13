@@ -2,6 +2,9 @@ INHERIT: mkdocs.base.yml
 site_url: https://aldo-f.github.io
 docs_dir: docs/en
 site_dir: site
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js
+  - "assets/javascripts/pagefind-init.js"
 extra:
   alternate:
     - name: English
@@ -12,9 +15,6 @@ extra:
       lang: nl
   extra_css:
     - assets/css/giscus-no-branding.css
-  extra_javascript:
-    - https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js
-    - "assets/javascripts/pagefind-init.js"
 plugins:
   - search
   - blog:
