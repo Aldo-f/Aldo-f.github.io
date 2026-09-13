@@ -28,6 +28,7 @@ def _parse_abbreviation(path: Path) -> dict[str, Any] | None:
         re.DOTALL,
     )
     if not match:
+        print(f"⚠️  {path.name}: Missing or malformed front-matter")
         return None
 
     front_matter, body = match.groups()
@@ -35,6 +36,7 @@ def _parse_abbreviation(path: Path) -> dict[str, Any] | None:
         r"^abbreviation:\s*(\S+)\s*$", front_matter, re.MULTILINE | re.I
     )
     if not abbreviation_match:
+        print(f"⚠️  {path.name}: Missing 'abbreviation:' in front-matter")
         return None
 
     abbreviation = abbreviation_match.group(1).upper()
@@ -59,7 +61,14 @@ def _parse_abbreviation(path: Path) -> dict[str, Any] | None:
             section,
             re.I | re.DOTALL,
         )
-        if not title or not category_match or not definition_match:
+        if not title:
+            print(f"⚠️  {path.name}: Section missing title")
+            continue
+        if not category_match:
+            print(f"⚠️  {path.name}: Section '{title}' missing 'Category:'")
+            continue
+        if not definition_match:
+            print(f"⚠️  {path.name}: Section '{title}' missing 'Definition:'")
             continue
 
         categories = [
@@ -76,6 +85,7 @@ def _parse_abbreviation(path: Path) -> dict[str, Any] | None:
         )
 
     if not answers:
+        print(f"⚠️  {path.name}: No valid answers found")
         return None
     return {"abbreviation": abbreviation, "answers": answers}
 
@@ -95,6 +105,7 @@ def on_config(config: Any) -> Any:
     """Load entries before pages are rendered."""
     global _abbreviations
     _abbreviations = _load_abbreviations()
+    print(f"📚 Loaded {len(_abbreviations)} abbreviation(s)")
     return config
 
 
@@ -112,3 +123,4 @@ def on_post_build(*, config: Any, **kwargs: Any) -> None:
     output_path = site_dir / OUTPUT_FILE
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(_abbreviations, indent=2), encoding="utf-8")
+    print(f"✅ Wrote {len(_abbreviations)} abbreviations to {OUTPUT_FILE}")
