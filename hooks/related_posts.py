@@ -1,7 +1,7 @@
 """MkDocs hook: injects related posts section into blog posts.
 
-Scans all blog posts, finds those sharing tags or categories,
-and adds a "Lees ook" section at the bottom of each post.
+Scans all blog posts, finds those sharing tags, categories, or projects,
+and adds a "Lees ook" / "See also" section at the bottom of each post.
 """
 
 from __future__ import annotations
@@ -58,10 +58,11 @@ def _find_blog_posts(docs_dir: Path) -> list[Path]:
     return sorted(posts_dir.glob("*.md"))
 
 
-def _build_index(posts: list[Path]) -> tuple[dict, dict]:
-    """Build tag and category indexes keyed by resolved file path."""
+def _build_index(posts: list[Path]) -> tuple[dict, dict, dict]:
+    """Build tag, category and project indexes keyed by resolved file path."""
     tag_index: dict[str, list[tuple[Path, dict]]] = defaultdict(list)
     cat_index: dict[str, list[tuple[Path, dict]]] = defaultdict(list)
+    project_index: dict[str, list[tuple[Path, dict]]] = defaultdict(list)
     for post_path in posts:
         content = post_path.read_text(encoding="utf-8")
         fm, _ = _parse_frontmatter(content)
@@ -70,22 +71,27 @@ def _build_index(posts: list[Path]) -> tuple[dict, dict]:
             continue
         post_tags = [t.lower() for t in fm.get("tags", [])]
         post_cats = [c.lower() for c in fm.get("categories", [])]
+        post_projects = [p.lower() for p in fm.get("projects", [])]
         for tag in post_tags:
             tag_index[tag].append((post_path, fm))
         for cat in post_cats:
             cat_index[cat].append((post_path, fm))
-    return dict(tag_index), dict(cat_index)
+        for proj in post_projects:
+            project_index[proj].append((post_path, fm))
+    return dict(tag_index), dict(cat_index), dict(project_index)
 
 
 def _get_related(
     current_path: Path,
     current_tags: list[str],
     current_cats: list[str],
+    current_projects: list[str],
     tag_index: dict,
     cat_index: dict,
+    project_index: dict,
     blog_base: Path,
 ) -> list[tuple[str, str]]:
-    """Find related posts by tags or categories."""
+    """Find related posts by tags, categories, or projects."""
     scored: dict[Path, int] = {}
     for tag in current_tags:
         tag = tag.lower()
@@ -102,6 +108,14 @@ def _get_related(
                 if path.resolve() == current_path.resolve():
                     continue
                 score = scored.get(path, 0) + 1
+                scored[path] = score
+    for proj in current_projects:
+        proj = proj.lower()
+        if proj in project_index:
+            for path, fm in project_index[proj]:
+                if path.resolve() == current_path.resolve():
+                    continue
+                score = scored.get(path, 0) + 3  # Projects get highest priority
                 scored[path] = score
 
     related = sorted(scored.items(), key=lambda x: -x[1])[:5]
@@ -124,9 +138,10 @@ def on_config(config, **kwargs):
     docs_dir = Path(config.docs_dir)
     blog_posts = _find_blog_posts(docs_dir)
     if blog_posts:
-        tag_index, cat_index = _build_index(blog_posts)
+        tag_index, cat_index, project_index = _build_index(blog_posts)
         config._blog_tag_index = tag_index
         config._blog_cat_index = cat_index
+        config._blog_project_index = project_index
         config._blog_posts = blog_posts
         print(f"[RELATED] Found {len(blog_posts)} blog posts", file=sys.stderr)
     return config
@@ -149,6 +164,7 @@ def on_page_markdown(markdown: str, page, config, **kwargs):
     blog_posts = getattr(config, "_blog_posts", None)
     tag_index = getattr(config, "_blog_tag_index", {})
     cat_index = getattr(config, "_blog_cat_index", {})
+    project_index = getattr(config, "_blog_project_index", {})
 
     if not blog_posts:
         return markdown
@@ -156,11 +172,13 @@ def on_page_markdown(markdown: str, page, config, **kwargs):
     current_path = Path(getattr(page.file, "abs_src_path", "")).resolve()
     current_tags = [t.lower() for t in page.meta.get("tags", [])]
     current_cats = [c.lower() for c in page.meta.get("categories", [])]
+    current_projects = [p.lower() for p in page.meta.get("projects", [])]
 
     blog_base = Path(config.docs_dir) / "blog" / "posts"
 
     related = _get_related(
-        current_path, current_tags, current_cats, tag_index, cat_index, blog_base
+        current_path, current_tags, current_cats, current_projects,
+        tag_index, cat_index, project_index, blog_base
     )
 
     if not related:
@@ -203,7 +221,7 @@ def on_post_page(output: str, page, config, **kwargs):
     """Add CSS for related posts."""
     src_path = getattr(getattr(page, "file", None), "src_path", None)
     if not src_path or (
-        "/blog/posts/" not in src_path and "\\blog\\posts\\" not in src_path
+        "blog/posts/" not in src_path and "blog\\posts\\" not in src_path
     ):
         return output
 

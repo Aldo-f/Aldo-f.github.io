@@ -45,6 +45,10 @@ REPO_META = {
         "display": "Vaultwarden Backup",
         "url": "https://github.com/Aldo-f/07-security-vaultwarden-backup",
     },
+    "nocturna": {
+        "display": "Nocturna",
+        "url": "https://github.com/Aldo-f/Nocturna",
+    },
 }
 
 

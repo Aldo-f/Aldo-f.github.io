@@ -61,6 +61,10 @@ plugins:
           import_url: https://gitlab.com/Aldo-f/blanky?branch=v1-docs
           imports:
             - docs
+        - name: nocturna
+          import_url: https://github.com/Aldo-f/Nocturna?branch=main
+          imports:
+            - docs
 nav:
   - Home: index.md
   - Over: about.md

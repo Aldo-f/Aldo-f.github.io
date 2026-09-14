@@ -2428,39 +2428,46 @@
 </div>
 
 <style>
-    :root { --accent: #ab57ff; --bg: #ffffff; --card: #f0f0f0; --text: #000000; --muted: #555555; --border: #cccccc; }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; padding: 2rem; line-height: 1.6; }
-  h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-  .subtitle { color: var(--muted); margin-bottom: 1.5rem; }
-  .toolbar { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-  .search { flex: 1; min-width: 200px; padding: 0.6rem 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); font-size: 1rem; }
-  .search:focus { outline: 2px solid var(--accent); }
-  .filter { padding: 0.6rem 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); font-size: 1rem; cursor: pointer; }
-  .filter:focus { outline: 2px solid var(--accent); }
-  .add-link { margin-left: auto; padding: 0.6rem 1.2rem; background: var(--accent); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; transition: opacity 0.2s; }
-  .add-link:hover { opacity: 0.85; }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; transition: border-color 0.2s; }
-  .card:hover { border-color: var(--accent); }
-  .card-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
-  .card-header h2 { font-size: 1.3rem; color: var(--accent); }
-  .card-header .arrow { font-size: 1.2rem; transition: transform 0.2s; }
-  .card.open .arrow { transform: rotate(180deg); }
-  .card-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-  .card.open .card-body { max-height: 800px; margin-top: 1rem; }
-  .answer { border-left: 3px solid var(--accent); padding: 0.5rem 1rem; margin-bottom: 0.5rem; background: rgba(171,87,255,0.05); border-radius: 0 6px 6px 0; }
-  .answer h3 { font-size: 1rem; color: var(--text); margin-bottom: 0.2rem; }
-  .tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
-  .tag { font-size: 0.75rem; padding: 0.15rem 0.6rem; border-radius: 999px; background: var(--border); color: var(--muted); }
-  .definition { color: var(--muted); font-size: 0.95rem; }
-  .no-results { color: var(--muted); padding: 2rem 0; }
-  .hidden { display: none; }
-  .howto { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 1.5rem; }
-  .howto h2 { color: var(--accent); margin-bottom: 0.8rem; }
-  .howto ul { padding-left: 1.2rem; margin-top: 0.5rem; }
-  .howto li { margin-bottom: 0.3rem; }
-  .howto code { background: var(--border); padding: 0.1rem 0.4rem; border-radius: 4px; color: var(--text); }
-  .copy-link { color: var(--accent); font-size: 0.85rem; word-break: break-all; }
+    #abbreviations-page {
+        --accent: #ab57ff;
+        --bg: #ffffff;
+        --card: #f0f0f0;
+        --text: #000000;
+        --muted: #555555;
+        --border: #cccccc;
+        font-family: 'Inter', system-ui, sans-serif;
+        line-height: 1.6;
+    }
+    #abbreviations-page * { box-sizing: border-box; }
+    #abbreviations-page .subtitle { color: var(--muted); margin-bottom: 1.5rem; }
+    #abbreviations-page .toolbar { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    #abbreviations-page .search { flex: 1; min-width: 200px; padding: 0.6rem 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); font-size: 1rem; }
+    #abbreviations-page .search:focus { outline: 2px solid var(--accent); }
+    #abbreviations-page .filter { padding: 0.6rem 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--card); color: var(--text); font-size: 1rem; cursor: pointer; }
+    #abbreviations-page .filter:focus { outline: 2px solid var(--accent); }
+    #abbreviations-page .add-link { margin-left: auto; padding: 0.6rem 1.2rem; background: var(--accent); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; transition: opacity 0.2s; }
+    #abbreviations-page .add-link:hover { opacity: 0.85; }
+    #abbreviations-page .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; transition: border-color 0.2s; }
+    #abbreviations-page .card:hover { border-color: var(--accent); }
+    #abbreviations-page .card-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+    #abbreviations-page .card-header h2 { font-size: 1.3rem; color: var(--accent); }
+    #abbreviations-page .card-header .arrow { font-size: 1.2rem; transition: transform 0.2s; }
+    #abbreviations-page .card.open .arrow { transform: rotate(180deg); }
+    #abbreviations-page .card-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    #abbreviations-page .card.open .card-body { max-height: 800px; margin-top: 1rem; }
+    #abbreviations-page .answer { border-left: 3px solid var(--accent); padding: 0.5rem 1rem; margin-bottom: 0.5rem; background: rgba(171,87,255,0.05); border-radius: 0 6px 6px 0; }
+    #abbreviations-page .answer h3 { font-size: 1rem; color: var(--text); margin-bottom: 0.2rem; }
+    #abbreviations-page .tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+    #abbreviations-page .tag { font-size: 0.75rem; padding: 0.15rem 0.6rem; border-radius: 999px; background: var(--border); color: var(--muted); }
+    #abbreviations-page .definition { color: var(--muted); font-size: 0.95rem; }
+    #abbreviations-page .no-results { color: var(--muted); padding: 2rem 0; }
+    #abbreviations-page .hidden { display: none; }
+    #abbreviations-page .howto { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 1.5rem; }
+    #abbreviations-page .howto h2 { color: var(--accent); margin-bottom: 0.8rem; }
+    #abbreviations-page .howto ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+    #abbreviations-page .howto li { margin-bottom: 0.3rem; }
+    #abbreviations-page .howto code { background: var(--border); padding: 0.1rem 0.4rem; border-radius: 4px; color: var(--text); }
+    #abbreviations-page .copy-link { color: var(--accent); font-size: 0.85rem; word-break: break-all; }
 </style>
 
 <div class="howto">
