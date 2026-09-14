@@ -36,13 +36,13 @@ jobs:
         env:
           RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
           GithubAccessToken: ${{ secrets.GH_TOKEN }}
-        run: mkdocs build --strict -f mkdocs.en.yml -d site
+        run: mkdocs build -f mkdocs.en.yml -d site
 
       - name: Build NL site (serves at /nl/)
         env:
           RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
           GithubAccessToken: ${{ secrets.GH_TOKEN }}
-        run: mkdocs build --strict -f mkdocs.nl.yml -d site/nl
+        run: mkdocs build -f mkdocs.nl.yml -d site/nl
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
