@@ -20,10 +20,6 @@ jobs:
         with:
           fetch-depth: 0  # Needed for git history if needed by plugins
 
-      - name: Configure Git credentials
-        run: |
-          git config --global url."https://${{ github.token }}@github.com/".insteadOf "https://github.com/"
-
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
@@ -36,17 +32,17 @@ jobs:
           pip install mkdocs-raw-markdown==0.1.0 mkdocs-pivot-table==0.4.0
           npm install
 
-       - name: Build EN site (serves at root)
-         env:
-           RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
-           GithubAccessToken: ${{ github.token }}
-         run: mkdocs build --strict -f mkdocs.en.yml -d site
+      - name: Build EN site (serves at root)
+        env:
+          RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
+          GithubAccessToken: ${{ github.token }}
+        run: mkdocs build --strict -f mkdocs.en.yml -d site
 
-       - name: Build NL site (serves at /nl/)
-         env:
-           RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
-           GithubAccessToken: ${{ github.token }}
-         run: mkdocs build --strict -f mkdocs.nl.yml -d site/nl
+      - name: Build NL site (serves at /nl/)
+        env:
+          RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
+          GithubAccessToken: ${{ github.token }}
+        run: mkdocs build --strict -f mkdocs.nl.yml -d site/nl
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
