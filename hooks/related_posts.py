@@ -177,8 +177,14 @@ def on_page_markdown(markdown: str, page, config, **kwargs):
     blog_base = Path(config.docs_dir) / "blog" / "posts"
 
     related = _get_related(
-        current_path, current_tags, current_cats, current_projects,
-        tag_index, cat_index, project_index, blog_base
+        current_path,
+        current_tags,
+        current_cats,
+        current_projects,
+        tag_index,
+        cat_index,
+        project_index,
+        blog_base,
     )
 
     if not related:
