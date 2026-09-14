@@ -36,15 +36,17 @@ jobs:
           pip install mkdocs-raw-markdown==0.1.0 mkdocs-pivot-table==0.4.0
           npm install
 
-      - name: Build EN site (serves at root)
-        env:
-          RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
-        run: mkdocs build --strict -f mkdocs.en.yml -d site
+       - name: Build EN site (serves at root)
+         env:
+           RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
+           GithubAccessToken: ${{ github.token }}
+         run: mkdocs build --strict -f mkdocs.en.yml -d site
 
-      - name: Build NL site (serves at /nl/)
-        env:
-          RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
-        run: mkdocs build --strict -f mkdocs.nl.yml -d site/nl
+       - name: Build NL site (serves at /nl/)
+         env:
+           RAG_API_KEY: ${{ secrets.RAG_API_KEY }}
+           GithubAccessToken: ${{ github.token }}
+         run: mkdocs build --strict -f mkdocs.nl.yml -d site/nl
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
