@@ -21,7 +21,7 @@ title: Abbreviations Cheatsheet
         aria-label="Search abbreviations"
         autocomplete="off"
       >
-      <span class="kbd-hint" aria-hidden="true">⌘K</span>
+
     </div>
     <select id="filter" class="filter" aria-label="Filter by category">
       <option value="">All categories</option>

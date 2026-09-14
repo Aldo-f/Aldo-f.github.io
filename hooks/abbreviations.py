@@ -113,7 +113,10 @@ def on_page_markdown(markdown: str, page: Any, config: Any, files: Any) -> str:
     """Inject the build-time data into the cheatsheet page."""
     if page.meta.get("title") == PAGE_TITLE:
         data = json.dumps(_abbreviations, ensure_ascii=False)
-        return f"<script>window.ABBREVIATIONS = {data};</script>\n{markdown}"
+        assets = """<link rel="stylesheet" href="assets/css/abbreviations.css">
+<script src="assets/javascripts/abbreviations.js"></script>
+"""
+        return f"<script>window.ABBREVIATIONS = {data};</script>\n{assets}{markdown}"
     return markdown
 
 
@@ -124,3 +127,14 @@ def on_post_build(*, config: Any, **kwargs: Any) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(_abbreviations, indent=2), encoding="utf-8")
     print(f"✅ Wrote {len(_abbreviations)} abbreviations to {OUTPUT_FILE}")
+    # Copy client-side assets so the page renders
+    for src, dst_name in [
+        ("assets/js/abbreviations.js", "assets/javascripts/abbreviations.js"),
+        ("assets/css/abbreviations.css", "assets/css/abbreviations.css"),
+    ]:
+        src_path = Path(src)
+        if src_path.exists():
+            dst_path = site_dir / dst_name
+            dst_path.parent.mkdir(parents=True, exist_ok=True)
+            dst_path.write_text(src_path.read_text(encoding="utf-8"), encoding="utf-8")
+            print(f"✅ Copied {src} -> {dst_path}")

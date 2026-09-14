@@ -176,15 +176,6 @@
   searchInput.addEventListener('input', debouncedRender);
   filterSelect.addEventListener('change', render);
 
-  // Keyboard shortcut: Ctrl+K or Cmd+K to focus search
-  document.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-      e.preventDefault();
-      searchInput.focus();
-      searchInput.select();
-    }
-  });
-
   // Initialize
   populateFilter();
   updateAddLink();

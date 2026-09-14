@@ -79,18 +79,7 @@
   pointer-events: none;
 }
 
-#abbreviations-page .kbd-hint {
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.75rem;
-  color: var(--muted);
-  background: var(--bg);
-  padding: 0.1rem 0.4rem;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-}
+
 
 #abbreviations-page .filter {
   padding: 0.75rem 1rem;
