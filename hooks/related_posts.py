@@ -121,14 +121,38 @@ def _get_related(
     related = sorted(scored.items(), key=lambda x: -x[1])[:5]
     result = []
     for path, _score in related:
-        try:
-            # Preserve language folder in URL (e.g., /nl/blog/...)
-            rel_url = "/" + path.relative_to(blog_base.parent.parent).as_posix()
-        except ValueError:
-            rel_url = "/" + path.name
         content = path.read_text(encoding="utf-8")
         fm, _ = _parse_frontmatter(content)
         display_title = fm.get("title", path.stem)
+        # Generate published URL from frontmatter date and title slug
+        # Source: docs/{lang}/blog/posts/YYYY-MM-DD-title.md
+        # Published: /{lang}/blog/YYYY/MM/DD/slugified-title/
+        date_str = fm.get("date", "")
+        if date_str:
+            # Parse date like "2026-09-03"
+            parts = date_str.split("-")
+            if len(parts) == 3:
+                year, month, day = parts
+                # Slugify title: lowercase, replace spaces/special chars with dashes
+                import re
+                slug = re.sub(r'[^a-z0-9]+', '-', display_title.lower()).strip('-')
+                # Detect language from path
+                lang = "en"
+                if path.parts[0] in ("en", "nl"):
+                    lang = path.parts[0]
+                rel_url = f"/{lang}/blog/{year}/{int(month):02d}/{int(day):02d}/{slug}/"
+            else:
+                # Fallback to source path if date parsing fails
+                try:
+                    rel_url = "/" + path.relative_to(blog_base.parent.parent).as_posix()
+                except ValueError:
+                    rel_url = "/" + path.name
+        else:
+            # Fallback to source path if no date
+            try:
+                rel_url = "/" + path.relative_to(blog_base.parent.parent).as_posix()
+            except ValueError:
+                rel_url = "/" + path.name
         result.append((display_title, rel_url))
     return result
 
