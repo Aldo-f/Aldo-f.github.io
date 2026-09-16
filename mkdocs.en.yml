@@ -129,4 +129,4 @@ nav:
       - Vaultwarden Backup:
           - vaultwarden-backup/docs/index.md
       - Nocturna:
-          - Screenshots: nocturna/docs/screenshots/README.md
+          - Screenshots: nocturna/docs/screenshots/
