@@ -1,10 +1,6 @@
 # AGENTS.md — 06-apps-neo-brutalist-home
 
-React + Vite neobrutalist component library for the neo-brutalist homepage. Deployed via `01-core-infra/roles/neo-brutalist-home` as a static site.
-
-## OVERVIEW
-
-React + Vite neobrutalist component library and homepage for the home lab dashboard.
+React + Vite neobrutalist component library for the neo-brutalist homepage, deployed via `01-core-infra/roles/neo-brutalist-home` as a static site.
 
 ## STRUCTURE
 
