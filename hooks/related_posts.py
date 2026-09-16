@@ -129,10 +129,11 @@ def _get_related(
         # Published: /{lang}/blog/YYYY/MM/DD/slugified-title/
         date_str = fm.get("date", "")
         if date_str:
-            # Parse date like "2026-09-03"
-            parts = date_str.split("-")
-            if len(parts) == 3:
-                year, month, day = parts
+            # Parse date like "2026-09-03" or "2019-04-17T18:30:00+02:00"
+            # Extract only the YYYY-MM-DD portion
+            date_match = re.match(r"(\d{4})-(\d{2})-(\d{2})", str(date_str))
+            if date_match:
+                year, month, day = date_match.groups()
                 # Slugify title: lowercase, replace spaces/special chars with dashes
                 import re
                 slug = re.sub(r'[^a-z0-9]+', '-', display_title.lower()).strip('-')
