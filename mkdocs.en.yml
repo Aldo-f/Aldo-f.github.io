@@ -129,4 +129,10 @@ nav:
       - Vaultwarden Backup:
           - vaultwarden-backup/docs/index.md
       - Nocturna:
+          - Overview: nocturna/docs/index.md
+          - Getting Started: nocturna/docs/getting-started.md
+          - Architecture: nocturna/docs/architecture.md
+          - Deployment: nocturna/docs/deployment.md
+          - API Reference: nocturna/docs/api.md
+          - Troubleshooting: nocturna/docs/troubleshooting.md
           - Screenshots: nocturna/docs/screenshots/

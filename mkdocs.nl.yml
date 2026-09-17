@@ -70,3 +70,12 @@ nav:
   - Over: about.md
   - Blog: blog/index.md
   - Home-lab: home-lab-docs.md
+  - Projecten:
+      - Nocturna:
+          - Overzicht: nocturna/docs/index.md
+          - Aan de slag: nocturna/docs/getting-started.md
+          - Architectuur: nocturna/docs/architecture.md
+          - Deployment: nocturna/docs/deployment.md
+          - API Referentie: nocturna/docs/api.md
+          - Probleemoplossing: nocturna/docs/troubleshooting.md
+          - Screenshots: nocturna/docs/screenshots/
