@@ -1,8 +1,8 @@
 # PROJECT KNOWLEDGE BASE
 
-**Generated:** 2026-09-13
-**Commit:** {{short_sha}}
-**Branch:** {{branch}}
+**Generated:** 2026-09-17
+**Commit:** 1313f15
+**Branch:** main
 
 ## OVERVIEW
 Personal documentation hub built with MkDocs Material, aggregating multiple repositories via multirepo plugin. Deployed to https://aldo-f.github.io via GitHub Pages.
