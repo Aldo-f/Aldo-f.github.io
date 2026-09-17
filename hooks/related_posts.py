@@ -135,8 +135,7 @@ def _get_related(
             if date_match:
                 year, month, day = date_match.groups()
                 # Slugify title: lowercase, replace spaces/special chars with dashes
-                import re
-                slug = re.sub(r'[^a-z0-9]+', '-', display_title.lower()).strip('-')
+                slug = re.sub(r"[^a-z0-9]+", "-", display_title.lower()).strip("-")
                 # Detect language from path
                 lang = "en"
                 if path.parts[0] in ("en", "nl"):
