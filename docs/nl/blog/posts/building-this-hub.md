@@ -17,6 +17,8 @@ publiceer de statische output. Geen database, geen server-side rendering, geen
 ‘quokka-buildkit’-achtige tovenarij — alleen deterministische tools die iedereen
 lokaal met twee commando’s kan herhalen.
 
+<!-- more -->
+
 ---
 
 <!-- translated from `en/blog/posts/building-this-hub` (en->nl) by deepl on 2026-08-26; review before publishing edits -->

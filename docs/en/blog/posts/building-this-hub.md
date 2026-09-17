@@ -10,6 +10,8 @@ build time. A MkDocs configuration lists each project repository and branch,
 and during every build the docs folders of those repositories are pulled in
 and merged into one navigable site under a single explicit table of contents.
 
+<!-- more -->
+
 This approach keeps each project's documentation next to its code while still
 offering one entry point for readers. The build pipeline itself is plain
 continuous integration: install the pinned requirements, run a strict build,

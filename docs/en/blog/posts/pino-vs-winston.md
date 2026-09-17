@@ -14,6 +14,8 @@ pino is known for its extreme speed. It is written in pure JavaScript with a foc
 
 winston, on the other hand, prioritizes flexibility and extensibility. Its performance is still reasonable for most use cases, but it isn’t quite as fast as pino. If your application doesn’t require micro‑second logging latency, winston’s performance is more than adequate.
 
+<!-- more -->
+
 ## API Simplicity
 
 pino offers a straightforward, minimal API:

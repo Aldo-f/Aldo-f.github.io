@@ -8,6 +8,8 @@ categories:
 
 It's Wednesday, the 5th day after the scrum week.
 
+<!-- more -->
+
 In my opinion, it moved too fast. Not that the project wasn't ready - with the minimal functionality - but it's just hard to see a project as "done".
 
 ## How did it go?

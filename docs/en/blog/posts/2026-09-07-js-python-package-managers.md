@@ -9,16 +9,18 @@ Choosing the right package manager isn't just about convenience—it's about dis
 ## Quick comparison (interactive)
 
 [pivot-table]
-| Tool | Ecosystem | Store/cache | Linking | Fallback | Lockfile | Speed | Runtime? | Maturity |
-|------|-----------|-------------|---------|----------|----------|-------|----------|----------|
-| npm  | JS/TS     | ~/.npm      | Copy    | None     | package-lock.json | Slow   | No       | High     |
-| pnpm | JS/TS     | ~/.pnpm-store | Hard link | Copy | pnpm-lock.yaml   | Fast   | No       | High     |
-| Bun  | JS/TS     | ~/.bun/bin/cache | Hard link | Copy | bun.lockb        | Fastest| Yes      | Medium   |
-| pip  | Python    | ~/.cache/pip | Copy   | None     | requirements.txt | Slow   | No       | High     |
-| uv   | Python    | ~/.uv/cache | Hard/reflink | Copy | uv.lock          | Fast   | No       | Medium   |
+|| Tool | Ecosystem | Store/cache | Linking | Fallback | Lockfile | Speed | Runtime? | Maturity ||
+||------|-----------|-------------|---------|----------|----------|-------|----------|----------||
+|| npm  | JS/TS     | ~/.npm      | Copy    | None     | package-lock.json | Slow   | No       | High     ||
+|| pnpm | JS/TS     | ~/.pnpm-store | Hard link | Copy | pnpm-lock.yaml   | Fast   | No       | High     ||
+|| Bun  | JS/TS     | ~/.bun/bin/cache | Hard link | Copy | bun.lockb        | Fastest| Yes      | Medium   ||
+|| pip  | Python    | ~/.cache/pip | Copy   | None     | requirements.txt | Slow   | No       | High     ||
+|| uv   | Python    | ~/.uv/cache | Hard/reflink | Copy | uv.lock          | Fast   | No       | Medium   ||
 [/pivot-table]
 
 ## Install flow diagrams
+
+<!-- more -->
 
 ### npm install flow
 ```mermaid

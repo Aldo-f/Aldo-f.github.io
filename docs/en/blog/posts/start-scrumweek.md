@@ -25,5 +25,7 @@ and how we would handle communication.
 We also agreed to try pair programming for the first time.
 This should help us understand each other's working styles better.
 
+<!-- more -->
+
 The week ahead will be intense, but also very educational.
 Let's see what we can achieve together!
