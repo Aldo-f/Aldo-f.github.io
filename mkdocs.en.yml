@@ -59,9 +59,9 @@ plugins:
             - docs
 nav:
   - About: about.md
-  - Abbreviations: abbreviations.md
   - Blog: blog.md
   - Projects:
+      - Abbreviations: abbreviations.md
       - Thuis:
           - 'Thuis main': "!import https://github.com/Aldo-f/thuis?branch=main"
           - 'Thuis v5': "!import https://github.com/Aldo-f/thuis?branch=v5/main&docs_dir=website/docs/*"
