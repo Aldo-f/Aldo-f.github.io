@@ -72,3 +72,9 @@ nav:
   - Home-lab: home-lab-docs.md
   - Projecten:
       - Nocturna: "!import https://github.com/Aldo-f/Nocturna?branch=main"
+      - Thuis:
+          - 'Thuis main': "!import https://github.com/Aldo-f/thuis?branch=main"
+          - 'Thuis v3': "!import https://github.com/Aldo-f/thuis?branch=v3/main"
+      - Clock: "!import https://github.com/Aldo-f/clock?branch=main"
+      - Vaultwarden Backup: "!import https://github.com/Aldo-f/07-security-vaultwarden-backup?branch=main"
+      - OpenCode Fallback Plugin: "!import https://github.com/Aldo-f/opencode-multi-model-fallback?branch=main"
