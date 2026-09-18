@@ -65,14 +65,10 @@ plugins:
           import_url: https://github.com/Aldo-f/Nocturna?branch=main
           imports:
             - docs
-      repos:
-        - name: nocturna
-          import_url: https://github.com/Aldo-f/Nocturna?branch=main
-          imported_repo: true
 nav:
   - Home: index.md
   - Over: about.md
   - Blog: blog/index.md
   - Home-lab: home-lab-docs.md
   - Projecten:
-      - Nocturna: !import https://github.com/Aldo-f/Nocturna?branch=main
+      - Nocturna: "!import https://github.com/Aldo-f/Nocturna?branch=main"
