@@ -4,7 +4,7 @@ Personal documentation hub for Aldo Fieuw's projects and home-lab services.
 
 [![GitHub Pages Deploy](https://github.com/Aldo-f/Aldo-f.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/Aldo-f/Aldo-f.github.io/actions/workflows/deploy.yml)
 [![GitHub Pages Status](https://img.shields.io/github/actions/workflow/status/Aldo-f/Aldo-f.github.io/deploy.yml?branch=main&label=pages%20deploy)](https://aldo-f.github.io)
-[![MkDocs Material](https://img.shields.io/badge/mkdocs-material-9.5.31-blue)](https://squidfunk.github.io/mkdocs-material/)
+[![MkDocs Material](https://img.shields.io/badge/mkdocs%20material-9.7.7-blue)](https://squidfunk.github.io/mkdocs-material/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Last Updated](https://img.shields.io/github/last-commit/Aldo-f/Aldo-f.github.io/main)](https://github.com/Aldo-f/Aldo-f.github.io/commits/main)
 
