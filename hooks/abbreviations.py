@@ -113,8 +113,8 @@ def on_page_markdown(markdown: str, page: Any, config: Any, files: Any) -> str:
     """Inject the build-time data into the cheatsheet page."""
     if page.meta.get("title") == PAGE_TITLE:
         data = json.dumps(_abbreviations, ensure_ascii=False)
-        assets = """<link rel="stylesheet" href="assets/css/abbreviations.css">
-<script src="assets/javascripts/abbreviations.js"></script>
+        assets = """<link rel="stylesheet" href="/assets/css/abbreviations.css">
+<script src="/assets/javascripts/abbreviations.js"></script>
 """
         return f"<script>window.ABBREVIATIONS = {data};</script>\n{assets}{markdown}"
     return markdown
