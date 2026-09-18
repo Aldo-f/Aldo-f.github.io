@@ -5,9 +5,10 @@ categories:
   - Scrum
   - VDAB
 ---
-
 For the VDAB training as PHP developer, the scrum week started today.
 Two groups were formed, one of 3 and one of 4 people.
+
+<!-- more -->
 
 The goal is to create a FlexDating app within this week.
 This will be done by largely using existing code that fetches users from another server.
@@ -25,7 +26,7 @@ and how we would handle communication.
 We also agreed to try pair programming for the first time.
 This should help us understand each other's working styles better.
 
-<!-- more -->
+
 
 The week ahead will be intense, but also very educational.
 Let's see what we can achieve together!

@@ -4,7 +4,6 @@ date: 2026-08-23
 categories:
   - General
 ---
-
 This is the first post on the new blog section of the documentation hub.
 Short notes, release announcements and write-ups that do not belong to a
 single project's manual will live here from now on.

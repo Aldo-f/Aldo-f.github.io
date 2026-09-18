@@ -3,8 +3,9 @@ title: "JS & Python Package Managers Compared: npm, pnpm, Bun, pip, uv"
 date: 2026-09-07
 tags: [tooling, javascript, python]
 ---
-
 Choosing the right package manager isn't just about convenience—it's about disk space, install speed, and reproducible builds. The wrong choice can bloat your project with duplicate files, while the right one keeps your workspace lean and your CI pipelines humming.
+
+<!-- more -->
 
 ## Quick comparison (interactive)
 
@@ -20,7 +21,7 @@ Choosing the right package manager isn't just about convenience—it's about dis
 
 ## Install flow diagrams
 
-<!-- more -->
+
 
 ### npm install flow
 ```mermaid

@@ -5,7 +5,6 @@ categories:
   - Scrum
   - VDAB
 ---
-
 It's Wednesday, the 5th day after the scrum week.
 
 <!-- more -->

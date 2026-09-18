@@ -4,13 +4,14 @@ date: 2026-08-26
 categories:
   - Meta
 ---
-
 Mijn documentatiecentrum is altijd ontworpen voor mensen: MkDocs, een strak
 thema, één overzichtelijke pagina per concept. Dat werkt prima — totdat je een
 AI-agent vraagt om er iets in te zoeken. Een agent bladert niet; hij haalt informatie op.
 En gewone HTML-pagina’s zijn daar slecht voor geschikt. In dit bericht beschrijf ik hoe ik
 dezelfde kennisbank voor beide doelgroepen heb laten werken, volledig draaiend op een
 Raspberry Pi 5.
+
+<!-- more -->
 
 ## OKF in zestig seconden
 
@@ -46,7 +47,7 @@ uitvoeringsscript en een verificatieprogramma — deterministische code, zonder 
 een agent de controle zelf kan uitvoeren en het resultaat kan verifiëren in plaats van af te gaan op
 tekstuele beschrijvingen.
 
-<!-- more -->
+
 
 ## Een minimale RAG-pijplijn
 

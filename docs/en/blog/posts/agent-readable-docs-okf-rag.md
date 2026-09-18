@@ -4,13 +4,14 @@ date: 2026-08-26
 categories:
   - Meta
 ---
-
 My documentation hub has always been built for humans: MkDocs, a clean
 theme, one navigable page per concept. That works well — until you ask an
 AI agent to find something in it. An agent doesn't browse; it retrieves.
 And plain HTML pages are a poor retrieval target. This post describes how I
 made the same knowledge base work for both audiences, running entirely on a
 Raspberry Pi 5.
+
+<!-- more -->
 
 ## OKF in sixty seconds
 
@@ -46,7 +47,7 @@ executor script and an attester — deterministic code, no LLM involved — so
 an agent can run the check itself and verify the receipt instead of trusting
 prose.
 
-<!-- more -->
+
 
 ## A minimal RAG pipeline
 

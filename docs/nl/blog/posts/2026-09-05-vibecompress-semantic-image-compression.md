@@ -13,7 +13,6 @@ tags:
   - gpt-4o-mini
   - hallucinatie-als-feature
 ---
-
 Ontwikkelaar Forrest Dunlap, die duidelijk vroeg "wat als we de afbeelding gewoon... niet opslaan?", heeft **vibecompress** uitgebracht — een CLI-tool die 99,6% compressie bereikt door je foto's te vervangen door hallucinaties.
 
 <!-- more -->

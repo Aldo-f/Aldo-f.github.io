@@ -5,9 +5,10 @@ categories:
   - Scrum
   - VDAB
 ---
-
 Voor de opleiding van de VDAB, php developer, startte vandaag de scrumweek.
 Hierbij werden 2 groepjes gemaakt van 3 en 4 personen.
+
+<!-- more -->
 
 De bedoeling is in deze week een FlexDating app te creëren.
 Dit door grotendeels gebruik te maken van bestaande code die gebruikers fetcht van een andere server.
@@ -30,7 +31,7 @@ Vooral de login is belangrijk in deze sprint, dit aangezien er in principe geen 
 
 Problemen die in vandaag zelf heb ondervonden:
 
-<!-- more -->
+
 
 * Een git server opzetten gaat niet altijd even vlot.
   * Er een groep aangemaakt waar iedereen lid van werd, dit om de code maximaal als eigenaar te hebben van alle leden

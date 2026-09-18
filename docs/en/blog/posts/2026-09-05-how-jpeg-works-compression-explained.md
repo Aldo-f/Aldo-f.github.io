@@ -11,8 +11,9 @@ tags:
   - quantization
   - pixel
 ---
-
 While AI compression tools like **[vibecompress](../2026/09/05/why-store-pixels-when-you-can-store-vibes-meet-vibecompress/)** replace your photos with hallucinations, the humble JPEG format has been doing something completely different for decades: mathematics instead of guessing. Here's exactly how it works.
+
+<!-- more -->
 
 ## The Full Pipeline
 
@@ -37,7 +38,7 @@ flowchart LR
 
 The flow goes from raw RGB pixels through mathematical transforms, with **quantization** (the orange step) being where data is permanently discarded.
 
-<!-- more -->
+
 
 ## What Is JPEG?
 

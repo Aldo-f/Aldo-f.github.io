@@ -11,7 +11,6 @@ tags:
   - quantization
   - pixel
 ---
-
 Terwijl AI-compressietools zoals vibecompress je foto's vervangen door hallucinaties, werkt de vertrouwde JPG-formaat al decennia op een heel ander principe: wiskunde in plaats van gokken. Hier is hoe dat precies werkt.
 
 <!-- more -->

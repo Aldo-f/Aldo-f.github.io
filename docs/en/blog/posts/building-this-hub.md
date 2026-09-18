@@ -4,7 +4,6 @@ date: 2026-08-20
 categories:
   - Meta
 ---
-
 The hub you are reading aggregates documentation from several repositories at
 build time. A MkDocs configuration lists each project repository and branch,
 and during every build the docs folders of those repositories are pulled in

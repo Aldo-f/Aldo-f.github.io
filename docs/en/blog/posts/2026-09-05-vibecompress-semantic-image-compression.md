@@ -13,7 +13,6 @@ tags:
   - gpt-4o-mini
   - hallucination-as-a-feature
 ---
-
 Forrest Dunlap, a developer who clearly asked "what if we just... didn't store the image?" has released **vibecompress** — a CLI tool that achieves 99.6% compression ratios by replacing your photos with hallucinations.
 
 <!-- more -->

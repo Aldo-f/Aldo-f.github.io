@@ -4,7 +4,6 @@ date: 2026-08-23
 categories:
   - General
 ---
-
 Dit is het eerste bericht op de nieuwe blogsectie van de documentatiehub.
 Korte notities, aankondigingen van nieuwe versies en verslagen die niet thuishoren in de
 handleiding van een specifiek project, zullen vanaf nu hier verschijnen.

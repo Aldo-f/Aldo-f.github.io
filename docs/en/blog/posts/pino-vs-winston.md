@@ -3,8 +3,9 @@ title: "pino vs winston: Choosing the Right Logger for Node.js"
 date: 2026-11-03
 tags: ["nodejs", "logging", "performance"]
 ---
-
 ## Introduction
+
+<!-- more -->
 
 When building Node.js applications, logging is essential for debugging, monitoring, and analytics. Two of the most popular logging libraries are **pino** and **winston**. While both serve the same purpose, they differ significantly in design philosophy, performance characteristics, and feature sets. This post compares pino and winston across several dimensions to help you decide which library best fits your project.
 
@@ -14,7 +15,7 @@ pino is known for its extreme speed. It is written in pure JavaScript with a foc
 
 winston, on the other hand, prioritizes flexibility and extensibility. Its performance is still reasonable for most use cases, but it isn’t quite as fast as pino. If your application doesn’t require micro‑second logging latency, winston’s performance is more than adequate.
 
-<!-- more -->
+
 
 ## API Simplicity
 

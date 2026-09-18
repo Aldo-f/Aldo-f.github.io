@@ -15,7 +15,6 @@ tags:
   - belgium
   - watchlist
 ---
-
 VRT MAX streams are DRM-protected and notoriously hard to download. After weeks of work involving pywidevine, N_m3u8DL-RE, and a custom `_vrt_drm_*` field detector, the thuis-v4 downloader now gracefully handles both DRM and non-DRM content. This post covers the full journey — from detecting DRM in the HLS manifest to the fallback strategy that keeps non-DRM downloads fast.
 
 <!-- more -->
