@@ -49,16 +49,8 @@ plugins:
           import_url: https://github.com/Aldo-f/clock?branch=main
           imports:
             - docs
-        - name: blanky
-          import_url: https://gitlab.com/Aldo-f/blanky?branch=main
-          imports:
-            - docs
         - name: opencode-multi-model-fallback
           import_url: https://github.com/Aldo-f/opencode-multi-model-fallback?branch=main
-          imports:
-            - docs
-        - name: blanky-v1
-          import_url: https://gitlab.com/Aldo-f/blanky?branch=v1-docs
           imports:
             - docs
         - name: nocturna
@@ -70,18 +62,9 @@ nav:
   - Abbreviations: abbreviations.md
   - Blog: blog.md
   - Projects:
-      - projects.md
       - Thuis:
           - 'Thuis main': "!import https://github.com/Aldo-f/thuis?branch=main"
-          - 'Thuis v5':
-              - Overview: thuis-v5/website/docs/intro.md
-              - Getting started: thuis-v5/website/docs/getting-started.md
-              - Usage: thuis-v5/website/docs/usage.md
-              - Architecture: thuis-v5/website/docs/architecture.md
-              - API reference: thuis-v5/website/docs/api-reference.md
-              - Credential vault: thuis-v5/website/docs/credential-vault.md
-              - Provider adapter: thuis-v5/website/docs/provider-adapter.md
-              - Search service: thuis-v5/website/docs/search-service.md
+          - 'Thuis v5': "!import https://github.com/Aldo-f/thuis?branch=v5/main&docs_dir=website/docs/*"
           - 'Thuis v4':
               - Overview: thuis-v4/website/docs/intro.md
               - Installation: thuis-v4/website/docs/installation.md
@@ -90,9 +73,6 @@ nav:
               - Development: thuis-v4/website/docs/development.md
           - 'Thuis v3': "!import https://github.com/Aldo-f/thuis?branch=v3/main"
       - Clock: "!import https://github.com/Aldo-f/clock?branch=main"
-      - Blanky:
-          - 'Blanky main': blanky/docs/index.md
-          - 'Blanky v1': blanky-v1/docs/index.md
       - OpenCode Fallback Plugin: "!import https://github.com/Aldo-f/opencode-multi-model-fallback?branch=main"
       - Home-lab: home-lab-docs.md
       - Vaultwarden Backup: "!import https://github.com/Aldo-f/07-security-vaultwarden-backup?branch=main"
