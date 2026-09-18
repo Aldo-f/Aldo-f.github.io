@@ -65,6 +65,10 @@ plugins:
           import_url: https://github.com/Aldo-f/Nocturna?branch=main
           imports:
             - docs
+      repos:
+        - name: nocturna
+          import_url: https://github.com/Aldo-f/Nocturna?branch=main
+          imported_repo: true
 nav:
   - About: about.md
   - Abbreviations: abbreviations.md
@@ -128,11 +132,4 @@ nav:
       - Home-lab: home-lab-docs.md
       - Vaultwarden Backup:
           - vaultwarden-backup/docs/index.md
-      - Nocturna:
-          - Overview: nocturna/docs/index.md
-          - Getting Started: nocturna/docs/getting-started.md
-          - Architecture: nocturna/docs/architecture.md
-          - Deployment: nocturna/docs/deployment.md
-          - API Reference: nocturna/docs/api.md
-          - Troubleshooting: nocturna/docs/troubleshooting.md
-          - Screenshots: nocturna/docs/screenshots/
+      - Nocturna: !import https://github.com/Aldo-f/Nocturna?branch=main
