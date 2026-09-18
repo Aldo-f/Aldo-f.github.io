@@ -5,9 +5,9 @@ tags: ["nodejs", "logging", "performance"]
 ---
 ## Introduction
 
-<!-- more -->
-
 When building Node.js applications, logging is essential for debugging, monitoring, and analytics. Two of the most popular logging libraries are **pino** and **winston**. While both serve the same purpose, they differ significantly in design philosophy, performance characteristics, and feature sets. This post compares pino and winston across several dimensions to help you decide which library best fits your project.
+
+<!-- more -->
 
 ## Performance
 

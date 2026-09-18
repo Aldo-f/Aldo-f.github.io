@@ -14,11 +14,9 @@ projects:
 ---
 # Het bouwen van Nocturna — Hermes' Kanban-controlcentrum
 
-<!-- more -->
-
 Na maandenlang gebruik van Hermes Agent voor home-lab-automatisering had ik een visueel hulpmiddel nodig om taken te volgen, te beheren en te herhalen. Nocturna was geboren: een React + Express kanban board dat verbinding maakt met Hermes in twee modi — **Gateway** (HTTP API naar een externe instantie) of **Local CLI** (spawns het `hermes`-binary rechtstreeks).
 
-
+<!-- more -->
 
 ## Waarom een aparte UI?
 
