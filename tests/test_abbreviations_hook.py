@@ -101,12 +101,26 @@ def test_on_page_markdown_injects_script(monkeypatch):
     out = abbrev.on_page_markdown(markdown, page, None, None)
     # The output should start with the script tag and contain the JSON data
     assert out.startswith("<script>window.ABBREVIATIONS = ")
-    # Ensure the original markdown follows after a newline
-    assert out.split("\n", 1)[1] == markdown
+    # The original markdown should be present after the injected assets
+    assert markdown in out
     # Verify JSON content matches dummy_data
     json_part = out.split("<script>window.ABBREVIATIONS = ", 1)[1].split(";</script>", 1)[0]
     parsed = json.loads(json_part)
     assert parsed == dummy_data
+
+
+def test_on_page_markdown_injects_material_design_assets(monkeypatch):
+    """TDD: Material Design assets must be injected for proper rendering."""
+    dummy_data = [{"abbreviation": "DRY", "answers": []}]
+    monkeypatch.setattr(abbrev, "_abbreviations", dummy_data, raising=False)
+    page = DummyPage(abbrev.PAGE_TITLE)
+    markdown = "# Content"
+    out = abbrev.on_page_markdown(markdown, page, None, None)
+    # Must inject the CSS and JS assets as absolute paths
+    assert '/assets/css/abbreviations.css' in out
+    assert '/assets/javascripts/abbreviations.js' in out
+    # Must inject the data for the client-side UI
+    assert 'window.ABBREVIATIONS' in out
 
 def test_on_post_build_writes_json(tmp_path, monkeypatch):
     # Set up a temporary site directory

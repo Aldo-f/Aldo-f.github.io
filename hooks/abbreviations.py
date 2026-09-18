@@ -113,7 +113,11 @@ def on_page_markdown(markdown: str, page: Any, config: Any, files: Any) -> str:
     """Inject the build-time data into the cheatsheet page."""
     if page.meta.get("title") == PAGE_TITLE:
         data = json.dumps(_abbreviations, ensure_ascii=False)
-        assets = """<link rel="stylesheet" href="/assets/css/abbreviations.css">
+        assets = """<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,wght@0,400;0,500;1,400&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="/assets/css/abbreviations.css">
 <script src="/assets/javascripts/abbreviations.js"></script>
 """
         return f"<script>window.ABBREVIATIONS = {data};</script>\n{assets}{markdown}"

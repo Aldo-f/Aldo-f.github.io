@@ -1,157 +1,212 @@
-/* Abbreviations Cheatsheet Styles */
+/* Abbreviations Cheatsheet Styles - Material Design */
 
 #abbreviations-page {
-  --accent: #ab57ff;
-  --accent-light: rgba(171, 87, 255, 0.1);
-  --bg: #ffffff;
-  --card: #f0f0f0;
-  --text: #000000;
-  --muted: #555555;
-  --border: #cccccc;
-  font-family: 'Inter', system-ui, sans-serif;
+  --md-primary: #1a73e8;
+  --md-primary-light: #e8f0fe;
+  --md-primary-dark: #0d47a1;
+  --md-secondary: #5f6368;
+  --md-surface: #ffffff;
+  --md-surface-variant: #f1f3f4;
+  --md-on-surface: #202124;
+  --md-on-surface-variant: #5f6368;
+  --md-outline: #dadce0;
+  --md-shadow-1: 0 1px 3px rgba(60, 64, 67, 0.12), 0 1px 2px rgba(60, 64, 67, 0.08);
+  --md-shadow-2: 0 2px 6px rgba(60, 64, 67, 0.15), 0 1px 2px rgba(60, 64, 67, 0.1);
+  --md-shadow-3: 0 4px 12px rgba(60, 64, 67, 0.2), 0 2px 4px rgba(60, 64, 67, 0.12);
+  --md-radius: 12px;
+  --md-radius-sm: 8px;
+  --md-spacing: 16px;
+  font-family: 'Google Sans', 'Roboto', 'Noto Sans', system-ui, sans-serif;
   line-height: 1.6;
+  color: var(--md-on-surface);
 }
 
-/* Dark theme support */
+/* Dark theme support - Material Design dark */
 [data-md-color-scheme="slate"] #abbreviations-page {
-  --accent: #c9a0ff;
-  --accent-light: rgba(201, 160, 255, 0.15);
-  --bg: #1e1e2e;
-  --card: #2a2a3c;
-  --text: #cdd6f4;
-  --muted: #a6adc8;
-  --border: #45475a;
+  --md-primary: #8ab4f8;
+  --md-primary-light: rgba(138, 180, 248, 0.12);
+  --md-primary-dark: #aecbfa;
+  --md-secondary: #9aa0a6;
+  --md-surface: #1e1e2e;
+  --md-surface-variant: #292a2e;
+  --md-on-surface: #e8eaed;
+  --md-on-surface-variant: #9aa0a6;
+  --md-outline: #3c4043;
+  --md-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.24);
+  --md-shadow-2: 0 2px 6px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.28);
+  --md-shadow-3: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.32);
 }
 
 #abbreviations-page * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* Header and subtitle */
+/* Header and subtitle - Material Display/Headline style */
 #abbreviations-page .page-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: calc(var(--md-spacing) * 1.5);
+  padding-bottom: calc(var(--md-spacing) * 0.75);
+  border-bottom: 1px solid var(--md-outline);
 }
 
 #abbreviations-page .subtitle {
-  color: var(--muted);
-  font-size: 1.1rem;
+  color: var(--md-on-surface-variant);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
-/* Toolbar */
+/* Toolbar - Material surface with elevation */
 #abbreviations-page .toolbar {
   display: flex;
-  gap: 1rem;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+  margin-bottom: calc(var(--md-spacing) * 1.5);
   align-items: center;
+  background: var(--md-surface);
+  padding: 12px;
+  border-radius: var(--md-radius);
+  box-shadow: var(--md-shadow-1);
 }
 
 #abbreviations-page .search-container {
   flex: 1;
-  min-width: 250px;
+  min-width: 240px;
   position: relative;
 }
 
+/* Search field - Material outlined */
 #abbreviations-page .search {
   width: 100%;
-  padding: 0.75rem 1rem;
-  padding-left: 2.5rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--card);
-  color: var(--text);
-  font-size: 1rem;
+  padding: 10px 16px 10px 48px;
+  border: 1px solid var(--md-outline);
+  border-radius: var(--md-radius-sm);
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+  font-size: 0.9375rem;
   transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+
+#abbreviations-page .search::placeholder {
+  color: var(--md-on-surface-variant);
+  opacity: 0.7;
 }
 
 #abbreviations-page .search:focus {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-light);
+  border-color: var(--md-primary);
+  box-shadow: 0 0 0 1px var(--md-primary);
 }
 
 #abbreviations-page .search-icon {
   position: absolute;
-  left: 0.75rem;
+  left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--muted);
+  color: var(--md-on-surface-variant);
   pointer-events: none;
+  font-size: 1.1rem;
 }
 
-
-
+/* Filter dropdown - Material outlined select */
 #abbreviations-page .filter {
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--card);
-  color: var(--text);
-  font-size: 1rem;
+  padding: 10px 16px;
+  border: 1px solid var(--md-outline);
+  border-radius: var(--md-radius-sm);
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+  font-size: 0.9375rem;
   cursor: pointer;
-  min-width: 180px;
+  min-width: 200px;
   transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%235f6368' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 24px;
+  padding-right: 40px;
 }
 
 #abbreviations-page .filter:focus {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-light);
+  border-color: var(--md-primary);
+  box-shadow: 0 0 0 1px var(--md-primary);
 }
 
+/* Add button - Material filled tonal */
 #abbreviations-page .add-link {
-  padding: 0.75rem 1.2rem;
-  background: var(--accent);
+  padding: 10px 20px;
+  background: var(--md-primary);
   color: #fff;
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: opacity 0.2s, transform 0.1s;
+  border-radius: var(--md-radius-sm);
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  transition: box-shadow 0.2s, background-color 0.2s;
   white-space: nowrap;
+  box-shadow: var(--md-shadow-1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #abbreviations-page .add-link:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+  box-shadow: var(--md-shadow-2);
+  background: var(--md-primary-dark);
 }
 
 #abbreviations-page .add-link:focus {
   outline: none;
-  box-shadow: 0 0 0 3px var(--accent-light);
+  box-shadow: 0 0 0 2px var(--md-primary-light), var(--md-shadow-1);
 }
 
 /* Cards container */
 #abbreviations-page #cards {
   min-height: 100px;
+  display: grid;
+  gap: 12px;
 }
 
-/* Cards */
+/* Cards - Material surface with elevation */
 #abbreviations-page .card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  margin-bottom: 1rem;
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline);
+  border-radius: var(--md-radius);
   overflow: hidden;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  box-shadow: var(--md-shadow-1);
 }
 
 #abbreviations-page .card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 4px 12px var(--accent-light);
+  box-shadow: var(--md-shadow-3);
+  border-color: var(--md-primary);
 }
 
 #abbreviations-page .card.open {
-  border-color: var(--accent);
+  border-color: var(--md-primary);
+  box-shadow: var(--md-shadow-2);
 }
 
+/* Card header - Material list item style */
 #abbreviations-page .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem;
+  padding: 16px;
   cursor: pointer;
   user-select: none;
-  background: linear-gradient(to right, var(--accent-light), transparent);
+  background: var(--md-surface-variant);
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+#abbreviations-page .card-header:hover {
+  background: var(--md-outline);
+  opacity: 0.9;
 }
 
 #abbreviations-page .card-header:focus {
@@ -159,23 +214,24 @@
 }
 
 #abbreviations-page .card-header:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--md-primary);
   outline-offset: -2px;
-  border-radius: 12px;
 }
 
 #abbreviations-page .card-header h2 {
-  font-size: 1.4rem;
-  color: var(--accent);
+  font-size: 1.125rem;
+  color: var(--md-on-surface);
   margin: 0;
-  font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  letter-spacing: 0.05em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  font-family: 'Google Sans', 'Roboto', 'Noto Sans', system-ui, sans-serif;
 }
 
 #abbreviations-page .card-header .arrow {
-  font-size: 1.2rem;
-  transition: transform 0.3s ease;
-  color: var(--accent);
+  font-size: 1rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--md-on-surface-variant);
+  flex-shrink: 0;
 }
 
 #abbreviations-page .card.open .arrow {
@@ -186,21 +242,21 @@
 #abbreviations-page .card-body {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s ease;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
 }
 
 #abbreviations-page .card.open .card-body {
   max-height: 2000px;
-  padding: 0 1.2rem 1.2rem;
+  padding: 0 16px 16px;
 }
 
-/* Answers */
+/* Answers - Material list item */
 #abbreviations-page .answer {
-  border-left: 3px solid var(--accent);
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.75rem;
-  background: var(--accent-light);
-  border-radius: 0 8px 8px 0;
+  border-left: 3px solid var(--md-primary);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  background: var(--md-surface-variant);
+  border-radius: 0 var(--md-radius-sm) var(--md-radius-sm) 0;
 }
 
 #abbreviations-page .answer:last-child {
@@ -208,125 +264,136 @@
 }
 
 #abbreviations-page .answer h3 {
-  font-size: 1rem;
-  color: var(--text);
-  margin: 0 0 0.4rem 0;
-  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--md-on-surface);
+  margin: 0 0 4px 0;
+  font-weight: 500;
 }
 
 #abbreviations-page .answer .tags {
   display: flex;
-  gap: 0.4rem;
+  gap: 6px;
   flex-wrap: wrap;
-  margin-bottom: 0.4rem;
+  margin-bottom: 8px;
 }
 
+/* Material chip style for tags */
 #abbreviations-page .tag {
   font-size: 0.75rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  background: var(--border);
-  color: var(--muted);
+  padding: 4px 10px;
+  border-radius: 16px;
+  background: var(--md-primary-light);
+  color: var(--md-primary);
   font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 #abbreviations-page .definition {
-  color: var(--muted);
-  font-size: 0.95rem;
+  color: var(--md-on-surface-variant);
+  font-size: 0.875rem;
   margin: 0;
   line-height: 1.5;
 }
 
-/* Empty state */
+/* Empty state - Material empty state */
 #abbreviations-page .no-results {
   text-align: center;
-  padding: 3rem 1rem;
-  color: var(--muted);
+  padding: calc(var(--md-spacing) * 3) 16px;
+  color: var(--md-on-surface-variant);
 }
 
 #abbreviations-page .no-results .icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 3.5rem;
+  margin-bottom: 16px;
   opacity: 0.5;
 }
 
 #abbreviations-page .no-results p {
-  margin: 0.5rem 0;
+  margin: 8px 0;
+  font-size: 1rem;
 }
 
 #abbreviations-page .no-results a {
-  color: var(--accent);
+  color: var(--md-primary);
   text-decoration: none;
+  font-weight: 500;
 }
 
 #abbreviations-page .no-results a:hover {
   text-decoration: underline;
 }
 
-/* How-to section */
+/* How-to section - Material surface with elevation */
 #abbreviations-page .howto {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 2rem;
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline);
+  border-radius: var(--md-radius);
+  padding: 24px;
+  margin-top: calc(var(--md-spacing) * 2);
+  box-shadow: var(--md-shadow-1);
 }
 
 #abbreviations-page .howto h2 {
-  color: var(--accent);
-  margin: 0 0 1rem 0;
-  font-size: 1.3rem;
+  color: var(--md-on-surface);
+  margin: 0 0 16px 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
 }
 
 #abbreviations-page .howto ol {
-  padding-left: 1.5rem;
+  padding-left: 24px;
   margin: 0;
 }
 
 #abbreviations-page .howto li {
-  margin-bottom: 0.75rem;
+  margin-bottom: 12px;
   line-height: 1.6;
+  color: var(--md-on-surface);
 }
 
 #abbreviations-page .howto code {
-  background: var(--border);
-  padding: 0.15rem 0.4rem;
+  background: var(--md-surface-variant);
+  padding: 2px 8px;
   border-radius: 4px;
-  color: var(--text);
+  color: var(--md-on-surface);
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 0.9em;
+  font-size: 0.875em;
 }
 
 #abbreviations-page .howto pre {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 0.5rem 0;
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline);
+  border-radius: var(--md-radius-sm);
+  padding: 16px;
+  margin: 12px 0;
   overflow-x: auto;
 }
 
 #abbreviations-page .howto pre code {
   background: none;
   padding: 0;
+  font-size: 0.875rem;
 }
 
-/* Count badge */
+/* Count badge - Material tonal badge */
 #abbreviations-page .count-badge {
   display: inline-block;
-  padding: 0.2rem 0.6rem;
-  background: var(--accent-light);
-  color: var(--accent);
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-left: 0.5rem;
+  padding: 4px 10px;
+  background: var(--md-primary-light);
+  color: var(--md-primary);
+  border-radius: 16px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin-left: 8px;
+  vertical-align: middle;
 }
 
-/* Responsive */
+/* Responsive - Material breakpoints */
 @media (max-width: 640px) {
   #abbreviations-page .toolbar {
     flex-direction: column;
+    align-items: stretch;
   }
 
   #abbreviations-page .search-container {
@@ -339,10 +406,10 @@
 
   #abbreviations-page .add-link {
     width: 100%;
-    text-align: center;
+    justify-content: center;
   }
 
   #abbreviations-page .card-header h2 {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 }
