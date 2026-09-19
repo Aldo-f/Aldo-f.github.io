@@ -60,10 +60,10 @@ plugins:
 nav:
   - Home: index.md
   - Over: about.md
+  - Afkortingen: abbreviations.md
   - Blog: blog/index.md
   - Home-lab: home-lab-docs.md
   - Projecten:
-      - Abbreviaties: abbreviations.md
       - Nocturna: "!import https://github.com/Aldo-f/Nocturna?branch=main"
       - Thuis:
           - 'Thuis main': "!import https://github.com/Aldo-f/thuis?branch=main"

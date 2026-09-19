@@ -9,10 +9,10 @@ documentation from various projects.
 
 ## Projects
 
-- [Thuis](thuis/docs/index.md) — VRT MAX video downloader
-- [Clock](clock/docs/index.md) — Special clocks
-- [Blanky](blanky/docs/index.md) — External link opener
-- [Projects](projects.md)
-- [Abbreviation Feature Overview](/abbreviation-feature/)
-
-
+| Project | What it is | Docs |
+|---------|------------|------|
+| **Thuis** | VRT MAX video downloader with automatic auth (v3→v5) | [Latest](thuis/docs/index.md) · [All versions](projects.md) |
+| **Clock** | React clock studio (13 clocks + AI customizer) | [Docs](clock/docs/index.md) |
+| **OpenCode Multi-Model Fallback** | Auto-switches fallback models on rate limits | [Docs](opencode-multi-model-fallback/docs/index.md) |
+| **Vaultwarden Backup** | Automated cloud backup | [Docs](vaultwarden-backup/docs/index.md) |
+| **nocturna** |  |  |
