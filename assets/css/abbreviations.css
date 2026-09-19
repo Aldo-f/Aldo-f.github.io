@@ -13,8 +13,8 @@
   --md-shadow-1: 0 1px 3px rgba(60, 64, 67, 0.12), 0 1px 2px rgba(60, 64, 67, 0.08);
   --md-shadow-2: 0 2px 6px rgba(60, 64, 67, 0.15), 0 1px 2px rgba(60, 64, 67, 0.1);
   --md-shadow-3: 0 4px 12px rgba(60, 64, 67, 0.2), 0 2px 4px rgba(60, 64, 67, 0.12);
-  --md-radius: 12px;
-  --md-radius-sm: 8px;
+  --md-radius: 0;
+  --md-radius-sm: 0;
   --md-spacing: 16px;
   font-family: 'Google Sans', 'Roboto', 'Noto Sans', system-ui, sans-serif;
   line-height: 1.6;
