@@ -60,7 +60,6 @@ plugins:
 nav:
   - Home: index.md
   - Over: about.md
-  - Afkortingen: abbreviations.md
   - Blog: blog/index.md
   - Home-lab: home-lab-docs.md
   - Projecten:

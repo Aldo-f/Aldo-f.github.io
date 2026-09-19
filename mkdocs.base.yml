@@ -36,6 +36,11 @@ plugins:
   - search
 extra:
   mermaid_version: "10.4.0"
+  footer_links:
+    - text: "Contact"
+      href: "contact.md"
+    - text: "Abbreviations"
+      href: "https://aldo-f.github.io/abbreviations/"
   extra_javascript:
     - https://unpkg.com/mermaid@10.4.0/dist/mermaid.min.js
     - assets/js/abbreviations.js

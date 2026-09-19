@@ -59,7 +59,6 @@ plugins:
             - docs
 nav:
   - About: about.md
-  - Abbreviations: abbreviations.md
   - Blog: blog.md
   - Projects:
       - Abbreviations:

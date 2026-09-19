@@ -1,0 +1,28 @@
+{#-
+  Custom footer with navigation links.
+  Base partial from: github.com/squidfunk/mkdocs-material/material/templates/partials/copyright.html
+#}
+<div class="md-copyright">
+  <div class="md-footer-nav__inner md-grid">
+    <nav class="md-footer-nav__link" aria-label="Footer navigation">
+      {% for link in config.extra.footer_links %}
+      <a href="{{ link.href }}" class="md-footer-nav__button" style="margin-right: 12px;">
+        {{ link.text }}
+      </a>
+      {% endfor %}
+    </nav>
+  </div>
+  <div class="md-copyright">
+    {% if config.copyright %}
+    <div class="md-copyright__highlight">
+      {{ config.copyright }}
+    </div>
+    {% endif %}
+    {% if not config.extra.generator == false %}
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+    {% endif %}
+  </div>
+</div>
