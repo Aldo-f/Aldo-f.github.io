@@ -1,8 +1,6 @@
 # PROJECT KNOWLEDGE BASE – docs/nl
 
-**Generated:** 2026-09-13
-**Commit:** {{short_sha}}
-**Branch:** {{branch}}
+**Generated:** 2026-09-20
 
 ## OVERVIEW
 Dutch-language documentation source for the Aldo-f docs hub. Mirrors English structure.
