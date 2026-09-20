@@ -1,17 +1,17 @@
-{#-
-  Custom copyright footer: pulsing heart + Usful link + footer navigation links.
+{#- Custom copyright footer: pulsing heart + Usful link + footer navigation links.
+  Top nav links: lightgray (#ddd). Bottom content: dark theme (hearts: #ef4444, text: #fff).
 #}
 <div class="md-copyright">
-  <div class="md-footer-nav__inner md-grid" style="margin-bottom: 0.4rem;">
+  <div class="md-footer-nav__inner md-grid" style="margin-bottom: 0.4rem; padding: 0.5rem 0; background: rgba(255,255,255,0.05);">
     <nav class="md-footer-nav__link" aria-label="Footer navigation">
       {% for link in config.extra.footer_links %}
-      <a href="{{ link.href }}" class="md-footer-nav__button" style="margin-right: 12px; color: #fff; text-decoration: underline; font-weight: 500;">
+      <a href="{{ link.href }}" class="md-footer-nav__button" style="margin-right: 12px; color: #ddd; text-decoration: underline; font-weight: 500;">
         {{ link.text }}
       </a>
       {% endfor %}
     </nav>
   </div>
-  <div class="md-copyright">
+  <div class="md-copyright" style="padding: 0.5rem 0; border-top: 1px solid rgba(255,255,255,0.1);">
     Made with
     <span style="display:inline-block;animation:heartbeat 1.2s ease-in-out infinite;color:#ef4444;">&hearts;</span>
     and a tiny bit of AI by
