@@ -1,8 +1,6 @@
 # PROJECT KNOWLEDGE BASE – plugins
 
-**Generated:** {{timestamp}}
-**Commit:** {{short_sha}}
-**Branch:** {{branch}}
+**Generated:** 2026-09-20
 
 ## OVERVIEW
 Custom MkDocs plugins extending the documentation pipeline (e.g., raw‑markdown parser, slugmap generator).

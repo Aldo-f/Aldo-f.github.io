@@ -1,8 +1,6 @@
 # PROJECT KNOWLEDGE BASE – overrides
 
-**Generated:** 2026-09-13
-**Commit:** {{short_sha}}
-**Branch:** {{branch}}
+**Generated:** 2026-09-20
 
 ## OVERVIEW
 MkDocs Material template overrides for custom HTML rendering.

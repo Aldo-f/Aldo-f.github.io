@@ -1,8 +1,6 @@
 # PROJECT KNOWLEDGE BASE – rag
 
-**Generated:** {{timestamp}}
-**Commit:** {{short_sha}}
-**Branch:** {{branch}}
+**Generated:** 2026-09-20
 
 ## OVERVIEW
 RAG (retrieval‑augmented generation) helpers that power the documentation site search and AI‑assisted content.

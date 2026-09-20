@@ -1,8 +1,6 @@
 # PROJECT KNOWLEDGE BASE – scripts
 
-**Generated:** 2026-09-13
-**Commit:** {{short_sha}}
-**Branch:** {{branch}}
+**Generated:** 2026-09-20
 
 ## OVERVIEW
 Build automation and utility scripts for the MkDocs documentation hub.

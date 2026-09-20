@@ -16,6 +16,8 @@ projects:
 
 After months of running Hermes Agent for home-lab automation, I needed a visual way to track, manage, and replay tasks. Nocturna was born: a React + Express kanban board that connects to Hermes in two modes — **Gateway** (HTTP API to a remote instance) or **Local CLI** (spawns the `hermes` binary directly).
 
+Nocturna provides a visual kanban board for Hermes tasks, supporting both remote Gateway API and local CLI modes.
+
 <!-- more -->
 
 ## Why a separate UI?

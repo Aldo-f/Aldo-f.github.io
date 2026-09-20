@@ -1,8 +1,6 @@
 # PROJECT KNOWLEDGE BASE – hooks
 
-**Generated:** {{timestamp}}
-**Commit:** {{short_sha}}
-**Branch:** {{branch}}
+**Generated:** 2026-09-20
 
 ## OVERVIEW
 Build‑time hook scripts that augment MkDocs generation (slugmap, custom markdown handling, etc.).

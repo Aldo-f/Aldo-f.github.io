@@ -1,8 +1,6 @@
 # PROJECT KNOWLEDGE BASE – .github/workflows
 
-**Generated:** 2026-09-13
-**Commit:** {{short_sha}}
-**Branch:** {{branch}}
+**Generated:** 2026-09-20
 
 ## OVERVIEW
 GitHub Actions workflows for CI/CD, testing, and deployment.

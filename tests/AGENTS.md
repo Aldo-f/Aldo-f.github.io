@@ -1,8 +1,6 @@
 # PROJECT KNOWLEDGE BASE – tests
 
-**Generated:** 2026-09-13
-**Commit:** {{short_sha}}
-**Branch:** {{branch}}
+**Generated:** 2026-09-20
 
 ## OVERVIEW
 Test suite for RAG, site utilities, and MkDocs hooks. Uses pytest with subdirectories for different test types.
