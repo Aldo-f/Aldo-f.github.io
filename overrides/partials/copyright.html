@@ -1,26 +1,31 @@
-{#- Custom footer: two stacked divs.
-  Top: lighter background + the two footer nav links (Contact, Abbreviations).
-  Bottom: "Made with" + social buttons rendered by Material.
+{#- Footer: 2 stacked divs.
+  Top: light background, 2 nav links.
+  Bottom: Made with + Usful + social icons (manual from extra.social).
 #}
 
-{#- Top bar with footer navigation links #}
-<div style="background: rgba(255,255,255,0.06); padding: 0.4rem 0; margin-bottom: 0.5rem;">
-  <div class="md-grid md-footer-nav__inner">
+{#- Top bar — lighter bg, footer nav links #}
+<div style="background:#23263a; padding:0.45rem 0; margin-bottom:0.35rem;">
+  <div style="display:flex; gap:0.75rem; flex-wrap:wrap; max-width:100%;">
     {% for link in config.extra.footer_links %}
-    <a href="{{ link.href }}" style="color: #bbb; text-decoration: underline; font-weight: 500; margin-right: 1rem;">
-      {{ link.text }}
-    </a>
+    <a href="{{ link.href }}" style="color:#ddd; text-decoration:underline; font-weight:500;">{{ link.text }}</a>
     {% endfor %}
   </div>
 </div>
 
-{#- Bottom bar: Made with hearts + social buttons #}
-<div class="md-copyright" style="padding: 0.4rem 0; border-top: 1px solid rgba(255,255,255,0.08);">
-  Made with
-  <span style="display:inline-block;animation:heartbeat 1.2s ease-in-out infinite;color:#ef4444;">&hearts;</span>
-  and a tiny bit of AI by
-  <a href="https://usful.be/" target="_blank" rel="noopener">Usful</a>
-  <span id="build-timestamp" style="font-size:0.55rem;color:#aaa;opacity:0.65;margin-left:6px;"></span>
-  {{ social }}
+{#- Bottom bar — Made with + Usful + social icons in one block #}
+<div class="md-copyright" style="padding:0.35rem 0; display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+  <span>
+    Made with
+    <span style="display:inline-block;animation:heartbeat 1.2s ease-in-out infinite;color:#ef4444;">&hearts;</span>
+    and a tiny bit of AI by
+    <a href="https://usful.be/" target="_blank" rel="noopener">Usful</a>
+    <span id="build-timestamp" style="font-size:0.55rem;color:#aaa;opacity:0.65;margin-left:6px;"></span>
+  </span>
+  <span style="flex-grow:1;"></span>
+  {% for s in config.extra.social %}
+  <a href="{{ s.link }}" target="_blank" rel="noopener" title="{{ s.icon.split('/')[-1].replace('brands/', '') }}" style="margin-left:0.35rem;color:#ccc;">
+    <i class="fa {{ s.icon.replace('fontawesome/', 'fa-') }} fa-lg"></i>
+  </a>
+  {% endfor %}
   <style>@keyframes heartbeat{0%,100%{color:#ef4444;transform:scale(1)}10%{color:#f87171;transform:scale(1.2)}18%{color:#ef4444;transform:scale(1)}25%{color:#dc2626;transform:scale(1.12)}40%,60%{color:#ef4444;transform:scale(1)}}</style>
 </div>
