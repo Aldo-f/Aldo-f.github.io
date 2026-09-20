@@ -23,8 +23,8 @@
   </span>
   <span style="flex-grow:1;"></span>
   {% for s in config.extra.social %}
-  <a href="{{ s.link }}" target="_blank" rel="noopener" title="{{ s.icon.split('/')[-1].replace('brands/', '') }}" style="margin-left:0.35rem;color:#ccc;">
-    <i class="fa {{ s.icon.replace('fontawesome/', 'fa-') }} fa-lg"></i>
+  <a href="{{ s.link }}" target="_blank" rel="{% if 'mastodon' in s.icon %}noopener me{% else %}noopener{% endif %}" title="{{ s.name or s.link.split('//')[1].split('/')[0] | e }}" style="margin-left:0.35rem;color:#ccc;" class="md-social__link">
+    {% include ".icons/" ~ s.icon ~ ".svg" %}
   </a>
   {% endfor %}
   <style>@keyframes heartbeat{0%,100%{color:#ef4444;transform:scale(1)}10%{color:#f87171;transform:scale(1.2)}18%{color:#ef4444;transform:scale(1)}25%{color:#dc2626;transform:scale(1.12)}40%,60%{color:#ef4444;transform:scale(1)}}</style>
