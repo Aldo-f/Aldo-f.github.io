@@ -22,19 +22,18 @@
     {% endif %}
   {% endif %}
 
-  {#- Full-width top bar with footer nav links (inside md-footer-meta__inner for container) #}
-  <div style="background:#23263a; padding:0.45rem 0; margin-bottom:0.35rem; width:100%;">
-    <div style="display:flex; gap:0.75rem; flex-wrap:wrap; width:100%; max-width:var(--md-content-width); margin:0 auto;">
-      {% for link in config.extra.footer_links %}
-      <a href="{{ link.href }}" style="color:#ddd; text-decoration:underline; font-weight:500;">{{ link.text }}</a>
-      {% endfor %}
-    </div>
-  </div>
-
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
+      {#- Top bar: full-width bg on parent, text inside container #}
+      <div style="background:#23263a; padding:0.45rem 0; margin-bottom:0.35rem; width:100%;">
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; width:100%; max-width:var(--md-content-width); margin:0 auto;">
+          {% for link in config.extra.footer_links %}
+          <a href="{{ link.href }}" style="color:#ddd; text-decoration:underline; font-weight:500;">{{ link.text }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {#- Bottom bar (Made with + social icons) #}
       {% include "partials/copyright.html" %}
-      {#- Note: social icons are already rendered inside copyright.html; do NOT include socials separately #}
     </div>
   </div>
 </footer>
