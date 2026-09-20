@@ -1,22 +1,26 @@
-{#- Custom copyright footer: pulsing heart + Usful link + footer navigation links.
-  Top nav links: lightgray (#ddd). Bottom content: dark theme (hearts: #ef4444, text: #fff).
+{#- Custom footer: two stacked divs.
+  Top: lighter background + the two footer nav links (Contact, Abbreviations).
+  Bottom: "Made with" + social buttons rendered by Material.
 #}
-<div class="md-copyright">
-  <div class="md-footer-nav__inner md-grid" style="margin-bottom: 0.4rem; padding: 0.5rem 0; background: rgba(255,255,255,0.05);">
-    <nav class="md-footer-nav__link" aria-label="Footer navigation">
-      {% for link in config.extra.footer_links %}
-      <a href="{{ link.href }}" class="md-footer-nav__button" style="margin-right: 12px; color: #ddd; text-decoration: underline; font-weight: 500;">
-        {{ link.text }}
-      </a>
-      {% endfor %}
-    </nav>
+
+{#- Top bar with footer navigation links #}
+<div style="background: rgba(255,255,255,0.06); padding: 0.4rem 0; margin-bottom: 0.5rem;">
+  <div class="md-grid md-footer-nav__inner">
+    {% for link in config.extra.footer_links %}
+    <a href="{{ link.href }}" style="color: #bbb; text-decoration: underline; font-weight: 500; margin-right: 1rem;">
+      {{ link.text }}
+    </a>
+    {% endfor %}
   </div>
-  <div class="md-copyright" style="padding: 0.5rem 0; border-top: 1px solid rgba(255,255,255,0.1);">
-    Made with
-    <span style="display:inline-block;animation:heartbeat 1.2s ease-in-out infinite;color:#ef4444;">&hearts;</span>
-    and a tiny bit of AI by
-    <a href="https://usful.be/" target="_blank" rel="noopener">Usful</a>
-    <span id="build-timestamp" style="font-size:0.55rem;color:#aaa;opacity:0.65;margin-left:6px;"></span>
-    <style>@keyframes heartbeat{0%,100%{color:#ef4444;transform:scale(1)}10%{color:#f87171;transform:scale(1.2)}18%{color:#ef4444;transform:scale(1)}25%{color:#dc2626;transform:scale(1.12)}40%,60%{color:#ef4444;transform:scale(1)}}</style>
-  </div>
+</div>
+
+{#- Bottom bar: Made with hearts + social buttons #}
+<div class="md-copyright" style="padding: 0.4rem 0; border-top: 1px solid rgba(255,255,255,0.08);">
+  Made with
+  <span style="display:inline-block;animation:heartbeat 1.2s ease-in-out infinite;color:#ef4444;">&hearts;</span>
+  and a tiny bit of AI by
+  <a href="https://usful.be/" target="_blank" rel="noopener">Usful</a>
+  <span id="build-timestamp" style="font-size:0.55rem;color:#aaa;opacity:0.65;margin-left:6px;"></span>
+  {{ social }}
+  <style>@keyframes heartbeat{0%,100%{color:#ef4444;transform:scale(1)}10%{color:#f87171;transform:scale(1.2)}18%{color:#ef4444;transform:scale(1)}25%{color:#dc2626;transform:scale(1.12)}40%,60%{color:#ef4444;transform:scale(1)}}</style>
 </div>
