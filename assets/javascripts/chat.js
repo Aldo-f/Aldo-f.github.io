@@ -329,7 +329,7 @@
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': 'aido_rag_813606c1cf96d6712e7a95196881e7e9',
+          'X-API-Key': 'freellmapi-82ea901092bf963260f3ea5fe1e1a02e3995a488b4f186e1',
         },
         body: JSON.stringify({
           question: message,
@@ -386,7 +386,7 @@
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-API-Key': 'aido_rag_813606c1cf96d6712e7a95196881e7e9',
+          'X-API-Key': 'freellmapi-82ea901092bf963260f3ea5fe1e1a02e3995a488b4f186e1',
         },
         body: JSON.stringify({ question: '_health_check_', k: 1 })
       });

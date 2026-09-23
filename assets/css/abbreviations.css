@@ -404,7 +404,8 @@
     width: 100%;
   }
 
-  #abbreviations-page .add-link {
+  #abbreviations-page .add-link,
+  #abbreviations-page .add-btn {
     width: 100%;
     justify-content: center;
   }
@@ -412,4 +413,199 @@
   #abbreviations-page .card-header h2 {
     font-size: 1rem;
   }
+}
+
+/* ===== Modal & Form Styles ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  position: relative;
+  background: var(--md-surface);
+  border: 1px solid var(--md-outline);
+  border-radius: var(--md-radius-sm);
+  box-shadow: var(--md-shadow-3);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slide-up 0.2s ease-out;
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(1rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-content h2 {
+  font-size: 1.25rem;
+  color: var(--md-on-surface);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--md-on-surface);
+  margin-bottom: 0.25rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--md-outline);
+  border-radius: var(--md-radius-sm);
+  background: var(--md-surface);
+  color: var(--md-on-surface);
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--md-primary);
+  box-shadow: 0 0 0 2px var(--md-primary-light);
+}
+
+.form-group .hint {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--md-on-surface-variant);
+  margin-top: 0.25rem;
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+  border-color: #d32f2f;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+.btn-submit {
+  padding: 0.625rem 1.25rem;
+  background: var(--md-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--md-radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: var(--md-primary-dark);
+  box-shadow: var(--md-shadow-1);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-cancel {
+  padding: 0.625rem 1.25rem;
+  background: transparent;
+  color: var(--md-on-surface-variant);
+  border: 1px solid var(--md-outline);
+  border-radius: var(--md-radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+  background: var(--md-surface-variant);
+}
+
+.form-status {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  padding: 0.5rem;
+  border-radius: var(--md-radius-sm);
+}
+
+.form-status.success {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.form-status.error {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+
+.form-status.info {
+  background: var(--md-primary-light);
+  color: var(--md-primary);
+  border: 1px solid var(--md-outline);
+}
+
+/* Add button styles */
+.add-btn {
+  padding: 8px 16px;
+  background: var(--md-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--md-radius-sm);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background-color 0.2s;
+  white-space: nowrap;
+  box-shadow: var(--md-shadow-1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.add-btn:hover {
+  box-shadow: var(--md-shadow-2);
+  background: var(--md-primary-dark);
+}
+
+.add-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--md-primary-light), var(--md-shadow-1);
+}
+
+/* Focus trap for modal */
+.modal-content:focus {
+  outline: none;
 }
