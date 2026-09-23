@@ -22,7 +22,7 @@
     const cardsContainer = document.getElementById('cards');
     const addBtn = document.getElementById('add-btn');
     const countBadge = document.getElementById('count-badge');
-    
+
     // Modal elements
     const modal = document.getElementById('add-modal');
     const modalOverlay = modal ? modal.querySelector('.modal-overlay') : null;
@@ -86,7 +86,7 @@
      */
     function showStatus(message, type) {
       if (!formStatus) return;
-      formStatus.textContent = message;
+      formStatus.innerHTML = message;
       formStatus.className = 'form-status ' + type;
     }
 
@@ -99,16 +99,16 @@
     }
 
     /**
-     * Handle form submission - creates a GitHub Issue
+     * Handle form submission - opens GitHub issue creation URL
      */
-    async function handleSubmit(e) {
+    function handleSubmit(e) {
       e.preventDefault();
-      
+
       const abbrInput = document.getElementById('abbr-abbreviation');
       const titleInput = document.getElementById('abbr-title');
       const categoriesInput = document.getElementById('abbr-categories');
       const definitionInput = document.getElementById('abbr-definition');
-      
+
       const abbreviation = abbrInput?.value.trim().toUpperCase();
       const title = titleInput?.value.trim();
       const categories = categoriesInput?.value.trim();
@@ -120,29 +120,24 @@
         abbrInput?.focus();
         return;
       }
-      
+
       if (!title) {
         showStatus('Please enter a title.', 'error');
         titleInput?.focus();
         return;
       }
-      
+
       if (!categories) {
         showStatus('Please enter at least one category.', 'error');
         categoriesInput?.focus();
         return;
       }
-      
+
       if (!definition) {
         showStatus('Please enter a definition.', 'error');
         definitionInput?.focus();
         return;
       }
-
-      // Disable submit button
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting...';
-      showStatus('Creating issue on GitHub...', 'info');
 
       // Build issue content
       const issueBody = `## ${title}
@@ -154,69 +149,54 @@
 ---
 *Submitted via the abbreviations form on aldo-f.github.io*`;
 
-      try {
-        const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/issues`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/vnd.github.v3+json',
-          },
-          body: JSON.stringify({
-            title: `${ISSUE_PREFIX}${abbreviation}`,
-            body: issueBody,
-            labels: [ISSUE_LABEL],
-          }),
-        });
+      // Build GitHub issue URL
+      const issueUrl = `https://github.com/${GITHUB_REPO}/issues/new` +
+        `?title=${encodeURIComponent(ISSUE_PREFIX + abbreviation)}` +
+        `&body=${encodeURIComponent(issueBody)}` +
+        `&labels=${encodeURIComponent(ISSUE_LABEL)}`;
 
-        const data = await response.json();
+      // Open in new tab
+      window.open(issueUrl, '_blank');
 
-        if (response.ok) {
-          const issueUrl = data.html_url || `https://github.com/${GITHUB_REPO}/issues/${data.number}`;
-          showStatus(`Success! Issue created: <a href="${issueUrl}" target="_blank">#${data.number}</a>. Please review and merge.`, 'success');
-          // Disable form fields
-          [abbrInput, titleInput, categoriesInput, definitionInput].forEach(input => {
-            if (input) input.disabled = true;
-          });
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Submitted';
-        } else {
-          showStatus(data.message || 'Failed to create issue. Check browser console for details.', 'error');
-          console.error('GitHub API error:', data);
-        }
-      } catch (error) {
-        console.error('Submission error:', error);
-        showStatus('Network error. Please try again.', 'error');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Issue';
-      }
+      // Show success message
+      showStatus(
+        `✅ Issue opened in new tab! Please review the details and click <strong>Submit new issue</strong> on GitHub.`,
+        'success'
+      );
+
+      // Disable form fields
+      [abbrInput, titleInput, categoriesInput, definitionInput].forEach(input => {
+        if (input) input.disabled = true;
+      });
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Opened';
     }
 
     /**
      * Event listeners
      */
     const debouncedRender = debounce(render, 150);
-    searchInput.addEventListener('input', debouncedRender);
-    filterSelect.addEventListener('change', render);
-    
+    searchInput?.addEventListener('input', debouncedRender);
+    filterSelect?.addEventListener('change', render);
+
     if (addBtn) {
       addBtn.addEventListener('click', openModal);
     }
-    
+
     if (modal) {
       modalOverlay?.addEventListener('click', closeModal);
       modal.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeModal();
       });
     }
-    
+
     if (cancelBtn) {
       cancelBtn.addEventListener('click', () => {
         closeModal();
         clearForm();
       });
     }
-    
+
     if (abbrForm) {
       abbrForm.addEventListener('submit', handleSubmit);
     }
@@ -230,8 +210,8 @@
    * Render the abbreviations cards based on current filters
    */
   function render() {
-    const q = (searchInput.value || '').toLowerCase().trim();
-    const cat = filterSelect.value;
+    const q = (searchInput?.value || '').toLowerCase().trim();
+    const cat = filterSelect?.value || '';
 
     cardsContainer.innerHTML = '';
     let visibleCount = 0;
@@ -308,13 +288,6 @@
       card.appendChild(body);
       cardsContainer.appendChild(card);
     });
-
-    // Show first card open if there are results
-    const firstCard = cardsContainer.querySelector('.card');
-    if (firstCard) {
-      firstCard.classList.add('open');
-      firstCard.querySelector('.card-header').setAttribute('aria-expanded', 'true');
-    }
 
     // Update count badge
     if (countBadge) {

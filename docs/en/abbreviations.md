@@ -66,7 +66,7 @@ title: Abbreviations Cheatsheet
         </div>
         <div class=\"form-actions\">
           <button type=\"button\" id=\"cancel-btn\" class=\"btn-cancel\">Cancel</button>
-          <button type="submit" id="submit-btn" class="btn-submit">Submit Issue</button>
+          <button type="submit" id="submit-btn" class="btn-submit">Open on GitHub</button>
         </div>
         <div id=\"form-status\" class=\"form-status\" aria-live=\"polite\"></div>
       </form>
@@ -77,7 +77,7 @@ title: Abbreviations Cheatsheet
 
   <div class=\"howto\">
     <h2>How to add a new abbreviation</h2>
-    <p>Click the <strong>+ Add Abbreviation</strong> button above and fill in the form. A GitHub Issue will be created for review. After your proposal is approved, it will be added to the site.</p>
+    <p>Click the <strong>+ Add Abbreviation</strong> button above and fill in the form. It will open a pre-filled issue on GitHub for review. After your proposal is approved, it will be added to the site.</p>
     <p><strong>Requirements:</strong></p>
     <ul>
       <li>Abbreviation: 2-10 uppercase letters (A-Z)</li>
