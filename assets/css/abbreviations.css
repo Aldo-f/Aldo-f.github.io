@@ -52,7 +52,7 @@
 
 #abbreviations-page .subtitle {
   color: var(--md-on-surface-variant);
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 400;
   letter-spacing: 0.02em;
 }
@@ -60,31 +60,31 @@
 /* Toolbar - Material surface with elevation */
 #abbreviations-page .toolbar {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-wrap: nowrap;
   margin-bottom: calc(var(--md-spacing) * 1.5);
   align-items: center;
   background: var(--md-surface);
-  padding: 12px;
+  padding: 8px 10px;
   border-radius: var(--md-radius);
   box-shadow: var(--md-shadow-1);
 }
 
 #abbreviations-page .search-container {
-  flex: 1;
-  min-width: 240px;
+  flex: 1 1 auto;
+  min-width: 0;
   position: relative;
 }
 
 /* Search field - Material outlined */
 #abbreviations-page .search {
   width: 100%;
-  padding: 10px 16px 10px 48px;
+  padding: 8px 14px 8px 42px;
   border: 1px solid var(--md-outline);
   border-radius: var(--md-radius-sm);
   background: var(--md-surface);
   color: var(--md-on-surface);
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   transition: border-color 0.2s, box-shadow 0.2s;
   font-family: inherit;
 }
@@ -102,32 +102,32 @@
 
 #abbreviations-page .search-icon {
   position: absolute;
-  left: 14px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--md-on-surface-variant);
   pointer-events: none;
-  font-size: 1.1rem;
+  font-size: 0.9375rem;
 }
 
 /* Filter dropdown - Material outlined select */
 #abbreviations-page .filter {
-  padding: 10px 16px;
+  padding: 8px 14px;
   border: 1px solid var(--md-outline);
   border-radius: var(--md-radius-sm);
   background: var(--md-surface);
   color: var(--md-on-surface);
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   cursor: pointer;
-  min-width: 200px;
+  min-width: 160px;
   transition: border-color 0.2s, box-shadow 0.2s;
   font-family: inherit;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%235f6368' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 8px center;
-  background-size: 24px;
-  padding-right: 40px;
+  background-position: right 6px center;
+  background-size: 20px;
+  padding-right: 32px;
 }
 
 #abbreviations-page .filter:focus {
@@ -138,20 +138,20 @@
 
 /* Add button - Material filled tonal */
 #abbreviations-page .add-link {
-  padding: 10px 20px;
+  padding: 8px 16px;
   background: var(--md-primary);
   color: #fff;
   text-decoration: none;
   border-radius: var(--md-radius-sm);
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.02em;
   transition: box-shadow 0.2s, background-color 0.2s;
   white-space: nowrap;
   box-shadow: var(--md-shadow-1);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 #abbreviations-page .add-link:hover {
@@ -196,7 +196,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  padding: 12px 14px;
   cursor: pointer;
   user-select: none;
   background: var(--md-surface-variant);
@@ -219,7 +219,7 @@
 }
 
 #abbreviations-page .card-header h2 {
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: var(--md-on-surface);
   margin: 0;
   font-weight: 500;
@@ -247,7 +247,7 @@
 
 #abbreviations-page .card.open .card-body {
   max-height: 2000px;
-  padding: 0 16px 16px;
+  padding: 0 14px 14px;
 }
 
 /* Answers - Material list item */
@@ -264,7 +264,7 @@
 }
 
 #abbreviations-page .answer h3 {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   color: var(--md-on-surface);
   margin: 0 0 4px 0;
   font-weight: 500;
@@ -290,7 +290,7 @@
 
 #abbreviations-page .definition {
   color: var(--md-on-surface-variant);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   margin: 0;
   line-height: 1.5;
 }
