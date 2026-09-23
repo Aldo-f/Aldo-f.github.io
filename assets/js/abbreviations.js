@@ -8,7 +8,7 @@
   'use strict';
 
   // GitHub repo info
-  const GITHUB_REPO = 'Aldo-f/aldo-f.github.io';
+  const GITHUB_REPO = 'Aldo-f/Aldo-f.github.io';
   const ISSUE_LABEL = 'abbreviation-proposal';
   const ISSUE_PREFIX = '[Proposal] Add ';
 
