@@ -1,21 +1,11 @@
-import subprocess, sys, os, time, urllib.request, tempfile, shutil
+import subprocess, sys, os, time, urllib.request, shutil
 import pytest
 
 
 @pytest.fixture(scope="session", autouse=True)
 def start_http_server():
-    """Start a simple HTTP server on port 8000 serving minimal static pages.
-    Creates temporary 404.html files with the required DOM element.
-    """
-    # Create temporary directory with minimal pages
-    temp_dir = tempfile.mkdtemp()
-    # root 404.html
-    with open(os.path.join(temp_dir, "404.html"), "w") as f:
-        f.write('<div id="dungeon-scene"></div>')
-    # nl/404.html
-    os.makedirs(os.path.join(temp_dir, "nl"), exist_ok=True)
-    with open(os.path.join(temp_dir, "nl", "404.html"), "w") as f:
-        f.write('<div id="dungeon-scene"></div>')
+    """Start a simple HTTP server on port 8000 serving the built site."""
+    site_dir = os.path.join(os.path.dirname(__file__), "site")
     # Start server
     proc = subprocess.Popen(
         [
@@ -24,7 +14,7 @@ def start_http_server():
             "http.server",
             "8000",
             "--directory",
-            temp_dir,
+            site_dir,
             "--bind",
             "127.0.0.1",
         ],
@@ -46,4 +36,3 @@ def start_http_server():
     yield
     proc.terminate()
     proc.wait()
-    shutil.rmtree(temp_dir)

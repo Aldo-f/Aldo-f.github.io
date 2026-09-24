@@ -21,6 +21,7 @@
       <span class="md-chip" style="background: var(--md-sys-color-surface-variant); margin: 0.1rem;">Conf: <span id="dungeon-conf">0</span>/3</span>
     </div>
   </div>
+  <div id="dungeon-log" class="md-chip-group" style="justify-content: center; margin-top: 0.5rem; min-height: 1.5rem;"></div>
   <div class="md-grid md-grid--spacing-x-2 md-grid--padding-y-4" style="justify-content: center;"></div>
   <button id="escape-btn" class="md-button" style="display: none; margin-top: 1rem; min-width: 180px;">Back to Homepage</button>
 </div>
@@ -28,66 +29,79 @@
 <script type="module">
 // ---- 404 Dungeon state machine (DRY: shared data, loaded from JSON) ----
 const MAX_CONF = 3;
+const BASE = window.location.pathname.includes('/nl/') ? '/nl' : '';
+const DATA_URL = `${BASE}/assets/data/404_dungeon.json`;
+console.log(`[404 Dungeon] loading data from ${DATA_URL}`);
 
-// Load the shared state machine from the site's data directory
-const response = await fetch('assets/data/404_dungeon.json');
-const data = await response.json();
-const scenes = data.nodes;
+const response = await fetch(DATA_URL);
+if (!response.ok) {
+  console.error(`[404 Dungeon] failed to load data: ${response.status} ${response.statusText}`);
+  document.getElementById('dungeon-text').textContent = `Error loading dungeon data (${response.status}).`;
+} else {
+  const data = await response.json();
+  const scenes = data.nodes;
+  console.log(`[404 Dungeon] loaded ${Object.keys(scenes).length} scenes`);
 
-const LANG = window.location.pathname.includes('/nl/') ? 'nl' : 'en'; // auto-detect language from URL
-let state = { node: 'start', confusion: 0 };
+  const LANG = window.location.pathname.includes('/nl/') ? 'nl' : 'en';
+  let state = { node: 'start', confusion: 0 };
 
-function t(node, field) {
-  const v = scenes[node]?.[field];
-  if (typeof v === 'object') return v[LANG] || v['en'] || '';
-  return v || '';
-}
+  function t(node, field) {
+    const v = scenes[node]?.[field];
+    if (typeof v === 'object') return v[LANG] || v['en'] || '';
+    return v || '';
+  }
 
-function render() {
-  const s = scenes[state.node];
-  if (!s) return;
-  document.getElementById('dungeon-title-text').textContent = state.node === 'start' ? 'The 404 Dungeon' : `Node: ${state.node}`;
-  document.getElementById('dungeon-text').textContent = t(state.node, 'text');
-  document.getElementById('dungeon-hp').textContent = Math.max(0, MAX_CONF - state.confusion);
-  document.getElementById('dungeon-conf').textContent = Math.min(MAX_CONF, state.confusion);
-  document.getElementById('escape-btn').style.display = state.node === 'escape' ? 'block' : 'none';
+  function log(msg) {
+    console.log(`[404 Dungeon] ${msg}`);
+    const el = document.getElementById('dungeon-log');
+    if (el) el.textContent = msg;
+  }
 
-  const grid = document.querySelector('.md-grid--spacing-x-2');
-  if (!grid) return;
-  grid.querySelectorAll('.choice-btn').forEach(b => b.remove());
+  function render() {
+    const s = scenes[state.node];
+    if (!s) return;
+    const title = state.node === 'start' ? 'The 404 Dungeon' : t(state.node, 'label') || state.node;
+    document.getElementById('dungeon-title-text').textContent = title;
+    document.getElementById('dungeon-text').textContent = t(state.node, 'text');
+    document.getElementById('dungeon-hp').textContent = Math.max(0, MAX_CONF - state.confusion);
+    document.getElementById('dungeon-conf').textContent = Math.min(MAX_CONF, state.confusion);
+    document.getElementById('escape-btn').style.display = state.node === 'escape' ? 'block' : 'none';
+    log(`[${state.node}] confusion=${state.confusion}`);
 
-  (s.choices || []).forEach(c => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'md-button md-button--outlined choice-btn';
-    btn.style.minWidth = '160px';
-    btn.textContent = t(c, 'label');
-    btn.addEventListener('click', () => {
-      if (c.statDelta !== undefined) {
-        state.confusion = Math.max(0, Math.min(MAX_CONF, state.confusion + c.statDelta));
+    const grid = document.querySelector('.md-grid--spacing-x-2');
+    if (!grid) return;
+    grid.querySelectorAll('.choice-btn').forEach(b => b.remove());
+
+    (s.choices || []).forEach(c => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'md-button md-button--outlined choice-btn';
+      btn.style.minWidth = '160px';
+      btn.textContent = t(c, 'label');
+      btn.addEventListener('click', () => {
+        console.log(`[404 Dungeon] choice: ${t(c, 'label')} -> ${c.next || 'escape'}`);
+        if (c.statDelta !== undefined) {
+          state.confusion = Math.max(0, Math.min(MAX_CONF, state.confusion + c.statDelta));
+        }
+        state.node = c.next || 'escape';
+        log(`chose "${t(c, 'label')}" -> ${state.node} (confusion=${state.confusion})`);
         render();
-      }
-      if (c.next) {
-        state.node = c.next;
-        render();
-      } else {
-        state.node = 'escape';
-        render();
-      }
+      });
+      grid.appendChild(btn);
     });
-    grid.appendChild(btn);
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
+    }
+  }
+
+  document.getElementById('escape-btn').addEventListener('click', () => {
+    console.log('[404 Dungeon] escaping to homepage');
+    window.location.href = BASE || '/';
   });
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
-  }
+  render();
 }
-
-document.getElementById('escape-btn').addEventListener('click', () => {
-  window.location.href = 'assets/';
-});
-
-render();
 </script>
 <style>
 .md-card:hover, .md-card:focus-within { elevation: 2 !important; }
@@ -98,5 +112,6 @@ render();
   .md-card { transition: none !important; }
   .choice-btn { pointer-events: auto; }
 }
+#dungeon-log { font-size: 0.75rem; color: var(--md-sys-on-surface, #fff); opacity: 0.7; }
 </style>
 {% endblock %}
