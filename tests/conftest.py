@@ -46,7 +46,7 @@ def start_http_server():
     proc.wait()
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def base_url(start_http_server):
     """Return base URL for tests."""
     return "http://127.0.0.1:8000"
