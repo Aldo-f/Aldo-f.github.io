@@ -10,9 +10,9 @@ from memory_helper import get_memory_provider
 
 
 def test_helper_reads_hermes_config(monkeypatch):
-    # Real call: hermes config get memory.provider is configured as "mem0"
+    # Real call: hermes config get memory.provider is configured as "holographic"
     provider = get_memory_provider()
-    assert provider in {"mem0", "faiss"}
+    assert provider == "holographic"
 
 
 def test_helper_falls_back_on_failure(monkeypatch):

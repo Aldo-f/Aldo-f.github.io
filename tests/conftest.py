@@ -1,4 +1,3 @@
-import subprocess, sys, os, time, urllib.request, socket
 import pytest
 
 
@@ -8,6 +7,11 @@ def start_http_server():
     import subprocess, sys, os, time, urllib.request
     site_dir = os.path.join(os.path.dirname(__file__), "..", "site")
     site_dir = os.path.abspath(site_dir)
+    
+    # Skip if site directory doesn't exist (e.g. CI before build)
+    if not os.path.isdir(site_dir):
+        yield
+        return
     
     proc = subprocess.Popen(
         [
@@ -40,3 +44,9 @@ def start_http_server():
     yield
     proc.terminate()
     proc.wait()
+
+
+@pytest.fixture
+def base_url(start_http_server):
+    """Return base URL for tests."""
+    return "http://127.0.0.1:8000"
