@@ -13,14 +13,14 @@
       "mnt_hdd1_dev_06_apps_aldo_f_github_io_site_nl_assets_javascripts_lunr_thai_rules",
       "ref_assert",
       "ref_brace_expansion",
-      "ref_inflight",
+      "ref_glob",
       "ref_inherits",
-      "ref_minimatch",
-      "ref_path_is_absolute",
+      "ref_once",
+      "ref_path",
+      "ref_sys",
       "ref_util",
-      "ref_wrappy",
-      "site_en_assets_javascripts_lunr_wordcut_rationale_3578",
       "site_en_assets_javascripts_lunr_wordcut_rationale_4282",
+      "site_en_assets_javascripts_lunr_wordcut_rationale_6531",
       "site_nl_assets_javascripts_lunr_wordcut",
       "site_nl_assets_javascripts_lunr_wordcut_alphasort",
       "site_nl_assets_javascripts_lunr_wordcut_alphasorti",
@@ -87,11 +87,11 @@
       "ref_concat_map",
       "ref_events",
       "ref_fs",
-      "ref_glob",
-      "ref_once",
-      "ref_path",
-      "ref_sys",
+      "ref_inflight",
+      "ref_minimatch",
+      "ref_path_is_absolute",
       "ref_underscore",
+      "ref_wrappy",
       "site_en_assets_javascripts_lunr_wordcut",
       "site_en_assets_javascripts_lunr_wordcut_alphasort",
       "site_en_assets_javascripts_lunr_wordcut_alphasorti",
@@ -128,7 +128,7 @@
       "site_en_assets_javascripts_lunr_wordcut_oncestrict",
       "site_en_assets_javascripts_lunr_wordcut_posix",
       "site_en_assets_javascripts_lunr_wordcut_range",
-      "site_en_assets_javascripts_lunr_wordcut_rationale_6531",
+      "site_en_assets_javascripts_lunr_wordcut_rationale_3578",
       "site_en_assets_javascripts_lunr_wordcut_regexpescape",
       "site_en_assets_javascripts_lunr_wordcut_runcleartimeout",
       "site_en_assets_javascripts_lunr_wordcut_runtimeout",
@@ -523,6 +523,46 @@
       "threading"
     ],
     "9": [
+      "conftest",
+      "conftest_py_fixture",
+      "conftest_rationale_7",
+      "conftest_start_http_server",
+      "datetime",
+      "documentation_watcher_watcher",
+      "documentation_watcher_watcher_main",
+      "documentation_watcher_watcher_rationale_2",
+      "hashlib",
+      "hooks_build_info",
+      "hooks_build_info_on_config",
+      "hooks_build_info_on_post_build",
+      "hooks_build_info_rationale_1",
+      "okf_test_suite",
+      "okf_test_suite_err",
+      "okf_test_suite_ok",
+      "okf_test_suite_parse_frontmatter",
+      "okf_test_suite_rationale_2",
+      "okf_test_suite_rationale_41",
+      "os",
+      "projects_05_media_jellyfin_references_attesters_check_http",
+      "projects_05_media_jellyfin_references_attesters_check_http_rationale_13",
+      "projects_05_media_jellyfin_references_attesters_check_http_rationale_2",
+      "projects_05_media_jellyfin_references_attesters_check_http_test_jellyfin_healthcheck",
+      "rag_memory_helper",
+      "requests",
+      "shutil",
+      "subprocess",
+      "sys",
+      "tempfile",
+      "tests_api_test_rag_api",
+      "tests_api_test_rag_api_load_api_key",
+      "tests_api_test_rag_api_rationale_17",
+      "tests_api_test_rag_api_server_running",
+      "tests_api_test_rag_api_test_search_endpoint",
+      "time",
+      "urllib_request",
+      "yaml"
+    ],
+    "10": [
       "specify_scripts_bash_check_prerequisites",
       "specify_scripts_bash_check_prerequisites_sh__entry",
       "specify_scripts_bash_common",
@@ -560,7 +600,7 @@
       "specify_scripts_bash_setup_tasks",
       "specify_scripts_bash_setup_tasks_sh__entry"
     ],
-    "10": [
+    "11": [
       "package",
       "package_author",
       "package_bugs",
@@ -595,7 +635,7 @@
       "tests_click_test_spec",
       "tests_nocturna_site_integration_spec"
     ],
-    "11": [
+    "12": [
       "any",
       "fixture",
       "hooks",
@@ -627,7 +667,7 @@
       "tests_test_abbreviations_hook_test_parse_abbreviation_valid",
       "types"
     ],
-    "12": [
+    "13": [
       "site_en_assets_javascripts_bundle_d7400e89_min_di",
       "site_en_assets_javascripts_bundle_d7400e89_min_e",
       "site_en_assets_javascripts_bundle_d7400e89_min_e_a",
@@ -657,7 +697,7 @@
       "site_en_assets_javascripts_bundle_d7400e89_min_xo",
       "site_en_assets_javascripts_bundle_d7400e89_min_yt"
     ],
-    "13": [
+    "14": [
       "site_nl_assets_javascripts_bundle_d7400e89_min_di",
       "site_nl_assets_javascripts_bundle_d7400e89_min_e",
       "site_nl_assets_javascripts_bundle_d7400e89_min_e_a",
@@ -687,7 +727,7 @@
       "site_nl_assets_javascripts_bundle_d7400e89_min_xo",
       "site_nl_assets_javascripts_bundle_d7400e89_min_yt"
     ],
-    "14": [
+    "15": [
       "site_en_assets_javascripts_bundle_d7400e89_min_a",
       "site_en_assets_javascripts_bundle_d7400e89_min_ae_c",
       "site_en_assets_javascripts_bundle_d7400e89_min_bo",
@@ -716,7 +756,7 @@
       "site_en_assets_javascripts_bundle_d7400e89_min_wo_u",
       "site_en_assets_javascripts_bundle_d7400e89_min_ys"
     ],
-    "15": [
+    "16": [
       "site_en_assets_javascripts_lunr_min_lunr_fi_min_o",
       "site_en_assets_javascripts_lunr_min_lunr_tr_min",
       "site_en_assets_javascripts_lunr_min_lunr_tr_min_a",
@@ -745,7 +785,7 @@
       "site_en_assets_javascripts_lunr_min_lunr_tr_min_v",
       "site_en_assets_javascripts_lunr_min_lunr_tr_min_w"
     ],
-    "16": [
+    "17": [
       "site_en_assets_javascripts_lunr_wordcut_arraytohash",
       "site_en_assets_javascripts_lunr_wordcut_debuglog",
       "site_en_assets_javascripts_lunr_wordcut_deepequal",
@@ -774,7 +814,7 @@
       "site_en_assets_javascripts_lunr_wordcut_stylizenocolor",
       "site_en_assets_javascripts_lunr_wordcut_throws"
     ],
-    "17": [
+    "18": [
       "site_nl_assets_javascripts_bundle_d7400e89_min_a",
       "site_nl_assets_javascripts_bundle_d7400e89_min_ae_c",
       "site_nl_assets_javascripts_bundle_d7400e89_min_bo",
@@ -803,7 +843,7 @@
       "site_nl_assets_javascripts_bundle_d7400e89_min_wo_u",
       "site_nl_assets_javascripts_bundle_d7400e89_min_ys"
     ],
-    "18": [
+    "19": [
       "site_nl_assets_javascripts_lunr_min_lunr_fi_min_o",
       "site_nl_assets_javascripts_lunr_min_lunr_tr_min",
       "site_nl_assets_javascripts_lunr_min_lunr_tr_min_a",
@@ -832,33 +872,34 @@
       "site_nl_assets_javascripts_lunr_min_lunr_tr_min_v",
       "site_nl_assets_javascripts_lunr_min_lunr_tr_min_w"
     ],
-    "19": [
-      "conftest",
-      "conftest_py_fixture",
-      "conftest_rationale_7",
-      "conftest_start_http_server",
-      "documentation_watcher_watcher",
-      "documentation_watcher_watcher_main",
-      "documentation_watcher_watcher_rationale_2",
-      "hashlib",
-      "os",
-      "projects_05_media_jellyfin_references_attesters_check_http",
-      "projects_05_media_jellyfin_references_attesters_check_http_rationale_13",
-      "projects_05_media_jellyfin_references_attesters_check_http_rationale_2",
-      "projects_05_media_jellyfin_references_attesters_check_http_test_jellyfin_healthcheck",
-      "rag_memory_helper",
-      "requests",
-      "shutil",
-      "subprocess",
-      "tempfile",
-      "tests_api_test_rag_api",
-      "tests_api_test_rag_api_load_api_key",
-      "tests_api_test_rag_api_rationale_17",
-      "tests_api_test_rag_api_server_running",
-      "tests_api_test_rag_api_test_search_endpoint",
-      "time"
-    ],
     "20": [
+      "faiss",
+      "numpy",
+      "rag_okf_rag_serve",
+      "rag_okf_rag_serve_get_pipeline",
+      "rag_okf_rag_serve_main",
+      "rag_okf_rag_serve_rationale_2",
+      "rag_rag_query",
+      "rag_rag_query_main",
+      "rag_rag_query_okfragpipeline",
+      "rag_rag_query_okfragpipeline_build_index",
+      "rag_rag_query_okfragpipeline_extract_frontmatter",
+      "rag_rag_query_okfragpipeline_init",
+      "rag_rag_query_okfragpipeline_load_documents",
+      "rag_rag_query_okfragpipeline_query",
+      "rag_rag_query_okfragpipeline_query_with_answer",
+      "rag_rag_query_okfragpipeline_uses_mem0",
+      "rag_rag_query_rationale_108",
+      "rag_rag_query_rationale_163",
+      "rag_rag_query_rationale_2",
+      "rag_rag_query_rationale_238",
+      "rag_rag_query_rationale_29",
+      "rag_rag_query_rationale_306",
+      "rag_rag_query_rationale_43",
+      "rag_rag_query_rationale_67",
+      "sentence_transformers"
+    ],
+    "21": [
       "documentation_watcher_watcher_docwatcher",
       "documentation_watcher_watcher_docwatcher_ensure_directories",
       "documentation_watcher_watcher_docwatcher_get_file_hash",
@@ -884,7 +925,7 @@
       "documentation_watcher_watcher_rationale_325",
       "documentation_watcher_watcher_rationale_95"
     ],
-    "21": [
+    "22": [
       "site_en_assets_javascripts_bundle_d7400e89_min_ae",
       "site_en_assets_javascripts_bundle_d7400e89_min_ao",
       "site_en_assets_javascripts_bundle_d7400e89_min_b",
@@ -910,7 +951,7 @@
       "site_en_assets_javascripts_bundle_d7400e89_min_w",
       "site_en_assets_javascripts_bundle_d7400e89_min_yr"
     ],
-    "22": [
+    "23": [
       "site_nl_assets_javascripts_bundle_d7400e89_min_ae",
       "site_nl_assets_javascripts_bundle_d7400e89_min_ao",
       "site_nl_assets_javascripts_bundle_d7400e89_min_b",
@@ -936,7 +977,7 @@
       "site_nl_assets_javascripts_bundle_d7400e89_min_w",
       "site_nl_assets_javascripts_bundle_d7400e89_min_yr"
     ],
-    "23": [
+    "24": [
       "site_nl_assets_javascripts_lunr_wordcut_balanced",
       "site_nl_assets_javascripts_lunr_wordcut_braceexpand",
       "site_nl_assets_javascripts_lunr_wordcut_embrace",
@@ -960,7 +1001,7 @@
       "site_nl_assets_javascripts_lunr_wordcut_parsenegate",
       "site_nl_assets_javascripts_lunr_wordcut_unescapebraces"
     ],
-    "24": [
+    "25": [
       "site_nl_assets_javascripts_lunr_wordcut_arraytohash",
       "site_nl_assets_javascripts_lunr_wordcut_deepequal",
       "site_nl_assets_javascripts_lunr_wordcut_extend",
@@ -983,7 +1024,7 @@
       "site_nl_assets_javascripts_lunr_wordcut_reducetosinglestring",
       "site_nl_assets_javascripts_lunr_wordcut_stylizenocolor"
     ],
-    "25": [
+    "26": [
       "site_nl_assets_javascripts_lunr_wordcut_collectnonenumprops",
       "site_nl_assets_javascripts_lunr_wordcut_debuglog",
       "site_nl_assets_javascripts_lunr_wordcut_deprecate",
@@ -1006,7 +1047,7 @@
       "site_nl_assets_javascripts_lunr_wordcut_timestamp",
       "site_nl_assets_javascripts_lunr_wordcut_tostring"
     ],
-    "26": [
+    "27": [
       "site_en_assets_javascripts_lunr_wordcut_balanced",
       "site_en_assets_javascripts_lunr_wordcut_braceexpand",
       "site_en_assets_javascripts_lunr_wordcut_embrace",
@@ -1027,7 +1068,7 @@
       "site_en_assets_javascripts_lunr_wordcut_parsecommaparts",
       "site_en_assets_javascripts_lunr_wordcut_parsenegate"
     ],
-    "27": [
+    "28": [
       "collections",
       "hooks_related_posts",
       "hooks_related_posts_build_index",
@@ -1046,26 +1087,6 @@
       "hooks_related_posts_rationale_54",
       "hooks_related_posts_rationale_62",
       "hooks_related_posts_rationale_94"
-    ],
-    "28": [
-      "rag_okf_rag_serve",
-      "rag_okf_rag_serve_get_pipeline",
-      "rag_okf_rag_serve_main",
-      "rag_okf_rag_serve_rationale_2",
-      "rag_rag_query_okfragpipeline",
-      "rag_rag_query_okfragpipeline_build_index",
-      "rag_rag_query_okfragpipeline_extract_frontmatter",
-      "rag_rag_query_okfragpipeline_init",
-      "rag_rag_query_okfragpipeline_load_documents",
-      "rag_rag_query_okfragpipeline_query",
-      "rag_rag_query_okfragpipeline_query_with_answer",
-      "rag_rag_query_okfragpipeline_uses_mem0",
-      "rag_rag_query_rationale_108",
-      "rag_rag_query_rationale_163",
-      "rag_rag_query_rationale_238",
-      "rag_rag_query_rationale_29",
-      "rag_rag_query_rationale_43",
-      "rag_rag_query_rationale_67"
     ],
     "29": [
       "site_en_assets_javascripts_lunr_min_lunr_es_min",
@@ -1258,6 +1279,24 @@
       "site_nl_assets_javascripts_workers_search_2c215733_min_ue"
     ],
     "39": [
+      "hooks_mermaid_entities",
+      "hooks_mermaid_entities_on_page_content",
+      "hooks_mermaid_entities_on_page_content_decode_entities",
+      "hooks_mermaid_entities_on_post_build",
+      "hooks_mermaid_entities_on_post_page",
+      "hooks_mermaid_entities_on_post_page_decode_entities",
+      "hooks_mermaid_entities_rationale_1",
+      "hooks_mermaid_entities_rationale_21",
+      "hooks_mermaid_entities_rationale_57",
+      "hooks_socialmedia",
+      "hooks_socialmedia_on_page_markdown",
+      "hooks_socialmedia_rationale_1",
+      "html",
+      "re",
+      "textwrap",
+      "urllib_parse"
+    ],
+    "40": [
       "page",
       "playwright_sync_api",
       "pytest",
@@ -1275,7 +1314,7 @@
       "tests_rag_test_mem0_integration_test_helper_reads_hermes_config",
       "tests_rag_test_mem0_integration_test_mem0_used"
     ],
-    "40": [
+    "41": [
       "site_en_assets_javascripts_lunr_min_lunr_it_min",
       "site_en_assets_javascripts_lunr_min_lunr_it_min_a",
       "site_en_assets_javascripts_lunr_min_lunr_it_min_b",
@@ -1293,7 +1332,7 @@
       "site_en_assets_javascripts_lunr_min_lunr_it_min_v",
       "site_en_assets_javascripts_lunr_min_lunr_it_min_w"
     ],
-    "41": [
+    "42": [
       "site_nl_assets_javascripts_lunr_min_lunr_it_min",
       "site_nl_assets_javascripts_lunr_min_lunr_it_min_a",
       "site_nl_assets_javascripts_lunr_min_lunr_it_min_b",
@@ -1311,7 +1350,7 @@
       "site_nl_assets_javascripts_lunr_min_lunr_it_min_v",
       "site_nl_assets_javascripts_lunr_min_lunr_it_min_w"
     ],
-    "42": [
+    "43": [
       "site_en_assets_javascripts_bundle_d7400e89_min_ci",
       "site_en_assets_javascripts_bundle_d7400e89_min_ds",
       "site_en_assets_javascripts_bundle_d7400e89_min_gi",
@@ -1328,7 +1367,7 @@
       "site_en_assets_javascripts_bundle_d7400e89_min_vi",
       "site_en_assets_javascripts_bundle_d7400e89_min_we"
     ],
-    "43": [
+    "44": [
       "site_en_assets_javascripts_bundle_d7400e89_min_dt",
       "site_en_assets_javascripts_bundle_d7400e89_min_gt",
       "site_en_assets_javascripts_bundle_d7400e89_min_gt_a",
@@ -1345,7 +1384,7 @@
       "site_en_assets_javascripts_bundle_d7400e89_min_ze",
       "site_en_assets_javascripts_bundle_d7400e89_min_zr"
     ],
-    "44": [
+    "45": [
       "site_en_assets_javascripts_lunr_min_lunr_hu_min",
       "site_en_assets_javascripts_lunr_min_lunr_hu_min_a",
       "site_en_assets_javascripts_lunr_min_lunr_hu_min_b",
@@ -1362,7 +1401,7 @@
       "site_en_assets_javascripts_lunr_min_lunr_hu_min_u",
       "site_en_assets_javascripts_lunr_min_lunr_hu_min_w"
     ],
-    "45": [
+    "46": [
       "site_en_assets_javascripts_lunr_min_lunr_ru_min",
       "site_en_assets_javascripts_lunr_min_lunr_ru_min_a",
       "site_en_assets_javascripts_lunr_min_lunr_ru_min_c",
@@ -1379,7 +1418,7 @@
       "site_en_assets_javascripts_lunr_min_lunr_ru_min_u",
       "site_en_assets_javascripts_lunr_min_lunr_ru_min_w"
     ],
-    "46": [
+    "47": [
       "site_nl_assets_javascripts_bundle_d7400e89_min_ci",
       "site_nl_assets_javascripts_bundle_d7400e89_min_ds",
       "site_nl_assets_javascripts_bundle_d7400e89_min_gi",
@@ -1396,7 +1435,7 @@
       "site_nl_assets_javascripts_bundle_d7400e89_min_vi",
       "site_nl_assets_javascripts_bundle_d7400e89_min_we"
     ],
-    "47": [
+    "48": [
       "site_nl_assets_javascripts_bundle_d7400e89_min_dt",
       "site_nl_assets_javascripts_bundle_d7400e89_min_gt",
       "site_nl_assets_javascripts_bundle_d7400e89_min_gt_a",
@@ -1413,7 +1452,7 @@
       "site_nl_assets_javascripts_bundle_d7400e89_min_ze",
       "site_nl_assets_javascripts_bundle_d7400e89_min_zr"
     ],
-    "48": [
+    "49": [
       "site_nl_assets_javascripts_lunr_min_lunr_hu_min",
       "site_nl_assets_javascripts_lunr_min_lunr_hu_min_a",
       "site_nl_assets_javascripts_lunr_min_lunr_hu_min_b",
@@ -1430,7 +1469,7 @@
       "site_nl_assets_javascripts_lunr_min_lunr_hu_min_u",
       "site_nl_assets_javascripts_lunr_min_lunr_hu_min_w"
     ],
-    "49": [
+    "50": [
       "site_nl_assets_javascripts_lunr_min_lunr_ru_min",
       "site_nl_assets_javascripts_lunr_min_lunr_ru_min_a",
       "site_nl_assets_javascripts_lunr_min_lunr_ru_min_c",
@@ -1446,22 +1485,6 @@
       "site_nl_assets_javascripts_lunr_min_lunr_ru_min_t",
       "site_nl_assets_javascripts_lunr_min_lunr_ru_min_u",
       "site_nl_assets_javascripts_lunr_min_lunr_ru_min_w"
-    ],
-    "50": [
-      "datetime",
-      "hooks_build_info",
-      "hooks_build_info_on_config",
-      "hooks_build_info_on_post_build",
-      "hooks_build_info_rationale_1",
-      "scripts_gen_category_index",
-      "scripts_gen_category_index_collect",
-      "scripts_gen_category_index_main",
-      "scripts_gen_category_index_parse_front_matter",
-      "scripts_gen_category_index_py_path",
-      "scripts_gen_category_index_rationale_2",
-      "scripts_gen_category_index_rationale_29",
-      "scripts_gen_category_index_render",
-      "scripts_gen_category_index_slugify"
     ],
     "51": [
       "hooks_blanky",
@@ -1495,66 +1518,6 @@
       "rag_rag_api_search"
     ],
     "53": [
-      "faiss",
-      "hooks_socialmedia",
-      "hooks_socialmedia_on_page_markdown",
-      "hooks_socialmedia_rationale_1",
-      "numpy",
-      "rag_rag_query",
-      "rag_rag_query_main",
-      "rag_rag_query_rationale_2",
-      "rag_rag_query_rationale_306",
-      "re",
-      "sentence_transformers",
-      "textwrap",
-      "urllib_parse"
-    ],
-    "54": [
-      "hooks_about_org_table",
-      "hooks_about_org_table_branch_display",
-      "hooks_about_org_table_build_table",
-      "hooks_about_org_table_inject_into_about",
-      "hooks_about_org_table_on_config",
-      "hooks_about_org_table_on_page_markdown",
-      "hooks_about_org_table_rationale_1",
-      "hooks_about_org_table_rationale_118",
-      "hooks_about_org_table_rationale_127",
-      "hooks_about_org_table_rationale_169",
-      "hooks_about_org_table_rationale_75",
-      "hooks_about_org_table_rationale_85",
-      "sys"
-    ],
-    "55": [
-      "okf_test_suite",
-      "okf_test_suite_err",
-      "okf_test_suite_ok",
-      "okf_test_suite_parse_frontmatter",
-      "okf_test_suite_rationale_2",
-      "okf_test_suite_rationale_41",
-      "scripts_generate_projects",
-      "scripts_generate_projects_main",
-      "scripts_generate_projects_make_index_table",
-      "scripts_generate_projects_make_projects_md",
-      "scripts_generate_projects_parse_nav_repos",
-      "scripts_generate_projects_rationale_2",
-      "yaml"
-    ],
-    "56": [
-      "rag_mem0_store",
-      "rag_mem0_store_load_api_key",
-      "rag_mem0_store_mem0vectorstore",
-      "rag_mem0_store_mem0vectorstore_add",
-      "rag_mem0_store_mem0vectorstore_init",
-      "rag_mem0_store_mem0vectorstore_post",
-      "rag_mem0_store_mem0vectorstore_search",
-      "rag_mem0_store_rationale_2",
-      "rag_mem0_store_rationale_34",
-      "rag_mem0_store_rationale_66",
-      "rag_mem0_store_rationale_80",
-      "urllib_error",
-      "urllib_request"
-    ],
-    "57": [
       "site_en_assets_javascripts_lunr_min_lunr_nl_min",
       "site_en_assets_javascripts_lunr_min_lunr_nl_min_a",
       "site_en_assets_javascripts_lunr_min_lunr_nl_min_c",
@@ -1569,7 +1532,7 @@
       "site_en_assets_javascripts_lunr_min_lunr_nl_min_u",
       "site_en_assets_javascripts_lunr_min_lunr_tr_min_q"
     ],
-    "58": [
+    "54": [
       "site_nl_assets_javascripts_lunr_min_lunr_nl_min",
       "site_nl_assets_javascripts_lunr_min_lunr_nl_min_a",
       "site_nl_assets_javascripts_lunr_min_lunr_nl_min_c",
@@ -1584,7 +1547,21 @@
       "site_nl_assets_javascripts_lunr_min_lunr_nl_min_u",
       "site_nl_assets_javascripts_lunr_min_lunr_tr_min_q"
     ],
-    "59": [
+    "55": [
+      "hooks_about_org_table",
+      "hooks_about_org_table_branch_display",
+      "hooks_about_org_table_build_table",
+      "hooks_about_org_table_inject_into_about",
+      "hooks_about_org_table_on_config",
+      "hooks_about_org_table_on_page_markdown",
+      "hooks_about_org_table_rationale_1",
+      "hooks_about_org_table_rationale_118",
+      "hooks_about_org_table_rationale_127",
+      "hooks_about_org_table_rationale_169",
+      "hooks_about_org_table_rationale_75",
+      "hooks_about_org_table_rationale_85"
+    ],
+    "56": [
       "hooks_slugmap",
       "hooks_slugmap_build_map",
       "hooks_slugmap_on_config",
@@ -1598,7 +1575,21 @@
       "hooks_slugmap_write_site",
       "pymdownx_slugs"
     ],
-    "60": [
+    "57": [
+      "rag_mem0_store",
+      "rag_mem0_store_load_api_key",
+      "rag_mem0_store_mem0vectorstore",
+      "rag_mem0_store_mem0vectorstore_add",
+      "rag_mem0_store_mem0vectorstore_init",
+      "rag_mem0_store_mem0vectorstore_post",
+      "rag_mem0_store_mem0vectorstore_search",
+      "rag_mem0_store_rationale_2",
+      "rag_mem0_store_rationale_34",
+      "rag_mem0_store_rationale_66",
+      "rag_mem0_store_rationale_80",
+      "urllib_error"
+    ],
+    "58": [
       "site_en_assets_javascripts_bundle_d7400e89_min_cn",
       "site_en_assets_javascripts_bundle_d7400e89_min_fn",
       "site_en_assets_javascripts_bundle_d7400e89_min_me",
@@ -1612,7 +1603,7 @@
       "site_en_assets_javascripts_bundle_d7400e89_min_x",
       "site_en_assets_javascripts_bundle_d7400e89_min_xr"
     ],
-    "61": [
+    "59": [
       "site_en_assets_javascripts_lunr_min_lunr_du_min",
       "site_en_assets_javascripts_lunr_min_lunr_du_min_a",
       "site_en_assets_javascripts_lunr_min_lunr_du_min_c",
@@ -1626,7 +1617,7 @@
       "site_en_assets_javascripts_lunr_min_lunr_du_min_t",
       "site_en_assets_javascripts_lunr_min_lunr_du_min_u"
     ],
-    "62": [
+    "60": [
       "site_nl_assets_javascripts_bundle_d7400e89_min_cn",
       "site_nl_assets_javascripts_bundle_d7400e89_min_fn",
       "site_nl_assets_javascripts_bundle_d7400e89_min_me",
@@ -1640,7 +1631,7 @@
       "site_nl_assets_javascripts_bundle_d7400e89_min_x",
       "site_nl_assets_javascripts_bundle_d7400e89_min_xr"
     ],
-    "63": [
+    "61": [
       "site_nl_assets_javascripts_lunr_min_lunr_du_min",
       "site_nl_assets_javascripts_lunr_min_lunr_du_min_a",
       "site_nl_assets_javascripts_lunr_min_lunr_du_min_c",
@@ -1654,7 +1645,20 @@
       "site_nl_assets_javascripts_lunr_min_lunr_du_min_t",
       "site_nl_assets_javascripts_lunr_min_lunr_du_min_u"
     ],
-    "64": [
+    "62": [
+      "assets_js_abbreviations",
+      "assets_js_abbreviations_escapehtml",
+      "assets_js_abbreviations_init",
+      "assets_js_abbreviations_init_clearform",
+      "assets_js_abbreviations_init_closemodal",
+      "assets_js_abbreviations_init_debounce",
+      "assets_js_abbreviations_init_handlesubmit",
+      "assets_js_abbreviations_init_openmodal",
+      "assets_js_abbreviations_init_populatefilter",
+      "assets_js_abbreviations_init_showstatus",
+      "assets_js_abbreviations_render"
+    ],
+    "63": [
       "hooks_chat",
       "hooks_chat_inject_key",
       "hooks_chat_load_api_key",
@@ -1667,7 +1671,7 @@
       "hooks_chat_rationale_680",
       "typing"
     ],
-    "65": [
+    "64": [
       "site_en_assets_javascripts_lunr_min_lunr_fi_min",
       "site_en_assets_javascripts_lunr_min_lunr_fi_min_a",
       "site_en_assets_javascripts_lunr_min_lunr_fi_min_c",
@@ -1680,7 +1684,7 @@
       "site_en_assets_javascripts_lunr_min_lunr_fi_min_u",
       "site_en_assets_javascripts_lunr_min_lunr_fi_min_w"
     ],
-    "66": [
+    "65": [
       "site_en_assets_javascripts_lunr_wordcut_collectnonenumprops",
       "site_en_assets_javascripts_lunr_wordcut_eventemitter",
       "site_en_assets_javascripts_lunr_wordcut_eventemitter_addlistener",
@@ -1693,7 +1697,7 @@
       "site_en_assets_javascripts_lunr_wordcut_glob_readdirerror",
       "site_en_assets_javascripts_lunr_wordcut_isfunction"
     ],
-    "67": [
+    "66": [
       "site_nl_assets_javascripts_lunr_min_lunr_fi_min",
       "site_nl_assets_javascripts_lunr_min_lunr_fi_min_a",
       "site_nl_assets_javascripts_lunr_min_lunr_fi_min_c",
@@ -1706,19 +1710,7 @@
       "site_nl_assets_javascripts_lunr_min_lunr_fi_min_u",
       "site_nl_assets_javascripts_lunr_min_lunr_fi_min_w"
     ],
-    "68": [
-      "hooks_mermaid_entities",
-      "hooks_mermaid_entities_on_page_content",
-      "hooks_mermaid_entities_on_page_content_decode_entities",
-      "hooks_mermaid_entities_on_post_build",
-      "hooks_mermaid_entities_on_post_page",
-      "hooks_mermaid_entities_on_post_page_decode_entities",
-      "hooks_mermaid_entities_rationale_1",
-      "hooks_mermaid_entities_rationale_21",
-      "hooks_mermaid_entities_rationale_57",
-      "html"
-    ],
-    "69": [
+    "67": [
       "site_en_assets_javascripts_lunr_wordcut_escapebraces",
       "site_en_assets_javascripts_lunr_wordcut_expandtop",
       "site_en_assets_javascripts_lunr_wordcut_glob_makeabs",
@@ -1730,7 +1722,7 @@
       "site_en_assets_javascripts_lunr_wordcut_resolve",
       "site_en_assets_javascripts_lunr_wordcut_unescapebraces"
     ],
-    "70": [
+    "68": [
       "tests_test_watcher_map",
       "tests_test_watcher_map_rationale_1",
       "tests_test_watcher_map_rationale_32",
@@ -1742,7 +1734,7 @@
       "tests_test_watcher_map_test_letspeppol_is_bundle_only",
       "tests_test_watcher_map_test_neo_brutalist_publishes_and_mirrors"
     ],
-    "71": [
+    "69": [
       "assets_javascripts_chat",
       "assets_javascripts_chat_addmessage",
       "assets_javascripts_chat_checkraghealth",
@@ -1753,7 +1745,7 @@
       "assets_javascripts_chat_sendmessage",
       "assets_javascripts_chat_togglechat"
     ],
-    "72": [
+    "70": [
       "hooks_dynamic_repo",
       "hooks_dynamic_repo_get_js",
       "hooks_dynamic_repo_on_config",
@@ -1764,7 +1756,18 @@
       "hooks_dynamic_repo_rationale_33",
       "json"
     ],
-    "73": [
+    "71": [
+      "scripts_gen_category_index",
+      "scripts_gen_category_index_collect",
+      "scripts_gen_category_index_main",
+      "scripts_gen_category_index_parse_front_matter",
+      "scripts_gen_category_index_py_path",
+      "scripts_gen_category_index_rationale_2",
+      "scripts_gen_category_index_rationale_29",
+      "scripts_gen_category_index_render",
+      "scripts_gen_category_index_slugify"
+    ],
+    "72": [
       "site_en_assets_javascripts_chat",
       "site_en_assets_javascripts_chat_addmessage",
       "site_en_assets_javascripts_chat_checkraghealth",
@@ -1775,7 +1778,7 @@
       "site_en_assets_javascripts_chat_sendmessage",
       "site_en_assets_javascripts_chat_togglechat"
     ],
-    "74": [
+    "73": [
       "site_en_assets_javascripts_lunr_min_lunr_de_min",
       "site_en_assets_javascripts_lunr_min_lunr_de_min_a",
       "site_en_assets_javascripts_lunr_min_lunr_de_min_c",
@@ -1786,7 +1789,7 @@
       "site_en_assets_javascripts_lunr_min_lunr_de_min_t",
       "site_en_assets_javascripts_lunr_min_lunr_de_min_u"
     ],
-    "75": [
+    "74": [
       "site_en_assets_javascripts_lunr_wordcut_eventemitter_setmaxlisteners",
       "site_en_assets_javascripts_lunr_wordcut_getmessage",
       "site_en_assets_javascripts_lunr_wordcut_isnumber",
@@ -1797,7 +1800,7 @@
       "site_en_assets_javascripts_lunr_wordcut_tostring",
       "site_en_assets_javascripts_lunr_wordcut_truncate"
     ],
-    "76": [
+    "75": [
       "site_nl_assets_javascripts_chat",
       "site_nl_assets_javascripts_chat_addmessage",
       "site_nl_assets_javascripts_chat_checkraghealth",
@@ -1808,7 +1811,7 @@
       "site_nl_assets_javascripts_chat_sendmessage",
       "site_nl_assets_javascripts_chat_togglechat"
     ],
-    "77": [
+    "76": [
       "site_nl_assets_javascripts_lunr_min_lunr_de_min",
       "site_nl_assets_javascripts_lunr_min_lunr_de_min_a",
       "site_nl_assets_javascripts_lunr_min_lunr_de_min_c",
@@ -1819,7 +1822,7 @@
       "site_nl_assets_javascripts_lunr_min_lunr_de_min_t",
       "site_nl_assets_javascripts_lunr_min_lunr_de_min_u"
     ],
-    "78": [
+    "77": [
       "specify_init_options",
       "specify_init_options_author",
       "specify_init_options_dependencies",
@@ -1830,7 +1833,7 @@
       "specify_init_options_python_requires",
       "specify_init_options_speckit_version"
     ],
-    "79": [
+    "78": [
       "site_nl_assets_javascripts_lunr_wordcut_finish",
       "site_nl_assets_javascripts_lunr_wordcut_glob_done",
       "site_nl_assets_javascripts_lunr_wordcut_glob_emitmatch",
@@ -1840,16 +1843,7 @@
       "site_nl_assets_javascripts_lunr_wordcut_globsync_finish",
       "site_nl_assets_javascripts_lunr_wordcut_isignored"
     ],
-    "80": [
-      "assets_js_abbreviations",
-      "assets_js_abbreviations_init",
-      "assets_js_abbreviations_init_debounce",
-      "assets_js_abbreviations_init_escapehtml",
-      "assets_js_abbreviations_init_populatefilter",
-      "assets_js_abbreviations_init_render",
-      "assets_js_abbreviations_init_updateaddlink"
-    ],
-    "81": [
+    "79": [
       "site_en_assets_javascripts_lightbox",
       "site_en_assets_javascripts_lightbox_closelightbox",
       "site_en_assets_javascripts_lightbox_ensureoverlay",
@@ -1858,7 +1852,7 @@
       "site_en_assets_javascripts_lightbox_openimage",
       "site_en_assets_javascripts_lightbox_opensvg"
     ],
-    "82": [
+    "80": [
       "site_nl_assets_javascripts_lightbox",
       "site_nl_assets_javascripts_lightbox_closelightbox",
       "site_nl_assets_javascripts_lightbox_ensureoverlay",
@@ -1867,7 +1861,15 @@
       "site_nl_assets_javascripts_lightbox_openimage",
       "site_nl_assets_javascripts_lightbox_opensvg"
     ],
-    "83": [
+    "81": [
+      "scripts_generate_projects",
+      "scripts_generate_projects_main",
+      "scripts_generate_projects_make_index_table",
+      "scripts_generate_projects_make_projects_md",
+      "scripts_generate_projects_parse_nav_repos",
+      "scripts_generate_projects_rationale_2"
+    ],
+    "82": [
       "site_en_assets_javascripts_lunr_min_lunr_da_min",
       "site_en_assets_javascripts_lunr_min_lunr_da_min_e",
       "site_en_assets_javascripts_lunr_min_lunr_da_min_n",
@@ -1875,7 +1877,7 @@
       "site_en_assets_javascripts_lunr_min_lunr_da_min_s",
       "site_en_assets_javascripts_lunr_min_lunr_da_min_t"
     ],
-    "84": [
+    "83": [
       "site_nl_assets_javascripts_lunr_min_lunr_da_min",
       "site_nl_assets_javascripts_lunr_min_lunr_da_min_e",
       "site_nl_assets_javascripts_lunr_min_lunr_da_min_n",
@@ -1883,248 +1885,248 @@
       "site_nl_assets_javascripts_lunr_min_lunr_da_min_s",
       "site_nl_assets_javascripts_lunr_min_lunr_da_min_t"
     ],
-    "85": [
+    "84": [
       "site_en_assets_javascripts_lunr_min_lunr_el_min",
       "site_en_assets_javascripts_lunr_min_lunr_el_min_e",
       "site_en_assets_javascripts_lunr_min_lunr_el_min_n",
       "site_en_assets_javascripts_lunr_min_lunr_el_min_r",
       "site_en_assets_javascripts_lunr_min_lunr_el_min_t"
     ],
-    "86": [
+    "85": [
       "site_en_assets_javascripts_lunr_min_lunr_no_min",
       "site_en_assets_javascripts_lunr_min_lunr_no_min_e",
       "site_en_assets_javascripts_lunr_min_lunr_no_min_i",
       "site_en_assets_javascripts_lunr_min_lunr_no_min_o",
       "site_en_assets_javascripts_lunr_min_lunr_no_min_t"
     ],
-    "87": [
+    "86": [
       "site_en_assets_javascripts_lunr_min_lunr_sv_min",
       "site_en_assets_javascripts_lunr_min_lunr_sv_min_e",
       "site_en_assets_javascripts_lunr_min_lunr_sv_min_i",
       "site_en_assets_javascripts_lunr_min_lunr_sv_min_s",
       "site_en_assets_javascripts_lunr_min_lunr_sv_min_t"
     ],
-    "88": [
+    "87": [
       "site_en_assets_javascripts_lunr_tinyseg",
       "site_en_assets_javascripts_lunr_tinyseg_tinysegmenter",
       "site_en_assets_javascripts_lunr_tinyseg_tinysegmenter_ctype",
       "site_en_assets_javascripts_lunr_tinyseg_tinysegmenter_segment",
       "site_en_assets_javascripts_lunr_tinyseg_tinysegmenter_ts"
     ],
-    "89": [
+    "88": [
       "site_nl_assets_javascripts_lunr_min_lunr_el_min",
       "site_nl_assets_javascripts_lunr_min_lunr_el_min_e",
       "site_nl_assets_javascripts_lunr_min_lunr_el_min_n",
       "site_nl_assets_javascripts_lunr_min_lunr_el_min_r",
       "site_nl_assets_javascripts_lunr_min_lunr_el_min_t"
     ],
-    "90": [
+    "89": [
       "site_nl_assets_javascripts_lunr_min_lunr_no_min",
       "site_nl_assets_javascripts_lunr_min_lunr_no_min_e",
       "site_nl_assets_javascripts_lunr_min_lunr_no_min_i",
       "site_nl_assets_javascripts_lunr_min_lunr_no_min_o",
       "site_nl_assets_javascripts_lunr_min_lunr_no_min_t"
     ],
-    "91": [
+    "90": [
       "site_nl_assets_javascripts_lunr_min_lunr_sv_min",
       "site_nl_assets_javascripts_lunr_min_lunr_sv_min_e",
       "site_nl_assets_javascripts_lunr_min_lunr_sv_min_i",
       "site_nl_assets_javascripts_lunr_min_lunr_sv_min_s",
       "site_nl_assets_javascripts_lunr_min_lunr_sv_min_t"
     ],
-    "92": [
+    "91": [
       "site_nl_assets_javascripts_lunr_tinyseg",
       "site_nl_assets_javascripts_lunr_tinyseg_tinysegmenter",
       "site_nl_assets_javascripts_lunr_tinyseg_tinysegmenter_ctype",
       "site_nl_assets_javascripts_lunr_tinyseg_tinysegmenter_segment",
       "site_nl_assets_javascripts_lunr_tinyseg_tinysegmenter_ts"
     ],
-    "93": [
+    "92": [
       "setup",
       "setup_sh__entry",
       "setup_tmpdir",
       "venv_bin_activate"
     ],
-    "94": [
+    "93": [
       "site_en_assets_javascripts_blanky_umd",
       "site_en_assets_javascripts_blanky_umd_blanky",
       "site_en_assets_javascripts_blanky_umd_classifylink",
       "site_en_assets_javascripts_blanky_umd_mergerel"
     ],
-    "95": [
+    "94": [
       "site_en_assets_javascripts_dynamic_repo",
       "site_en_assets_javascripts_dynamic_repo_fetchrepostats",
       "site_en_assets_javascripts_dynamic_repo_formatnumber",
       "site_en_assets_javascripts_dynamic_repo_updatereposource"
     ],
-    "96": [
+    "95": [
       "site_nl_assets_javascripts_blanky_umd",
       "site_nl_assets_javascripts_blanky_umd_blanky",
       "site_nl_assets_javascripts_blanky_umd_classifylink",
       "site_nl_assets_javascripts_blanky_umd_mergerel"
     ],
-    "97": [
+    "96": [
       "site_nl_assets_javascripts_dynamic_repo",
       "site_nl_assets_javascripts_dynamic_repo_fetchrepostats",
       "site_nl_assets_javascripts_dynamic_repo_formatnumber",
       "site_nl_assets_javascripts_dynamic_repo_updatereposource"
     ],
-    "98": [
+    "97": [
       "scripts_post_sync",
       "scripts_post_sync_log",
       "scripts_post_sync_sh__entry"
     ],
-    "99": [
+    "98": [
       "projects_05_media_jellyfin_references_skills_run_jellyfin_check",
       "projects_05_media_jellyfin_references_skills_run_jellyfin_check_sh__entry"
     ],
-    "100": [
+    "99": [
       "scripts_fix_rag_paths",
       "scripts_fix_rag_paths_sh__entry"
     ],
-    "101": [
+    "100": [
       "scripts_run_rag_api",
       "scripts_run_rag_api_sh__entry"
     ],
-    "102": [
+    "101": [
       "site_en_assets_javascripts_slug_switch",
       "site_en_assets_javascripts_slug_switch_currentpath"
     ],
-    "103": [
+    "102": [
       "site_nl_assets_javascripts_slug_switch",
       "site_nl_assets_javascripts_slug_switch_currentpath"
     ],
-    "104": [
+    "103": [
       "test_blanky",
       "test_blanky_sh__entry"
     ],
-    "105": [
+    "104": [
       "docs_assets_javascripts_pagefind_init"
     ],
-    "106": [
+    "105": [
       "docs_en_assets_javascripts_pagefind_init"
     ],
-    "107": [
+    "106": [
       "docs_nl_assets_javascripts_pagefind_init"
     ],
-    "108": [
+    "107": [
       "site_en_assets_javascripts_blanky_init"
     ],
-    "109": [
+    "108": [
       "site_en_assets_javascripts_build_footer"
     ],
-    "110": [
+    "109": [
       "site_en_assets_javascripts_build_info"
     ],
-    "111": [
+    "110": [
       "site_en_assets_javascripts_lunr_min_lunr_ar_min"
     ],
-    "112": [
+    "111": [
       "site_en_assets_javascripts_lunr_min_lunr_he_min"
     ],
-    "113": [
+    "112": [
       "site_en_assets_javascripts_lunr_min_lunr_hi_min"
     ],
-    "114": [
+    "113": [
       "site_en_assets_javascripts_lunr_min_lunr_hy_min"
     ],
-    "115": [
+    "114": [
       "site_en_assets_javascripts_lunr_min_lunr_ja_min"
     ],
-    "116": [
+    "115": [
       "site_en_assets_javascripts_lunr_min_lunr_jp_min"
     ],
-    "117": [
+    "116": [
       "site_en_assets_javascripts_lunr_min_lunr_kn_min"
     ],
-    "118": [
+    "117": [
       "site_en_assets_javascripts_lunr_min_lunr_ko_min"
     ],
-    "119": [
+    "118": [
       "site_en_assets_javascripts_lunr_min_lunr_multi_min"
     ],
-    "120": [
+    "119": [
       "site_en_assets_javascripts_lunr_min_lunr_sa_min"
     ],
-    "121": [
+    "120": [
       "site_en_assets_javascripts_lunr_min_lunr_stemmer_support_min"
     ],
-    "122": [
+    "121": [
       "site_en_assets_javascripts_lunr_min_lunr_ta_min"
     ],
-    "123": [
+    "122": [
       "site_en_assets_javascripts_lunr_min_lunr_te_min"
     ],
-    "124": [
+    "123": [
       "site_en_assets_javascripts_lunr_min_lunr_th_min"
     ],
-    "125": [
+    "124": [
       "site_en_assets_javascripts_lunr_min_lunr_vi_min"
     ],
-    "126": [
+    "125": [
       "site_en_assets_javascripts_lunr_min_lunr_zh_min"
     ],
-    "127": [
+    "126": [
       "site_en_assets_javascripts_pagefind_init"
     ],
-    "128": [
+    "127": [
       "site_nl_assets_javascripts_blanky_init"
     ],
-    "129": [
+    "128": [
       "site_nl_assets_javascripts_build_footer"
     ],
-    "130": [
+    "129": [
       "site_nl_assets_javascripts_build_info"
     ],
-    "131": [
+    "130": [
       "site_nl_assets_javascripts_lunr_min_lunr_ar_min"
     ],
-    "132": [
+    "131": [
       "site_nl_assets_javascripts_lunr_min_lunr_he_min"
     ],
-    "133": [
+    "132": [
       "site_nl_assets_javascripts_lunr_min_lunr_hi_min"
     ],
-    "134": [
+    "133": [
       "site_nl_assets_javascripts_lunr_min_lunr_hy_min"
     ],
-    "135": [
+    "134": [
       "site_nl_assets_javascripts_lunr_min_lunr_ja_min"
     ],
-    "136": [
+    "135": [
       "site_nl_assets_javascripts_lunr_min_lunr_jp_min"
     ],
-    "137": [
+    "136": [
       "site_nl_assets_javascripts_lunr_min_lunr_kn_min"
     ],
-    "138": [
+    "137": [
       "site_nl_assets_javascripts_lunr_min_lunr_ko_min"
     ],
-    "139": [
+    "138": [
       "site_nl_assets_javascripts_lunr_min_lunr_multi_min"
     ],
-    "140": [
+    "139": [
       "site_nl_assets_javascripts_lunr_min_lunr_sa_min"
     ],
-    "141": [
+    "140": [
       "site_nl_assets_javascripts_lunr_min_lunr_stemmer_support_min"
     ],
-    "142": [
+    "141": [
       "site_nl_assets_javascripts_lunr_min_lunr_ta_min"
     ],
-    "143": [
+    "142": [
       "site_nl_assets_javascripts_lunr_min_lunr_te_min"
     ],
-    "144": [
+    "143": [
       "site_nl_assets_javascripts_lunr_min_lunr_th_min"
     ],
-    "145": [
+    "144": [
       "site_nl_assets_javascripts_lunr_min_lunr_vi_min"
     ],
-    "146": [
+    "145": [
       "site_nl_assets_javascripts_lunr_min_lunr_zh_min"
     ],
-    "147": [
+    "146": [
       "tests_test_abbreviations_hook_py_fixture"
     ]
   },
@@ -2138,26 +2140,26 @@
     "6": 0.11378353376503238,
     "7": 0.11014492753623188,
     "8": 0.09175377468060394,
-    "9": 0.12698412698412698,
-    "10": 0.06060606060606061,
-    "11": 0.10574712643678161,
-    "12": 0.09788359788359788,
+    "9": 0.06970128022759602,
+    "10": 0.12698412698412698,
+    "11": 0.06060606060606061,
+    "12": 0.10574712643678161,
     "13": 0.09788359788359788,
-    "14": 0.1794871794871795,
-    "15": 0.22507122507122507,
-    "16": 0.1225071225071225,
-    "17": 0.1794871794871795,
-    "18": 0.22507122507122507,
-    "19": 0.10507246376811594,
-    "20": 0.11956521739130435,
-    "21": 0.16304347826086957,
+    "14": 0.09788359788359788,
+    "15": 0.1794871794871795,
+    "16": 0.22507122507122507,
+    "17": 0.1225071225071225,
+    "18": 0.1794871794871795,
+    "19": 0.22507122507122507,
+    "20": 0.11333333333333333,
+    "21": 0.11956521739130435,
     "22": 0.16304347826086957,
-    "23": 0.12987012987012986,
-    "24": 0.15714285714285714,
+    "23": 0.16304347826086957,
+    "24": 0.12987012987012986,
     "25": 0.15714285714285714,
-    "26": 0.15789473684210525,
-    "27": 0.1568627450980392,
-    "28": 0.16339869281045752,
+    "26": 0.15714285714285714,
+    "27": 0.15789473684210525,
+    "28": 0.1568627450980392,
     "29": 0.23529411764705882,
     "30": 0.19117647058823528,
     "31": 0.22058823529411764,
@@ -2168,65 +2170,65 @@
     "36": 0.22058823529411764,
     "37": 0.19117647058823528,
     "38": 0.21323529411764705,
-    "39": 0.14166666666666666,
-    "40": 0.20833333333333334,
+    "39": 0.13333333333333333,
+    "40": 0.14166666666666666,
     "41": 0.20833333333333334,
-    "42": 0.20952380952380953,
-    "43": 0.2,
-    "44": 0.2761904761904762,
-    "45": 0.22857142857142856,
-    "46": 0.20952380952380953,
-    "47": 0.2,
-    "48": 0.2761904761904762,
-    "49": 0.22857142857142856,
-    "50": 0.1978021978021978,
+    "42": 0.20833333333333334,
+    "43": 0.20952380952380953,
+    "44": 0.2,
+    "45": 0.2761904761904762,
+    "46": 0.22857142857142856,
+    "47": 0.20952380952380953,
+    "48": 0.2,
+    "49": 0.2761904761904762,
+    "50": 0.22857142857142856,
     "51": 0.15384615384615385,
     "52": 0.16666666666666666,
-    "53": 0.15384615384615385,
-    "54": 0.19230769230769232,
-    "55": 0.19230769230769232,
-    "56": 0.19230769230769232,
-    "57": 0.34615384615384615,
-    "58": 0.34615384615384615,
-    "59": 0.24242424242424243,
+    "53": 0.34615384615384615,
+    "54": 0.34615384615384615,
+    "55": 0.21212121212121213,
+    "56": 0.24242424242424243,
+    "57": 0.21212121212121213,
+    "58": 0.25757575757575757,
+    "59": 0.3333333333333333,
     "60": 0.25757575757575757,
     "61": 0.3333333333333333,
-    "62": 0.25757575757575757,
-    "63": 0.3333333333333333,
-    "64": 0.21818181818181817,
-    "65": 0.23636363636363636,
-    "66": 0.36363636363636365,
-    "67": 0.23636363636363636,
-    "68": 0.2222222222222222,
-    "69": 0.28888888888888886,
-    "70": 0.2,
-    "71": 0.3888888888888889,
-    "72": 0.25,
-    "73": 0.3888888888888889,
-    "74": 0.3333333333333333,
-    "75": 0.2222222222222222,
-    "76": 0.3888888888888889,
-    "77": 0.3333333333333333,
-    "78": 0.2222222222222222,
-    "79": 0.2857142857142857,
-    "80": 0.3333333333333333,
-    "81": 0.42857142857142855,
-    "82": 0.42857142857142855,
+    "62": 0.2545454545454545,
+    "63": 0.21818181818181817,
+    "64": 0.23636363636363636,
+    "65": 0.36363636363636365,
+    "66": 0.23636363636363636,
+    "67": 0.28888888888888886,
+    "68": 0.2,
+    "69": 0.3888888888888889,
+    "70": 0.25,
+    "71": 0.3611111111111111,
+    "72": 0.3888888888888889,
+    "73": 0.3333333333333333,
+    "74": 0.2222222222222222,
+    "75": 0.3888888888888889,
+    "76": 0.3333333333333333,
+    "77": 0.2222222222222222,
+    "78": 0.2857142857142857,
+    "79": 0.42857142857142855,
+    "80": 0.42857142857142855,
+    "81": 0.5333333333333333,
+    "82": 0.4,
     "83": 0.4,
-    "84": 0.4,
-    "85": 0.7,
+    "84": 0.7,
+    "85": 0.4,
     "86": 0.4,
-    "87": 0.4,
-    "88": 0.6,
-    "89": 0.7,
+    "87": 0.6,
+    "88": 0.7,
+    "89": 0.4,
     "90": 0.4,
-    "91": 0.4,
-    "92": 0.6,
-    "93": 0.5,
+    "91": 0.6,
+    "92": 0.5,
+    "93": 0.8333333333333334,
     "94": 0.8333333333333334,
     "95": 0.8333333333333334,
     "96": 0.8333333333333334,
-    "97": 0.8333333333333334,
+    "97": 1.0,
     "98": 1.0,
     "99": 1.0,
     "100": 1.0,
@@ -2275,8 +2277,7 @@
     "143": 1.0,
     "144": 1.0,
     "145": 1.0,
-    "146": 1.0,
-    "147": 1.0
+    "146": 1.0
   },
   "gods": [
     {
