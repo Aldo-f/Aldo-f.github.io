@@ -2,9 +2,8 @@
   "version": "1.0.1",
   "name": "404 Dungeon",
   "description": "Multilingual 404 D&D adventure; EN/NL text lives in docs/<lang>/404_dungeon.md, shared state machine here.",
-  "nodes": [
-    {
-      "id": "start",
+  "nodes": {
+    "start": {
       "text": {"en": "You stand before a rickety gate. A sign reads: 'Page not found.' To your left, a flickering torch. Ahead, a dark corridor.", "nl": "Je staat voor een wankel hek. Een bordje lezen: 'Pagina niet gevonden.' Links knettert een fakkel. Voor je een donkere corridor."},
       "choices": [
         {"label": {"en": "Examine the torch", "nl": "Onderzoek de fakkel"}, "next": "torch"},
@@ -12,8 +11,7 @@
       ],
       "statDelta": 0
     },
-    {
-      "id": "torch",
+    "torch": {
       "text": {"en": "You examine the torch. A hidden note falls out: 'The gate opens only if you find the key.' Your confusion rises.", "nl": "Je onderzoekt de fakkel. Een briefje valt eruit: 'Het hek opent alleen als je de sleutel vindt.' Je verwarring stijgt."},
       "choices": [
         {"label": {"en": "Search for a key", "nl": "Zoek naar een sleutel"}, "next": "dead_end"},
@@ -21,8 +19,7 @@
       ],
       "statDelta": 1
     },
-    {
-      "id": "corridor",
+    "corridor": {
       "text": {"en": "A dark corridor stretches before you. A friendly slime oozes out: 'I can guide you home if you share your light.'", "nl": "Een donkere corridor strekt zich voor je uit. Een vriendelijke slijmsoep slempt zich naar voren: 'Ik kan je naar huis leiden als je je licht deelt.'"},
       "choices": [
         {"label": {"en": "Accept the slime's help", "nl": "Accepteer de hulp van de slijmsoep"}, "next": "slime_help"},
@@ -30,19 +27,17 @@
       ],
       "statDelta": 0
     },
-    {
-      "id": "slime_help",
+    "slime_help": {
       "text": {"en": "The slime lights your way and points to the exit. Your confusion fades.", "nl": "De slijmsoep verlicht je pad en wijst naar de uitgang. Je verwarring verdwijnt."},
       "choices": [],
       "statDelta": -1
     },
-    {
-      "id": "dead_end",
+    "dead_end": {
       "text": {"en": "You found a room full of other 404 visitors. They wave at you. A bit awkward, but the exit is right there.", "nl": "Je vindt een kamer vol andere 404-bezoekers. Ze wuiven. Een beetje gekend, maar de uitgang is vlakbij."},
       "choices": [],
       "statDelta": 0
     }
-  ],
+  },
   "maxConfusion": 3,
   "escapeNode": "escape"
 }
