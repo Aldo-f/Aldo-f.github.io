@@ -65,7 +65,7 @@ if (!response.ok) {
     document.getElementById('dungeon-text').textContent = t(state.node, 'text');
     document.getElementById('dungeon-hp').textContent = Math.max(0, MAX_CONF - state.confusion);
     document.getElementById('dungeon-conf').textContent = Math.min(MAX_CONF, state.confusion);
-    document.getElementById('escape-btn').style.display = state.node === 'escape' ? 'block' : 'none';
+    document.getElementById('escape-btn').style.display = (s.choices?.length || 0) === 0 ? 'block' : 'none';
     log(`[${state.node}] confusion=${state.confusion}`);
 
     const grid = document.querySelector('.md-grid--spacing-x-2');
@@ -80,10 +80,12 @@ if (!response.ok) {
       btn.textContent = t(c, 'label');
       btn.addEventListener('click', () => {
         console.log(`[404 Dungeon] choice: ${t(c, 'label')} -> ${c.next || 'escape'}`);
-        if (c.statDelta !== undefined) {
-          state.confusion = Math.max(0, Math.min(MAX_CONF, state.confusion + c.statDelta));
-        }
         state.node = c.next || 'escape';
+        // Apply statDelta from the destination node
+        const dest = scenes[state.node];
+        if (dest && dest.statDelta !== undefined) {
+          state.confusion = Math.max(0, Math.min(MAX_CONF, state.confusion + dest.statDelta));
+        }
         log(`chose "${t(c, 'label')}" -> ${state.node} (confusion=${state.confusion})`);
         render();
       });
