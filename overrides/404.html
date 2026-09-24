@@ -31,7 +31,8 @@ const MAX_CONF = 3;
 
 // Load the shared state machine from the site's data directory
 const response = await fetch('assets/data/404_dungeon.json');
-const scenes = await response.json();
+const data = await response.json();
+const scenes = data.nodes;
 
 const LANG = window.location.pathname.includes('/nl/') ? 'nl' : 'en'; // auto-detect language from URL
 let state = { node: 'start', confusion: 0 };
