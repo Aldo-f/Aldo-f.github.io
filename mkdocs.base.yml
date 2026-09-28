@@ -80,3 +80,4 @@ hooks:
   - hooks/blanky.py
   - hooks/about_org_table.py
   - hooks/projects_from_nav_repos.py
+  - hooks/project_blog_sidebar.py
